@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Build
+build
+
 # Runtime data
 database.sqlite
 
@@ -22,3 +25,6 @@ yarn-error.log*
 
 # Misc
 .DS_Store
+
+# Docker
+docker-compose.yml
