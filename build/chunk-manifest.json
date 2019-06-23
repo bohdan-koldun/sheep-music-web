@@ -1,0 +1,43 @@
+{
+  "client": ["/assets/vendors.ebe8a8d4.chunk.js", "/assets/client.215e8232.js"],
+  "home": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/home.2634847f.chunk.js"
+  ],
+  "contact": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/contact.bb2bb1b5.chunk.js"
+  ],
+  "login": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/login.30523a9e.chunk.js"
+  ],
+  "register": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/register.4721f5e5.chunk.js"
+  ],
+  "about": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/about.f4a7ed14.chunk.js"
+  ],
+  "privacy": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/privacy.5a1bf57e.chunk.js"
+  ],
+  "admin": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/admin.a9e64d66.chunk.js"
+  ],
+  "not-found": [
+    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
+    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+    "/assets/not-found.61027479.chunk.js"
+  ]
+}
