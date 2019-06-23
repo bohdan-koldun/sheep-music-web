@@ -8,7 +8,7 @@ if (process.env.BROWSER) {
 
 module.exports = {
   // Node.js app
-  port: process.env.PORT || 3000,
+  port: process.env.WEB_PORT || 3000,
 
   // https://expressjs.com/en/guide/behind-proxies.html
   trustProxy: process.env.TRUST_PROXY || 'loopback',
@@ -20,7 +20,7 @@ module.exports = {
     // API URL to be used in the server-side code
     serverUrl:
       process.env.API_SERVER_URL ||
-      `http://localhost:${process.env.PORT || 3000}`,
+      `http://localhost:${process.env.WEB_PORT || 3000}`,
   },
 
   // Database

@@ -1,5 +1,8 @@
 {
-  "client": ["/assets/vendors.ebe8a8d4.chunk.js", "/assets/client.215e8232.js"],
+  "client": [
+    "/assets/vendors.ebe8a8d4.chunk.js",
+    "/assets/client.23e7294b.js"
+  ],
   "home": [
     "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js",
     "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",

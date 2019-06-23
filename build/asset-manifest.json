@@ -1,9 +1,8 @@
 {
   "about.js": "/assets/about.f4a7ed14.chunk.js",
-  "about~admin~contact~home~login~not-found~privacy~register.js":
-    "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
+  "about~admin~contact~home~login~not-found~privacy~register.js": "/assets/about~admin~contact~home~login~not-found~privacy~register.5a29162f.chunk.js",
   "admin.js": "/assets/admin.a9e64d66.chunk.js",
-  "client.js": "/assets/client.215e8232.js",
+  "client.js": "/assets/client.23e7294b.js",
   "contact.js": "/assets/contact.bb2bb1b5.chunk.js",
   "home.js": "/assets/home.2634847f.chunk.js",
   "login.js": "/assets/login.30523a9e.chunk.js",
@@ -13,6 +12,5 @@
   "privacy.js": "/assets/privacy.5a1bf57e.chunk.js",
   "register.js": "/assets/register.4721f5e5.chunk.js",
   "vendors.js": "/assets/vendors.ebe8a8d4.chunk.js",
-  "vendors~about~admin~contact~home~login~not-found~privacy~register.js":
-    "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js"
+  "vendors~about~admin~contact~home~login~not-found~privacy~register.js": "/assets/vendors~about~admin~contact~home~login~not-found~privacy~register.3a5c3474.chunk.js"
 }
