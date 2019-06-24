@@ -15,9 +15,7 @@
     "cookie-parser": "^1.4.3",
     "core-js": "^2.5.3",
     "express": "^4.16.3",
-    "express-graphql": "^0.6.12",
     "express-jwt": "^5.3.1",
-    "graphql": "^0.13.2",
     "history": "^4.7.2",
     "isomorphic-style-loader": "^4.0.0",
     "jsonwebtoken": "^8.2.0",
@@ -123,7 +121,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": ["eslint --no-ignore --fix", "git add --force"],
-    "*.{json,md,graphql}": ["prettier --write", "git add --force"],
+    "*.{json,md}": ["prettier --write", "git add --force"],
     "*.{css,less,styl,scss,sass,sss}": ["stylelint --fix", "git add --force"]
   },
   "scripts": {

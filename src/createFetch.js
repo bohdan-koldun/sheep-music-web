@@ -1,14 +1,11 @@
 /* @flow */
-
-import type { graphql as graphqType, GraphQLSchema } from 'graphql';
-
+// eslint-disable-next-line flowtype/no-types-missing-file-annotation
 type Fetch = (url: string, options: ?any) => Promise<any>;
 
+// eslint-disable-next-line flowtype/no-types-missing-file-annotation
 type Options = {
   baseUrl: string,
   cookie?: string,
-  schema?: GraphQLSchema,
-  graphql?: graphqType,
 };
 
 /**
@@ -17,13 +14,11 @@ type Options = {
  * of boilerplate code in the application.
  * https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch
  */
-function createFetch(
-  fetch: Fetch,
-  { baseUrl, cookie, schema, graphql }: Options,
-) {
+// eslint-disable-next-line flowtype/no-types-missing-file-annotation
+function createFetch(fetch: Fetch, { baseUrl, cookie }: Options) {
   // NOTE: Tweak the default options to suite your application needs
   const defaults = {
-    method: 'POST', // handy with GraphQL backends
+    method: 'POST',
     mode: baseUrl ? 'cors' : 'same-origin',
     credentials: baseUrl ? 'include' : 'same-origin',
     headers: {
@@ -33,25 +28,8 @@ function createFetch(
     },
   };
 
-  return async (url: string, options: any) => {
-    const isGraphQL = url.startsWith('/graphql');
-    if (schema && graphql && isGraphQL) {
-      // We're SSR, so route the graphql internal to avoid latency
-      const query = JSON.parse(options.body);
-      const result = await graphql(
-        schema,
-        query.query,
-        { request: {} }, // fill in request vars needed by graphql
-        null,
-        query.variables,
-      );
-      return Promise.resolve({
-        status: result.errors ? 400 : 200,
-        json: () => Promise.resolve(result),
-      });
-    }
-
-    return isGraphQL || url.startsWith('/api')
+  return async (url: string, options: any) =>
+    url.startsWith('/api')
       ? fetch(`${baseUrl}${url}`, {
           ...defaults,
           ...options,
@@ -61,7 +39,6 @@ function createFetch(
           },
         })
       : fetch(url, options);
-  };
 }
 
 export default createFetch;
