@@ -1,15 +1,18 @@
-FROM node:8.16.0-alpine
+FROM node:12-alpine
 
-# Set a working directory
+# Install Linux dependencies
+RUN npm install cross-env rimraf webpack -g
+
+# Create app directory
 WORKDIR /usr/src/app
 
-COPY ./ .
+COPY . .
 
-# Install Node.js dependencies
-RUN yarn
+ENV NODE_ENV production
+
+RUN yarn install --production
 RUN yarn build
 
-# Run the container under "node" user by default
-USER node
+EXPOSE 3000
 
-CMD [ "yarn", "start:prod" ]
+CMD ["yarn", "run", "start:prod"]
