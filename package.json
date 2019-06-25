@@ -1,6 +1,6 @@
 {
-  "name": "react-boilerplate",
-  "version": "4.0.0",
+  "name": "sheep-music-web",
+  "version": "1.0.0",
   "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "build:clean": "rimraf ./build",
     "start": "cross-env NODE_ENV=development node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
-    "start:production": "yarn test && yarn build && yarn start:prod",
+    "start:production": "yarn build && yarn start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
     "presetup": "yarn add chalk shelljs",
     "setup": "node ./internals/scripts/setup.js",
