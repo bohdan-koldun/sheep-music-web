@@ -1,91 +1,88 @@
-// ESLint configuration
-// http://eslint.org/docs/user-guide/configuring
+const fs = require('fs');
+const path = require('path');
+
+const prettierOptions = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
+);
+
 module.exports = {
   parser: 'babel-eslint',
-
-  extends: [
-    'airbnb',
-    'plugin:flowtype/recommended',
-    'plugin:css-modules/recommended',
-    'prettier',
-    'prettier/flowtype',
-    'prettier/react',
-  ],
-
-  plugins: ['flowtype', 'css-modules', 'prettier'],
-
-  globals: {
-    __DEV__: true,
-  },
-
+  extends: ['airbnb', 'prettier', 'prettier/react'],
+  plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y'],
   env: {
+    jest: true,
     browser: true,
+    node: true,
+    es6: true,
   },
-
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
   rules: {
-    // Forbid the use of extraneous packages
-    // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
-    'import/no-extraneous-dependencies': ['error', { packageDir: '.' }],
-
-    // Recommend not to leave any console.log in your code
-    // Use console.error, console.warn and console.info instead
-    // https://eslint.org/docs/rules/no-console
-    'no-console': [
-      'error',
+    'prettier/prettier': ['error', prettierOptions],
+    'arrow-body-style': [2, 'as-needed'],
+    'class-methods-use-this': 0,
+    'import/imports-first': 0,
+    'import/newline-after-import': 0,
+    'import/no-dynamic-require': 0,
+    'import/no-extraneous-dependencies': 0,
+    'import/no-named-as-default': 0,
+    'import/no-unresolved': 2,
+    'import/no-webpack-loader-syntax': 0,
+    'import/prefer-default-export': 0,
+    indent: [
+      2,
+      2,
       {
-        allow: ['warn', 'error', 'info'],
+        SwitchCase: 1,
       },
     ],
-
-    // Prefer destructuring from arrays and objects
-    // http://eslint.org/docs/rules/prefer-destructuring
-    'prefer-destructuring': [
-      'error',
+    'jsx-a11y/aria-props': 2,
+    'jsx-a11y/heading-has-content': 0,
+    'jsx-a11y/label-has-associated-control': [
+      2,
       {
-        VariableDeclarator: {
-          array: false,
-          object: true,
-        },
-        AssignmentExpression: {
-          array: false,
-          object: false,
-        },
-      },
-      {
-        enforceForRenamedProperties: false,
+        // NOTE: If this error triggers, either disable it or add
+        // your custom components, labels and attributes via these options
+        // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
+        controlComponents: ['Input'],
       },
     ],
-
-    // Ensure <a> tags are valid
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['to'],
-        aspects: ['noHref', 'invalidHref', 'preferButton'],
-      },
-    ],
-
-    // Allow .js files to use JSX syntax
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
-
-    // Functional and class components are equivalent from React’s point of view
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
-    'react/prefer-stateless-function': 'off',
-
-    // ESLint plugin for prettier formatting
-    // https://github.com/prettier/eslint-plugin-prettier
-    'prettier/prettier': 'error',
+    'jsx-a11y/label-has-for': 0,
+    'jsx-a11y/mouse-events-have-key-events': 2,
+    'jsx-a11y/role-has-required-aria-props': 2,
+    'jsx-a11y/role-supports-aria-props': 2,
+    'max-len': 0,
+    'newline-per-chained-call': 0,
+    'no-confusing-arrow': 0,
+    'no-console': 1,
+    'no-unused-vars': 2,
+    'no-use-before-define': 0,
+    'prefer-template': 2,
+    'react/destructuring-assignment': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react/jsx-closing-tag-location': 0,
+    'react/forbid-prop-types': 0,
+    'react/jsx-first-prop-new-line': [2, 'multiline'],
+    'react/jsx-filename-extension': 0,
+    'react/jsx-no-target-blank': 0,
+    'react/jsx-uses-vars': 2,
+    'react/require-default-props': 0,
+    'react/require-extension': 0,
+    'react/self-closing-comp': 0,
+    'react/sort-comp': 0,
+    'redux-saga/no-yield-in-race': 2,
+    'redux-saga/yield-effects': 2,
+    'require-yield': 0,
   },
-
   settings: {
-    // Allow absolute paths in imports, e.g. import Button from 'components/Button'
-    // https://github.com/benmosher/eslint-plugin-import/tree/master/resolvers
     'import/resolver': {
-      node: {
-        moduleDirectory: ['node_modules', 'src'],
+      webpack: {
+        config: './internals/webpack/webpack.prod.babel.js',
       },
     },
   },

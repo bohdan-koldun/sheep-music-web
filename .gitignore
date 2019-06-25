@@ -1,30 +1,10 @@
-# Dependencies
-node_modules/
-
-# Build
-build
-
-# Runtime data
-database.sqlite
-
-# Test coverage
+# Don't check auto-generated stuff into git
 coverage
+build
+node_modules
+stats.json
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editors and IDEs
-.idea
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# Misc
+# Cruft
 .DS_Store
-
-# Docker
-docker-compose.yml
+npm-debug.log
+.idea

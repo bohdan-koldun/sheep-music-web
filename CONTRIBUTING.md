@@ -1,66 +1,157 @@
-## Contributing to React Starter Kit
+# Contributing to react-boilerplate
 
-React Starter Kit is currently the most widely adopted Node.js/React boilerplate used by many
-tech startups around the globe. We're working hard to keep it up to date, making sure that it
-follows best practices and high coding standards, paying extremely close attention to details.
+Love react-boilerplate and want to help? Thanks so much, there's something to do for everybody!
 
-Your contributions are welcome and are greatly appreciated! Every little bit helps, and credit
-will always be given.
+Please take a moment to review this document in order to make the contribution process easy and effective for everyone involved.
 
-Please take a moment to review this document in order to make the contribution process easy and
-effective for everyone involved.
+Following these guidelines helps to communicate that you respect the time of the developers managing and developing this open source project. In return, they should reciprocate that respect in addressing your issue or assessing patches and features.
 
-### Conduct
+## Using the issue tracker
 
-Please, follow the [golden rule](https://en.wikipedia.org/wiki/Golden_Rule). Be respectful, even to
-those that are disrespectful.
+The [issue tracker](https://github.com/react-boilerplate/react-boilerplate/issues) is
+the preferred channel for [bug reports](#bugs), [features requests](#features)
+and [submitting pull requests](#pull-requests).
 
-### Feedback
+<a name="bugs"></a>
 
-Feedback is the breakfast for champions! We'd love to hear your opinions, discuss potential
-improvements, architecture, theory, internal implementation, etc. Please, join or start a new
-conversation in our [issue tracker](https://github.com/kriasoft/react-starter-kit/issues),
-[Gitter](https://gitter.im/kriasoft/react-starter-kit) chat room, or let's talk face-to-face on
-[Appear.in](https://appear.in/react) or [Skype](http://hatscripts.com/addskype?koistya).
+## Bug reports
 
-### Documentation
+A bug is a _demonstrable problem_ that is caused by the code in the repository.
+Good bug reports are extremely helpful - thank you!
 
-We need your help with improving documentation to the project. This might be the easiest way for
-you to contribute, because you don't even need to clone the repo but can edit or create new `.md`
-files right from GitHub website as described [here](https://help.github.com/articles/editing-files-in-your-repository/).
+Guidelines for bug reports:
 
-### Bugs & Feature Requests
+1.  **Use the GitHub issue search** &mdash; check if the issue has already been reported.
 
-Before opening an issue, please:
+2.  **Check if the issue has been fixed** &mdash; try to reproduce it using the latest `master` or development branch in the repository.
 
-* Check the [Getting Started](https://github.com/kriasoft/react-starter-kit/blob/master/docs/getting-started.md) guide.
-* Search the [issue tracker](https://github.com/kriasoft/react-starter-kit/issues) to make sure
-  your issue hasn’t already been reported.
-* If your issue sounds more like a question, please post it on StackOverflow.com instead with the
-  tag [react-starter-kit](http://stackoverflow.com/questions/tagged/react-starter-kit).
+3.  **Isolate the problem** &mdash; ideally create a [reduced test case](https://css-tricks.com/reduced-test-cases/) and a live example.
 
-### Pull Requests
+4.  **Use the bug report template** &mdash; please fill in the template which appears when you open a new issue.
 
-Before you submit a [pull request](https://help.github.com/articles/using-pull-requests/) from your
-forked repo, check that it meets these guidelines:
+A good bug report shouldn't leave others needing to chase you up for more information. Please try to be as detailed as possible in your report. What is your environment? What steps will reproduce the issue? What browser(s) and OS
+experience the problem? What would you expect to be the outcome? All these details will help people to fix any potential bugs.
 
-* If the pull request adds functionality, the docs should be updated as part of the same PR.
-* Create a separate PR for each small feature or bug fix.
-* [Squash](http://stackoverflow.com/questions/5189560/squash-my-last-x-commits-together-using-git)
-  your commits into one for each PR.
-* Run `yarn test` to make sure that your code style is OK and there are no any regression bugs.
-* When contributing to an opt-in feature, apply the `[feature/...]` tag as a prefix to your PR title
+Example:
 
-#### Style Guide
+> ## Description
+> A clear and concise description of what the bug is.
+>
+> Any other information you want to share that is relevant to the issue being
+> reported. This might include the lines of code that you have identified as
+> causing the bug, and potential solutions (and your opinions on their
+> merits).
+>
+> ## Steps to reproduce
+> Steps to reproduce the behavior:
+>
+> 1.  This is the first step
+> 2.  This is the second step
+> 3.  Further steps, etc.
+>
+> (Add link to a demo on https://jsfiddle.net or similar if possible)
+>
+> **Expected behavior**
+> A clear and concise description of what you expected to happen.
+>
+> **Screenshots**
+> If applicable, add screenshots to help explain your problem.
+>
+> ## Versions
+>
+> - React-Boilerplate:
+> - Node/NPM:
+> - Browser:
 
-Our linter will catch most styling issues that may exist in your code. You can check the status
-of your code styling by simply running: `yarn lint`
+<a name="features"></a>
 
-However, there are still some styles that the linter cannot pick up. If you are unsure about
-something, looking at [Airbnb's Style Guide](https://github.com/airbnb/javascript) will guide you
-in the right direction.
+## Feature requests
 
-### License
+Feature requests are welcome. But take a moment to find out whether your idea fits with the scope and aims of the project. It's up to _you_ to make a strong case to convince the project's developers of the merits of this feature. Please provide as many details and as much context as possible.
 
-By contributing to React Starter Kit, you agree that your contributions will be licensed under its
-[MIT license](https://github.com/kriasoft/react-starter-kit/blob/master/LICENSE.txt).
+There is also a template for feature requests. Please make sure to use it.
+
+<a name="pull-requests"></a>
+
+## Pull requests
+
+Good pull requests - patches, improvements, new features - are a fantastic
+help. They should remain focused in scope and avoid containing unrelated
+commits.
+
+**Please ask first** before embarking on any significant pull request (e.g.
+implementing features, refactoring code, porting to a different language),
+otherwise you risk spending a lot of time working on something that the
+project's developers might not want to merge into the project.
+
+Please adhere to the coding conventions used throughout a project (indentation,
+accurate comments, etc.) and any other requirements (such as test coverage).
+
+Since the `master` branch is what people actually use in production, we have a
+`dev` branch that unstable changes get merged into first. Only when we
+consider that stable we merge it into the `master` branch and release the
+changes for real.
+
+Adhering to the following process is the best way to get your work
+included in the project:
+
+1.  [Fork](https://help.github.com/articles/fork-a-repo/) the project, clone your fork, and configure the remotes:
+
+    ```bash
+    # Clone your fork of the repo into the current directory
+    git clone https://github.com/<your-username>/react-boilerplate.git
+    # Navigate to the newly cloned directory
+    cd react-boilerplate
+    # Assign the original repo to a remote called "upstream"
+    git remote add upstream https://github.com/react-boilerplate/react-boilerplate.git
+    ```
+
+2.  If you cloned a while ago, get the latest changes from upstream:
+
+    ```bash
+    git checkout dev
+    git pull upstream dev
+    ```
+
+3.  Create a new topic branch (off the `dev` branch) to contain your feature, change, or fix:
+
+    ```bash
+    git checkout -b <topic-branch-name>
+    ```
+
+4.  Commit your changes in logical chunks. Please adhere to these [git commit message guidelines](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) or your code is unlikely be merged into the main project. Use Git's [interactive rebase](https://help.github.com/articles/about-git-rebase/) feature to tidy up your commits before making them public.
+
+5.  Locally merge (or rebase) the upstream dev branch into your topic branch:
+
+    ```bash
+    git pull [--rebase] upstream dev
+    ```
+
+6.  Push your topic branch up to your fork:
+
+    ```bash
+    git push origin <topic-branch-name>
+    ```
+
+7.  [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
+    with a clear title and description.
+
+**IMPORTANT**: By submitting a patch, you agree to allow the project
+owners to license your work under the terms of the [MIT License](https://github.com/react-boilerplate/react-boilerplate/blob/master/LICENSE.md).
+
+# Collaborating guidelines
+
+You can find the list of all contributors in [README.md](./README.md).
+
+There are few basic rules to ensure high quality of the boilerplate:
+
+- Before merging, a PR requires at least two approvals from the collaborators unless it's an architectural change, a large feature, etc. If it is, then at least 50% of the core team have to agree to merge it, with every team member having a full veto right. (i.e. every single one can block any PR)
+- A PR should remain open for at least two days before merging (does not apply for trivial contributions like fixing a typo). This way everyone has enough time to look into it.
+
+You are always welcome to discuss and propose improvements to this guideline.
+
+# Add yourself as a contributor
+
+This project follows the [All Contributors specification](https://allcontributors.org/). To add yourself to the table of contributors in the README file, please use the [bot](https://allcontributors.org/docs/en/bot/overview) or the [CLI](https://allcontributors.org/docs/en/cli/overview) as part of your PR.
+
+If you've already added yourself to the list and are making a new type of contribution, you can run it again and select the new contribution type.
