@@ -1,6 +1,0 @@
-version: "3.6"
-services:
-  web-sheep:
-    build: .
-    ports:
-    - 3001:80
