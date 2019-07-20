@@ -14,7 +14,7 @@ function Pagination({ onPageChange, pageCount, forcePage }) {
         breakLabel="..."
         breakClassName="break-me"
         pageCount={pageCount}
-        forcePage={Number(forcePage)}
+        forcePage={forcePage}
         marginPagesDisplayed={4}
         pageRangeDisplayed={7}
         onPageChange={onPageChange}

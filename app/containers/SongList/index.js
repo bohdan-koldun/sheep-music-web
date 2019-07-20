@@ -21,6 +21,7 @@ import {
   makeSelectError,
   makeSelectSongList,
 } from './selectors';
+import './SongList.scss';
 
 export function SongList({ songs, onLoadSongList, location, onPaginate }) {
   useInjectReducer({ key: 'songList', reducer });
@@ -47,15 +48,17 @@ export function SongList({ songs, onLoadSongList, location, onPaginate }) {
       </Helmet>
       {songs && songs.results ? (
         <div>
-          {songs.results.map(song => (
-            <div key={song.slug}>
-              <Link to={`/song/${song.slug}`}>{song.title}</Link>
-              <br />
-            </div>
-          ))}
+          <ul className="multi-column">
+            {songs.results.map(song => (
+              <li key={song.slug}>
+                <Link to={`/song/${song.slug}`}>{song.title}</Link>
+                <br />
+              </li>
+            ))}
+          </ul>
           <Pagination
             pageCount={songs.countPages}
-            forcePage={songs.curPage}
+            forcePage={Number(songs.curPage)}
             onPageChange={paginate}
           />
         </div>

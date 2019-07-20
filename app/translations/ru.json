@@ -1,9 +1,11 @@
 {
-  "boilerplate.components.Footer.author.message": "Made with love by {author}.",
+  "boilerplate.components.Footer.author.message": "Сделано с любовью {author}.",
   "boilerplate.components.Footer.license.message": "Все права защищены.",
   "boilerplate.components.Header.features": "Фичи",
   "boilerplate.components.Header.home": "Головна",
   "boilerplate.components.Header.songs": "Песни",
+  "boilerplate.components.Header.albums": "Альбомы",
+  "boilerplate.components.Header.authors": "Исполнители",
   "boilerplate.containers.FeaturePage.css.header": "Features",
   "boilerplate.components.Pagination.next": "вперёд",
   "boilerplate.components.Pagination.previous": "назад",
