@@ -7,7 +7,9 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import { push } from 'connected-react-router';
 
+import Pagination from 'components/Pagination';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
@@ -20,42 +22,61 @@ import {
   makeSelectSongList,
 } from './selectors';
 
-export function SongList({ songs, onLoadSongList }) {
+export function SongList({ songs, onLoadSongList, location, onPaginate }) {
   useInjectReducer({ key: 'songList', reducer });
   useInjectSaga({ key: 'songList', saga });
 
+  const paginate = page => {
+    onPaginate(page.selected);
+    onLoadSongList(page.selected);
+  };
+
   useEffect(() => {
-    // When initial state username is not null, submit the form to load repos
-    onLoadSongList(20);
+    const params = new URLSearchParams(location.search);
+    onLoadSongList(params.get('page'));
   }, []);
 
   return (
     <div>
       <Helmet>
-        <title> SongList </title>
-        <meta name="description" content="Description of SongList" />
+        <title> Песни </title>
+        <meta
+          name="description"
+          content="Христианские песни: слова, аудио, mp3, текст, аккорды"
+        />
       </Helmet>
-      {songs && songs.results
-        ? songs.results.map(song => (
+      {songs && songs.results ? (
+        <div>
+          {songs.results.map(song => (
             <div key={song.slug}>
               <Link to={`/song/${song.slug}`}>{song.title}</Link>
               <br />
             </div>
-          ))
-        : null}
+          ))}
+          <Pagination
+            pageCount={songs.countPages}
+            forcePage={songs.curPage}
+            onPageChange={paginate}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
 
 SongList.propTypes = {
   //  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  //  loading: PropTypes.bool,
+  // loading: PropTypes.bool,
   songs: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,
     total: PropTypes.number,
   }),
   onLoadSongList: PropTypes.func,
+  onPaginate: PropTypes.func,
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -67,6 +88,7 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadSongList: page => dispatch(loadSongList(page)),
+    onPaginate: page => dispatch(push(`/songs?page=${page}`)),
   };
 }
 

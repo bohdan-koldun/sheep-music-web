@@ -11,18 +11,18 @@ import messages from './messages';
 function Header() {
   return (
     <div>
-      <A href="https://www.reactboilerplate.com/">
-        <Img src={Banner} alt="react-boilerplate - Logo" />
+      <A href="https://sheep-music.com/">
+        <Img src={Banner} alt="sheep music" />
       </A>
       <NavBar>
-        <HeaderLink to="/">
-          <FormattedMessage {...messages.home} />
-        </HeaderLink>
-        <HeaderLink to="/features">
-          <FormattedMessage {...messages.features} />
-        </HeaderLink>
         <HeaderLink to="/songs">
           <FormattedMessage {...messages.songs} />
+        </HeaderLink>
+        <HeaderLink to="/albums">
+          <FormattedMessage {...messages.albums} />
+        </HeaderLink>
+        <HeaderLink to="/authors">
+          <FormattedMessage {...messages.authors} />
         </HeaderLink>
       </NavBar>
     </div>
