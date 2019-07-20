@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.features`,
     defaultMessage: 'Features',
   },
+  songs: {
+    id: `${scope}.songs`,
+    defaultMessage: 'Песни',
+  },
 });

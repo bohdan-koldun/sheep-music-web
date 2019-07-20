@@ -13,6 +13,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
+import Song from 'containers/Song/Loadable';
+import SongList from 'containers/SongList/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -31,16 +33,15 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
+      <Helmet titleTemplate="%s - SheepMusic" defaultTitle="Sheep Music">
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />
+        <Route path="/songs" component={SongList} />
+        <Route path="/song/:slug" component={Song} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
