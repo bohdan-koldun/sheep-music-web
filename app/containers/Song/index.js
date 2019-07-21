@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -37,17 +38,28 @@ export function Song({ songData, onLoadSong, match }) {
         <div>
           <h1>{songData ? songData.title : null}</h1>
           <div>
-            <span>
-              <FormattedMessage {...messages.author} />:{' '}
-            </span>
-            <a href="/ffff">
-              {songData.author ? songData.author.title : 'Нет'}
-            </a>
-            <span>
-              {'    '}
-              <FormattedMessage {...messages.album} />:{' '}
-            </span>
-            <a href="/ffff">{songData.album ? songData.album.title : 'Нет'}</a>
+            {songData.author && (
+              <div>
+                <span>
+                  {'    '}
+                  <FormattedMessage {...messages.author} />:{' '}
+                </span>
+                <Link to={`/author/${songData.author.slug}`}>
+                  {songData.author.title}
+                </Link>
+              </div>
+            )}
+            {songData.album && (
+              <div>
+                <span>
+                  {'    '}
+                  <FormattedMessage {...messages.album} />:{' '}
+                </span>
+                <Link to={`/album/${songData.album.slug}`}>
+                  {songData.album.title}
+                </Link>
+              </div>
+            )}
           </div>
 
           <figure>

@@ -1,36 +1,39 @@
 import produce from 'immer';
-import { LOAD_SONG, LOAD_SONG_SUCCESS, LOAD_SONG_ERROR } from './constants';
+import { LOAD_ALBUM, LOAD_ALBUM_SUCCESS, LOAD_ALBUM_ERROR } from './constants';
 
 export const initialState = {
   loading: false,
   error: false,
-  songData: {
+  albumData: {
     title: '',
-    audioMp3: {},
-    chords: '',
-    chordKey: '',
+    description: '',
+    year: '',
+    iTunes: '',
+    googlePlay: '',
+    author: {},
+    thumbnail: {},
   },
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const songReducer = (state = initialState, action) =>
+const albumReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOAD_SONG:
+      case LOAD_ALBUM:
         draft.loading = true;
         draft.error = false;
         break;
 
-      case LOAD_SONG_SUCCESS:
-        draft.songData = action.song;
+      case LOAD_ALBUM_SUCCESS:
+        draft.albumData = action.album;
         draft.loading = false;
         break;
 
-      case LOAD_SONG_ERROR:
+      case LOAD_ALBUM_ERROR:
         draft.error = action.error;
         draft.loading = false;
         break;
     }
   });
 
-export default songReducer;
+export default albumReducer;

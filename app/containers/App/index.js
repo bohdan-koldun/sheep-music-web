@@ -15,6 +15,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import Song from 'containers/Song/Loadable';
 import SongList from 'containers/SongList/Loadable';
+import Album from 'containers/Album/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/features" component={FeaturePage} />
         <Route path="/songs" component={SongList} />
         <Route path="/song/:slug" component={Song} />
+        <Route path="/album/:slug" component={Album} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
