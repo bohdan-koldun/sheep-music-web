@@ -18,6 +18,7 @@ import SongList from 'containers/SongList/Loadable';
 import Album from 'containers/Album/Loadable';
 import AlbumList from 'containers/AlbumList/Loadable';
 import Author from 'containers/Author/Loadable';
+import AuthorList from 'containers/AuthorList/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/album/:slug" component={Album} />
         <Route path="/albums" component={AlbumList} />
         <Route path="/author/:slug" component={Author} />
+        <Route path="/authors" component={AuthorList} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
