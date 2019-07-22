@@ -1,30 +1,28 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 
-import A from './A';
-import Img from './Img';
-import NavBar from './NavBar';
-import HeaderLink from './HeaderLink';
 import Banner from './banner.jpg';
 import messages from './messages';
+import './Header.scss';
 
 function Header() {
   return (
     <div>
-      <A href="https://sheep-music.com/">
-        <Img src={Banner} alt="sheep music" />
-      </A>
-      <NavBar>
-        <HeaderLink to="/songs">
+      <a href="https://sheep-music.com/">
+        <img src={Banner} alt="sheep music" className="header-banner" />
+      </a>
+      <div className="header-links">
+        <Link to="/songs">
           <FormattedMessage {...messages.songs} />
-        </HeaderLink>
-        <HeaderLink to="/albums">
+        </Link>
+        <Link to="/albums">
           <FormattedMessage {...messages.albums} />
-        </HeaderLink>
-        <HeaderLink to="/authors">
+        </Link>
+        <Link to="/authors">
           <FormattedMessage {...messages.authors} />
-        </HeaderLink>
-      </NavBar>
+        </Link>
+      </div>
     </div>
   );
 }

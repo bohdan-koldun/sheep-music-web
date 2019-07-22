@@ -36,11 +36,13 @@ export function Album({ onLoadAlbum, match, albumData }) {
           </Helmet>
           <h1>{albumData.title}</h1>
           <b>{albumData.year}</b>
-          <img
-            src={albumData.thumbnail.path}
-            alt={albumData.title}
-            style={{ width: '70%', display: 'block' }}
-          />
+          {albumData.thumbnail && (
+            <img
+              src={albumData.thumbnail.path}
+              alt={albumData.title}
+              style={{ width: '70%', display: 'block' }}
+            />
+          )}
           <div>{albumData.description}</div>
         </div>
       )}

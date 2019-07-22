@@ -36,11 +36,14 @@ export function Author({ onLoadAuthor, match, authorData }) {
           </Helmet>
           <h1>{authorData.title}</h1>
           <b>{authorData.year}</b>
-          <img
-            src={authorData.thumbnail.path}
-            alt={authorData.title}
-            style={{ width: '70%', display: 'block' }}
-          />
+          {authorData.thumbnail && (
+            <img
+              src={authorData.thumbnail.path}
+              alt={authorData.title}
+              style={{ width: '70%', display: 'block' }}
+            />
+          )}
+
           <div>{authorData.description}</div>
         </div>
       )}
