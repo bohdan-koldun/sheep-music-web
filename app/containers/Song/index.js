@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -29,14 +30,14 @@ export function Song({ songData, onLoadSong, match }) {
   }, []);
 
   return (
-    <div>
-      <Helmet>
-        <title>{songData ? songData.title : null}</title>
-        <meta name="description" content="Description of Song" />
-      </Helmet>
+    <React.Fragment>
       {songData ? (
         <div>
-          <h1>{songData ? songData.title : null}</h1>
+          <Helmet>
+            <title>{songData.title}</title>
+            <meta name="description" content="Description of Song" />
+          </Helmet>
+          <h1>{songData.title}</h1>
           <div>
             {songData.author && (
               <div>
@@ -73,9 +74,19 @@ export function Song({ songData, onLoadSong, match }) {
             </audio>
           </figure>
           <pre>{songData ? songData.text : null}</pre>
+          {songData.video && (
+            <ReactPlayer
+              url={songData.video}
+              config={{
+                youtube: {
+                  playerVars: { showinfo: 0, controls: 1 },
+                },
+              }}
+            />
+          )}
         </div>
       ) : null}
-    </div>
+    </React.Fragment>
   );
 }
 
