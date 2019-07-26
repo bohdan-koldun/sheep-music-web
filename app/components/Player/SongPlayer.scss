@@ -1,0 +1,43 @@
+.song-player-wrapper {
+  width: 100%;
+  color: #fff;
+}
+
+.song-player-control {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+
+  .group-control-first,
+  .group-control-second,
+  .group-control-third {
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-button {
+    border: none;
+    outline: none;
+    background: none;
+
+  }
+
+  .player-icon {
+    color: #fff;
+    font-size: 28px;
+  }
+
+  .play-icon {
+    font-size: 36px;
+  }
+
+  .icon-active {
+    color: #e2263e;
+  }
+
+  .song-player-img{
+    width: 45px;
+    border-radius: 3px;
+    margin: 2px 8px;
+  }
+}

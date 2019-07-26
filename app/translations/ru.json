@@ -8,7 +8,6 @@
   "boilerplate.components.Header.authors": "Исполнители",
   "boilerplate.containers.FeaturePage.css.header": "Features",
   "boilerplate.components.Pagination.next": "вперёд",
-  "boilerplate.components.Pagination.previous": "назад",
   "boilerplate.containers.FeaturePage.css.message": "Next generation CSS",
   "boilerplate.containers.FeaturePage.feedback.header": "Instant feedback",
   "boilerplate.containers.FeaturePage.feedback.message": "Enjoy the best DX and code your app at the speed of thought! Your\n    saved changes to the CSS and JS are reflected instantaneously\n    without refreshing the page. Preserve application state even when\n    you update something in the underlying code!",
@@ -34,5 +33,15 @@
   "boilerplate.containers.LocaleToggle.en": "en",
   "boilerplate.containers.NotFoundPage.header": "Страница не найдена.",
   "app.containers.Song.author": "Автор",
-  "app.containers.Song.album": "Альбом"
+  "app.containers.Song.album": "Альбом",
+  "app.components.Player.play": "воспроизвести",
+  "app.components.Player.pause": "остановить",
+  "app.components.Player.volumeOff": "отключить звук",
+  "app.components.Player.volumeOn": "включить звук",
+  "app.components.Player.prev": "предыдущий трек",
+  "app.components.Player.next": "следующий трек",
+  "app.components.Player.download": "скачать",
+  "app.components.Player.list": "список",
+  "app.components.Player.shuffle": "перемешать",
+  "app.components.Player.loop": "зациклить"
 }

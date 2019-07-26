@@ -11,6 +11,11 @@ import ReactPlayer from 'react-player';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
+import {
+  makeSelectPlay,
+  makeSelectAudioPlayerSong,
+} from 'containers/AudioPlayer//selectors';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -21,13 +26,29 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-export function Song({ songData, onLoadSong, match }) {
+export function Song({
+  songData,
+  onLoadSong,
+  onPlaySong,
+  onPlayPause,
+  play,
+  playSong,
+  match,
+}) {
   useInjectReducer({ key: 'song', reducer });
   useInjectSaga({ key: 'song', saga });
 
   useEffect(() => {
     onLoadSong(match.params.slug);
   }, []);
+
+  const playPauseSong = () => {
+    if (playSong && songData && songData.id === playSong.id) {
+      onPlayPause(songData.id);
+    } else {
+      onPlaySong(songData);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -61,19 +82,14 @@ export function Song({ songData, onLoadSong, match }) {
                 </Link>
               </div>
             )}
+            {songData.audioMp3 ? (
+              <button type="button" onClick={playPauseSong}>
+                {play ? 'pause' : 'play'}
+              </button>
+            ) : null}
           </div>
 
-          <figure>
-            <audio
-              controls
-              src={songData.audioMp3 ? songData.audioMp3.path : ''}
-            >
-              <track kind="captions" />
-              Your browser does not support the
-              <code>audio</code> element.
-            </audio>
-          </figure>
-          <pre>{songData ? songData.text : null}</pre>
+          <pre>{songData.text}</pre>
           {songData.video && (
             <ReactPlayer
               url={songData.video}
@@ -95,15 +111,26 @@ Song.propTypes = {
   loading: PropTypes.bool,
   songData: PropTypes.object,
   onLoadSong: PropTypes.func,
+  onPlaySong: PropTypes.func,
+  onPlayPause: PropTypes.func,
   match: PropTypes.shape({
     params: PropTypes.shape({
       slug: PropTypes.string,
+    }),
+  }),
+  play: PropTypes.bool,
+  playSong: PropTypes.shape({
+    id: PropTypes.number,
+    audioMp3: PropTypes.shape({
+      path: PropTypes.string,
     }),
   }),
 };
 
 const mapStateToProps = createStructuredSelector({
   songData: makeSelectSongData(),
+  play: makeSelectPlay(),
+  playSong: makeSelectAudioPlayerSong(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });
@@ -111,6 +138,8 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadSong: slug => dispatch(loadSong(slug)),
+    onPlaySong: song => dispatch(setSong(song)),
+    onPlayPause: id => dispatch(setPlayPause(id)),
   };
 }
 

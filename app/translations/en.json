@@ -34,5 +34,15 @@
   "boilerplate.containers.LocaleToggle.en": "en",
   "boilerplate.containers.NotFoundPage.header": "Page not found.",
   "app.containers.Song.author": "Author",
-  "app.containers.Song.album": "Album"
+  "app.containers.Song.album": "Album",
+  "app.components.Player.play": "play",
+  "app.components.Player.pause": "pause",
+  "app.components.Player.volumeOff": "mute",
+  "app.components.Player.volumeOn": "unmute",
+  "app.components.Player.prev": "previous track",
+  "app.components.Player.next": "next track",
+  "app.components.Player.download": "download",
+  "app.components.Player.list": "play list",
+  "app.components.Player.shuffle": "shuffle",
+  "app.components.Player.loop": "loop"
 }
