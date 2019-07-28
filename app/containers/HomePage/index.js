@@ -20,7 +20,6 @@ import {
   makeSelectError,
 } from 'containers/App/selectors';
 import H2 from 'components/H2';
-import ReposList from 'components/ReposList';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
@@ -35,14 +34,7 @@ import saga from './saga';
 
 const key = 'home';
 
-export function HomePage({
-  username,
-  loading,
-  error,
-  repos,
-  onSubmitForm,
-  onChangeUsername,
-}) {
+export function HomePage({ username, onSubmitForm, onChangeUsername }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -50,12 +42,6 @@ export function HomePage({
     // When initial state username is not null, submit the form to load repos
     if (username && username.trim().length > 0) onSubmitForm();
   }, []);
-
-  const reposListProps = {
-    loading,
-    error,
-    repos,
-  };
 
   return (
     <article>
@@ -94,7 +80,6 @@ export function HomePage({
               />
             </label>
           </Form>
-          <ReposList {...reposListProps} />
         </Section>
       </div>
     </article>

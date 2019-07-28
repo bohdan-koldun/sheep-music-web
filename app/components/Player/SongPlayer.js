@@ -103,13 +103,11 @@ class SongPlayer extends Component {
   };
 
   onEnded = () => {
-    // const { loop, random } = this.state;
-    // const keysSong = Object.keys(this.props.songs.songs);
-    // if (loop) this.setState({ playing: loop });
-    // else if (random) {
-    //     this.handlePrevNext(keysSong[Math.floor(Math.random() * keysSong.length)]);
-    // }
-    //   this.handlePrevNext(this.props.songs.nextSong);
+    const { loop } = this.state;
+    const { playData, onPrevNext } = this.props;
+    if (!loop) {
+      onPrevNext(playData.nextPlayListId);
+    }
   };
 
   onDuration = duration => {
@@ -133,26 +131,6 @@ class SongPlayer extends Component {
       default:
         break;
     }
-  };
-
-  handlePrevNext = () => {
-    // if (id) {
-    //   const { changeCurrentSong, songs } = this.props;
-    //   let nextSong;
-    //   let prevSong;
-    //   Object.keys(songs.songs).some((currId, index, arr) => {
-    //     if (currId === id) {
-    //       nextSong = arr[index + 1];
-    //       prevSong = arr[index - 1];
-    //     }
-    //     return currId === id;
-    //   });
-    //   changeCurrentSong({
-    //     prevSong,
-    //     currentSong: id,
-    //     nextSong,
-    //   });
-    // }
   };
 
   componentDidMount() {
