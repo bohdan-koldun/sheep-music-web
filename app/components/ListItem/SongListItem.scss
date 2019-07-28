@@ -2,6 +2,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid-column;   
 }
 
 .song-list-item-description{

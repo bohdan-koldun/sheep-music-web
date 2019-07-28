@@ -14,7 +14,7 @@ class SongListItem extends React.Component {
     const { intl } = this.context;
 
     return (
-      <li className="song-list-item">
+      <div className="song-list-item">
         <button
           type="button"
           onClick={() => playPauseSong(song)}
@@ -41,7 +41,7 @@ class SongListItem extends React.Component {
         </div>
 
         <ReactTooltip place="top" type="dark" effect="float" />
-      </li>
+      </div>
     );
   }
 }

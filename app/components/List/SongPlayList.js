@@ -5,7 +5,7 @@ import './SongPlayList.scss';
 
 function SongPlayList({ songs, playData, play, playPauseSong }) {
   return songs ? (
-    <ul className="song-list">
+    <div className="song-list">
       {songs.map(song => (
         <SongListItem
           key={song.slug}
@@ -15,7 +15,7 @@ function SongPlayList({ songs, playData, play, playPauseSong }) {
           play={play}
         />
       ))}
-    </ul>
+    </div>
   ) : null;
 }
 
