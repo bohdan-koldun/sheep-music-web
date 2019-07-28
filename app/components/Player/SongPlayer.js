@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import ReactTooltip from 'react-tooltip';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import {
   MdPause,
@@ -223,12 +224,14 @@ class SongPlayer extends Component {
           </div>
 
           <div className="group-control-second">
-            <SongImg song={song} className="song-player-img" />
-            <div>
-              <b>{song.title}</b>
-              <br />
-              <span>{song.author && song.author.title}</span>
-            </div>
+            <Link to={`/song/${song.slug}`} className="player-song-link">
+              <SongImg song={song} className="song-player-img" />
+              <div>
+                <b>{song.title}</b>
+                <br />
+                <span>{song.author && song.author.title}</span>
+              </div>
+            </Link>
             <button type="button" className="icon-button">
               <a href={song.audioMp3.path} download>
                 <MdVerticalAlignBottom
