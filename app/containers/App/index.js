@@ -30,14 +30,11 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <Fragment>
+      <Helmet titleTemplate="%s - SheepMusic" defaultTitle="Sheep Music">
+        <meta name="description" content="A React.js Boilerplate application" />
+      </Helmet>
+      <Header />
       <AppWrapper>
-        <Helmet titleTemplate="%s - SheepMusic" defaultTitle="Sheep Music">
-          <meta
-            name="description"
-            content="A React.js Boilerplate application"
-          />
-        </Helmet>
-        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/features" component={FeaturePage} />

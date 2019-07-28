@@ -15,10 +15,10 @@ const makeSelectShowPlayer = () =>
     audioPlayer => audioPlayer.showPlayer,
   );
 
-const makeSelectAudioPlayerSong = () =>
+const makeSelectAudioPlayData = () =>
   createSelector(
     selectAudioPlayerDomain,
-    audioPlayer => audioPlayer.playSong,
+    audioPlayer => audioPlayer.playData,
   );
 
 const makeSelectAudioPlayerList = () =>
@@ -31,6 +31,6 @@ export {
   selectAudioPlayerDomain,
   makeSelectPlay,
   makeSelectShowPlayer,
-  makeSelectAudioPlayerSong,
+  makeSelectAudioPlayData,
   makeSelectAudioPlayerList,
 };

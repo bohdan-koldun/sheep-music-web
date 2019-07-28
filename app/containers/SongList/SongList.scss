@@ -1,4 +1,4 @@
-.multi-column {
+.song-list {
     -moz-column-count: 2;
     -moz-column-gap: 20px;
     -moz-column-fill: auto;
@@ -9,4 +9,17 @@
     column-gap: 20px;
     column-fill: auto;
     list-style-position: inside;
+
+    .icon-button {
+        border: none;
+        outline: none;
+        background: none;
+        padding-left: 0;
+    
+      }
+    
+      .song-icon {
+        color: #000;
+        font-size: 36px;
+      }
  }

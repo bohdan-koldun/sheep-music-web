@@ -8,14 +8,20 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import {
+  MdCloudDownload,
+  MdPlayCircleFilled,
+  MdPauseCircleFilled,
+} from 'react-icons/md';
 
+import { SongImg } from 'components/Img';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
 import {
   makeSelectPlay,
-  makeSelectAudioPlayerSong,
-} from 'containers/AudioPlayer//selectors';
+  makeSelectAudioPlayData,
+} from 'containers/AudioPlayer/selectors';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -25,15 +31,16 @@ import { loadSong } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import './Song.scss';
 
 export function Song({
   songData,
   onLoadSong,
+  match,
+  play,
+  playData,
   onPlaySong,
   onPlayPause,
-  play,
-  playSong,
-  match,
 }) {
   useInjectReducer({ key: 'song', reducer });
   useInjectSaga({ key: 'song', saga });
@@ -43,7 +50,7 @@ export function Song({
   }, []);
 
   const playPauseSong = () => {
-    if (playSong && songData && songData.id === playSong.id) {
+    if (playData && songData && songData.id === playData.song.id) {
       onPlayPause(songData.id);
     } else {
       onPlaySong(songData);
@@ -58,35 +65,61 @@ export function Song({
             <title>{songData.title}</title>
             <meta name="description" content="Description of Song" />
           </Helmet>
-          <h1>{songData.title}</h1>
-          <div>
-            {songData.author && (
-              <div>
-                <span>
-                  {'    '}
-                  <FormattedMessage {...messages.author} />:{' '}
-                </span>
-                <Link to={`/author/${songData.author.slug}`}>
-                  {songData.author.title}
-                </Link>
-              </div>
-            )}
-            {songData.album && (
-              <div>
-                <span>
-                  {'    '}
-                  <FormattedMessage {...messages.album} />:{' '}
-                </span>
-                <Link to={`/album/${songData.album.slug}`}>
-                  {songData.album.title}
-                </Link>
-              </div>
-            )}
-            {songData.audioMp3 ? (
-              <button type="button" onClick={playPauseSong}>
-                {play ? 'pause' : 'play'}
-              </button>
-            ) : null}
+
+          <div className="song-page-header">
+            <SongImg song={songData} className="song-page-img" />
+            <div className="song-metadata">
+              <h1>{songData.title}</h1>
+              {songData.author && (
+                <div>
+                  <span>
+                    {'    '}
+                    <FormattedMessage {...messages.author} />:{' '}
+                  </span>
+                  <Link to={`/author/${songData.author.slug}`}>
+                    {songData.author.title}
+                  </Link>
+                </div>
+              )}
+              {songData.album && (
+                <div>
+                  <span>
+                    {'    '}
+                    <FormattedMessage {...messages.album} />:{' '}
+                  </span>
+                  <Link to={`/album/${songData.album.slug}`}>
+                    {songData.album.title}
+                  </Link>
+                </div>
+              )}
+              {songData.audioMp3 ? (
+                <div>
+                  <button
+                    type="button"
+                    onClick={playPauseSong}
+                    className="icon-button"
+                  >
+                    {play && playData && songData.id === playData.song.id ? (
+                      <MdPauseCircleFilled
+                        //     data-tip={intl.formatMessage(messages.pause)}
+                        className="song-icon"
+                      />
+                    ) : (
+                      <MdPlayCircleFilled
+                        //    data-tip={intl.formatMessage(messages.play)}
+                        className="song-icon"
+                      />
+                    )}
+                  </button>
+                  <a href={songData.audioMp3.path} download>
+                    <MdCloudDownload
+                      //  data-tip={intl.formatMessage(messages.download)}
+                      className="song-icon"
+                    />
+                  </a>
+                </div>
+              ) : null}
+            </div>
           </div>
 
           <pre>{songData.text}</pre>
@@ -119,27 +152,31 @@ Song.propTypes = {
     }),
   }),
   play: PropTypes.bool,
-  playSong: PropTypes.shape({
-    id: PropTypes.number,
-    audioMp3: PropTypes.shape({
-      path: PropTypes.string,
+  playData: PropTypes.shape({
+    song: PropTypes.shape({
+      title: PropTypes.string,
+      audioMp3: PropTypes.shape({
+        path: PropTypes.string,
+      }),
     }),
+    prevPlayListId: PropTypes.number,
+    nextPlayListId: PropTypes.number,
   }),
 };
 
 const mapStateToProps = createStructuredSelector({
-  songData: makeSelectSongData(),
-  play: makeSelectPlay(),
-  playSong: makeSelectAudioPlayerSong(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  songData: makeSelectSongData(),
+  play: makeSelectPlay(),
+  playData: makeSelectAudioPlayData(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadSong: slug => dispatch(loadSong(slug)),
     onPlaySong: song => dispatch(setSong(song)),
-    onPlayPause: id => dispatch(setPlayPause(id)),
+    onPlayPause: () => dispatch(setPlayPause()),
   };
 }
 

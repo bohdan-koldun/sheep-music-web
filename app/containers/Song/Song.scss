@@ -1,0 +1,33 @@
+.song-page-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    h1{
+        margin: 0;
+    }
+
+  .icon-button {
+    border: none;
+    outline: none;
+    background: none;
+    padding-left: 0;
+
+  }
+
+  .song-icon {
+    color: #000;
+    font-size: 36px;
+  }
+
+  .song-player-img{
+    width: 45px;
+    border-radius: 3px;
+    margin: 2px 8px;
+  }
+}
+
+.song-page-img{
+    width: 150px;
+    margin-right: 20px;
+}

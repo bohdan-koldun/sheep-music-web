@@ -1,4 +1,9 @@
-import { SET_PLAY_SONG, SET_PLAY_SONG_LIST, SET_PLAY_PAUSE } from './constants';
+import {
+  SET_PLAY_SONG,
+  SET_PLAY_SONG_LIST,
+  SET_PLAY_BY_LIST_ID,
+  SET_PLAY_PAUSE,
+} from './constants';
 
 export function setSong(song) {
   return {
@@ -15,9 +20,15 @@ export function setSongList(song, songList) {
   };
 }
 
-export function setPlayPause(sondId) {
+export function setPlayByListId(listId) {
+  return {
+    type: SET_PLAY_BY_LIST_ID,
+    listId,
+  };
+}
+
+export function setPlayPause() {
   return {
     type: SET_PLAY_PAUSE,
-    sondId,
   };
 }

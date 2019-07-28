@@ -174,8 +174,8 @@ class SongPlayer extends Component {
       playbackRate,
     } = this.state;
 
-    const { song, playPause } = this.props;
-
+    const { playData, playPause, onPrevNext } = this.props;
+    const { song, nextPlayListId, prevPlayListId } = playData || {};
     const { intl } = this.context;
 
     return (
@@ -205,7 +205,11 @@ class SongPlayer extends Component {
 
         <div className="song-player-control">
           <div className="group-control-first">
-            <button type="button" className="icon-button">
+            <button
+              type="button"
+              onClick={() => onPrevNext(prevPlayListId)}
+              className="icon-button"
+            >
               <MdSkipPrevious
                 data-tip={intl.formatMessage(messages.prev)}
                 className="player-icon"
@@ -224,9 +228,13 @@ class SongPlayer extends Component {
                 />
               )}
             </button>
-            <button type="button" className="icon-button">
+            <button
+              type="button"
+              onClick={() => onPrevNext(nextPlayListId)}
+              className="icon-button"
+            >
               <MdSkipNext
-                data-tip={intl.formatMessage(messages.next)}
+                onClick={() => onPrevNext(nextPlayListId)}
                 className="player-icon play-icon"
               />
             </button>
@@ -305,9 +313,16 @@ class SongPlayer extends Component {
 SongPlayer.propTypes = {
   playing: PropTypes.bool.isRequired,
   playPause: PropTypes.func.isRequired,
-  song: PropTypes.shape({
-    id: PropTypes.number,
-    audioMp3: PropTypes.object,
+  onPrevNext: PropTypes.func.isRequired,
+  playData: PropTypes.shape({
+    song: PropTypes.shape({
+      title: PropTypes.string,
+      audioMp3: PropTypes.shape({
+        path: PropTypes.string,
+      }),
+    }),
+    prevPlayListId: PropTypes.number,
+    nextPlayListId: PropTypes.number,
   }),
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,25 +10,35 @@ import { SongPlayer } from 'components/Player';
 import {
   makeSelectPlay,
   makeSelectShowPlayer,
-  makeSelectAudioPlayerSong,
+  makeSelectAudioPlayData,
   makeSelectAudioPlayerList,
 } from './selectors';
 import reducer from './reducer';
-import { setPlayPause } from './actions';
+import { setPlayPause, setPlayByListId } from './actions';
 import './AudioPlayer.scss';
 
-export function AudioPlayer({ play, onPlayPause, showPlayer, song }) {
+export function AudioPlayer({
+  play,
+  onPlayPause,
+  onPrevNext,
+  showPlayer,
+  playData,
+}) {
   useInjectReducer({ key: 'audioPlayer', reducer });
-  // useInjectSaga({ key: 'audioPlayer', saga });
 
   return (
     <Fragment>
-      {showPlayer && song && song.audioMp3 && song.audioMp3.path && (
+      {showPlayer &&
+        playData &&
+        playData.song &&
+        playData.song.audioMp3 &&
+        playData.song.audioMp3.path && (
         <div className="sheep-music-player">
           <SongPlayer
             playing={play}
-            playPause={() => onPlayPause(song.id)}
-            song={song}
+            playPause={onPlayPause}
+            onPrevNext={onPrevNext}
+            playData={playData}
           />
         </div>
       )}
@@ -38,25 +49,31 @@ export function AudioPlayer({ play, onPlayPause, showPlayer, song }) {
 AudioPlayer.propTypes = {
   play: PropTypes.bool,
   showPlayer: PropTypes.bool,
-  song: PropTypes.shape({
-    title: PropTypes.string,
-    audioMp3: PropTypes.shape({
-      path: PropTypes.string,
+  playData: PropTypes.shape({
+    song: PropTypes.shape({
+      title: PropTypes.string,
+      audioMp3: PropTypes.shape({
+        path: PropTypes.string,
+      }),
     }),
+    prevPlayListId: PropTypes.number,
+    nextPlayListId: PropTypes.number,
   }),
   onPlayPause: PropTypes.func.isRequired,
+  onPrevNext: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   play: makeSelectPlay(),
   showPlayer: makeSelectShowPlayer(),
-  song: makeSelectAudioPlayerSong(),
+  playData: makeSelectAudioPlayData(),
   playList: makeSelectAudioPlayerList(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onPlayPause: id => dispatch(setPlayPause(id)),
+    onPlayPause: () => dispatch(setPlayPause()),
+    onPrevNext: listId => dispatch(setPlayByListId(listId)),
   };
 }
 
