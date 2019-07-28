@@ -6,8 +6,14 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import { SongPlayList } from 'components/List';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import {
+  makeSelectPlay,
+  makeSelectAudioPlayData,
+} from 'containers/AudioPlayer/selectors';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -18,13 +24,29 @@ import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
 
-export function Author({ onLoadAuthor, match, authorData }) {
+export function Author({
+  onLoadAuthor,
+  match,
+  authorData,
+  play,
+  playData,
+  onPlaySongList,
+  onPlayPause,
+}) {
   useInjectReducer({ key: 'author', reducer });
   useInjectSaga({ key: 'author', saga });
 
   useEffect(() => {
     onLoadAuthor(match.params.slug);
   }, []);
+
+  const playPauseSong = song => {
+    if (playData && playData.song && song && song.id === playData.song.id) {
+      onPlayPause(song.id);
+    } else if (song && song.audioMp3 && song.audioMp3.path) {
+      onPlaySongList(song, authorData.songs || []);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -45,6 +67,12 @@ export function Author({ onLoadAuthor, match, authorData }) {
           )}
 
           <div>{authorData.description}</div>
+          <SongPlayList
+            songs={authorData.songs}
+            playPauseSong={playPauseSong}
+            playData={playData}
+            play={play}
+          />
         </div>
       )}
     </React.Fragment>
@@ -52,8 +80,6 @@ export function Author({ onLoadAuthor, match, authorData }) {
 }
 
 Author.propTypes = {
-  // error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  // loading: PropTypes.bool,
   authorData: PropTypes.object,
   onLoadAuthor: PropTypes.func,
   match: PropTypes.shape({
@@ -61,17 +87,34 @@ Author.propTypes = {
       slug: PropTypes.string,
     }),
   }),
+  play: PropTypes.bool,
+  playData: PropTypes.shape({
+    song: PropTypes.shape({
+      title: PropTypes.string,
+      audioMp3: PropTypes.shape({
+        path: PropTypes.string,
+      }),
+    }),
+    prevPlayListId: PropTypes.number,
+    nextPlayListId: PropTypes.number,
+  }),
+  onPlaySongList: PropTypes.func,
+  onPlayPause: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  authorData: makeSelectAuthorData(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  authorData: makeSelectAuthorData(),
+  play: makeSelectPlay(),
+  playData: makeSelectAudioPlayData(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadAuthor: slug => dispatch(loadAuthor(slug)),
+    onPlaySongList: (song, songList) => dispatch(setSongList(song, songList)),
+    onPlayPause: () => dispatch(setPlayPause()),
   };
 }
 const withConnect = connect(
