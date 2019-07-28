@@ -1,0 +1,23 @@
+.album-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+  img{
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 50%;
+      margin: 10px;
+  }
+}
+
+.album-description {
+  margin: 10px;
+}
+
+.spin-album-image {
+    animation: spin 25s linear infinite;
+}
+
+@keyframes spin { 100% { transform:rotate(360deg); } }

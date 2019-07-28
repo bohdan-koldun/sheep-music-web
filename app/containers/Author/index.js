@@ -2,7 +2,6 @@ import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -22,7 +21,6 @@ import {
 import { loadAuthor } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
 
 export function Author({
   onLoadAuthor,
@@ -53,11 +51,14 @@ export function Author({
       {authorData && (
         <div>
           <Helmet>
-            <title>{authorData.title}</title>
+            <title>{authorData.title} - Автор</title>
             <meta name="description" content="Description of Author" />
           </Helmet>
-          <h1>{authorData.title}</h1>
+          <h1>Автор {authorData.title}</h1>
           <b>{authorData.year}</b>
+          <span>
+            <b>{(authorData.songs && authorData.songs.length) || 0}</b> песен
+          </span>
           {authorData.thumbnail && (
             <img
               src={authorData.thumbnail.path}
