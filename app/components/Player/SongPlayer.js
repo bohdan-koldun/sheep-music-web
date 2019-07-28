@@ -18,7 +18,6 @@ import {
 import { SongImg } from '../Img';
 import messages from './messages';
 import { AudioSlider, VolumeSlider } from './Sliders';
-
 import Duration from './Duration';
 import './SongPlayer.scss';
 

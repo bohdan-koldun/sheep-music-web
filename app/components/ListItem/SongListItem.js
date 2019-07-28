@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import ReactTooltip from 'react-tooltip';
 import { MdPlayCircleFilled, MdPauseCircleFilled } from 'react-icons/md';
 import messages from 'components/Player/messages';
+import './SongListItem.scss';
 
 class SongListItem extends React.Component {
   render() {
@@ -33,8 +34,12 @@ class SongListItem extends React.Component {
             />
           )}
         </button>
-        <Link to={`/song/${song.slug}`}>{song.title}</Link>
-        <br />
+        <div className="song-list-item-description">
+          <Link to={`/song/${song.slug}`}>{song.title}</Link>
+          <br />
+          <span>{song.author && song.author.title}</span>
+        </div>
+
         <ReactTooltip place="top" type="dark" effect="float" />
       </li>
     );

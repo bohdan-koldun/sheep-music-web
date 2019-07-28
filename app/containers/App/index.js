@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
-
 import HomePage from 'containers/HomePage/Loadable';
 import Song from 'containers/Song/Loadable';
 import SongList from 'containers/SongList/Loadable';

@@ -1,0 +1,12 @@
+.song-list-item{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px 2px;
+}
+
+.song-list-item-description{
+    span{
+        font-size: 12px;
+    }
+}
