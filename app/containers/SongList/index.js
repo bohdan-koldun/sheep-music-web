@@ -10,9 +10,8 @@ import { push } from 'connected-react-router';
 import Pagination from 'components/Pagination';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-
-import { SongListItem } from 'components/ListItem';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import { SongPlayList } from 'components/List';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -25,7 +24,6 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import './SongList.scss';
 
 export function SongList({
   songs,
@@ -69,17 +67,12 @@ export function SongList({
       </Helmet>
       {songs && songs.results ? (
         <div>
-          <ul className="song-list">
-            {songs.results.map(song => (
-              <SongListItem
-                key={song.slug}
-                song={song}
-                playPauseSong={playPauseSong}
-                playData={playData}
-                play={play}
-              />
-            ))}
-          </ul>
+          <SongPlayList
+            songs={songs.results}
+            playPauseSong={playPauseSong}
+            playData={playData}
+            play={play}
+          />
           <Pagination
             pageCount={songs.countPages}
             forcePage={Number(songs.curPage)}
