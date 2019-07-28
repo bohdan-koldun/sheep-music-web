@@ -6,8 +6,6 @@
   "boilerplate.components.Header.songs": "Songs",
   "boilerplate.components.Header.albums": "Albums",
   "boilerplate.components.Header.authors": "Artists",
-  "boilerplate.components.Pagination.next": "next",
-  "boilerplate.components.Pagination.previous": "previous",
   "boilerplate.containers.HomePage.start_project.header": "Start your next react project in seconds",
   "boilerplate.containers.HomePage.start_project.message": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "boilerplate.containers.HomePage.tryme.atPrefix": "@",

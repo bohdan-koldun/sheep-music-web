@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import ReactPaginate from 'react-paginate';
-import messages from './messages';
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import './Pagination.scss';
 
 function Pagination({ onPageChange, pageCount, forcePage }) {
   return (
     <React.Fragment>
       <ReactPaginate
-        previousLabel={<FormattedMessage {...messages.previous} />}
-        nextLabel={<FormattedMessage {...messages.next} />}
+        previousLabel={<MdNavigateBefore />}
+        nextLabel={<MdNavigateNext />}
         breakLabel="..."
         breakClassName="break-me"
         pageCount={pageCount}
-        forcePage={forcePage}
-        marginPagesDisplayed={4}
-        pageRangeDisplayed={7}
+        forcePage={forcePage || 0}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={4}
         onPageChange={onPageChange}
         containerClassName="pagination"
         subContainerClassName="pages pagination"

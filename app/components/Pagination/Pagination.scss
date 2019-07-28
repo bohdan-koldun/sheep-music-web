@@ -1,5 +1,6 @@
 .pagination {
-    margin: 30px 5px;
+  margin: 30px auto;
+  text-align: center;
 
   ul {
     display: inline-block;
@@ -13,19 +14,32 @@
     margin: 5px;
     cursor: pointer;
 
+
     a {
       outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+
+      &:hover {
+        transition: all ease 0.5s;
+        color: #fff;
+        background-color: #e2263e;
+      }
     }
 
-    &:hover {
-      transition: all ease 0.5s;
-      background-color: #d0261d;
-    }
+
 
   }
 
   .active {
-    color: #fff;
-    background: #d0261d;
+    a {
+      color: #fff;
+      background: #e2263e;
+    }
+
   }
 }
