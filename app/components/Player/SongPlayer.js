@@ -185,12 +185,17 @@ class SongPlayer extends Component {
           <div className="group-control-first">
             <button
               type="button"
-              onClick={() => onPrevNext(prevPlayListId)}
+              onClick={() =>
+                (prevPlayListId || prevPlayListId === 0) &&
+                onPrevNext(prevPlayListId)
+              }
               className="icon-button"
             >
               <MdSkipPrevious
                 data-tip={intl.formatMessage(messages.prev)}
-                className="player-icon"
+                className={classNames('player-icon', {
+                  'icon-disable': !prevPlayListId && prevPlayListId !== 0,
+                })}
               />
             </button>
             <button type="button" onClick={playPause} className="icon-button">
@@ -208,12 +213,13 @@ class SongPlayer extends Component {
             </button>
             <button
               type="button"
-              onClick={() => onPrevNext(nextPlayListId)}
+              onClick={() => nextPlayListId && onPrevNext(nextPlayListId)}
               className="icon-button"
             >
               <MdSkipNext
-                onClick={() => onPrevNext(nextPlayListId)}
-                className="player-icon play-icon"
+                className={classNames('player-icon', {
+                  'icon-disable': !nextPlayListId,
+                })}
               />
             </button>
             <span>
