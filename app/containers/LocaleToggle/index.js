@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { MdLanguage } from 'react-icons/md';
 
 import Toggle from 'components/Toggle';
 import messages from './messages';
@@ -13,6 +14,7 @@ import './LocaleToggle.scss';
 export function LocaleToggle(props) {
   return (
     <div className="locale-toggle">
+      <MdLanguage />
       <Toggle
         value={props.locale}
         values={appLocales}

@@ -1,12 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import classNames from 'classnames/bind';
 import LocaleToggle from 'containers/LocaleToggle';
 import Banner from './banner.png';
 import messages from './messages';
 import './Header.scss';
 
-function Header() {
+function Header({ location }) {
+  const { pathname } = location || {};
   return (
     <div>
       <header>
@@ -14,13 +18,22 @@ function Header() {
           <Link to="/">Sheep Music</Link>
         </div>
         <div className="header-links">
-          <Link to="/songs">
+          <Link
+            to="/songs"
+            className={classNames({ 'active-link': pathname === '/songs' })}
+          >
             <FormattedMessage {...messages.songs} />
           </Link>
-          <Link to="/albums">
+          <Link
+            to="/albums"
+            className={classNames({ 'active-link': pathname === '/albums' })}
+          >
             <FormattedMessage {...messages.albums} />
           </Link>
-          <Link to="/authors">
+          <Link
+            to="/authors"
+            className={classNames({ 'active-link': pathname === '/authors' })}
+          >
             <FormattedMessage {...messages.authors} />
           </Link>
         </div>
@@ -35,4 +48,10 @@ function Header() {
   );
 }
 
-export default Header;
+Header.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
+};
+
+export default withRouter(Header);
