@@ -1,0 +1,10 @@
+.album-list {
+  columns: 2;
+
+}
+
+@media screen and (max-width: 700px) {
+  .album-list {
+    columns: 1;
+  }
+}

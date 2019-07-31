@@ -1,3 +1,4 @@
 import SongListItem from './SongListItem';
+import AlbumListItem from './AlbumListItem';
 
-export { SongListItem };
+export { SongListItem, AlbumListItem };

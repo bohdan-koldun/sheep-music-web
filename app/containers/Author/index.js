@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { SongPlayList } from 'components/List';
+import { SongPlayList, AlbumPictureList } from 'components/List';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
@@ -55,10 +55,6 @@ export function Author({
             <meta name="description" content="Description of Author" />
           </Helmet>
           <h1>Автор {authorData.title}</h1>
-          <b>{authorData.year}</b>
-          <span>
-            <b>{(authorData.songs && authorData.songs.length) || 0}</b> песен
-          </span>
           {authorData.thumbnail && (
             <img
               src={authorData.thumbnail.path}
@@ -66,14 +62,23 @@ export function Author({
               style={{ width: '70%', display: 'block' }}
             />
           )}
-
           <div>{authorData.description}</div>
+          <span>
+            <b>{(authorData.songs && authorData.songs.length) || 0}</b> песен
+          </span>
           <SongPlayList
             songs={authorData.songs}
             playPauseSong={playPauseSong}
             playData={playData}
             play={play}
           />
+          <br />
+          <span>
+            <b>{(authorData.albums && authorData.albums.length) || 0}</b>{' '}
+            альбомов
+          </span>
+          <AlbumPictureList albums={authorData.albums} />
+          <br /> <br />
         </div>
       )}
     </React.Fragment>

@@ -68,17 +68,16 @@ export function Album({
             )}
             <div className="album-description">
               <div>
-                <h1>Альбом {albumData.title}</h1>
-                Год: <b>{`${albumData.year}  ♦  `}</b>
-                <span>
-                  <b>{(albumData.songs && albumData.songs.length) || 0}</b>{' '}
-                  песен
-                </span>
+                <h1>{albumData.title}</h1>
                 <div>
-                  Автор:{' '}
+                  Альбом{' • '}
                   <Link to={`/author/${albumData.author.slug}`}>
                     {albumData.author.title}
                   </Link>
+                </div>
+                <div>
+                  <b>{(albumData.songs && albumData.songs.length) || 0}</b>{' '}
+                  композиции
                 </div>
               </div>
             </div>

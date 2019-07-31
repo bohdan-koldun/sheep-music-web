@@ -3,25 +3,22 @@ import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
 import { push } from 'connected-react-router';
 
 import Pagination from 'components/Pagination';
+import { AlbumPictureList } from 'components/List';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
 import { loadAlbumList } from './actions';
 import {
   makeSelectLoading,
   makeSelectError,
   makeSelectAlbumList,
 } from './selectors';
-import './AlbumList.scss';
 
 export function AlbumList({ albums, onLoadAlbumList, location, onPaginate }) {
   useInjectReducer({ key: 'albumList', reducer });
@@ -40,7 +37,7 @@ export function AlbumList({ albums, onLoadAlbumList, location, onPaginate }) {
   return (
     <div>
       <Helmet>
-        <title> Песни </title>
+        <title> Альбомы </title>
         <meta
           name="description"
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
@@ -48,14 +45,7 @@ export function AlbumList({ albums, onLoadAlbumList, location, onPaginate }) {
       </Helmet>
       {albums && albums.results ? (
         <div>
-          <ul className="multi-column">
-            {albums.results.map(album => (
-              <li key={album.slug}>
-                <Link to={`/album/${album.slug}`}>{album.title}</Link>
-                <br />
-              </li>
-            ))}
-          </ul>
+          <AlbumPictureList albums={albums.results} />
           <Pagination
             pageCount={albums.countPages}
             forcePage={Number(albums.curPage)}
