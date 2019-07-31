@@ -1,6 +1,9 @@
 {
-  "boilerplate.components.Footer.author.message": "Зроблено з любов'ю {author}.",
-  "boilerplate.components.Footer.license.message": "Всі права захищені.",
+  "app.components.Footer.author.message": "Зроблено з любов'ю {author}.",
+  "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Всі права захищені.",
+  "app.components.Footer.website.menu": "Меню:",
+  "app.components.Footer.website.language": "Мова:",
+  "app.components.Footer.right.message": "Матеріали, присутні на сайті, отримані з публічних (широкодоступних) ресурсів. Якщо ви володієте авторським правом на якусь інформацію, розміщену на сайті sheep-music.com і не згодні з її загальнодоступністю в майбутньому, то ми згодні розглянути пропозиції по видаленню певного матеріалу, а також обговорити пропозиції про домовленості, які дозволяють використовувати даний контент. Ми не відстежуємо дії користувачів, які самостійно викладають джерела текстів, які є об'єктом вашого авторського права. Всі дані на сайт, завантажуються автоматично, не проходячи заздалегідь відбору з чиєї-небудь сторони, що є нормою в світовому досвіді розміщення інформації в мережі інтернет.",
   "boilerplate.components.Header.features": "Features",
   "boilerplate.components.Header.home": "Головна",
   "boilerplate.components.Header.songs": "Пісні",

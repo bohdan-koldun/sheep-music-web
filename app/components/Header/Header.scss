@@ -1,5 +1,7 @@
+@import "../../styles/colors.scss";
+
 header {
-  background: #000;
+  background: $primary-black-color;
   width: 100%;
   position: sticky;
   top: 0;
@@ -35,7 +37,7 @@ header {
 
 .header-links {
   text-align: center;
-  background: #000;
+  background: $primary-black-color;
   width: 100%;
   position: sticky;
   top: 0;
@@ -43,6 +45,7 @@ header {
 
   a {
     display: inline-flex;
+    align-items: center;
     padding: 0.25em 2em;
     margin: 0.4em 1em;
     text-decoration: none;
@@ -55,14 +58,18 @@ header {
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 20px;
-    color: #929292;
+    color: $light-grey;
+
+    svg{
+      margin-right: 5px;
+    }
 
     &:hover {
       color: #fff;
     }
 
     &:active {
-      color: #e2263e;
+      color: $red;
     }
   }
 

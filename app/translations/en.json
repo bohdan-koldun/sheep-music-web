@@ -1,7 +1,9 @@
 {
-  "boilerplate.components.Footer.author.message": "Made with love by {author}.",
-  "boilerplate.components.Footer.license.message": "All rights reserved.",
-  "boilerplate.components.Header.features": "Features",
+  "app.components.Footer.author.message": "Made with love by {author}.",
+  "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",
+  "app.components.Footer.website.menu": "Menu:",
+  "app.components.Footer.website.language": "Language:",
+  "app.components.Footer.right.message": "The materials on the site are obtained from public (widely available) resources. If you own the copyright to any information hosted on sheep-music.com and do not agree with its publicity in the future, then we agree to consider proposals for the removal of certain material, as well as to discuss proposals for arrangements that allow the use of this content. We do not track the actions of users who self-publish text sources that are the subject of your copyright. All data on the site are downloaded automatically, without going through pre-selection from anyone's side, which is the norm in the world experience of placing information on the Internet.",
   "boilerplate.components.Header.home": "Home",
   "boilerplate.components.Header.songs": "Songs",
   "boilerplate.components.Header.albums": "Albums",

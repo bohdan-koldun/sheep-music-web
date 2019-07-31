@@ -13,8 +13,7 @@ import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-
-import GlobalStyle from '../../global-styles';
+import './App.scss';
 
 const AppWrapper = styled.div`
   max-width: 900px;
@@ -43,9 +42,8 @@ export default function App() {
           <Route path="/authors" component={AuthorList} />
           <Route path="" component={NotFoundPage} />
         </Switch>
-        <Footer />
-        <GlobalStyle />
       </AppWrapper>
+      <Footer />
       <AudioPlayer />
     </Fragment>
   );

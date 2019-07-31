@@ -1,16 +1,19 @@
+@import "../../styles/colors.scss";
+
 .locale-toggle {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 70px;
   color: #fff;
-  background: #000;
+  background: $primary-black-color;
   padding: 5px 10px;
 
   select {
     width: 35px;
     text-align: center;
     color: #fff;
-    background: #000;
+    background: $primary-black-color;
     margin: 0;
     padding: 5px 5px 8px;
     font-size: 18px;
@@ -22,6 +25,6 @@
     outline: none;
     color: #fff;
     padding: 5px;
-    background: #000;
+    background: $primary-black-color;
   }
 }
