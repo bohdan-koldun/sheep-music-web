@@ -8,7 +8,8 @@ import request from 'utils/request';
 import { API_HOST } from '../../appConstants';
 
 export function* getAuthorList(action) {
-  const requestURL = `${API_HOST}/authors?page=${action.page}&limit=40`;
+  const page = Number.isNaN(+action.page) ? 0 : +action.page;
+  const requestURL = `${API_HOST}/authors?page=${page}&limit=40`;
 
   try {
     const authors = yield call(request, requestURL);
