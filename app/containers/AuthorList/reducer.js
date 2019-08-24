@@ -3,12 +3,21 @@ import {
   LOAD_AUTHOR_LIST,
   LOAD_AUTHOR_LIST_SUCCESS,
   LOAD_AUTHOR_LIST_ERROR,
+  CHANGE_AUTHOR_LIST_PAGE,
+  CHANGE_AUTHOR_LIST_FILTER,
+  CHANGE_AUTHOR_LIST_SEARCH,
 } from './constants';
 
 export const initialState = {
   loading: false,
   error: false,
   authors: {},
+  page: 0,
+  search: '',
+  filter: {
+    value: 'newest',
+    label: 'Новые',
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -26,6 +35,15 @@ const authorListReducer = (state = initialState, action) =>
       case LOAD_AUTHOR_LIST_ERROR:
         draft.error = action.error;
         draft.loading = false;
+        break;
+      case CHANGE_AUTHOR_LIST_SEARCH:
+        draft.search = action.search;
+        break;
+      case CHANGE_AUTHOR_LIST_PAGE:
+        draft.page = action.page;
+        break;
+      case CHANGE_AUTHOR_LIST_FILTER:
+        draft.filter = action.filter;
         break;
     }
   });

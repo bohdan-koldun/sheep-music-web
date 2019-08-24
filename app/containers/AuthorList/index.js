@@ -1,56 +1,75 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable indent */
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import { push } from 'connected-react-router';
 
 import Pagination from 'components/Pagination';
+import { ListFilter } from 'components/Filter';
+import { SearchInfo } from 'components/Info';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
-import { loadAuthorList } from './actions';
+import { 
+  loadAuthorList,
+  changeSearch,
+  changePage,
+  changeFilter,
+ } from './actions';
 import {
   makeSelectLoading,
   makeSelectError,
   makeSelectAuthorList,
+  makeSelectAuthorListPage,
+  makeSelectAuthorListSearch,
+  makeSelectAuthorListFilter,
 } from './selectors';
 import './AuthorList.scss';
 
 export function AuthorList({
   authors,
   onLoadAuthorList,
-  location,
-  onPaginate,
+  page,
+  search,
+  filter,
+  onChangePage,
+  onChangeSearch,
+  onChangeFilter,
 }) {
   useInjectReducer({ key: 'authorList', reducer });
   useInjectSaga({ key: 'authorList', saga });
 
-  const paginate = page => {
-    onPaginate(page.selected);
-    onLoadAuthorList(page.selected);
-  };
-
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    onLoadAuthorList(params.get('page'));
-  }, []);
+    onLoadAuthorList(page, search, filter.value);
+  }, [page, search, filter]);
 
   return (
     <div>
       <Helmet>
-        <title> Песни </title>
+        <title> Авторы </title>
         <meta
           name="description"
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
         />
       </Helmet>
+
+      <ListFilter
+        search={search}
+        filter={filter}
+        onChangeSearch={onChangeSearch}
+        onChangeFilter={onChangeFilter}
+      />
+      
+      <SearchInfo
+        count={(authors && authors.total) || 0}
+        page={authors && 1 + Number.parseInt(authors.curPage, 10)}
+      />
+
       {authors && authors.results ? (
         <div>
           <ul className="multi-column">
@@ -64,7 +83,7 @@ export function AuthorList({
           <Pagination
             pageCount={authors.countPages}
             forcePage={Number(authors.curPage)}
-            onPageChange={paginate}
+            onPageChange={onChangePage}
           />
         </div>
       ) : null}
@@ -73,30 +92,38 @@ export function AuthorList({
 }
 
 AuthorList.propTypes = {
-  //  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  // loading: PropTypes.bool,
   authors: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,
     total: PropTypes.number,
   }),
-  onLoadAuthorList: PropTypes.func,
-  onPaginate: PropTypes.func,
-  location: PropTypes.shape({
-    search: PropTypes.string,
+  page: PropTypes.number,
+  search: PropTypes.string,
+  filter: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
   }),
+  onLoadAuthorList: PropTypes.func,
+  onChangeSearch: PropTypes.func,
+  onChangePage: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   authors: makeSelectAuthorList(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  page: makeSelectAuthorListPage(),
+  search: makeSelectAuthorListSearch(),
+  filter: makeSelectAuthorListFilter(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadAuthorList: page => dispatch(loadAuthorList(page)),
-    onPaginate: page => dispatch(push(`/authors?page=${page}`)),
+    onLoadAuthorList: (page, search, filter) => dispatch(loadAuthorList(page, search, filter)),
+    onChangePage: page => dispatch(changePage(page)),
+    onChangeSearch: search => dispatch(changeSearch(search)),
+    onChangeFilter: filter => dispatch(changeFilter(filter)),
   };
 }
 

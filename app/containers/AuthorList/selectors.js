@@ -21,9 +21,30 @@ const makeSelectAuthorList = () =>
     authorState => authorState.authors,
   );
 
+const makeSelectAuthorListPage = () =>
+  createSelector(
+    selectAuthorListDomain,
+    songState => songState.page,
+  );
+
+const makeSelectAuthorListSearch = () =>
+  createSelector(
+    selectAuthorListDomain,
+    songState => songState.search,
+  );
+
+const makeSelectAuthorListFilter = () =>
+  createSelector(
+    selectAuthorListDomain,
+    songState => songState.filter,
+  );
+
 export {
   selectAuthorListDomain,
   makeSelectLoading,
   makeSelectError,
   makeSelectAuthorList,
+  makeSelectAuthorListPage,
+  makeSelectAuthorListSearch,
+  makeSelectAuthorListFilter,
 };
