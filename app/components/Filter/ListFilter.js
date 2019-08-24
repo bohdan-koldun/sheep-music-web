@@ -1,32 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DebounceInput } from 'react-debounce-input';
-import { MdSearch, MdFilterList } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
 import Select from 'react-select';
-
+import { useIntl } from 'containers/LanguageProvider';
+import SelectIcon from './SelectIcon';
+import messages from './messages';
 import './ListFilter.scss';
 
-const options = [
-  { value: 'newest', label: 'Новые' },
-  { value: 'alphabet', label: 'По алфавиту' },
-  { value: 'revert_alphabet', label: 'Против алфавита' },
-];
-
 function ListFilter({ search, filter, onChangeSearch, onChangeFilter }) {
+  const intl = useIntl();
+  const options = [
+    { value: 'newest', label: intl.formatMessage(messages.newest) },
+    { value: 'alphabet', label: intl.formatMessage(messages.alphabet) },
+    {
+      value: 'revert_alphabet',
+      label: intl.formatMessage(messages.revertAlphabet),
+    },
+  ];
+
+  const filterValue = options.find(option => option.value === filter.value);
+
   return (
     <div className="filter">
-      <MdSearch />
-      <DebounceInput
-        value={search}
-        minLength={2}
-        placeholder="Поиск"
-        debounceTimeout={400}
-        onChange={event => onChangeSearch(event.target.value)}
-        className="search-input"
-      />
-      <MdFilterList />
+      <div className="search-block">
+        <MdSearch />
+        <DebounceInput
+          value={search}
+          minLength={2}
+          placeholder={intl.formatMessage(messages.search)}
+          debounceTimeout={400}
+          onChange={event => onChangeSearch(event.target.value)}
+          className="search-input"
+        />
+      </div>
+
+      <SelectIcon filter={filter.value} />
       <Select
-        value={filter}
+        value={filterValue}
         onChange={onChangeFilter}
         options={options}
         className="sort-select"
@@ -43,6 +54,10 @@ ListFilter.propTypes = {
   }),
   onChangeSearch: PropTypes.func,
   onChangeFilter: PropTypes.func,
+};
+
+ListFilter.contextTypes = {
+  intl: PropTypes.object.isRequired,
 };
 
 export default ListFilter;

@@ -1,22 +1,41 @@
-.filter{
+@import "../../styles/colors.scss";
 
+.filter {
+
+  display: flex;
+  align-items: center;
+
+  svg {
+    font-size: 28px;
+    margin-right: 8px;
+  }
+
+  .sort-select {
+    height: 35px;
+    width: 200px;
+    border-radius: 2px;
+  }
+
+
+  .search-block {
     display: flex;
     align-items: center;
+    padding: 0 3px;
+    border: 1px solid $light-grey;
+    border-radius: 3px;
+    margin-right: 20px;
 
-    svg{
-        font-size: 28px;
-    }
+  }
 
-    .sort-select{
-        height: 35px;
-        width: 200px;
-        border-radius: 2px;
-       
-    }
+  .search-input {
+    height: 35px;
+    border-radius: 2px;
+    margin-right: 20px;
+    border: none;
 
-    .search-input{
-        height: 35px;
-        border-radius: 2px;
-        margin-right: 20px;
+    &:focus {
+      border: none;
+      outline: none;
     }
+  }
 }

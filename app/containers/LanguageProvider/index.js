@@ -2,9 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, injectIntl } from 'react-intl';
 
 import { makeSelectLocale } from './selectors';
+
+const ReactIntlContext = React.createContext(null);
+
+const IntlContextProvider = injectIntl(({ intl, children }) => (
+  <ReactIntlContext.Provider value={intl}>{children}</ReactIntlContext.Provider>
+));
+
+export const useIntl = () => React.useContext(ReactIntlContext);
 
 export function LanguageProvider(props) {
   return (
@@ -13,7 +21,9 @@ export function LanguageProvider(props) {
       key={props.locale}
       messages={props.messages[props.locale]}
     >
-      {React.Children.only(props.children)}
+      <IntlContextProvider>
+        {React.Children.only(props.children)}
+      </IntlContextProvider>
     </IntlProvider>
   );
 }
