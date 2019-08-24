@@ -11,7 +11,8 @@ function AlbumListItem({ album }) {
         <Link to={`/album/${album.slug}`}>{album.title}</Link>
         <br />
         <span>
-          Альбом {' • '} {album.songs || 0} композиции
+          Альбом {album.year && ` • ${album.year}`} {' • '} {album.songs || 0}{' '}
+          композиции
         </span>
       </div>
     </div>

@@ -21,9 +21,30 @@ const makeSelectSongList = () =>
     songState => songState.songs,
   );
 
+const makeSelectSongListPage = () =>
+  createSelector(
+    selectSongListDomain,
+    songState => songState.page,
+  );
+
+const makeSelectSongListSearch = () =>
+  createSelector(
+    selectSongListDomain,
+    songState => songState.search,
+  );
+
+const makeSelectSongListFilter = () =>
+  createSelector(
+    selectSongListDomain,
+    songState => songState.filter,
+  );
+
 export {
   selectSongListDomain,
   makeSelectLoading,
   makeSelectError,
   makeSelectSongList,
+  makeSelectSongListPage,
+  makeSelectSongListSearch,
+  makeSelectSongListFilter,
 };

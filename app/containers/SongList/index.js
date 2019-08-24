@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -12,15 +13,24 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { SongPlayList } from 'components/List';
+import { ListFilter } from 'components/Filter';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
 } from 'containers/AudioPlayer/selectors';
-import { loadSongList } from './actions';
+import {
+  loadSongList,
+  changeSearch,
+  changePage,
+  changeFilter,
+} from './actions';
 import {
   makeSelectLoading,
   makeSelectError,
   makeSelectSongList,
+  makeSelectSongListPage,
+  makeSelectSongListSearch,
+  makeSelectSongListFilter,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -28,25 +38,27 @@ import saga from './saga';
 export function SongList({
   songs,
   onLoadSongList,
+  paginate,
   location,
-  onPaginate,
   onPlaySongList,
   onPlayPause,
   play,
   playData,
+  page,
+  search,
+  filter,
+  onChangePage,
+  onChangeSearch,
+  onChangeFilter,
 }) {
   useInjectReducer({ key: 'songList', reducer });
   useInjectSaga({ key: 'songList', saga });
 
-  const paginate = page => {
-    onPaginate(page.selected);
-    onLoadSongList(page.selected);
-  };
-
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    onLoadSongList(params.get('page'));
-  }, []);
+    // const params = new URLSearchParams(location.search);
+    // TODO paginate(params.get('page') || 0, search, filter.value);
+    onLoadSongList(page, search, filter.value);
+  }, [page, search, filter]);
 
   const playPauseSong = song => {
     if (playData && playData.song && song && song.id === playData.song.id) {
@@ -65,6 +77,14 @@ export function SongList({
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
         />
       </Helmet>
+
+      <ListFilter
+        search={search}
+        filter={filter}
+        onChangeSearch={onChangeSearch}
+        onChangeFilter={onChangeFilter}
+      />
+
       {songs && songs.results ? (
         <div>
           <SongPlayList
@@ -76,7 +96,7 @@ export function SongList({
           <Pagination
             pageCount={songs.countPages}
             forcePage={Number(songs.curPage)}
-            onPageChange={paginate}
+            onPageChange={onChangePage}
           />
         </div>
       ) : null}
@@ -91,7 +111,7 @@ SongList.propTypes = {
     total: PropTypes.number,
   }),
   onLoadSongList: PropTypes.func,
-  onPaginate: PropTypes.func,
+  paginate: PropTypes.func,
   location: PropTypes.shape({
     search: PropTypes.string,
   }),
@@ -108,6 +128,15 @@ SongList.propTypes = {
   }),
   onPlaySongList: PropTypes.func,
   onPlayPause: PropTypes.func,
+  page: PropTypes.number,
+  search: PropTypes.string,
+  filter: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+  }),
+  onChangeSearch: PropTypes.func,
+  onChangePage: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -116,14 +145,22 @@ const mapStateToProps = createStructuredSelector({
   songs: makeSelectSongList(),
   play: makeSelectPlay(),
   playData: makeSelectAudioPlayData(),
+  page: makeSelectSongListPage(),
+  search: makeSelectSongListSearch(),
+  filter: makeSelectSongListFilter(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadSongList: page => dispatch(loadSongList(page)),
-    onPaginate: page => dispatch(push(`/songs?page=${page}`)),
+    onLoadSongList: (page, search, filter) =>
+      dispatch(loadSongList(page, search, filter)),
+    paginate: (page, search, filter) =>
+      dispatch(push(`/songs?page=${page}&search=${search}&filter=${filter}`)),
     onPlaySongList: (song, songList) => dispatch(setSongList(song, songList)),
     onPlayPause: () => dispatch(setPlayPause()),
+    onChangePage: page => dispatch(changePage(page)),
+    onChangeSearch: search => dispatch(changeSearch(search)),
+    onChangeFilter: filter => dispatch(changeFilter(filter)),
   };
 }
 

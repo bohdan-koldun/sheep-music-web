@@ -16,7 +16,7 @@ function Pagination({ onPageChange, pageCount, forcePage }) {
         forcePage={forcePage || 0}
         marginPagesDisplayed={2}
         pageRangeDisplayed={4}
-        onPageChange={onPageChange}
+        onPageChange={page => onPageChange(page.selected)}
         containerClassName="pagination"
         subContainerClassName="pages pagination"
         activeClassName="active"
