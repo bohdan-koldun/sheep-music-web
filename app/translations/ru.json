@@ -34,5 +34,8 @@
   "app.components.Player.download": "скачать",
   "app.components.Player.list": "список",
   "app.components.Player.shuffle": "перемешать",
-  "app.components.Player.loop": "зациклить"
+  "app.components.Player.loop": "зациклить",
+  "app.containers.AlbumList.header": "Найти альбом",
+  "app.containers.AuthorList.header": "Найти автора",
+  "app.containers.SongList.header": "Найти песню"
 }

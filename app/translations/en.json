@@ -33,5 +33,8 @@
   "app.components.Player.download": "download",
   "app.components.Player.list": "play list",
   "app.components.Player.shuffle": "shuffle",
-  "app.components.Player.loop": "loop"
+  "app.components.Player.loop": "loop",
+  "app.containers.AlbumList.header": "Find an album",
+  "app.containers.AuthorList.header": "Find an author",
+  "app.containers.SongList.header": "Find a song"
 }

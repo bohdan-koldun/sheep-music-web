@@ -38,6 +38,7 @@ const albumListReducer = (state = initialState, action) =>
         break;
       case CHANGE_ALBUM_LIST_SEARCH:
         draft.search = action.search;
+        draft.page = 0;
         break;
       case CHANGE_ALBUM_LIST_PAGE:
         draft.page = action.page;

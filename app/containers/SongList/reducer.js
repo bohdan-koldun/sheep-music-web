@@ -40,6 +40,7 @@ const songListReducer = (state = initialState, action) =>
         break;
       case CHANGE_SONG_LIST_SEARCH:
         draft.search = action.search;
+        draft.page = 0;
         break;
       case CHANGE_SONG_LIST_PAGE:
         draft.page = action.page;

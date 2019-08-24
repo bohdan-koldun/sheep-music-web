@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable indent */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'connected-react-router';
+import { FormattedMessage } from 'react-intl';
 
 import Pagination from 'components/Pagination';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -35,6 +36,7 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import messages from './messages';
 
 export function SongList({
   songs,
@@ -54,6 +56,10 @@ export function SongList({
 }) {
   useInjectReducer({ key: 'songList', reducer });
   useInjectSaga({ key: 'songList', saga });
+
+  const myRef = useRef(null);
+  const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop - 20);
+  const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
     // const params = new URLSearchParams(location.search);
@@ -78,7 +84,9 @@ export function SongList({
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
         />
       </Helmet>
-
+      <h1 ref={myRef}>
+        <FormattedMessage {...messages.header} />
+      </h1>
       <ListFilter
         search={search}
         filter={filter}
@@ -101,7 +109,10 @@ export function SongList({
           <Pagination
             pageCount={songs.countPages}
             forcePage={Number(songs.curPage)}
-            onPageChange={onChangePage}
+            onPageChange={pageNum => {
+              onChangePage(pageNum);
+              executeScroll();
+            }}
           />
         </div>
       ) : null}

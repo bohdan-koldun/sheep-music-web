@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable indent */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 
 import Pagination from 'components/Pagination';
 import { ListFilter } from 'components/Filter';
@@ -29,6 +30,7 @@ import {
   makeSelectAuthorListSearch,
   makeSelectAuthorListFilter,
 } from './selectors';
+import messages from './messages';
 
 export function AuthorList({
   authors,
@@ -43,6 +45,10 @@ export function AuthorList({
   useInjectReducer({ key: 'authorList', reducer });
   useInjectSaga({ key: 'authorList', saga });
 
+  const myRef = useRef(null);
+  const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop - 20);
+  const executeScroll = () => scrollToRef(myRef);
+
   useEffect(() => {
     onLoadAuthorList(page, search, filter.value);
   }, [page, search, filter]);
@@ -56,14 +62,15 @@ export function AuthorList({
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
         />
       </Helmet>
-
+      <h1 ref={myRef}>
+        <FormattedMessage {...messages.header} />
+      </h1>
       <ListFilter
         search={search}
         filter={filter}
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
       />
-      
       <SearchInfo
         count={(authors && authors.total) || 0}
         page={authors && 1 + Number.parseInt(authors.curPage, 10)}
@@ -75,7 +82,10 @@ export function AuthorList({
           <Pagination
             pageCount={authors.countPages}
             forcePage={Number(authors.curPage)}
-            onPageChange={onChangePage}
+            onPageChange={pageNum => {
+              onChangePage(pageNum);
+              executeScroll();
+            }}
           />
         </div>
       ) : null}

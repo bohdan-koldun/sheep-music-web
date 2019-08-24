@@ -1,10 +1,11 @@
 /* eslint-disable indent */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { FormattedMessage } from 'react-intl';
 
 import Pagination from 'components/Pagination';
 import { AlbumPictureList } from 'components/List';
@@ -28,6 +29,7 @@ import {
   makeSelectAlbumListSearch,
   makeSelectAlbumListFilter,
 } from './selectors';
+import messages from './messages';
 
 export function AlbumList({
   albums,
@@ -42,6 +44,10 @@ export function AlbumList({
   useInjectReducer({ key: 'albumList', reducer });
   useInjectSaga({ key: 'albumList', saga });
 
+  const myRef = useRef(null);
+  const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop - 20);
+  const executeScroll = () => scrollToRef(myRef);
+
   useEffect(() => {
     onLoadAlbumList(page, search, filter.value);
   }, [page, search, filter]);
@@ -55,7 +61,9 @@ export function AlbumList({
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
         />
       </Helmet>
-
+      <h1 ref={myRef}>
+        <FormattedMessage {...messages.header} />
+      </h1>
       <ListFilter
         search={search}
         filter={filter}
@@ -73,7 +81,10 @@ export function AlbumList({
           <Pagination
             pageCount={albums.countPages}
             forcePage={Number(albums.curPage)}
-            onPageChange={onChangePage}
+            onPageChange={pageNum => {
+              onChangePage(pageNum);
+              executeScroll();
+            }}
           />
         </div>
       ) : null}

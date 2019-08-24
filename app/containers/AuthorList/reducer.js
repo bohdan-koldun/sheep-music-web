@@ -38,6 +38,7 @@ const authorListReducer = (state = initialState, action) =>
         break;
       case CHANGE_AUTHOR_LIST_SEARCH:
         draft.search = action.search;
+        draft.page = 0;
         break;
       case CHANGE_AUTHOR_LIST_PAGE:
         draft.page = action.page;
