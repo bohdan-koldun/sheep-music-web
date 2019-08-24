@@ -5,34 +5,46 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { push } from 'connected-react-router';
 
 import Pagination from 'components/Pagination';
 import { AlbumPictureList } from 'components/List';
+import { ListFilter } from 'components/Filter';
+import { SearchInfo } from 'components/Info';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
-import { loadAlbumList } from './actions';
+import {
+  loadAlbumList,
+  changeSearch,
+  changePage,
+  changeFilter,
+} from './actions';
 import {
   makeSelectLoading,
   makeSelectError,
   makeSelectAlbumList,
+  makeSelectAlbumListPage,
+  makeSelectAlbumListSearch,
+  makeSelectAlbumListFilter,
 } from './selectors';
 
-export function AlbumList({ albums, onLoadAlbumList, location, onPaginate }) {
+export function AlbumList({
+  albums,
+  onLoadAlbumList,
+  page,
+  search,
+  filter,
+  onChangePage,
+  onChangeSearch,
+  onChangeFilter,
+}) {
   useInjectReducer({ key: 'albumList', reducer });
   useInjectSaga({ key: 'albumList', saga });
 
-  const paginate = page => {
-    onPaginate(page.selected);
-    onLoadAlbumList(page.selected);
-  };
-
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    onLoadAlbumList(params.get('page'));
-  }, []);
+    onLoadAlbumList(page, search, filter.value);
+  }, [page, search, filter]);
 
   return (
     <div>
@@ -43,13 +55,25 @@ export function AlbumList({ albums, onLoadAlbumList, location, onPaginate }) {
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
         />
       </Helmet>
+
+      <ListFilter
+        search={search}
+        filter={filter}
+        onChangeSearch={onChangeSearch}
+        onChangeFilter={onChangeFilter}
+      />
+      <SearchInfo
+        count={(albums && albums.total) || 0}
+        page={albums && 1 + Number.parseInt(albums.curPage, 10)}
+      />
+
       {albums && albums.results ? (
         <div>
           <AlbumPictureList albums={albums.results} />
           <Pagination
             pageCount={albums.countPages}
             forcePage={Number(albums.curPage)}
-            onPageChange={paginate}
+            onPageChange={onChangePage}
           />
         </div>
       ) : null}
@@ -58,30 +82,39 @@ export function AlbumList({ albums, onLoadAlbumList, location, onPaginate }) {
 }
 
 AlbumList.propTypes = {
-  //  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  // loading: PropTypes.bool,
   albums: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,
     total: PropTypes.number,
   }),
-  onLoadAlbumList: PropTypes.func,
-  onPaginate: PropTypes.func,
-  location: PropTypes.shape({
-    search: PropTypes.string,
+  page: PropTypes.number,
+  search: PropTypes.string,
+  filter: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
   }),
+  onLoadAlbumList: PropTypes.func,
+  onChangeSearch: PropTypes.func,
+  onChangePage: PropTypes.func,
+  onChangeFilter: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   albums: makeSelectAlbumList(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  page: makeSelectAlbumListPage(),
+  search: makeSelectAlbumListSearch(),
+  filter: makeSelectAlbumListFilter(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadAlbumList: page => dispatch(loadAlbumList(page)),
-    onPaginate: page => dispatch(push(`/albums?page=${page}`)),
+    onLoadAlbumList: (page, search, filter) =>
+      dispatch(loadAlbumList(page, search, filter)),
+    onChangePage: page => dispatch(changePage(page)),
+    onChangeSearch: search => dispatch(changeSearch(search)),
+    onChangeFilter: filter => dispatch(changeFilter(filter)),
   };
 }
 

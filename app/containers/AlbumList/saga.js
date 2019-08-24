@@ -8,8 +8,9 @@ import request from 'utils/request';
 import { API_HOST } from '../../appConstants';
 
 export function* getAlbumList(action) {
-  const page = Number.isNaN(+action.page) ? 0 : +action.page;
-  const requestURL = `${API_HOST}/albums?page=${page}&limit=20`;
+  const requestURL = `${API_HOST}/albums?page=${action.page}&keyword=${
+    action.search
+  }&limit=40&filter=${action.filter}`;
 
   try {
     const albums = yield call(request, requestURL);
