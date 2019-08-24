@@ -22,6 +22,7 @@ function ListFilter({ search, filter, onChangeSearch, onChangeFilter }) {
         placeholder="Поиск"
         debounceTimeout={400}
         onChange={event => onChangeSearch(event.target.value)}
+        className="search-input"
       />
       <MdFilterList />
       <Select

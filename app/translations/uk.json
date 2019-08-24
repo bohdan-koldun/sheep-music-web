@@ -9,6 +9,8 @@
   "boilerplate.components.Header.songs": "Пісні",
   "boilerplate.components.Header.albums": "Альбоми",
   "boilerplate.components.Header.authors": "Виконавці",
+  "boilerplate.components.Info.page": "сторінка",
+  "boilerplate.components.Info.results": "Результати:",
   "boilerplate.containers.HomePage.start_project.header": "Сайт-агрегатор християнської музики",
   "boilerplate.containers.HomePage.start_project.message": "Аудіо, тексти, акорди, автори, альбоми",
   "boilerplate.containers.HomePage.tryme.atPrefix": "@",

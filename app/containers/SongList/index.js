@@ -14,6 +14,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { SongPlayList } from 'components/List';
 import { ListFilter } from 'components/Filter';
+import { SearchInfo } from 'components/Info';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -83,6 +84,10 @@ export function SongList({
         filter={filter}
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
+      />
+      <SearchInfo
+        count={(songs && songs.total) || 0}
+        page={songs && 1 + Number.parseInt(songs.curPage, 10)}
       />
 
       {songs && songs.results ? (
