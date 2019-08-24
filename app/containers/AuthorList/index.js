@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
 
 import Pagination from 'components/Pagination';
 import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { AuhorPictureList } from 'components/List';
 import reducer from './reducer';
 import saga from './saga';
 import { 
@@ -29,7 +29,6 @@ import {
   makeSelectAuthorListSearch,
   makeSelectAuthorListFilter,
 } from './selectors';
-import './AuthorList.scss';
 
 export function AuthorList({
   authors,
@@ -51,7 +50,7 @@ export function AuthorList({
   return (
     <div>
       <Helmet>
-        <title> Авторы </title>
+        <title>Авторы </title>
         <meta
           name="description"
           content="Христианские песни: слова, аудио, mp3, текст, аккорды"
@@ -72,14 +71,7 @@ export function AuthorList({
 
       {authors && authors.results ? (
         <div>
-          <ul className="multi-column">
-            {authors.results.map(author => (
-              <li key={author.slug}>
-                <Link to={`/author/${author.slug}`}>{author.title}</Link>
-                <br />
-              </li>
-            ))}
-          </ul>
+          <AuhorPictureList authors={authors.results}/>
           <Pagination
             pageCount={authors.countPages}
             forcePage={Number(authors.curPage)}
