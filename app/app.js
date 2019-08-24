@@ -12,6 +12,7 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import TagManager from 'react-gtm-module';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
@@ -35,6 +36,12 @@ import { translationMessages } from './i18n';
 const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
+
+const tagManagerArgs = {
+  gtmId: 'GTM-N4ZGWF6',
+};
+
+TagManager.initialize(tagManagerArgs);
 
 const render = messages => {
   ReactDOM.render(
