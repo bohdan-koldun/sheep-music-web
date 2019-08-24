@@ -1,9 +1,10 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
+import ReactTooltip from 'react-tooltip';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
@@ -15,13 +16,16 @@ import {
 } from 'react-icons/md';
 
 import { SongImg } from 'components/Img';
+import { DownloadModal } from 'components/Modal';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
+import { useIntl } from 'containers/LanguageProvider';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
 } from 'containers/AudioPlayer/selectors';
+import playerMessages from 'components/Player/messages';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -45,9 +49,13 @@ export function Song({
   useInjectReducer({ key: 'song', reducer });
   useInjectSaga({ key: 'song', saga });
 
+  const intl = useIntl();
+
   useEffect(() => {
     onLoadSong(match.params.slug);
   }, []);
+
+  const [showDownload, setShowDownload] = useState(false);
 
   const playPauseSong = () => {
     if (playData && songData && songData.id === playData.song.id) {
@@ -101,22 +109,27 @@ export function Song({
                   >
                     {play && playData && songData.id === playData.song.id ? (
                       <MdPauseCircleFilled
-                        //     data-tip={intl.formatMessage(messages.pause)}
+                        data-tip={intl.formatMessage(playerMessages.pause)}
                         className="song-icon"
                       />
                     ) : (
                       <MdPlayCircleFilled
-                        //    data-tip={intl.formatMessage(messages.play)}
+                        data-tip={intl.formatMessage(playerMessages.play)}
                         className="song-icon"
                       />
                     )}
                   </button>
-                  <a href={songData.audioMp3.path} download>
-                    <MdCloudDownload
-                      //  data-tip={intl.formatMessage(messages.download)}
-                      className="song-icon"
-                    />
-                  </a>
+                  <MdCloudDownload
+                    data-tip={intl.formatMessage(playerMessages.download)}
+                    onClick={() => setShowDownload(true)}
+                    className="song-icon"
+                  />
+                  <DownloadModal
+                    isOpen={showDownload}
+                    onCloseModal={() => setShowDownload(false)}
+                    downloadUrl={songData.audioMp3.path}
+                    title={songData.title}
+                  />
                 </div>
               ) : null}
             </div>
@@ -135,6 +148,7 @@ export function Song({
           )}
         </div>
       ) : null}
+      <ReactTooltip place="top" type="dark" effect="float" />
     </React.Fragment>
   );
 }

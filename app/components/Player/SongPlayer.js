@@ -16,6 +16,7 @@ import {
   MdVerticalAlignBottom,
   MdQueueMusic,
 } from 'react-icons/md';
+import { DownloadModal } from 'components/Modal';
 import { SongImg } from '../Img';
 import messages from './messages';
 import { AudioSlider, VolumeSlider } from './Sliders';
@@ -35,6 +36,7 @@ class SongPlayer extends Component {
     duration: 0,
     playbackRate: 1.0,
     loop: false,
+    showDownload: false,
   };
 
   load = () => {
@@ -150,6 +152,7 @@ class SongPlayer extends Component {
       played,
       duration,
       playbackRate,
+      showDownload,
     } = this.state;
 
     const { playData, playPause, onPrevNext } = this.props;
@@ -157,141 +160,151 @@ class SongPlayer extends Component {
     const { intl } = this.context;
 
     return (
-      <div className="song-player-wrapper">
-        <AudioSlider
-          value={played * 1000}
-          onChange={this.onSeekChange}
-          durationComponent={<Duration seconds={played * duration} />}
-        />
-        <ReactPlayer
-          ref={this.ref}
-          className="react-player"
-          width="0"
-          height="0"
-          url={song.audioMp3.path}
-          playing={playing}
-          loop={loop}
-          playbackRate={playbackRate}
-          volume={volume}
-          muted={muted}
-          onPlay={this.onPlay}
-          onPause={this.onPause}
-          onEnded={this.onEnded}
-          onProgress={this.onProgress}
-          onDuration={this.onDuration}
-        />
+      <React.Fragment>
+        <div className="song-player-wrapper">
+          <AudioSlider
+            value={played * 1000}
+            onChange={this.onSeekChange}
+            durationComponent={<Duration seconds={played * duration} />}
+          />
+          <ReactPlayer
+            ref={this.ref}
+            className="react-player"
+            width="0"
+            height="0"
+            url={song.audioMp3.path}
+            playing={playing}
+            loop={loop}
+            playbackRate={playbackRate}
+            volume={volume}
+            muted={muted}
+            onPlay={this.onPlay}
+            onPause={this.onPause}
+            onEnded={this.onEnded}
+            onProgress={this.onProgress}
+            onDuration={this.onDuration}
+          />
 
-        <div className="song-player-control">
-          <div className="group-control-first">
-            <button
-              type="button"
-              onClick={() =>
-                (prevPlayListId || prevPlayListId === 0) &&
-                onPrevNext(prevPlayListId)
-              }
-              className="icon-button"
-            >
-              <MdSkipPrevious
-                data-tip={intl.formatMessage(messages.prev)}
-                className={classNames('player-icon', {
-                  'icon-disable': !prevPlayListId && prevPlayListId !== 0,
-                })}
-              />
-            </button>
-            <button type="button" onClick={playPause} className="icon-button">
-              {!playing ? (
-                <MdPlayArrow
-                  data-tip={intl.formatMessage(messages.play)}
-                  className="player-icon play-icon"
+          <div className="song-player-control">
+            <div className="group-control-first">
+              <button
+                type="button"
+                onClick={() =>
+                  (prevPlayListId || prevPlayListId === 0) &&
+                  onPrevNext(prevPlayListId)
+                }
+                className="icon-button"
+              >
+                <MdSkipPrevious
+                  data-tip={intl.formatMessage(messages.prev)}
+                  className={classNames('player-icon', {
+                    'icon-disable': !prevPlayListId && prevPlayListId !== 0,
+                  })}
                 />
-              ) : (
-                <MdPause
-                  data-tip={intl.formatMessage(messages.pause)}
-                  className="player-icon play-icon"
+              </button>
+              <button type="button" onClick={playPause} className="icon-button">
+                {!playing ? (
+                  <MdPlayArrow
+                    data-tip={intl.formatMessage(messages.play)}
+                    className="player-icon play-icon"
+                  />
+                ) : (
+                  <MdPause
+                    data-tip={intl.formatMessage(messages.pause)}
+                    className="player-icon play-icon"
+                  />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={() => nextPlayListId && onPrevNext(nextPlayListId)}
+                className="icon-button"
+              >
+                <MdSkipNext
+                  className={classNames('player-icon', {
+                    'icon-disable': !nextPlayListId,
+                  })}
                 />
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={() => nextPlayListId && onPrevNext(nextPlayListId)}
-              className="icon-button"
-            >
-              <MdSkipNext
-                className={classNames('player-icon', {
-                  'icon-disable': !nextPlayListId,
-                })}
-              />
-            </button>
-            <span>
-              <Duration seconds={played * duration} />
-              {' / '}
-              <Duration seconds={duration} />
-            </span>
-          </div>
+              </button>
+              <span>
+                <Duration seconds={played * duration} />
+                {' / '}
+                <Duration seconds={duration} />
+              </span>
+            </div>
 
-          <div className="group-control-second">
-            <Link to={`/song/${song.slug}`} className="player-song-link">
-              <SongImg song={song} className="song-player-img" />
-              <div>
-                <b>{song.title}</b>
-                <br />
-                <span>{song.author && song.author.title}</span>
-              </div>
-            </Link>
-            <button type="button" className="icon-button">
-              <a href={song.audioMp3.path} download>
+            <div className="group-control-second">
+              <Link to={`/song/${song.slug}`} className="player-song-link">
+                <SongImg song={song} className="song-player-img" />
+                <div>
+                  <b>{song.title}</b>
+                  <br />
+                  <span>{song.author && song.author.title}</span>
+                </div>
+              </Link>
+              <button type="button" className="icon-button">
                 <MdVerticalAlignBottom
                   data-tip={intl.formatMessage(messages.download)}
+                  onClick={() => this.setState({ showDownload: true })}
                   className="player-icon"
                 />
-              </a>
-            </button>
-            <button type="button" className="icon-button">
-              <MdQueueMusic
-                data-tip={intl.formatMessage(messages.list)}
-                className="player-icon"
-              />
-            </button>
+              </button>
+              <button type="button" className="icon-button">
+                <MdQueueMusic
+                  data-tip={intl.formatMessage(messages.list)}
+                  className="player-icon"
+                />
+              </button>
+            </div>
+            <div className="group-control-third">
+              <VolumeSlider value={volume * 1000} onChange={this.setVolume} />
+              <button
+                type="button"
+                onClick={this.toggleMuted}
+                className="icon-button"
+              >
+                {!muted ? (
+                  <MdVolumeUp
+                    data-tip={intl.formatMessage(messages.volumeOff)}
+                    className="player-icon"
+                  />
+                ) : (
+                  <MdVolumeOff
+                    data-tip={intl.formatMessage(messages.volumeOn)}
+                    className="player-icon"
+                  />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={this.toggleLoop}
+                className="icon-button"
+              >
+                <MdRepeat
+                  data-tip={intl.formatMessage(messages.loop)}
+                  className={classNames('player-icon', { 'icon-active': loop })}
+                />
+              </button>
+              <button type="button" className="icon-button">
+                <MdShuffle
+                  className="player-icon"
+                  data-tip={intl.formatMessage(messages.shuffle)}
+                />
+              </button>
+            </div>
           </div>
-          <div className="group-control-third">
-            <VolumeSlider value={volume * 1000} onChange={this.setVolume} />
-            <button
-              type="button"
-              onClick={this.toggleMuted}
-              className="icon-button"
-            >
-              {!muted ? (
-                <MdVolumeUp
-                  data-tip={intl.formatMessage(messages.volumeOff)}
-                  className="player-icon"
-                />
-              ) : (
-                <MdVolumeOff
-                  data-tip={intl.formatMessage(messages.volumeOn)}
-                  className="player-icon"
-                />
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={this.toggleLoop}
-              className="icon-button"
-            >
-              <MdRepeat
-                data-tip={intl.formatMessage(messages.loop)}
-                className={classNames('player-icon', { 'icon-active': loop })}
-              />
-            </button>
-            <button type="button" className="icon-button">
-              <MdShuffle
-                className="player-icon"
-                data-tip={intl.formatMessage(messages.shuffle)}
-              />
-            </button>
-          </div>
+
+          <ReactTooltip place="top" type="dark" effect="float" />
         </div>
-        <ReactTooltip place="top" type="dark" effect="float" />
-      </div>
+        <DownloadModal
+          isOpen={showDownload}
+          onCloseModal={() => {
+            this.setState({ showDownload: false });
+          }}
+          downloadUrl={song.audioMp3.path}
+          title={song.title}
+        />
+      </React.Fragment>
     );
   }
 }

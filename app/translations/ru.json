@@ -37,5 +37,7 @@
   "app.components.Player.loop": "зациклить",
   "app.containers.AlbumList.header": "Найти альбом",
   "app.containers.AuthorList.header": "Найти автора",
-  "app.containers.SongList.header": "Найти песню"
+  "app.containers.SongList.header": "Найти песню",
+  "app.components.Model.download": "Скачать MP3:",
+  "app.components.Model.cancel": "Отменить"
 }

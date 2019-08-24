@@ -36,5 +36,7 @@
   "app.components.Player.loop": "loop",
   "app.containers.AlbumList.header": "Find an album",
   "app.containers.AuthorList.header": "Find an author",
-  "app.containers.SongList.header": "Find a song"
+  "app.containers.SongList.header": "Find a song",
+  "app.components.Model.download": "Download MP3:",
+  "app.components.Model.cancel": "Cancel"
 }
