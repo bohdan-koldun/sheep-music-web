@@ -17,7 +17,7 @@ footer {
   padding: 70px 15px;
 
   &>div {
-    min-width: 300px;
+    min-width: 150px;
   }
 }
 
@@ -28,7 +28,7 @@ footer {
   width: 100%;
   background: $secondary-black-color;
   min-height: 200px;
-  padding: 50px 15px 150px;
+  padding: 50px 20px 150px;
 
   p {
     width: 100%;
@@ -96,4 +96,29 @@ h3 {
 .footer-language{
     display: flex;
     align-items: center;
+    span{
+      padding-left: 25px;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .footer-website-menu {
+    display: block;
+  
+    &>div {
+      min-width: 100%;
+      margin: auto;
+      text-align: center;
+    }
+  }
+
+  .footer-links {
+    align-items: center;
+  }
+
+  .footer-language{
+    justify-content: center;
+}
 }
