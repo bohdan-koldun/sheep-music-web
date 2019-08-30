@@ -1,13 +1,50 @@
 @import "../../styles/colors.scss";
 
 header {
-  background: $primary-black-color;
   width: 100%;
-  position: sticky;
+  position: fixed;
   top: 0;
+}
+
+.header-top {
+  width: 100%;
+  background: $primary-black-color;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.menu {
+  width: 100%;
+  max-width: 300px;
+  background: $primary-black-color;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  padding: 10px 0 20px; 
+
+}
+
+.show-menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+.header-bar {
+  color: #fff;
+  font-size: 32px;
+  padding: 2px 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .header-banner {
@@ -25,24 +62,19 @@ header {
   a {
     font-family: 'Fascinate', cursive;
     color: #fff;
-    word-wrap: none;
-    word-break: none;
     font-size: 24px;
     font-weight: 600;
     text-transform: uppercase;
     text-decoration: none;
+
+    span {
+      color: $red;
+    }
   }
 }
 
 
 .header-links {
-  text-align: center;
-  background: $primary-black-color;
-  width: 100%;
-  position: sticky;
-  top: 0;
-
-
   a {
     display: inline-flex;
     align-items: center;
@@ -60,7 +92,7 @@ header {
     font-size: 20px;
     color: $light-grey;
 
-    svg{
+    svg {
       margin-right: 5px;
     }
 
@@ -73,9 +105,38 @@ header {
     }
   }
 
+  .header-desktop-links {
+    text-align: center;
+  }
+
   .active-link {
     color: #fff;
   }
 
   margin-right: 25px;
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+
+@media screen and (max-width: 1140px) {
+  .header-desktop-links {
+    display: none;
+  }
+
+  .header-logo {
+    width: 180px;
+    margin-left: 20px;
+  
+    a {
+      font-size: 20px;
+    }
+  }
 }

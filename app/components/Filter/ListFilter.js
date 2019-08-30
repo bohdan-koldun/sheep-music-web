@@ -34,14 +34,15 @@ function ListFilter({ search, filter, onChangeSearch, onChangeFilter }) {
           className="search-input"
         />
       </div>
-
-      <SelectIcon filter={filter.value} />
-      <Select
-        value={filterValue}
-        onChange={onChangeFilter}
-        options={options}
-        className="sort-select"
-      />
+      <div className="sort-block">
+        <SelectIcon filter={filter.value} />
+        <Select
+          value={filterValue}
+          onChange={onChangeFilter}
+          options={options}
+          className="sort-select"
+        />
+      </div>
     </div>
   );
 }

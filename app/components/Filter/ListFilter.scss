@@ -10,6 +10,12 @@
     margin-right: 8px;
   }
 
+  .sort-block {
+    display: flex;
+    align-items: center;
+
+  }
+
   .sort-select {
     height: 35px;
     width: 210px;
@@ -36,6 +42,25 @@
     &:focus {
       border: none;
       outline: none;
+    }
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .filter {
+    display: block;
+
+    .sort-block {
+      margin-top: 10px;
+    }
+
+    .sort-select {
+      width: 100%;
+    }
+
+    .search-block {
+      width: 100%;
     }
   }
 }
