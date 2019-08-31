@@ -13,6 +13,7 @@ import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import ScrollToTop from './ScrollToTop';
 import './App.scss';
 
 const AppWrapper = styled.div`
@@ -35,16 +36,18 @@ export default function App() {
       </Helmet>
       <Header />
       <AppWrapper>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/songs" component={SongList} />
-          <Route path="/song/:slug" component={Song} />
-          <Route path="/album/:slug" component={Album} />
-          <Route path="/albums" component={AlbumList} />
-          <Route path="/author/:slug" component={Author} />
-          <Route path="/authors" component={AuthorList} />
-          <Route path="" component={NotFoundPage} />
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/songs" component={SongList} />
+            <Route path="/song/:slug" component={Song} />
+            <Route path="/album/:slug" component={Album} />
+            <Route path="/albums" component={AlbumList} />
+            <Route path="/author/:slug" component={Author} />
+            <Route path="/authors" component={AuthorList} />
+            <Route path="" component={NotFoundPage} />
+          </Switch>
+        </ScrollToTop>
       </AppWrapper>
       <Footer />
       <AudioPlayer />
