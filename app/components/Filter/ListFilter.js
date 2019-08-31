@@ -40,6 +40,7 @@ function ListFilter({ search, filter, onChangeSearch, onChangeFilter }) {
           value={filterValue}
           onChange={onChangeFilter}
           options={options}
+          isSearchable={false}
           className="sort-select"
         />
       </div>

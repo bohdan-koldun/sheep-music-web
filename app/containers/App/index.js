@@ -28,7 +28,10 @@ export default function App() {
   return (
     <Fragment>
       <Helmet titleTemplate="%s - SheepMusic" defaultTitle="Sheep Music">
-        <meta name="description" content="A React.js Boilerplate application" />
+        <meta
+          name="description"
+          content="Христианские песни: слова, аудио, mp3, текст, аккорды"
+        />
       </Helmet>
       <Header />
       <AppWrapper>
