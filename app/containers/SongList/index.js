@@ -78,10 +78,10 @@ export function SongList({
   return (
     <div>
       <Helmet>
-        <title> Песни </title>
+        <title>Удобный Сборник Христианских Песен</title>
         <meta
           name="description"
-          content="Христианские песни: слова, аудио, mp3, текст, аккорды"
+          content="Христианские песни: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
         />
       </Helmet>
       <h1 ref={myRef}>

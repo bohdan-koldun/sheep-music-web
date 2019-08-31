@@ -56,10 +56,10 @@ export function AuthorList({
   return (
     <div>
       <Helmet>
-        <title>Авторы </title>
+      <title>Авторы, Исполнители Христианских Песен</title>
         <meta
           name="description"
-          content="Христианские песни: слова, аудио, mp3, текст, аккорды"
+          content="Песни христианских исполнителей: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
         />
       </Helmet>
       <h1 ref={myRef}>

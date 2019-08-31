@@ -35,8 +35,11 @@ export function HomePage({ username, onSubmitForm }) {
   return (
     <article>
       <Helmet>
-        <title>Home Page</title>
-        <meta name="description" content="Сайт-агрегатор христианской музыки" />
+        <title>Сайт-Агрегатор Христианской Музыки</title>
+        <meta
+          name="description"
+          content="Sheep Music: слушать онлайн, скачать mp3, слова, текст, аккорды, фонограммы"
+        />
       </Helmet>
       <div>
         <H2>

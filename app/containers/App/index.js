@@ -27,10 +27,10 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <Fragment>
-      <Helmet titleTemplate="%s - SheepMusic" defaultTitle="Sheep Music">
+      <Helmet titleTemplate="%s | Sheep Music" defaultTitle="Sheep Music">
         <meta
           name="description"
-          content="Христианские песни: слова, аудио, mp3, текст, аккорды"
+          content="Христианские песни: слова, текст, слушать аудио онлайн, скачать mp3, аккорды, видео"
         />
       </Helmet>
       <Header />

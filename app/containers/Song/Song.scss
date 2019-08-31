@@ -31,3 +31,24 @@
     width: 150px;
     margin-right: 20px;
 }
+
+@media screen and (max-width: 600px) {
+  .song-page-header{
+    h1{
+      font-size: 24px;
+    }
+
+  .song-icon {
+    font-size: 36px;
+  }
+}
+
+pre{
+  font-size: 14px;
+}
+
+.song-page-img{
+  width: 80px;
+  margin-right: 20px;
+}
+}

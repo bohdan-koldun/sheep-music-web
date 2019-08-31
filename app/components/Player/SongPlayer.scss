@@ -35,22 +35,32 @@
   .icon-active {
     color: #e2263e;
   }
+
   .icon-disable {
     color: grey;
   }
 
-  .song-player-img{
+  .song-player-img {
     width: 45px;
     border-radius: 3px;
     margin: 2px 8px;
   }
 }
 
-.player-song-link{
+.player-song-link {
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
   color: #fff;
   margin: 0 5px;
+}
+
+@media screen and (max-width: 600px) {
+
+  .song-player-control {
+    .group-control-second, .group-control-third {
+      display: none;
+    }
+  }
 }

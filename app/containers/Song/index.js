@@ -70,8 +70,17 @@ export function Song({
       {songData ? (
         <div>
           <Helmet>
-            <title>{songData.title}</title>
-            <meta name="description" content="Description of Song" />
+            <title>
+              {songData.title}{' '}
+              {songData.author ? ` | ${songData.author.title}` : ''}
+              {` | Слова, Аккорды, Видео`}
+            </title>
+            <meta
+              name="description"
+              content={`${
+                songData.title
+              }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
+            />
           </Helmet>
 
           <div className="song-page-header">

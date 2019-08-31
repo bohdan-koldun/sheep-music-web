@@ -55,8 +55,18 @@ export function Album({
       {albumData && (
         <div>
           <Helmet>
-            <title>Альбом {albumData.title}</title>
-            <meta name="description" content={`Альбом ${albumData.title}`} />
+            <title>
+              Альбом {albumData.title}{' '}
+              {albumData.author ? ` | ${albumData.author.slug}` : ''}
+              {albumData.songs ? ` | ${albumData.songs.length} песен(я)` : ''}
+              {` | Песни, Слова, Аккорды, Видео`}
+            </title>
+            <meta
+              name="description"
+              content={`Альбом ${
+                albumData.title
+              }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
+            />
           </Helmet>
           <div className="album-header">
             {albumData.thumbnail && (

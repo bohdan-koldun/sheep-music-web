@@ -29,7 +29,7 @@ class SongPlayer extends Component {
   state = {
     playing: this.props.playing,
     random: false,
-    volume: 0.8,
+    volume: 1,
     muted: false,
     played: 0,
     loaded: 0,

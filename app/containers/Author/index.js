@@ -51,8 +51,17 @@ export function Author({
       {authorData && (
         <div>
           <Helmet>
-            <title>{authorData.title} - Автор</title>
-            <meta name="description" content="Description of Author" />
+            <title>
+              {authorData.title}{' '}
+              {authorData.songs ? ` | ${authorData.songs.length} песен(я)` : ''}
+              {` | Песни, Слова, Аккорды, Видео`}
+            </title>
+            <meta
+              name="description"
+              content={`Автор ${
+                authorData.title
+              }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
+            />
           </Helmet>
           <h1>Автор {authorData.title}</h1>
           {authorData.thumbnail && (
