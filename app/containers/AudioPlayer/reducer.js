@@ -4,11 +4,13 @@ import {
   SET_PLAY_SONG_LIST,
   SET_PLAY_PAUSE,
   SET_PLAY_BY_LIST_ID,
+  SET_SHOW_PLAYER_LIST,
 } from './constants';
 
 export const initialState = {
   play: false,
   showPlayer: false,
+  showPlayerList: false,
   playData: {
     song: {
       id: null,
@@ -63,6 +65,7 @@ const audioPlayerReducer = (state = initialState, action) =>
         break;
       case SET_PLAY_BY_LIST_ID:
         draft.showPlayer = true;
+        draft.play = true;
         draft.playData = {
           prevPlayListId:
             action.listId > 0 && action.listId < state.playList.length
@@ -74,6 +77,9 @@ const audioPlayerReducer = (state = initialState, action) =>
               ? action.listId + 1
               : null,
         };
+        break;
+      case SET_SHOW_PLAYER_LIST:
+        draft.showPlayerList = !state.showPlayerList;
         break;
     }
   });

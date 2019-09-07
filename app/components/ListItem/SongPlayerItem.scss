@@ -1,0 +1,27 @@
+.song-play-list-item{
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    justify-content: flex-start;
+    align-items: center;
+    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid-column;   
+
+    a{
+        color: #fff;
+    }
+
+    .song-player-img {
+        width: 45px;
+        border-radius: 3px;
+        margin: 2px 8px;
+      }
+}
+
+.song-play-list-item-description{
+    margin: 10px 2px;
+    span{
+        font-size: 12px;
+    }
+}

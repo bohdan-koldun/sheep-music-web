@@ -13,7 +13,6 @@ import {
   makeSelectLoading,
   makeSelectError,
 } from 'containers/App/selectors';
-import H2 from 'components/H2';
 import messages from './messages';
 import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
@@ -42,9 +41,9 @@ export function HomePage({ username, onSubmitForm }) {
         />
       </Helmet>
       <div>
-        <H2>
+        <h2>
           <FormattedMessage {...messages.startProjectHeader} />
-        </H2>
+        </h2>
         <p>
           <FormattedMessage {...messages.startProjectMessage} />
         </p>

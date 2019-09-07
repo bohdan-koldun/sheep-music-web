@@ -155,7 +155,7 @@ class SongPlayer extends Component {
       showDownload,
     } = this.state;
 
-    const { playData, playPause, onPrevNext } = this.props;
+    const { playData, playPause, onPrevNext, onShowPlayList } = this.props;
     const { song, nextPlayListId, prevPlayListId } = playData || {};
     const { intl } = this.context;
 
@@ -252,6 +252,7 @@ class SongPlayer extends Component {
               <button type="button" className="icon-button">
                 <MdQueueMusic
                   data-tip={intl.formatMessage(messages.list)}
+                  onClick={() => onShowPlayList()}
                   className="player-icon"
                 />
               </button>
@@ -313,6 +314,7 @@ SongPlayer.propTypes = {
   playing: PropTypes.bool.isRequired,
   playPause: PropTypes.func.isRequired,
   onPrevNext: PropTypes.func.isRequired,
+  onShowPlayList: PropTypes.func.isRequired,
   playData: PropTypes.shape({
     song: PropTypes.shape({
       title: PropTypes.string,

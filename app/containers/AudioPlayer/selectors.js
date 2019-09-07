@@ -15,6 +15,12 @@ const makeSelectShowPlayer = () =>
     audioPlayer => audioPlayer.showPlayer,
   );
 
+const makeSelectShowPlayerList = () =>
+  createSelector(
+    selectAudioPlayerDomain,
+    audioPlayer => audioPlayer.showPlayerList,
+  );
+
 const makeSelectAudioPlayData = () =>
   createSelector(
     selectAudioPlayerDomain,
@@ -31,6 +37,7 @@ export {
   selectAudioPlayerDomain,
   makeSelectPlay,
   makeSelectShowPlayer,
+  makeSelectShowPlayerList,
   makeSelectAudioPlayData,
   makeSelectAudioPlayerList,
 };

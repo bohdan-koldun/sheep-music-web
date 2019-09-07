@@ -1,9 +1,43 @@
-.sheep-music-player{
-    display: flex;
-    min-height: 100px;
+@import "../../styles/colors.scss";
+
+.sheep-music-player,
+.sheep-music-player-list {
+  display: flex;
+  width: 100%;
+  background-color: #232323eb;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  z-index: 101;
+}
+
+.sheep-music-player {
+  min-height: 100px;
+  bottom: 0;
+}
+
+.sheep-music-player-list {
+  flex-wrap: wrap;
+  height: calc(100vh - 100px);
+  bottom: 100px;
+
+  .play-list-header {
     width: 100%;
-    background-color: #232323eb;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .close-button {
+    margin: 15px 20px;
+    background: none;
+    outline: none;
+    border: none;
     color: #fff;
-    position: fixed;
-    bottom: 0;
+    font-size: 48px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      color: $red;
+    }
+  }
 }

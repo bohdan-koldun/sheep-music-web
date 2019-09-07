@@ -3,6 +3,7 @@ import {
   SET_PLAY_SONG_LIST,
   SET_PLAY_BY_LIST_ID,
   SET_PLAY_PAUSE,
+  SET_SHOW_PLAYER_LIST,
 } from './constants';
 
 export function setSong(song) {
@@ -30,5 +31,11 @@ export function setPlayByListId(listId) {
 export function setPlayPause() {
   return {
     type: SET_PLAY_PAUSE,
+  };
+}
+
+export function setShowPlayList() {
+  return {
+    type: SET_SHOW_PLAYER_LIST,
   };
 }
