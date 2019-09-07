@@ -19,7 +19,7 @@ import {
   makeSelectShowPlayerList,
 } from './selectors';
 import reducer from './reducer';
-import { setPlayPause, setPlayByListId, setShowPlayList } from './actions';
+import { setPlayPause, setPlayByListId, setShowPlayList, mixPlayList } from './actions';
 import './AudioPlayer.scss';
 
 export function AudioPlayer({
@@ -29,6 +29,7 @@ export function AudioPlayer({
   onShowPlayList,
   showPlayer,
   showPlayerList,
+  onMixPlayList,
   playData,
   playList,
 }) {
@@ -63,6 +64,7 @@ export function AudioPlayer({
               playPause={onPlayPause}
               onPrevNext={onPlayById}
               onShowPlayList={onShowPlayList}
+              onMixPlayList={onMixPlayList}
               playData={playData}
             />
           </div>
@@ -91,6 +93,7 @@ AudioPlayer.propTypes = {
   onPlayPause: PropTypes.func.isRequired,
   onPlayById: PropTypes.func.isRequired,
   onShowPlayList: PropTypes.func.isRequired,
+  onMixPlayList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -105,7 +108,8 @@ function mapDispatchToProps(dispatch) {
   return {
     onPlayPause: () => dispatch(setPlayPause()),
     onPlayById: listId => dispatch(setPlayByListId(listId)),
-    onShowPlayList: () => dispatch(setShowPlayList())
+    onShowPlayList: () => dispatch(setShowPlayList()),
+    onMixPlayList: () => dispatch(mixPlayList()),
   };
 }
 

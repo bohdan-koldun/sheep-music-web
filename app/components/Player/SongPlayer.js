@@ -155,7 +155,13 @@ class SongPlayer extends Component {
       showDownload,
     } = this.state;
 
-    const { playData, playPause, onPrevNext, onShowPlayList } = this.props;
+    const {
+      playData,
+      playPause,
+      onPrevNext,
+      onShowPlayList,
+      onMixPlayList,
+    } = this.props;
     const { song, nextPlayListId, prevPlayListId } = playData || {};
     const { intl } = this.context;
 
@@ -286,7 +292,11 @@ class SongPlayer extends Component {
                   className={classNames('player-icon', { 'icon-active': loop })}
                 />
               </button>
-              <button type="button" className="icon-button">
+              <button
+                type="button"
+                onClick={onMixPlayList}
+                className="icon-button"
+              >
                 <MdShuffle
                   className="player-icon"
                   data-tip={intl.formatMessage(messages.shuffle)}
@@ -315,6 +325,7 @@ SongPlayer.propTypes = {
   playPause: PropTypes.func.isRequired,
   onPrevNext: PropTypes.func.isRequired,
   onShowPlayList: PropTypes.func.isRequired,
+  onMixPlayList: PropTypes.func.isRequired,
   playData: PropTypes.shape({
     song: PropTypes.shape({
       title: PropTypes.string,

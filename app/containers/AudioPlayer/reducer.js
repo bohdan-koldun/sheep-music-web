@@ -5,6 +5,7 @@ import {
   SET_PLAY_PAUSE,
   SET_PLAY_BY_LIST_ID,
   SET_SHOW_PLAYER_LIST,
+  MIX_PLAYER_LIST,
 } from './constants';
 
 export const initialState = {
@@ -81,6 +82,27 @@ const audioPlayerReducer = (state = initialState, action) =>
       case SET_SHOW_PLAYER_LIST:
         draft.showPlayerList = !state.showPlayerList;
         break;
+      case MIX_PLAYER_LIST: {
+        const mixedPlayList = [...state.playList].sort(
+          () => Math.random() - 0.5,
+        );
+        const curSongIndex = mixedPlayList.findIndex(
+          song => state.playData.song && song.id === state.playData.song.id,
+        );
+        draft.playData = {
+          ...state.playData,
+          prevPlayListId:
+            curSongIndex > 0 && curSongIndex < mixedPlayList.length
+              ? curSongIndex - 1
+              : null,
+          nextPlayListId:
+            curSongIndex >= 0 && curSongIndex < mixedPlayList.length - 1
+              ? curSongIndex + 1
+              : null,
+        };
+        draft.playList = mixedPlayList;
+        break;
+      }
     }
   });
 
