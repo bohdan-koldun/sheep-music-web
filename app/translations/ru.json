@@ -25,6 +25,7 @@
   "boilerplate.containers.NotFoundPage.header": "Страница не найдена.",
   "app.containers.Song.author": "Автор",
   "app.containers.Song.album": "Альбом",
+  "app.containers.Album.availableOn": "Доступен на:",
   "app.components.Player.play": "воспроизвести",
   "app.components.Player.pause": "остановить",
   "app.components.Player.volumeOff": "отключить звук",

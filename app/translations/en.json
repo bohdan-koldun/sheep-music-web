@@ -24,6 +24,7 @@
   "boilerplate.containers.NotFoundPage.header": "Page not found.",
   "app.containers.Song.author": "Author",
   "app.containers.Song.album": "Album",
+  "app.containers.Album.availableOn": "Available on:",
   "app.components.Player.play": "play",
   "app.components.Player.pause": "pause",
   "app.components.Player.volumeOff": "mute",

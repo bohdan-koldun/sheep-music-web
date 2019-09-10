@@ -2,10 +2,11 @@ import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames/bind';
 
 import { SongPlayList } from 'components/List';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -23,8 +24,10 @@ import {
 import { loadAlbum } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
+import messages from './messages';
 import './Album.scss';
+import iTunes from './images/itunes.png';
+import googlePlay from './images/googleplay.png';
 
 export function Album({
   onLoadAlbum,
@@ -81,6 +84,7 @@ export function Album({
                 <h1>{albumData.title}</h1>
                 <div>
                   Альбом{' • '}
+                  {albumData.year && `${albumData.year} • `}
                   <Link to={`/author/${albumData.author.slug}`}>
                     {albumData.author.title}
                   </Link>
@@ -99,6 +103,27 @@ export function Album({
             playData={playData}
             play={play}
           />
+          <div className="itunes-googleplay">
+            <h3>
+              <FormattedMessage {...messages.availableOn} />
+            </h3>
+            <a href={albumData.iTunes} target="_blank">
+              <img
+                src={iTunes}
+                className={classNames({ 'no-availavle': !albumData.iTunes })}
+                alt="itunes"
+              />
+            </a>
+            <a href={albumData.googlePlay} target="_blank">
+              <img
+                src={googlePlay}
+                className={classNames({
+                  'no-availavle': !albumData.googlePlay,
+                })}
+                alt="google play"
+              />
+            </a>
+          </div>
         </div>
       )}
     </React.Fragment>

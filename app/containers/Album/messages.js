@@ -1,16 +1,10 @@
-/*
- * Album Messages
- *
- * This contains all the text for the Album container.
- */
-
 import { defineMessages } from 'react-intl';
 
 export const scope = 'app.containers.Album';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'This is the Album container!',
+  availableOn: {
+    id: `${scope}.availableOn`,
+    defaultMessage: 'Доступен на:',
   },
 });
