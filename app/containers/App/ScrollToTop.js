@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { withRouter } from 'react-router';
+import ReactGA from 'react-ga';
 
 const ScrollToTop = ({ children, location: { pathname } }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    // console.log('----', pathname, divHeight, divHeight.offsetHeight)
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, [pathname]);
 
   return children || null;

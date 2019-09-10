@@ -83,7 +83,7 @@
     "react": "16.8.6",
     "react-debounce-input": "^3.2.0",
     "react-dom": "16.8.6",
-    "react-gtm-module": "^2.0.7",
+    "react-ga": "^2.6.0",
     "react-helmet": "6.0.0-beta",
     "react-icons": "^3.7.0",
     "react-intl": "2.8.0",
