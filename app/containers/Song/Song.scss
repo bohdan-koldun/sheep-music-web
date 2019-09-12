@@ -32,6 +32,22 @@
     margin-right: 20px;
 }
 
+.tags{
+  margin-top: 20px;
+
+  .song-tag{
+    background: #000;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    white-space: nowrap;
+    display: inline-block;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .song-page-header{
     h1{

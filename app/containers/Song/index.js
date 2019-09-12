@@ -155,6 +155,14 @@ export function Song({
               }}
             />
           )}
+          <div className="tags">
+            {songData.tags &&
+              songData.tags.map(tag => (
+                <span className="song-tag" key={tag.name}>
+                  {tag.name}
+                </span>
+              ))}
+          </div>
         </div>
       ) : null}
       <ReactTooltip place="top" type="dark" effect="float" />
