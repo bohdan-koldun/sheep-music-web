@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .song-page-header{
     display: flex;
     justify-content: flex-start;
@@ -46,6 +48,11 @@
     white-space: nowrap;
     display: inline-block;
   }
+}
+
+.verse, .chorus, .bridge {
+  font-weight: 600;
+  color: $red;
 }
 
 @media screen and (max-width: 600px) {

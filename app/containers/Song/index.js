@@ -144,7 +144,7 @@ export function Song({
             </div>
           </div>
 
-          <pre>{songData.text}</pre>
+          <pre dangerouslySetInnerHTML={{ __html: songData.text }} />
           {songData.video && (
             <ReactPlayer
               url={songData.video}
