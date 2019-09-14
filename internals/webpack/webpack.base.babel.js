@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = options => ({
   mode: options.mode,
@@ -114,6 +115,11 @@ module.exports = options => ({
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'public',
+      },
+    ]),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],
