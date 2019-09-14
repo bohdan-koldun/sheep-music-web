@@ -55,6 +55,21 @@
   line-height: 3;
 }
 
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+ 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+pre{
+  overflow-x: scroll;
+}
+
 @media screen and (max-width: 600px) {
   .song-page-header{
     h1{

@@ -146,14 +146,19 @@ export function Song({
 
           <pre dangerouslySetInnerHTML={{ __html: songData.text }} />
           {songData.video && (
-            <ReactPlayer
-              url={songData.video}
-              config={{
-                youtube: {
-                  playerVars: { showinfo: 0, controls: 1 },
-                },
-              }}
-            />
+            <div className="player-wrapper">
+              <ReactPlayer
+                url={songData.video}
+                className="react-player"
+                config={{
+                  youtube: {
+                    playerVars: { showinfo: 0, controls: 1 },
+                  },
+                }}
+                width="100%"
+                height="100%"
+              />
+            </div>
           )}
           <div className="tags">
             {songData.tags &&
