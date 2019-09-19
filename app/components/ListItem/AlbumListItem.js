@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import commonMessages from 'translations/common-messages';
 import { Link } from 'react-router-dom';
 import './AlbumListItem.scss';
 
@@ -11,7 +13,8 @@ function AlbumListItem({ album }) {
         <Link to={`/album/${album.slug}`}>{album.title}</Link>
         <br />
         <span>
-          Альбом {album.year && ` • ${album.year}`} {' • '} {album.songs || 0}{' '}
+          <FormattedMessage {...commonMessages.album} />{' '}
+          {album.year && ` • ${album.year}`} {' • '} {album.songs || 0}{' '}
           композиции
         </span>
       </div>

@@ -1,4 +1,6 @@
 {
+  "app.common.author": "Автор",
+  "app.common.album": "Альбом",
   "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
   "app.components.Footer.website.menu": "Меню:",
@@ -23,8 +25,6 @@
   "boilerplate.containers.LocaleToggle.de": "de",
   "boilerplate.containers.LocaleToggle.en": "en",
   "boilerplate.containers.NotFoundPage.header": "Страница не найдена.",
-  "app.containers.Song.author": "Автор",
-  "app.containers.Song.album": "Альбом",
   "app.containers.Album.availableOn": "Доступен на:",
   "app.components.Player.play": "воспроизвести",
   "app.components.Player.pause": "остановить",

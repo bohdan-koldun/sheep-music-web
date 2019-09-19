@@ -26,6 +26,7 @@ import {
   makeSelectAudioPlayData,
 } from 'containers/AudioPlayer/selectors';
 import playerMessages from 'components/Player/messages';
+import commonMessages from 'translations/common-messages';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -34,7 +35,6 @@ import {
 import { loadSong } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
 import './Song.scss';
 
 export function Song({
@@ -91,7 +91,7 @@ export function Song({
                 <div>
                   <span>
                     {'    '}
-                    <FormattedMessage {...messages.author} />:{' '}
+                    <FormattedMessage {...commonMessages.author} />:{' '}
                   </span>
                   <Link to={`/author/${songData.author.slug}`}>
                     {songData.author.title}
@@ -102,7 +102,7 @@ export function Song({
                 <div>
                   <span>
                     {'    '}
-                    <FormattedMessage {...messages.album} />:{' '}
+                    <FormattedMessage {...commonMessages.album} />:{' '}
                   </span>
                   <Link to={`/album/${songData.album.slug}`}>
                     {songData.album.title}

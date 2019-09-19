@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import commonMessages from 'translations/common-messages';
 import { Link } from 'react-router-dom';
 import { AuthorImg } from 'components/Img';
 import './AuthorListItem.scss';
@@ -12,7 +14,8 @@ function AuthorListItem({ author }) {
         <Link to={`/author/${author.slug}`}>{author.title}</Link>
         <br />
         <span>
-          Автор {author.year && ` • ${author.year}`} {' • '} {author.songs || 0}{' '}
+          <FormattedMessage {...commonMessages.author} />{' '}
+          {author.year && ` • ${author.year}`} {' • '} {author.songs || 0}{' '}
           композиции
         </span>
       </div>
