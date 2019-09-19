@@ -11,4 +11,20 @@ export default defineMessages({
     id: `${scope}.album`,
     defaultMessage: 'Альбом',
   },
+  oneSong: {
+    id: `${scope}.oneSong`,
+    defaultMessage: 'песня',
+  },
+  manySongFirstVariant: {
+    id: `${scope}.manySongFirstVariant`,
+    defaultMessage: 'песни',
+  },
+  manySongSecondVariant: {
+    id: `${scope}.manySongSecondVariant`,
+    defaultMessage: 'песен',
+  },
+  manySongThirdVariant: {
+    id: `${scope}.manySongThirdVariant`,
+    defaultMessage: 'песеня',
+  },
 });

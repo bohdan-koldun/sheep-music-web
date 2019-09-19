@@ -1,6 +1,10 @@
 {
   "app.common.author": "Author",
   "app.common.album": "Album",
+  "app.common.oneSong": "song",
+  "app.common.manySongFirstVariant": "songs",
+  "app.common.manySongSecondVariant": "songs",
+  "app.common.manySongThirdVariant": "songs",
   "app.components.Footer.author.message": "Made with love by {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",
   "app.components.Footer.website.menu": "Menu:",

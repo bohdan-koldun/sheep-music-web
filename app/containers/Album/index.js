@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { SongsMessage } from 'components/Message';
+import commonMessages from 'translations/common-messages';
 import classNames from 'classnames/bind';
 
 import { SongPlayList } from 'components/List';
@@ -83,7 +85,7 @@ export function Album({
               <div>
                 <h1>{albumData.title}</h1>
                 <div>
-                  Альбом{' • '}
+                  <FormattedMessage {...commonMessages.album} /> {' • '}
                   {albumData.year && `${albumData.year} • `}
                   <Link to={`/author/${albumData.author.slug}`}>
                     {albumData.author.title}
@@ -91,7 +93,9 @@ export function Album({
                 </div>
                 <div>
                   <b>{(albumData.songs && albumData.songs.length) || 0}</b>{' '}
-                  композиции
+                  <SongsMessage
+                    count={(albumData.songs && albumData.songs.length) || 0}
+                  />
                 </div>
               </div>
             </div>

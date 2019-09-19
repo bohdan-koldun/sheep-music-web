@@ -9,6 +9,9 @@ import { SongPlayList, AlbumPictureList } from 'components/List';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import { FormattedMessage } from 'react-intl';
+import { SongsMessage } from 'components/Message';
+import commonMessages from 'translations/common-messages';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -63,7 +66,9 @@ export function Author({
               }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
             />
           </Helmet>
-          <h1>Автор {authorData.title}</h1>
+          <h1>
+            <FormattedMessage {...commonMessages.author} /> {authorData.title}
+          </h1>
           {authorData.thumbnail && (
             <img
               src={authorData.thumbnail.path}
@@ -73,7 +78,10 @@ export function Author({
           )}
           <div>{authorData.description}</div>
           <span>
-            <b>{(authorData.songs && authorData.songs.length) || 0}</b> песен
+            <b>{(authorData.songs && authorData.songs.length) || 0}</b>{' '}
+            <SongsMessage
+              count={(authorData.songs && authorData.songs.length) || 0}
+            />
           </span>
           <SongPlayList
             songs={authorData.songs}

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import commonMessages from 'translations/common-messages';
 import { Link } from 'react-router-dom';
 import { AuthorImg } from 'components/Img';
+import { SongsMessage } from 'components/Message';
 import './AuthorListItem.scss';
 
 function AuthorListItem({ author }) {
@@ -16,7 +17,7 @@ function AuthorListItem({ author }) {
         <span>
           <FormattedMessage {...commonMessages.author} />{' '}
           {author.year && ` • ${author.year}`} {' • '} {author.songs || 0}{' '}
-          композиции
+          <SongsMessage count={author.songs || 0} />
         </span>
       </div>
     </div>

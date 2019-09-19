@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import commonMessages from 'translations/common-messages';
+import { SongsMessage } from 'components/Message';
 import { Link } from 'react-router-dom';
 import './AlbumListItem.scss';
 
@@ -15,7 +16,7 @@ function AlbumListItem({ album }) {
         <span>
           <FormattedMessage {...commonMessages.album} />{' '}
           {album.year && ` • ${album.year}`} {' • '} {album.songs || 0}{' '}
-          композиции
+          <SongsMessage count={album.songs || 0} />
         </span>
       </div>
     </div>

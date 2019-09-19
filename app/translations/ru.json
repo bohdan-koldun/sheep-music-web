@@ -1,6 +1,10 @@
 {
   "app.common.author": "Автор",
   "app.common.album": "Альбом",
+  "app.common.oneSong": "песня",
+  "app.common.manySongFirstVariant": "песни",
+  "app.common.manySongSecondVariant": "песен",
+  "app.common.manySongThirdVariant": "песня",
   "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
   "app.components.Footer.website.menu": "Меню:",
