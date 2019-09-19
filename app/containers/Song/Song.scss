@@ -13,13 +13,18 @@
     border: none;
     outline: none;
     background: none;
-    padding-left: 0;
+    padding: 0;
 
+  }
+
+  .song-icons-wrapper{
+    margin-top: 10px;
   }
 
   .song-icon {
     color: #000;
     font-size: 36px;
+    margin-right: 10px;
   }
 
   .song-player-img{

@@ -13,6 +13,7 @@ import {
   MdCloudDownload,
   MdPlayCircleFilled,
   MdPauseCircleFilled,
+  MdOndemandVideo,
 } from 'react-icons/md';
 
 import { SongImg } from 'components/Img';
@@ -109,38 +110,45 @@ export function Song({
                   </Link>
                 </div>
               )}
-              {songData.audioMp3 ? (
-                <div>
-                  <button
-                    type="button"
-                    onClick={playPauseSong}
-                    className="icon-button"
-                  >
-                    {play && playData && songData.id === playData.song.id ? (
-                      <MdPauseCircleFilled
-                        data-tip={intl.formatMessage(playerMessages.pause)}
-                        className="song-icon"
-                      />
-                    ) : (
-                      <MdPlayCircleFilled
-                        data-tip={intl.formatMessage(playerMessages.play)}
-                        className="song-icon"
-                      />
-                    )}
-                  </button>
-                  <MdCloudDownload
-                    data-tip={intl.formatMessage(playerMessages.download)}
-                    onClick={() => setShowDownload(true)}
-                    className="song-icon"
-                  />
-                  <DownloadModal
-                    isOpen={showDownload}
-                    onCloseModal={() => setShowDownload(false)}
-                    downloadUrl={songData.audioMp3.path}
-                    title={songData.title}
-                  />
-                </div>
-              ) : null}
+              <div className="song-icons-wrapper">
+                {songData.audioMp3 ? (
+                  <React.Fragment>
+                    <button
+                      type="button"
+                      onClick={playPauseSong}
+                      className="icon-button"
+                    >
+                      {play && playData && songData.id === playData.song.id ? (
+                        <MdPauseCircleFilled
+                          data-tip={intl.formatMessage(playerMessages.pause)}
+                          className="song-icon"
+                        />
+                      ) : (
+                        <MdPlayCircleFilled
+                          data-tip={intl.formatMessage(playerMessages.play)}
+                          className="song-icon"
+                        />
+                      )}
+                    </button>
+                    <MdCloudDownload
+                      data-tip={intl.formatMessage(playerMessages.download)}
+                      onClick={() => setShowDownload(true)}
+                      className="song-icon"
+                    />
+                    <DownloadModal
+                      isOpen={showDownload}
+                      onCloseModal={() => setShowDownload(false)}
+                      downloadUrl={songData.audioMp3.path}
+                      title={songData.title}
+                    />
+                  </React.Fragment>
+                ) : null}
+                {songData.video && (
+                  <a href={songData.video} data-tip="youtube" target="_blank">
+                    <MdOndemandVideo className="song-icon" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 
