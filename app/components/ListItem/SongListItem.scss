@@ -4,12 +4,22 @@
     align-items: center;
     -webkit-column-break-inside: avoid; /* Chrome, Safari */
     page-break-inside: avoid;           /* Theoretically FF 20+ */
-    break-inside: avoid-column;   
+    break-inside: avoid-column;  
+    max-width: 98%; 
 }
 
 .song-list-item-description{
     margin: 10px 2px;
+    max-width: 70%;
     span{
         font-size: 12px;
     }
+}
+
+.song-list-item-info{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }

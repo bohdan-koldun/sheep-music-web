@@ -37,7 +37,11 @@ class SongListItem extends React.Component {
         <div className="song-list-item-description">
           <Link to={`/song/${song.slug}`}>{song.title}</Link>
           <br />
-          <span>{song.author && song.author.title}</span>
+          <span className="song-list-item-info">
+            {song.author && song.author.title}
+            {song.author && song.album && ' • '}
+            {song.album && song.album.title}
+          </span>
         </div>
 
         <ReactTooltip place="top" type="dark" effect="float" />
