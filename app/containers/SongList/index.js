@@ -96,6 +96,7 @@ export function SongList({
       <SearchInfo
         count={(songs && songs.total) || 0}
         page={songs && 1 + Number.parseInt(songs.curPage, 10)}
+        search={search}
       />
 
       {songs && songs.results ? (

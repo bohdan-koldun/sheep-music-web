@@ -73,6 +73,7 @@ export function AlbumList({
       <SearchInfo
         count={(albums && albums.total) || 0}
         page={albums && 1 + Number.parseInt(albums.curPage, 10)}
+        search={search}
       />
 
       {albums && albums.results ? (

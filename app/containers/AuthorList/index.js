@@ -74,6 +74,7 @@ export function AuthorList({
       <SearchInfo
         count={(authors && authors.total) || 0}
         page={authors && 1 + Number.parseInt(authors.curPage, 10)}
+        search={search}
       />
 
       {authors && authors.results ? (
