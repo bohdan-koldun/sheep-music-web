@@ -10,7 +10,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { FormattedMessage } from 'react-intl';
-import { SongsMessage } from 'components/Message';
+import { SongsMessage, AlbumsMessage } from 'components/Message';
 import commonMessages from 'translations/common-messages';
 import {
   makeSelectPlay,
@@ -92,7 +92,9 @@ export function Author({
           <br />
           <span>
             <b>{(authorData.albums && authorData.albums.length) || 0}</b>{' '}
-            альбомов
+            <AlbumsMessage
+              count={(authorData.albums && authorData.albums.length) || 0}
+            />
           </span>
           <AlbumPictureList albums={authorData.albums} />
           <br /> <br />
