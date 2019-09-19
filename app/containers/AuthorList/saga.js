@@ -5,7 +5,7 @@ import {
   authorListLoadingError,
 } from 'containers/AuthorList/actions';
 import request from 'utils/request';
-import { API_HOST } from '../../appConstants';
+import { API_HOST } from 'utils/constants';
 
 export function* getAuthorList(action) {
   const requestURL = `${API_HOST}/authors?page=${action.page}&keyword=${

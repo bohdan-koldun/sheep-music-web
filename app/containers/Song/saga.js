@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOAD_SONG } from 'containers/Song/constants';
 import { songLoaded, songLoadingError } from 'containers/Song/actions';
 import request from 'utils/request';
-import { API_HOST } from '../../appConstants';
+import { API_HOST } from 'utils/constants';
 
 export function* getSong(action) {
   const requestURL = `${API_HOST}/songs/${action.slug}`;

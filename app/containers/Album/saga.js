@@ -2,7 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOAD_ALBUM } from 'containers/Album/constants';
 import { albumLoaded, albumLoadingError } from 'containers/Album/actions';
 import request from 'utils/request';
-import { API_HOST } from '../../appConstants';
+import { API_HOST } from 'utils/constants';
 
 export function* getAlbum(action) {
   const requestURL = `${API_HOST}/albums/${action.slug}`;

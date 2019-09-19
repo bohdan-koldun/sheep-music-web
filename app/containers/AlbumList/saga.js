@@ -5,7 +5,7 @@ import {
   albumListLoadingError,
 } from 'containers/AlbumList/actions';
 import request from 'utils/request';
-import { API_HOST } from '../../appConstants';
+import { API_HOST } from 'utils/constants';
 
 export function* getAlbumList(action) {
   const requestURL = `${API_HOST}/albums?page=${action.page}&keyword=${
