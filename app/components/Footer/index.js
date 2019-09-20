@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import classNames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { MdLibraryMusic, MdAlbum, MdGroup } from 'react-icons/md';
+import { FaYoutube } from 'react-icons/fa';
 
 import LocaleToggle from 'containers/LocaleToggle';
 import headerMessages from 'components/Header/messages';
@@ -45,6 +46,13 @@ function Footer({ location }) {
             >
               <MdGroup />
               <FormattedMessage {...headerMessages.authors} />
+            </Link>
+            <Link
+              to="/videos"
+              className={classNames({ 'active-link': pathname === '/videos' })}
+            >
+              <FaYoutube />
+              <FormattedMessage {...headerMessages.videos} />
             </Link>
           </div>
         </div>

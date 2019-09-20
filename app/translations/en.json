@@ -14,10 +14,11 @@
   "app.components.Footer.website.menu": "Menu:",
   "app.components.Footer.website.language": "Language:",
   "app.components.Footer.right.message": "The materials on the site are obtained from public (widely available) resources. If you own the copyright to any information hosted on sheep-music.com and do not agree with its publicity in the future, then we agree to consider proposals for the removal of certain material, as well as to discuss proposals for arrangements that allow the use of this content. We do not track the actions of users who self-publish text sources that are the subject of your copyright. All data on the site are downloaded automatically, without going through pre-selection from anyone's side, which is the norm in the world experience of placing information on the Internet.",
-  "boilerplate.components.Header.home": "Home",
-  "boilerplate.components.Header.songs": "Songs",
-  "boilerplate.components.Header.albums": "Albums",
-  "boilerplate.components.Header.authors": "Artists",
+  "app.components.Header.home": "Home",
+  "app.components.Header.songs": "Songs",
+  "app.components.Header.albums": "Albums",
+  "app.components.Header.authors": "Artists",
+  "app.components.Header.videos": "Videos",
   "boilerplate.components.Info.page": "page",
   "boilerplate.components.Info.results": "Results:",
   "boilerplate.components.Filter.newest": "New",
@@ -46,6 +47,7 @@
   "app.containers.AlbumList.header": "Find an album",
   "app.containers.AuthorList.header": "Find an author",
   "app.containers.SongList.header": "Find a song",
+  "app.containers.VideoList.header": "Find a video",
   "app.components.Model.download": "Download MP3:",
   "app.components.Model.cancel": "Cancel"
 }

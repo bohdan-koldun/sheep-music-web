@@ -13,8 +13,8 @@ import {
   MdCloudDownload,
   MdPlayCircleFilled,
   MdPauseCircleFilled,
-  MdOndemandVideo,
 } from 'react-icons/md';
+import { FaYoutube } from 'react-icons/fa';
 
 import { SongImg } from 'components/Img';
 import { DownloadModal } from 'components/Modal';
@@ -145,7 +145,7 @@ export function Song({
                 ) : null}
                 {songData.video && (
                   <a href={songData.video} data-tip="youtube" target="_blank">
-                    <MdOndemandVideo className="song-icon" />
+                    <FaYoutube className="song-icon" />
                   </a>
                 )}
               </div>

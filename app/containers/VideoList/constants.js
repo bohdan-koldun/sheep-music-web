@@ -1,0 +1,9 @@
+export const LOAD_VIDEO_LIST = 'app/VideoList/LOAD_VIDEO_LIST';
+export const LOAD_VIDEO_LIST_SUCCESS = 'app/VideoList/LOAD_VIDEO_LIST_SUCCESS';
+export const LOAD_VIDEO_LIST_ERROR = 'app/VideoList/LOAD_VIDEO_LIST_ERROR';
+
+export const CHANGE_VIDEO_LIST_PAGE = 'app/VideoList/CHANGE_VIDEO_LIST_PAGE';
+export const CHANGE_VIDEO_LIST_SEARCH =
+  'app/VideoList/CHANGE_VIDEO_LIST_SEARCH';
+export const CHANGE_VIDEO_LIST_FILTER =
+  'app/VideoList/CHANGE_VIDEO_LIST_FILTER';

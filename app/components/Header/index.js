@@ -13,6 +13,7 @@ import {
   MdMenu,
   MdClose,
 } from 'react-icons/md';
+import { FaYoutube } from 'react-icons/fa';
 import Banner from './banner.png';
 import messages from './messages';
 import './Header.scss';
@@ -79,6 +80,15 @@ function Header({ location }) {
               <MdGroup />
               <FormattedMessage {...messages.authors} />{' '}
             </Link>{' '}
+            <Link
+              to="/videos"
+              className={classNames({
+                'active-link': pathname === '/videos',
+              })}
+            >
+              <FaYoutube />
+              <FormattedMessage {...messages.videos} />{' '}
+            </Link>{' '}
           </div>{' '}
           <div className="header-locale">
             <LocaleToggle />
@@ -119,6 +129,16 @@ function Header({ location }) {
           >
             <MdGroup />
             <FormattedMessage {...messages.authors} />{' '}
+          </Link>{' '}
+          <Link
+            to="/videos"
+            className={classNames({
+              'active-link': pathname === '/videos',
+            })}
+            onClick={() => setShowMenu(false)}
+          >
+            <FaYoutube />
+            <FormattedMessage {...messages.videos} />{' '}
           </Link>{' '}
         </div>{' '}
       </header>
