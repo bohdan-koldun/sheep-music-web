@@ -1,6 +1,7 @@
 {
   "app.common.author": "Author",
   "app.common.album": "Album",
+  "app.common.video": "Video",
   "app.common.oneSong": "song",
   "app.common.manySongFirstVariant": "songs",
   "app.common.manySongSecondVariant": "songs",

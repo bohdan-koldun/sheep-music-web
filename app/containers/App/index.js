@@ -9,6 +9,7 @@ import Album from 'containers/Album/Loadable';
 import AlbumList from 'containers/AlbumList/Loadable';
 import Author from 'containers/Author/Loadable';
 import AuthorList from 'containers/AuthorList/Loadable';
+import Video from 'containers/Video/Loadable';
 import VideoList from 'containers/VideoList/Loadable';
 import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -46,6 +47,7 @@ export default function App() {
             <Route path="/albums" component={AlbumList} />
             <Route path="/author/:slug" component={Author} />
             <Route path="/authors" component={AuthorList} />
+            <Route path="/video/:slug" component={Video} />
             <Route path="/videos" component={VideoList} />
             <Route path="" component={NotFoundPage} />
           </Switch>

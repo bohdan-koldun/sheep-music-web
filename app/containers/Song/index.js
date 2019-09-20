@@ -144,9 +144,9 @@ export function Song({
                   </React.Fragment>
                 ) : null}
                 {songData.video && (
-                  <a href={songData.video} data-tip="youtube" target="_blank">
-                    <FaYoutube className="song-icon" />
-                  </a>
+                  <Link to={`/video/${songData.slug}`} target="_blank">
+                    <FaYoutube data-tip="youtube" className="song-icon" />
+                  </Link>
                 )}
               </div>
             </div>

@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.album`,
     defaultMessage: 'Альбом',
   },
+  video: {
+    id: `${scope}.video`,
+    defaultMessage: 'Видео',
+  },
   oneSong: {
     id: `${scope}.oneSong`,
     defaultMessage: 'песня',

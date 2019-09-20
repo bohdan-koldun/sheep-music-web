@@ -1,11 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-// import { FormattedMessage } from 'react-intl';
-// import commonMessages from 'translations/common-messages';
 import { Link } from 'react-router-dom';
-// import { AuthorImg } from 'components/Img';
-// import { SongsMessage, AlbumsMessage } from 'components/Message';
 import './VideoYoutubeItem.scss';
 
 function VideoYoutubeItem({ video }) {
@@ -24,7 +20,7 @@ function VideoYoutubeItem({ video }) {
           height="100%"
         />
       </div>{' '}
-      <Link to={`/song/${video.slug}`}>{video.title}</Link>
+      <Link to={`/video/${video.slug}`}>{video.title}</Link>
     </div>
   );
 }

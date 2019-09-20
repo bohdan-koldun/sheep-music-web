@@ -56,10 +56,10 @@ export function VideoList({
   return (
     <div>
       <Helmet>
-      <title>Авторы, Исполнители Христианских Песен</title>
+      <title>Видеоклипы Христианских Песен | Youtube</title>
         <meta
           name="description"
-          content="Песни христианских исполнителей: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
+          content="Видео песен христианских исполнителей: смотреть видео онлайн с Youtube."
         />
       </Helmet>
       <h1 ref={myRef}>

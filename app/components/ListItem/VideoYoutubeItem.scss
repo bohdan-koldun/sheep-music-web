@@ -1,6 +1,7 @@
 .song-video-item {
   width: 100%;
   max-width: 250px;
+  margin-bottom: 40px;
 
   .player-wrapper {
     position: relative;
@@ -12,5 +13,11 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .song-video-item {
+    max-width: 100%;
   }
 }
