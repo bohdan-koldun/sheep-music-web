@@ -50,5 +50,7 @@
   "app.containers.SongList.header": "Знайти пісню",
   "app.containers.VideoList.header": "Знайти відеокліп",
   "app.components.Model.download": "Завантажити MP3:",
-  "app.components.Model.cancel": "Cкасувати"
+  "app.components.Model.cancel": "Cкасувати",
+  "app.components.Pdf.downloadPdf": "Завантажити PDF",
+  "app.components.Pdf.generatePdf": "Згенерувати PDF"
 }

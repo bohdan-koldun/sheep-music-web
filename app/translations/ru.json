@@ -50,5 +50,6 @@
   "app.containers.SongList.header": "Найти песню",
   "app.containers.VideoList.header": "Найти видеоклип",
   "app.components.Model.download": "Скачать MP3:",
-  "app.components.Model.cancel": "Отменить"
+  "app.components.Pdf.downloadPdf": "Скачать PDF",
+  "app.components.Pdf.generatePdf": "Сгенерировать PDF"
 }

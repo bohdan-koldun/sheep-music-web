@@ -50,5 +50,7 @@
   "app.containers.SongList.header": "Find a song",
   "app.containers.VideoList.header": "Find a video",
   "app.components.Model.download": "Download MP3:",
-  "app.components.Model.cancel": "Cancel"
+  "app.components.Model.cancel": "Cancel",
+  "app.components.Pdf.downloadPdf": "Download PDF",
+  "app.components.Pdf.generatePdf": "Generate PDF"
 }

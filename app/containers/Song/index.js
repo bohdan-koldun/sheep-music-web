@@ -15,7 +15,7 @@ import {
   MdPauseCircleFilled,
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
-
+import { SongPdfGenerator } from 'components/Pdf';
 import { SongImg } from 'components/Img';
 import { DownloadModal } from 'components/Modal';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -110,6 +110,7 @@ export function Song({
                   </Link>
                 </div>
               )}
+              <SongPdfGenerator song={songData} />
               <div className="song-icons-wrapper">
                 {songData.audioMp3 ? (
                   <React.Fragment>
@@ -151,7 +152,6 @@ export function Song({
               </div>
             </div>
           </div>
-
           <pre dangerouslySetInnerHTML={{ __html: songData.text }} />
           {songData.video && (
             <div className="player-wrapper">

@@ -19,6 +19,8 @@
 
   .song-icons-wrapper{
     margin-top: 10px;
+    display: flex;
+    align-items: center;
   }
 
   .song-icon {
@@ -36,7 +38,7 @@
 }
 
 .song-page-img{
-    width: 150px;
+    width: 180px;
     margin-right: 20px;
 }
 

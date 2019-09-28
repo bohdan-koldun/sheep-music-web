@@ -11,9 +11,14 @@
   z-index: 101;
 }
 
+
+
 .sheep-music-player {
   min-height: 100px;
   bottom: 0;
+  svg {
+    cursor: pointer;
+  }
 }
 
 .sheep-music-player-list {
