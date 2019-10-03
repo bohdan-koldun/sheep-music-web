@@ -39,6 +39,7 @@ export function HomePage({ username, onSubmitForm }) {
           name="description"
           content="Sheep Music: слушать онлайн, скачать mp3, слова, текст, аккорды, фонограммы"
         />
+        <link rel="canonical" href="https://sheep-music.com/album/" />
       </Helmet>
       <div>
         <h2>

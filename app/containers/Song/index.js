@@ -82,6 +82,27 @@ export function Song({
                 songData.title
               }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
             />
+            <link
+              rel="canonical"
+              href={`https://sheep-music.com/song/${songData.slug}`}
+            />
+            <script type="application/ld+json">
+              {`
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Песни",
+              "item": "https://sheep-music.com/songs"
+            },{
+              "@type": "ListItem",
+              "position": 2,
+              "name": "${songData.title}",
+              "item": "https://sheep-music.com/song/${songData.slug}"
+            }]
+            `}
+            </script>
           </Helmet>
 
           <div className="song-page-header">

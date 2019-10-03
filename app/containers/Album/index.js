@@ -72,6 +72,25 @@ export function Album({
                 albumData.title
               }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
             />
+            <link
+              rel="canonical"
+              href={`https://sheep-music.com/album/${albumData.slug}`}
+            />
+            <script type="application/ld+json">
+              {`"@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Альбомы",
+              "item": "https://sheep-music.com/albums"
+            },{
+              "@type": "ListItem",
+              "position": 2,
+              "name": "${albumData.title}",
+              "item": "https://sheep-music.com/album/${albumData.slug}"
+            }]`}
+            </script>
           </Helmet>
           <div className="album-header">
             {albumData.thumbnail && (

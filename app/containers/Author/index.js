@@ -65,6 +65,27 @@ export function Author({
                 authorData.title
               }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
             />
+            <link
+              rel="canonical"
+              href={`https://sheep-music.com/author/${authorData.slug}`}
+            />
+            <script type="application/ld+json">
+              {`
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Исполнители",
+              "item": "https://sheep-music.com/authors"
+            },{
+              "@type": "ListItem",
+              "position": 2,
+              "name": "${authorData.title}",
+              "item": "https://sheep-music.com/author/${authorData.slug}"
+            }]
+            `}
+            </script>
           </Helmet>
           <h1>
             <FormattedMessage {...commonMessages.author} /> {authorData.title}
