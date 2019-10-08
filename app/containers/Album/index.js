@@ -62,7 +62,7 @@ export function Album({
           <Helmet>
             <title>
               Альбом {albumData.title}{' '}
-              {albumData.author ? ` | ${albumData.author.slug}` : ''}
+              {albumData.author ? ` | ${albumData.author.title}` : ''}
               {albumData.songs ? ` | ${albumData.songs.length} песен(я)` : ''}
               {` | Песни, Слова, Аккорды, Видео`}
             </title>
