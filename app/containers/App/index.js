@@ -1,4 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -15,6 +21,10 @@ import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { makeSelectLoading, makeSelectError } from './selectors';
+import { loadTags } from './actions';
+import reducer from './reducer';
+import saga from './saga';
 import ScrollToTop from './ScrollToTop';
 import './App.scss';
 
@@ -27,7 +37,14 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function App() {
+function App({ onLoadTags }) {
+  useInjectReducer({ key: 'album', reducer });
+  useInjectSaga({ key: 'album', saga });
+
+  useEffect(() => {
+    onLoadTags();
+  }, []);
+
   return (
     <Fragment>
       <Helmet titleTemplate="%s | Sheep Music" defaultTitle="Sheep Music">
@@ -58,3 +75,24 @@ export default function App() {
     </Fragment>
   );
 }
+
+App.propTypes = {
+  onLoadTags: PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onLoadTags: () => dispatch(loadTags()),
+  };
+}
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(App);
