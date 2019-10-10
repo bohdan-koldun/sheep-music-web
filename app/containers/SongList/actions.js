@@ -5,14 +5,16 @@ import {
   CHANGE_SONG_LIST_SEARCH,
   CHANGE_SONG_LIST_PAGE,
   CHANGE_SONG_LIST_FILTER,
+  CHANGE_SONG_LIST_TAGS_FILTER,
 } from './constants';
 
-export function loadSongList(page, search, filter) {
+export function loadSongList(page, search, filter, tags) {
   return {
     type: LOAD_SONG_LIST,
     page,
     search,
     filter,
+    tags,
   };
 }
 
@@ -48,5 +50,12 @@ export function changeFilter(filter) {
   return {
     type: CHANGE_SONG_LIST_FILTER,
     filter,
+  };
+}
+
+export function changeTagsFilter(tagsFilter) {
+  return {
+    type: CHANGE_SONG_LIST_TAGS_FILTER,
+    tagsFilter,
   };
 }

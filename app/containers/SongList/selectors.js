@@ -39,6 +39,12 @@ const makeSelectSongListFilter = () =>
     songState => songState.filter,
   );
 
+const makeSelectSongListTagsFilter = () =>
+  createSelector(
+    selectSongListDomain,
+    songState => songState.tagsFilter,
+  );
+
 export {
   selectSongListDomain,
   makeSelectLoading,
@@ -47,4 +53,5 @@ export {
   makeSelectSongListPage,
   makeSelectSongListSearch,
   makeSelectSongListFilter,
+  makeSelectSongListTagsFilter,
 };

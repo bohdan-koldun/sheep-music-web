@@ -20,11 +20,13 @@ import {
   makeSelectPlay,
   makeSelectAudioPlayData,
 } from 'containers/AudioPlayer/selectors';
+import { makeSelectTags } from 'containers/App/selectors';
 import {
   loadSongList,
   changeSearch,
   changePage,
   changeFilter,
+  changeTagsFilter,
 } from './actions';
 import {
   makeSelectLoading,
@@ -33,6 +35,7 @@ import {
   makeSelectSongListPage,
   makeSelectSongListSearch,
   makeSelectSongListFilter,
+  makeSelectSongListTagsFilter,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -50,9 +53,12 @@ export function SongList({
   page,
   search,
   filter,
+  tags,
+  curTags,
   onChangePage,
   onChangeSearch,
   onChangeFilter,
+  onChangeTagsFilter,
 }) {
   useInjectReducer({ key: 'songList', reducer });
   useInjectSaga({ key: 'songList', saga });
@@ -64,8 +70,8 @@ export function SongList({
   useEffect(() => {
     // const params = new URLSearchParams(location.search);
     // TODO paginate(params.get('page') || 0, search, filter.value);
-    onLoadSongList(page, search, filter.value);
-  }, [page, search, filter]);
+    onLoadSongList(page, search, filter.value, curTags);
+  }, [page, search, filter, curTags]);
 
   const playPauseSong = song => {
     if (playData && playData.song && song && song.id === playData.song.id) {
@@ -90,8 +96,11 @@ export function SongList({
       <ListFilter
         search={search}
         filter={filter}
+        tags={tags}
+        curTags={curTags}
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
+        onChangeTagsFilter={onChangeTagsFilter}
       />
       <SearchInfo
         count={(songs && songs.total) || 0}
@@ -151,9 +160,12 @@ SongList.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string,
   }),
+  tags: PropTypes.arrayOf(PropTypes.object),
+  curTags: PropTypes.string,
   onChangeSearch: PropTypes.func,
   onChangePage: PropTypes.func,
   onChangeFilter: PropTypes.func,
+  onChangeTagsFilter: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -165,12 +177,14 @@ const mapStateToProps = createStructuredSelector({
   page: makeSelectSongListPage(),
   search: makeSelectSongListSearch(),
   filter: makeSelectSongListFilter(),
+  tags: makeSelectTags(),
+  curTags: makeSelectSongListTagsFilter(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadSongList: (page, search, filter) =>
-      dispatch(loadSongList(page, search, filter)),
+    onLoadSongList: (page, search, filter, tags) =>
+      dispatch(loadSongList(page, search, filter, tags)),
     paginate: (page, search, filter) =>
       dispatch(push(`/songs?page=${page}&search=${search}&filter=${filter}`)),
     onPlaySongList: (song, songList) => dispatch(setSongList(song, songList)),
@@ -178,6 +192,8 @@ export function mapDispatchToProps(dispatch) {
     onChangePage: page => dispatch(changePage(page)),
     onChangeSearch: search => dispatch(changeSearch(search)),
     onChangeFilter: filter => dispatch(changeFilter(filter)),
+    onChangeTagsFilter: tags =>
+      dispatch(changeTagsFilter(tags && tags.map(tag => tag.value).join('|'))),
   };
 }
 

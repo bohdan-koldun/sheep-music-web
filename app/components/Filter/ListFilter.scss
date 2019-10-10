@@ -10,7 +10,7 @@
     margin-right: 8px;
   }
 
-  .sort-block {
+  .sort-block, .tags-block {
     display: flex;
     align-items: center;
 
@@ -19,6 +19,13 @@
   .sort-select {
     height: 35px;
     width: 210px;
+    border-radius: 2px;
+    margin-right: 20px;
+  }
+
+  .tags-select {
+    height: 35px;
+    min-width: 210px;
     border-radius: 2px;
   }
 

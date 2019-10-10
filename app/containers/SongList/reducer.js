@@ -6,6 +6,7 @@ import {
   CHANGE_SONG_LIST_PAGE,
   CHANGE_SONG_LIST_SEARCH,
   CHANGE_SONG_LIST_FILTER,
+  CHANGE_SONG_LIST_TAGS_FILTER,
 } from './constants';
 
 export const initialState = {
@@ -18,6 +19,7 @@ export const initialState = {
     value: 'newest',
     label: 'Новые',
   },
+  tagsFilter: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -47,6 +49,9 @@ const songListReducer = (state = initialState, action) =>
         break;
       case CHANGE_SONG_LIST_FILTER:
         draft.filter = action.filter;
+        break;
+      case CHANGE_SONG_LIST_TAGS_FILTER:
+        draft.tagsFilter = action.tagsFilter;
         break;
     }
   });

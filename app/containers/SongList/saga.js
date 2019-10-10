@@ -10,7 +10,7 @@ import { API_HOST } from 'utils/constants';
 export function* getSongList(action) {
   const requestURL = `${API_HOST}/songs?page=${action.page}&keyword=${
     action.search
-  }&limit=40&filter=${action.filter}`;
+  }&limit=40&filter=${action.filter}&tags=${action.tags}`;
 
   try {
     const songs = yield call(request, requestURL);
