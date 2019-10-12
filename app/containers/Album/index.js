@@ -44,6 +44,8 @@ export function Album({
   useInjectSaga({ key: 'album', saga });
 
   useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(' ++++ ', match.params, match.params.slug);
     onLoadAlbum(match.params.slug);
   }, []);
 
@@ -55,7 +57,7 @@ export function Album({
     }
   };
   // eslint-disable-next-line no-console
-  console.log(' ----- ', albumData);
+  console.log(' ----- ', albumData, match.params.slug);
 
   return (
     <React.Fragment>
