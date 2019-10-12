@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import ReactTooltip from 'react-tooltip';
+import ReactGA from 'react-ga';
 import { MdPlayCircleFilled, MdPauseCircleFilled } from 'react-icons/md';
 import messages from 'components/Player/messages';
 import './SongListItem.scss';
@@ -17,7 +18,13 @@ class SongListItem extends React.Component {
       <div className="song-list-item">
         <button
           type="button"
-          onClick={() => playPauseSong(song)}
+          onClick={() => {
+            playPauseSong(song);
+            ReactGA.event({
+              category: 'Song List',
+              action: 'click play/pause button',
+            });
+          }}
           className="icon-button"
         >
           {play && playData && playData.song && song.id === playData.song.id ? (

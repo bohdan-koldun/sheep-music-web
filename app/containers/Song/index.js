@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import ReactTooltip from 'react-tooltip';
+import ReactGA from 'react-ga';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
@@ -137,7 +138,13 @@ export function Song({
                   <React.Fragment>
                     <button
                       type="button"
-                      onClick={playPauseSong}
+                      onClick={() => {
+                        playPauseSong();
+                        ReactGA.event({
+                          category: 'Song',
+                          action: 'click play/pause button',
+                        });
+                      }}
                       className="icon-button"
                     >
                       {play && playData && songData.id === playData.song.id ? (

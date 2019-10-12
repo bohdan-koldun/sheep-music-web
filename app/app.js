@@ -38,7 +38,6 @@ const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 ReactGA.initialize('UA-117933387-1');
-ReactGA.pageview(window.location.pathname + window.location.search);
 
 const render = messages => {
   ReactDOM.render(
