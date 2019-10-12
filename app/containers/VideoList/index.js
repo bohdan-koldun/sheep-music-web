@@ -67,18 +67,21 @@ export function VideoList({
     }
   }, []);
 
+  const changeURLSearchParams = (value, name, currentUrlParams) => {
+    if (value) {
+      currentUrlParams.set(name, value);
+    } else {
+      currentUrlParams.delete(name);
+    }
+  };
+
   useEffect(() => {
     const currentUrlParams = new URLSearchParams(window.location.search);
-    if (page) {
-      currentUrlParams.set('page', page);
-    }
-    if (search) {
-      currentUrlParams.set('search', search);
-    }
-    if (filter) {
-      currentUrlParams.set('filter', filter.value);
-    }
+    changeURLSearchParams(search, 'search', currentUrlParams);
+    changeURLSearchParams(filter && filter.value, 'filter', currentUrlParams);
+    changeURLSearchParams(page, 'page', currentUrlParams);
     history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
+
     onLoadVideoList(page, search, filter.value);
   }, [page, search, filter]);
 

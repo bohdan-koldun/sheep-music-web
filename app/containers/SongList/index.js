@@ -73,35 +73,36 @@ export function SongList({
     const urlTags = currentUrlParams.get('tags');
     const urlFilter = currentUrlParams.get('filter');
 
-    if (urlPage && !Number.isNaN(urlPage)) {
-      onChangePage(Number.parseInt(urlPage, 10));
-    }
-    if (urlTags) {
-      onChangeTagsFilter(urlTags.split(',').map(tag => ({ value: tag })));
-    }
     if (urlSearch) {
       onChangeSearch(urlSearch);
     }
     if (urlFilter) {
       onChangeFilter({ value: urlFilter });
     }
+    if (urlTags) {
+      onChangeTagsFilter(urlTags.split(',').map(tag => ({ value: tag })));
+    }
+    if (urlPage && !Number.isNaN(urlPage)) {
+      onChangePage(Number.parseInt(urlPage, 10));
+    }
   }, []);
+
+  const changeURLSearchParams = (value, name, currentUrlParams) => {
+    if (value) {
+      currentUrlParams.set(name, value);
+    } else {
+      currentUrlParams.delete(name);
+    }
+  };
 
   useEffect(() => {
     const currentUrlParams = new URLSearchParams(window.location.search);
-    if (page) {
-      currentUrlParams.set('page', page);
-    }
-    if (search) {
-      currentUrlParams.set('search', search);
-    }
-    if (filter) {
-      currentUrlParams.set('filter', filter.value);
-    }
-    if (curTags) {
-      currentUrlParams.set('tags', curTags);
-    }
+    changeURLSearchParams(search, 'search', currentUrlParams);
+    changeURLSearchParams(filter && filter.value, 'filter', currentUrlParams);
+    changeURLSearchParams(curTags, 'tags', currentUrlParams);
+    changeURLSearchParams(page, 'page', currentUrlParams);
     history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
+
     onLoadSongList(page, search, filter.value, curTags);
   }, [page, search, filter, curTags]);
 

@@ -56,29 +56,32 @@ export function AuthorList({
     const urlSearch = currentUrlParams.get('search');
     const urlFilter = currentUrlParams.get('filter');
 
-    if (urlPage && !Number.isNaN(urlPage)) {
-      onChangePage(Number.parseInt(urlPage, 10));
-    }
     if (urlSearch) {
       onChangeSearch(urlSearch);
     }
     if (urlFilter) {
       onChangeFilter({ value: urlFilter });
     }
+    if (urlPage && !Number.isNaN(urlPage)) {
+      onChangePage(Number.parseInt(urlPage, 10));
+    }
   }, []);
+
+  const changeURLSearchParams = (value, name, currentUrlParams) => {
+    if (value) {
+      currentUrlParams.set(name, value);
+    } else {
+      currentUrlParams.delete(name);
+    }
+  };
 
   useEffect(() => {
     const currentUrlParams = new URLSearchParams(window.location.search);
-    if (page) {
-      currentUrlParams.set('page', page);
-    }
-    if (search) {
-      currentUrlParams.set('search', search);
-    }
-    if (filter) {
-      currentUrlParams.set('filter', filter.value);
-    }
+    changeURLSearchParams(search, 'search', currentUrlParams);
+    changeURLSearchParams(filter && filter.value, 'filter', currentUrlParams);
+    changeURLSearchParams(page, 'page', currentUrlParams);
     history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
+
     onLoadAuthorList(page, search, filter.value);
   }, [page, search, filter]);
 
