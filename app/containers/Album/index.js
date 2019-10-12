@@ -44,8 +44,6 @@ export function Album({
   useInjectSaga({ key: 'album', saga });
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(' ++++ ', match.params, match.params.slug);
     onLoadAlbum(match.params.slug);
   }, []);
 
@@ -56,8 +54,6 @@ export function Album({
       onPlaySongList(song, albumData.songs || []);
     }
   };
-  // eslint-disable-next-line no-console
-  console.log(' ----- ', albumData, match.params.slug);
 
   return (
     <React.Fragment>

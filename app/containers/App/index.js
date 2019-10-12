@@ -38,8 +38,8 @@ const AppWrapper = styled.div`
 `;
 
 function App({ onLoadTags }) {
-  useInjectReducer({ key: 'album', reducer });
-  useInjectSaga({ key: 'album', saga });
+  useInjectReducer({ key: 'app', reducer });
+  useInjectSaga({ key: 'app', saga });
 
   useEffect(() => {
     onLoadTags();
