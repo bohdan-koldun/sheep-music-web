@@ -128,7 +128,7 @@ header {
 }
 
 
-@media screen and (max-width: 1367px) {
+@media screen and (max-width: 1000px) {
   .header-desktop-links {
     display: none;
   }
@@ -140,5 +140,11 @@ header {
     a {
       font-size: 20px;
     }
+  }
+}
+
+@media screen and (max-width: 1370px) {
+  .hide-medium {
+    display: none !important;
   }
 }

@@ -73,7 +73,7 @@ function Header({ location }) {
             </Link>{' '}
             <Link
               to="/authors"
-              className={classNames({
+              className={classNames('hide-medium', {
                 'active-link': pathname === '/authors',
               })}
             >
@@ -82,7 +82,7 @@ function Header({ location }) {
             </Link>{' '}
             <Link
               to="/videos"
-              className={classNames({
+              className={classNames('hide-medium', {
                 'active-link': pathname === '/videos',
               })}
             >
