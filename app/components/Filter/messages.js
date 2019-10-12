@@ -19,4 +19,12 @@ export default defineMessages({
     id: `${scope}.search`,
     defaultMessage: 'Поиск',
   },
+  theme: {
+    id: `${scope}.theme`,
+    defaultMessage: 'Тематика...',
+  },
+  sorting: {
+    id: `${scope}.sorting`,
+    defaultMessage: 'Сортировка...',
+  },
 });

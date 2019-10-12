@@ -4,7 +4,6 @@ import { DebounceInput } from 'react-debounce-input';
 import { MdSearch } from 'react-icons/md';
 import Select from 'react-select';
 import { useIntl } from 'containers/LanguageProvider';
-import { FaTags } from 'react-icons/fa';
 import SelectIcon from './SelectIcon';
 import messages from './messages';
 import './ListFilter.scss';
@@ -42,30 +41,8 @@ function ListFilter({
 
   return (
     <div className="filter">
-      <div className="search-block">
-        <MdSearch />
-        <DebounceInput
-          value={search}
-          minLength={2}
-          placeholder={intl.formatMessage(messages.search)}
-          debounceTimeout={400}
-          onChange={event => onChangeSearch(event.target.value)}
-          className="search-input"
-        />
-      </div>
-      <div className="sort-block">
-        <SelectIcon filter={filter.value} />
-        <Select
-          value={filterValue}
-          onChange={onChangeFilter}
-          options={options}
-          isSearchable={false}
-          className="sort-select"
-        />
-      </div>
       {tagOptions && tagOptions.length > 0 && (
         <div className="tags-block">
-          <FaTags />
           <Select
             value={tagValues}
             onChange={onChangeTagsFilter}
@@ -73,9 +50,34 @@ function ListFilter({
             isMulti
             isSearchable={false}
             className="tags-select"
+            placeholder={intl.formatMessage(messages.theme)}
           />
         </div>
       )}
+      <div className="main-filter">
+        <div className="search-block">
+          <MdSearch />
+          <DebounceInput
+            value={search}
+            minLength={2}
+            placeholder={intl.formatMessage(messages.search)}
+            debounceTimeout={400}
+            onChange={event => onChangeSearch(event.target.value)}
+            className="search-input"
+          />
+        </div>
+        <div className="sort-block">
+          <SelectIcon filter={filter.value} />
+          <Select
+            value={filterValue}
+            onChange={onChangeFilter}
+            options={options}
+            isSearchable={false}
+            className="sort-select"
+            placeholder={intl.formatMessage(messages.sorting)}
+          />
+        </div>
+      </div>
     </div>
   );
 }

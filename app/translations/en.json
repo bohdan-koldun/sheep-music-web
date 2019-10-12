@@ -26,6 +26,8 @@
   "boilerplate.components.Filter.alphabet": "Alphabetically",
   "boilerplate.components.Filter.alphabet.revert": "Back alphabetically",
   "boilerplate.components.Filter.search": "Search",
+  "boilerplate.components.Filter.theme": "Theme...",
+  "boilerplate.components.Filter.sorting": "Sorting...",
   "boilerplate.containers.HomePage.start_project.header": "Christian Music Aggregator Site",
   "boilerplate.containers.HomePage.start_project.message": "Audio, lyrics, chords, authors, albums",
   "boilerplate.containers.HomePage.tryme.atPrefix": "@",

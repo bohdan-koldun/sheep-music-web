@@ -26,6 +26,8 @@
   "boilerplate.components.Filter.alphabet": "За алфавітом",
   "boilerplate.components.Filter.alphabet.revert": "Зворотно алфавіту",
   "boilerplate.components.Filter.search": "Пошук",
+  "boilerplate.components.Filter.theme": "Тематика...",
+  "boilerplate.components.Filter.sorting": "Сортування...",
   "boilerplate.containers.HomePage.start_project.header": "Сайт-агрегатор християнської музики",
   "boilerplate.containers.HomePage.start_project.message": "Аудіо, тексти, акорди, автори, альбоми",
   "boilerplate.containers.HomePage.tryme.atPrefix": "@",
