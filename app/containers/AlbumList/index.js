@@ -37,6 +37,7 @@ export function AlbumList({
   page,
   search,
   filter,
+  history,
   onChangePage,
   onChangeSearch,
   onChangeFilter,
@@ -49,6 +50,34 @@ export function AlbumList({
   const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    const urlPage = currentUrlParams.get('page');
+    const urlSearch = currentUrlParams.get('search');
+    const urlFilter = currentUrlParams.get('filter');
+
+    if (urlPage && !Number.isNaN(urlPage)) {
+      onChangePage(Number.parseInt(urlPage, 10));
+    }
+    if (urlSearch) {
+      onChangeSearch(urlSearch);
+    }
+    if (urlFilter) {
+      onChangeFilter({ value: urlFilter });
+    }
+  }, []);
+
+  useEffect(() => {
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    if (page) {
+      currentUrlParams.set('page', page);
+    }
+    if (search) {
+      currentUrlParams.set('search', search);
+    }
+    if (filter) {
+      currentUrlParams.set('filter', filter.value);
+    }
+    history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
     onLoadAlbumList(page, search, filter.value);
   }, [page, search, filter]);
 
@@ -105,6 +134,7 @@ AlbumList.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string,
   }),
+  history: PropTypes.object,
   onLoadAlbumList: PropTypes.func,
   onChangeSearch: PropTypes.func,
   onChangePage: PropTypes.func,
