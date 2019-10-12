@@ -34,7 +34,7 @@ function ListFilter({
     tags && tags.map(tag => ({ value: tag.id, label: tag.name }));
 
   const curTagsArr =
-    curTags && curTags.split('|').map(tagId => Number.parseInt(tagId, 10));
+    curTags && curTags.split(',').map(tagId => Number.parseInt(tagId, 10));
 
   const tagValues =
     tagOptions &&

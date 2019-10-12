@@ -44,8 +44,6 @@ import messages from './messages';
 export function SongList({
   songs,
   onLoadSongList,
-  paginate,
-  location,
   onPlaySongList,
   onPlayPause,
   play,
@@ -59,6 +57,7 @@ export function SongList({
   onChangeSearch,
   onChangeFilter,
   onChangeTagsFilter,
+  history,
 }) {
   useInjectReducer({ key: 'songList', reducer });
   useInjectSaga({ key: 'songList', saga });
@@ -68,8 +67,41 @@ export function SongList({
   const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
-    // const params = new URLSearchParams(location.search);
-    // TODO paginate(params.get('page') || 0, search, filter.value);
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    const urlPage = currentUrlParams.get('page');
+    const urlSearch = currentUrlParams.get('search');
+    const urlTags = currentUrlParams.get('tags');
+    const urlFilter = currentUrlParams.get('filter');
+
+    if (urlPage && !Number.isNaN(urlPage)) {
+      onChangePage(Number.parseInt(urlPage, 10));
+    }
+    if (urlTags) {
+      onChangeTagsFilter(urlTags.split(',').map(tag => ({ value: tag })));
+    }
+    if (urlSearch) {
+      onChangeSearch(urlSearch);
+    }
+    if (urlFilter) {
+      onChangeFilter({ value: urlFilter });
+    }
+  }, []);
+
+  useEffect(() => {
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    if (page) {
+      currentUrlParams.set('page', page);
+    }
+    if (search) {
+      currentUrlParams.set('search', search);
+    }
+    if (filter) {
+      currentUrlParams.set('filter', filter.value);
+    }
+    if (curTags) {
+      currentUrlParams.set('tags', curTags);
+    }
+    history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
     onLoadSongList(page, search, filter.value, curTags);
   }, [page, search, filter, curTags]);
 
@@ -137,10 +169,6 @@ SongList.propTypes = {
     total: PropTypes.number,
   }),
   onLoadSongList: PropTypes.func,
-  paginate: PropTypes.func,
-  location: PropTypes.shape({
-    search: PropTypes.string,
-  }),
   play: PropTypes.bool,
   playData: PropTypes.shape({
     song: PropTypes.shape({
@@ -166,6 +194,7 @@ SongList.propTypes = {
   onChangePage: PropTypes.func,
   onChangeFilter: PropTypes.func,
   onChangeTagsFilter: PropTypes.func,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -185,15 +214,13 @@ export function mapDispatchToProps(dispatch) {
   return {
     onLoadSongList: (page, search, filter, tags) =>
       dispatch(loadSongList(page, search, filter, tags)),
-    paginate: (page, search, filter) =>
-      dispatch(push(`/songs?page=${page}&search=${search}&filter=${filter}`)),
     onPlaySongList: (song, songList) => dispatch(setSongList(song, songList)),
     onPlayPause: () => dispatch(setPlayPause()),
     onChangePage: page => dispatch(changePage(page)),
     onChangeSearch: search => dispatch(changeSearch(search)),
     onChangeFilter: filter => dispatch(changeFilter(filter)),
     onChangeTagsFilter: tags =>
-      dispatch(changeTagsFilter(tags && tags.map(tag => tag.value).join('|'))),
+      dispatch(changeTagsFilter(tags && tags.map(tag => tag.value).join(','))),
   };
 }
 
