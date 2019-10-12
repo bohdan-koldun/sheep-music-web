@@ -54,6 +54,8 @@ export function Album({
       onPlaySongList(song, albumData.songs || []);
     }
   };
+  // eslint-disable-next-line no-console
+  console.log(' ----- ', albumData);
 
   return (
     <React.Fragment>
