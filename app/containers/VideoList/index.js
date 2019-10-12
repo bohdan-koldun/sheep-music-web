@@ -38,6 +38,7 @@ export function VideoList({
   page,
   search,
   filter,
+  history,
   onChangePage,
   onChangeSearch,
   onChangeFilter,
@@ -50,6 +51,34 @@ export function VideoList({
   const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    const urlPage = currentUrlParams.get('page');
+    const urlSearch = currentUrlParams.get('search');
+    const urlFilter = currentUrlParams.get('filter');
+
+    if (urlSearch) {
+      onChangeSearch(urlSearch);
+    }
+    if (urlFilter) {
+      onChangeFilter({ value: urlFilter });
+    }
+    if (urlPage && !Number.isNaN(urlPage)) {
+      onChangePage(Number.parseInt(urlPage, 10));
+    }
+  }, []);
+
+  useEffect(() => {
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    if (page) {
+      currentUrlParams.set('page', page);
+    }
+    if (search) {
+      currentUrlParams.set('search', search);
+    }
+    if (filter) {
+      currentUrlParams.set('filter', filter.value);
+    }
+    history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
     onLoadVideoList(page, search, filter.value);
   }, [page, search, filter]);
 
@@ -106,6 +135,7 @@ VideoList.propTypes = {
     value: PropTypes.string,
     label: PropTypes.string,
   }),
+  history: PropTypes.object,
   onLoadVideoList: PropTypes.func,
   onChangeSearch: PropTypes.func,
   onChangePage: PropTypes.func,
