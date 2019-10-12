@@ -192,9 +192,13 @@ export function Song({
           <div className="tags">
             {songData.tags &&
               songData.tags.map(tag => (
-                <span className="song-tag" key={tag.name}>
+                <Link
+                  to={`/songs?tags=${tag.id}`}
+                  className="song-tag"
+                  key={tag.name}
+                >
                   {tag.name}
-                </span>
+                </Link>
               ))}
           </div>
         </div>
