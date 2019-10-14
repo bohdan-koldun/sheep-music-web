@@ -11,6 +11,8 @@
   "app.common.manyAlbumSecondVariant": "альбомов",
   "app.common.manyAlbumThirdVariant": "альбом",
   "app.common.hello": "Привет",
+  "app.common.login": "Войти",
+  "app.common.logout": "Выйти",
   "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
   "app.components.Footer.website.menu": "Меню:",
@@ -58,6 +60,5 @@
   "app.containers.LoginPage.header": "Вход в систему:",
   "app.containers.LoginPage.email": "эл. адрес",
   "app.containers.LoginPage.password": "пароль",
-  "app.containers.LoginPage.login": "Войти",
   "app.containers.LoginPage.error": "Ошибка авторизации!"
 }

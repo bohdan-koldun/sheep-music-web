@@ -22,8 +22,12 @@ import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import { makeSelectLoading, makeSelectError } from './selectors';
-import { loadTags } from './actions';
+import {
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectUser,
+} from './selectors';
+import { loadTags, loadUser } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import ScrollToTop from './ScrollToTop';
@@ -38,12 +42,13 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-function App({ onLoadTags }) {
+function App({ onLoadTags, onLoadUser, user }) {
   useInjectReducer({ key: 'app', reducer });
   useInjectSaga({ key: 'app', saga });
 
   useEffect(() => {
     onLoadTags();
+    onLoadUser();
   }, []);
 
   return (
@@ -54,7 +59,7 @@ function App({ onLoadTags }) {
           content="Христианские песни: слова, текст, слушать аудио онлайн, скачать mp3, аккорды, видео"
         />
       </Helmet>
-      <Header />
+      <Header user={user} />
       <AppWrapper>
         <ScrollToTop>
           <Switch>
@@ -80,16 +85,20 @@ function App({ onLoadTags }) {
 
 App.propTypes = {
   onLoadTags: PropTypes.func,
+  onLoadUser: PropTypes.func,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
+  user: makeSelectUser(),
   error: makeSelectError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onLoadTags: () => dispatch(loadTags()),
+    onLoadUser: () => dispatch(loadUser()),
   };
 }
 const withConnect = connect(

@@ -11,6 +11,8 @@
   "app.common.manyAlbumSecondVariant": "альбомів",
   "app.common.manyAlbumThirdVariant": "альбом",
   "app.common.hello": "Привіт",
+  "app.common.login": "Вхід",
+  "app.common.logout": "Вийти",
   "app.components.Footer.author.message": "Зроблено з любов'ю {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Всі права захищені.",
   "app.components.Footer.website.menu": "Меню:",
@@ -59,6 +61,5 @@
   "app.containers.LoginPage.header": "Вхід у систему:",
   "app.containers.LoginPage.email": "ел. пошта",
   "app.containers.LoginPage.password": "пароль",
-  "app.containers.LoginPage.login": "Вхід",
   "app.containers.LoginPage.error": "Помилка авторизації!"
 }

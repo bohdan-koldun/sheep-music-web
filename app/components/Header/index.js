@@ -12,13 +12,16 @@ import {
   MdGroup,
   MdMenu,
   MdClose,
+  MdAccountBox,
 } from 'react-icons/md';
+import { useIntl } from 'containers/LanguageProvider';
 import { FaYoutube } from 'react-icons/fa';
+import commonMessages from 'translations/common-messages';
 import Banner from './banner.png';
 import messages from './messages';
 import './Header.scss';
 
-function Header({ location }) {
+function Header({ location, user }) {
   const { pathname } = location || {};
   const [showMenu, setShowMenu] = useState(false);
 
@@ -29,6 +32,8 @@ function Header({ location }) {
     }
     setShowMenu(false);
   };
+
+  const intl = useIntl();
 
   useEffect(() => {
     document.addEventListener('mousedown', closeMenu);
@@ -90,6 +95,13 @@ function Header({ location }) {
               <FormattedMessage {...messages.videos} />{' '}
             </Link>{' '}
           </div>{' '}
+          <Link to="/login" className="header-login">
+            {' '}
+            <MdAccountBox />
+            <span>
+              {user ? user.name : intl.formatMessage(commonMessages.login)}
+            </span>
+          </Link>
           <div className="header-locale">
             <LocaleToggle />
           </div>{' '}
@@ -153,6 +165,7 @@ Header.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
+  user: PropTypes.object,
 };
 
 export default withRouter(Header);

@@ -51,4 +51,12 @@ export default defineMessages({
     id: `${scope}.hello`,
     defaultMessage: 'Привет',
   },
+  login: {
+    id: `${scope}.login`,
+    defaultMessage: 'Войти',
+  },
+  logout: {
+    id: `${scope}.logout`,
+    defaultMessage: 'Вийти',
+  },
 });

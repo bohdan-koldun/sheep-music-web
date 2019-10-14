@@ -122,6 +122,17 @@ header {
   opacity: 0.01;
 }
 
+.header-login{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  svg{
+    margin-right: 5px;
+  }
+}
+
 .example-appear.example-appear-active {
   opacity: 1;
   transition: opacity .5s ease-in;
@@ -143,8 +154,26 @@ header {
   }
 }
 
-@media screen and (max-width: 1370px) {
+@media screen and (max-width: 1435px) {
   .hide-medium {
     display: none !important;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .header-login{
+    span{
+      display: none;
+    }
+  }
+
+  .header-logo {
+    width: 150px;
+    margin-left: 20px;
+  
+    a {
+      font-size: 18px;
+    }
   }
 }

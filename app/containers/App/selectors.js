@@ -23,6 +23,12 @@ const makeSelectTags = () =>
     globalState => globalState.tags,
   );
 
+const makeSelectUser = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.user,
+  );
+
 const makeSelectLocation = () =>
   createSelector(
     selectRouter,
@@ -32,6 +38,7 @@ const makeSelectLocation = () =>
 export {
   selectGlobal,
   makeSelectTags,
+  makeSelectUser,
   makeSelectLoading,
   makeSelectError,
   makeSelectLocation,

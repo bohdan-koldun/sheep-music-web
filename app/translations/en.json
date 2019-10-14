@@ -11,6 +11,8 @@
   "app.common.manyAlbumSecondVariant": "albums",
   "app.common.manyAlbumThirdVariant": "albums",
   "app.common.hello": "Hi",
+  "app.common.login": "Login",
+  "app.common.logout": "Logout",
   "app.components.Footer.author.message": "Made with love by {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",
   "app.components.Footer.website.menu": "Menu:",
@@ -59,6 +61,5 @@
   "app.containers.LoginPage.header": "Member Login:",
   "app.containers.LoginPage.email": "email",
   "app.containers.LoginPage.password": "password",
-  "app.containers.LoginPage.login": "Login",
   "app.containers.LoginPage.error": "Authorisation Error!"
 }

@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { LOGIN } from 'containers/LoginPage/constants';
 import { loginSuccess, loginError } from 'containers/LoginPage/actions';
+import { userLoaded } from 'containers/App/actions';
 import request from 'utils/request';
 import { API_HOST } from 'utils/constants';
 
@@ -26,6 +27,7 @@ export function* login(action) {
       localStorage.setItem('authToken', data.token.accessToken);
     }
     yield put(loginSuccess(data && data.user));
+    yield put(userLoaded(data && data.user));
   } catch (err) {
     yield put(loginError(err));
   }

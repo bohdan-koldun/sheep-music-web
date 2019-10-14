@@ -9,18 +9,16 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { useIntl } from 'containers/LanguageProvider';
 import BeatLoader from 'react-spinners/BeatLoader';
 import commonMessages from 'translations/common-messages';
-import {
-  makeSelectLoading,
-  makeSelectError,
-  makeSelectUser,
-} from './selectors';
+import { makeSelectUser } from 'containers/App/selectors';
+import { logout } from 'containers/App/actions';
+import { makeSelectLoading, makeSelectError } from './selectors';
 import { login } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import './LoginPage.scss';
 
-export function LoginPage({ onLogin, loading, error, user }) {
+export function LoginPage({ onLogin, onLogout, loading, error, user }) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
@@ -52,7 +50,7 @@ export function LoginPage({ onLogin, loading, error, user }) {
               onChange={e => setPassword(e.target.value)}
             />
             <button type="button" onClick={() => onLogin(email, password)}>
-              {intl.formatMessage(messages.login)}
+              {intl.formatMessage(commonMessages.login)}
             </button>
             {error && (
               <div className="login-error">
@@ -62,8 +60,13 @@ export function LoginPage({ onLogin, loading, error, user }) {
           </div>
         )) || (
           <div className="user">
-            {' '}
-            {intl.formatMessage(commonMessages.hello)}, {user.name}!
+            <p>
+              {' '}
+              {intl.formatMessage(commonMessages.hello)}, {user.name}!
+            </p>
+            <button type="button" onClick={() => onLogout()}>
+              {intl.formatMessage(commonMessages.logout)}
+            </button>
           </div>
         )
       )}
@@ -73,6 +76,7 @@ export function LoginPage({ onLogin, loading, error, user }) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func.isRequired,
+  onLogout: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.any,
   user: PropTypes.object,
@@ -87,6 +91,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLogin: (email, password) => dispatch(login(email, password)),
+    onLogout: () => dispatch(logout()),
   };
 }
 
