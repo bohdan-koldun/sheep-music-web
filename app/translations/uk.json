@@ -10,6 +10,7 @@
   "app.common.manyAlbumFirstVariant": "альбоми",
   "app.common.manyAlbumSecondVariant": "альбомів",
   "app.common.manyAlbumThirdVariant": "альбом",
+  "app.common.hello": "Привіт",
   "app.components.Footer.author.message": "Зроблено з любов'ю {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Всі права захищені.",
   "app.components.Footer.website.menu": "Меню:",
@@ -54,5 +55,10 @@
   "app.components.Model.download": "Завантажити MP3:",
   "app.components.Model.cancel": "Cкасувати",
   "app.components.Pdf.downloadPdf": "Завантажити PDF",
-  "app.components.Pdf.generatePdf": "Згенерувати PDF"
+  "app.components.Pdf.generatePdf": "Згенерувати PDF",
+  "app.containers.LoginPage.header": "Вхід у систему:",
+  "app.containers.LoginPage.email": "ел. пошта",
+  "app.containers.LoginPage.password": "пароль",
+  "app.containers.LoginPage.login": "Вхід",
+  "app.containers.LoginPage.error": "Помилка авторизації!"
 }

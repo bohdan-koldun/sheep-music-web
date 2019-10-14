@@ -18,6 +18,7 @@ import AuthorList from 'containers/AuthorList/Loadable';
 import Video from 'containers/Video/Loadable';
 import VideoList from 'containers/VideoList/Loadable';
 import AudioPlayer from 'containers/AudioPlayer/Loadable';
+import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -66,6 +67,7 @@ function App({ onLoadTags }) {
             <Route path="/authors" component={AuthorList} />
             <Route path="/video/:slug" component={Video} />
             <Route path="/videos" component={VideoList} />
+            <Route path="/login" component={LoginPage} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </ScrollToTop>

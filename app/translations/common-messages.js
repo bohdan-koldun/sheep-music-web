@@ -47,4 +47,8 @@ export default defineMessages({
     id: `${scope}.manyAlbumThirdVariant`,
     defaultMessage: 'альбом',
   },
+  hello: {
+    id: `${scope}.hello`,
+    defaultMessage: 'Привет',
+  },
 });

@@ -10,6 +10,7 @@
   "app.common.manyAlbumFirstVariant": "альбома",
   "app.common.manyAlbumSecondVariant": "альбомов",
   "app.common.manyAlbumThirdVariant": "альбом",
+  "app.common.hello": "Привет",
   "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
   "app.components.Footer.website.menu": "Меню:",
@@ -53,5 +54,10 @@
   "app.containers.VideoList.header": "Найти видеоклип",
   "app.components.Model.download": "Скачать MP3:",
   "app.components.Pdf.downloadPdf": "Скачать PDF",
-  "app.components.Pdf.generatePdf": "Сгенерировать PDF"
+  "app.components.Pdf.generatePdf": "Сгенерировать PDF",
+  "app.containers.LoginPage.header": "Вход в систему:",
+  "app.containers.LoginPage.email": "эл. адрес",
+  "app.containers.LoginPage.password": "пароль",
+  "app.containers.LoginPage.login": "Войти",
+  "app.containers.LoginPage.error": "Ошибка авторизации!"
 }

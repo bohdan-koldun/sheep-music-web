@@ -1,0 +1,29 @@
+.login-page{
+    display: flex;
+    justify-content: center;
+
+    .login-form{
+        width: 100%;
+        max-width: 500px;
+
+        input, button {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        input{
+            padding: 5px 20px;
+        }
+    }
+
+    .login-error{
+        color: red;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .user{
+        font-weight: 700;
+    }
+
+}

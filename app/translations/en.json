@@ -10,6 +10,7 @@
   "app.common.manyAlbumFirstVariant": "albums",
   "app.common.manyAlbumSecondVariant": "albums",
   "app.common.manyAlbumThirdVariant": "albums",
+  "app.common.hello": "Hi",
   "app.components.Footer.author.message": "Made with love by {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",
   "app.components.Footer.website.menu": "Menu:",
@@ -54,5 +55,10 @@
   "app.components.Model.download": "Download MP3:",
   "app.components.Model.cancel": "Cancel",
   "app.components.Pdf.downloadPdf": "Download PDF",
-  "app.components.Pdf.generatePdf": "Generate PDF"
+  "app.components.Pdf.generatePdf": "Generate PDF",
+  "app.containers.LoginPage.header": "Member Login:",
+  "app.containers.LoginPage.email": "email",
+  "app.containers.LoginPage.password": "password",
+  "app.containers.LoginPage.login": "Login",
+  "app.containers.LoginPage.error": "Authorisation Error!"
 }
