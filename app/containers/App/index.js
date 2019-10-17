@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { PrivateRoute } from 'utils/privateRoute';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -19,6 +20,7 @@ import Video from 'containers/Video/Loadable';
 import VideoList from 'containers/VideoList/Loadable';
 import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
+import EditSong from 'containers/EditSong/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -73,6 +75,7 @@ function App({ onLoadTags, onLoadUser, user }) {
             <Route path="/video/:slug" component={Video} />
             <Route path="/videos" component={VideoList} />
             <Route path="/login" component={LoginPage} />
+            <PrivateRoute path="/edit/song/:slug" component={EditSong} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </ScrollToTop>
