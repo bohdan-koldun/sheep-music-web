@@ -13,6 +13,8 @@
   "app.common.hello": "Привіт",
   "app.common.login": "Вхід",
   "app.common.logout": "Вийти",
+  "app.common.words": "Cлова",
+  "app.common.chords": "Акорди",
   "app.components.Footer.author.message": "Зроблено з любов'ю {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Всі права захищені.",
   "app.components.Footer.website.menu": "Меню:",

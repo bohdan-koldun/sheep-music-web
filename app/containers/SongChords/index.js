@@ -34,14 +34,14 @@ import commonMessages from 'translations/common-messages';
 import {
   makeSelectLoading,
   makeSelectError,
-  makeSelectSongData,
+  makeSelectSongChordsData,
 } from './selectors';
-import { loadSong } from './actions';
+import { loadSongChords } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import './Song.scss';
+import './SongChords.scss';
 
-export function Song({
+export function SongChords({
   songData,
   onLoadSong,
   match,
@@ -83,7 +83,7 @@ export function Song({
             <title>
               {songData.title}{' '}
               {songData.author ? ` | ${songData.author.title}` : ''}
-              {` | Слова, Аккорды, Видео`}
+              {` | Аккорды, Слова, Видео`}
             </title>
             <meta
               name="description"
@@ -93,31 +93,16 @@ export function Song({
             />
             <link
               rel="canonical"
-              href={`https://sheep-music.com/song/${songData.slug}`}
+              href={`https://sheep-music.com/chord/${songData.slug}`}
             />
-            <script type="application/ld+json">
-              {`
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Песни",
-              "item": "https://sheep-music.com/songs"
-            },{
-              "@type": "ListItem",
-              "position": 2,
-              "name": "${songData.title}",
-              "item": "https://sheep-music.com/song/${songData.slug}"
-            }]
-            `}
-            </script>
           </Helmet>
 
           <div className="song-page-header">
             <SongImg song={songData} className="song-page-img" />
             <div className="song-metadata">
-              <h1>{songData.title}</h1>
+              <h1>
+                <FormattedMessage {...commonMessages.chords} /> {songData.title}
+              </h1>
               {songData.author && (
                 <div>
                   <span>
@@ -191,14 +176,14 @@ export function Song({
                     <MdModeEdit data-tip="edit song" className="song-icon" />
                   </Link>
                 )}
-                <Link to={`/chord/${songData.slug}`}>
+                <Link to={`/song/${songData.slug}`}>
                   {' '}
-                  <FormattedMessage {...commonMessages.chords} />
+                  <FormattedMessage {...commonMessages.words} />
                 </Link>
               </div>
             </div>
           </div>
-          <pre dangerouslySetInnerHTML={{ __html: songData.text }} />
+          <pre dangerouslySetInnerHTML={{ __html: songData.chords }} />
           {songData.video && (
             <div className="player-wrapper">
               <ReactPlayer
@@ -233,7 +218,7 @@ export function Song({
   );
 }
 
-Song.propTypes = {
+SongChords.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loading: PropTypes.bool,
   songData: PropTypes.object,
@@ -262,7 +247,7 @@ Song.propTypes = {
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
-  songData: makeSelectSongData(),
+  songData: makeSelectSongChordsData(),
   play: makeSelectPlay(),
   playData: makeSelectAudioPlayData(),
   user: makeSelectUser(),
@@ -270,7 +255,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadSong: slug => dispatch(loadSong(slug)),
+    onLoadSong: slug => dispatch(loadSongChords(slug)),
     onPlaySong: song => dispatch(setSong(song)),
     onPlayPause: () => dispatch(setPlayPause()),
   };
@@ -281,4 +266,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(Song);
+export default compose(withConnect)(SongChords);

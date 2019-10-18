@@ -59,4 +59,12 @@ export default defineMessages({
     id: `${scope}.logout`,
     defaultMessage: 'Вийти',
   },
+  words: {
+    id: `${scope}.words`,
+    defaultMessage: 'Cлова',
+  },
+  chords: {
+    id: `${scope}.chords`,
+    defaultMessage: 'Аккорды',
+  },
 });

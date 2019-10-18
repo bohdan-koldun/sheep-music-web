@@ -1,0 +1,101 @@
+@import "../../styles/colors.scss";
+
+.song-page-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    h1{
+        margin: 0;
+    }
+
+  .icon-button {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+
+  }
+
+  .song-icons-wrapper{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .song-icon {
+    color: #000;
+    font-size: 36px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .song-player-img{
+    width: 45px;
+    border-radius: 3px;
+    margin: 2px 8px;
+  }
+}
+
+.song-page-img{
+    width: 180px;
+    margin-right: 20px;
+}
+
+.tags{
+  margin-top: 20px;
+
+  .song-tag{
+    background: #000;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    white-space: nowrap;
+    display: inline-block;
+  }
+}
+
+.verse, .chorus, .bridge {
+  font-weight: 700;
+  line-height: 3;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+ 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+pre{
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .song-page-header{
+    h1{
+      font-size: 24px;
+    }
+
+  .song-icon {
+    font-size: 36px;
+  }
+}
+
+pre{
+  font-size: 14px;
+}
+
+.song-page-img{
+  width: 80px;
+  margin-right: 20px;
+}
+}
