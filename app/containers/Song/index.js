@@ -14,6 +14,7 @@ import {
   MdCloudDownload,
   MdPlayCircleFilled,
   MdPauseCircleFilled,
+  MdModeEdit,
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 import { SongPdfGenerator } from 'components/Pdf';
@@ -23,6 +24,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
 import { useIntl } from 'containers/LanguageProvider';
+import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -47,6 +49,7 @@ export function Song({
   playData,
   onPlaySong,
   onPlayPause,
+  user,
 }) {
   useInjectReducer({ key: 'song', reducer });
   useInjectSaga({ key: 'song', saga });
@@ -66,6 +69,11 @@ export function Song({
       onPlaySong(songData);
     }
   };
+
+  const userRoles =
+    user &&
+    user.roles &&
+    user.roles.map(role => role && role.role.slug).join(',');
 
   return (
     <React.Fragment>
@@ -177,6 +185,12 @@ export function Song({
                     <FaYoutube data-tip="youtube" className="song-icon" />
                   </Link>
                 )}
+                {/admin|moderator/.test(userRoles) && (
+                  <Link to={`/edit/song/${songData.slug}`} target="_blank">
+                    {' '}
+                    <MdModeEdit data-tip="edit song" className="song-icon" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -238,6 +252,7 @@ Song.propTypes = {
     prevPlayListId: PropTypes.number,
     nextPlayListId: PropTypes.number,
   }),
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -246,6 +261,7 @@ const mapStateToProps = createStructuredSelector({
   songData: makeSelectSongData(),
   play: makeSelectPlay(),
   playData: makeSelectAudioPlayData(),
+  user: makeSelectUser(),
 });
 
 export function mapDispatchToProps(dispatch) {
