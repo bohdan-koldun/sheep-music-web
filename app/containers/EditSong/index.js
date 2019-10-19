@@ -46,7 +46,7 @@ export function EditSong({
     if (song) {
       setTitle(song.title || '');
       setText(striptags(song.text || ''));
-      setChords(song.chords || '');
+      setChords(striptags(song.chords) || '');
       setChordsKey({ value: song.chordsKey, label: song.chordsKey });
       setVideo(song.video || '');
     }
