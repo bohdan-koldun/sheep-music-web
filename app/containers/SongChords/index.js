@@ -31,6 +31,7 @@ import {
 } from 'containers/AudioPlayer/selectors';
 import playerMessages from 'components/Player/messages';
 import commonMessages from 'translations/common-messages';
+import ChordsTransposer from 'components/chords/chords-transposer';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -183,7 +184,11 @@ export function SongChords({
               </div>
             </div>
           </div>
-          <pre dangerouslySetInnerHTML={{ __html: songData.chords }} />
+          {/* <pre dangerouslySetInnerHTML={{ __html: songData.chords }} /> */}
+          <ChordsTransposer
+            songChords={songData.chords}
+            chordsKey={songData.chordsKey}
+          />
           {songData.video && (
             <div className="player-wrapper">
               <ReactPlayer

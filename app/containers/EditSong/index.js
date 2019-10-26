@@ -62,6 +62,7 @@ export function EditSong({
     { value: 'А', label: 'А' },
     { value: 'А#', label: 'А#' },
     { value: 'Bb', label: 'Bb' },
+    { value: 'B', label: 'B' },
     { value: 'H', label: 'H' },
     { value: 'С', label: 'С' },
     { value: 'С#', label: 'С#' },

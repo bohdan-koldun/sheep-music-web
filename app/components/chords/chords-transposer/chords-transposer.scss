@@ -1,0 +1,81 @@
+ .chords-pre {
+   text-align: unset;
+   padding: 15px;
+   line-height: 1.6;
+
+   span {
+     display: flex;
+   }
+
+   b.c {
+     color: #2159D6;
+     cursor: pointer;
+   }
+
+   b {
+     font-weight: normal;
+   }
+ }
+
+ .chord-tooltip {
+   color: #FFF;
+   font-size: 20px !important;
+   pointer-events: auto !important;
+
+   &:hover {
+     visibility: visible !important;
+     opacity: 1 !important;
+   }
+ }
+
+ .c-margin {
+   margin-right: 5px;
+ }
+
+ .transpose-keys {
+   margin: 25px 15px 0;
+   overflow: auto;
+   font: normal 11px sans-serif;
+ }
+
+ .transpose-keys span {
+   display: block;
+   float: left;
+   border-radius: 90px;
+   width: 2.25em;
+   text-align: center;
+   margin: 0 .25em .25em 0;
+   color: #333;
+   background: #eee;
+   text-decoration: none;
+   padding: .4em 0;
+   border: solid 1px transparent;
+   outline: none;
+   cursor: pointer;
+ }
+
+ .transpose-keys span.selected {
+   background: #2159D6;
+   color: #FFF;
+ }
+
+ .buttonPlay {
+   text-indent: -9999em;
+   background: none;
+   border-right: none;
+   width: 21px;
+   height: 30px;
+   border-left: solid 20px rgb(37, 37, 37);
+   border-bottom: solid 15px transparent;
+   border-top: solid 15px transparent;
+ }
+
+ .buttonPlay:hover {
+   border-left: solid 20px #2159D6;
+   border-bottom: solid 15px transparent;
+   border-top: solid 15px transparent;
+ }
+
+ .buttonPlay:focus {
+   outline: 0;
+ }
