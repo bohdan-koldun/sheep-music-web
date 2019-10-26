@@ -191,7 +191,10 @@ export function Song({
                     <MdModeEdit data-tip="edit song" className="song-icon" />
                   </Link>
                 )}
-                <Link to={`/chord/${songData.slug}`}>
+                <Link
+                  to={`/chord/${songData.slug}`}
+                  className="yellow-button-link"
+                >
                   {' '}
                   <FormattedMessage {...commonMessages.chords} />
                 </Link>

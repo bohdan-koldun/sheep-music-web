@@ -1,3 +1,5 @@
+@import "../../../styles/colors.scss";
+
  .chords-pre {
    text-align: unset;
    padding: 15px;
@@ -41,10 +43,9 @@
  .transpose-keys span {
    display: block;
    float: left;
-   border-radius: 90px;
    width: 2.25em;
    text-align: center;
-   margin: 0 .25em .25em 0;
+   margin: 0 .3em .3em 0;
    color: #333;
    background: #eee;
    text-decoration: none;
@@ -55,8 +56,9 @@
  }
 
  .transpose-keys span.selected {
-   background: #2159D6;
-   color: #FFF;
+   background: $yellow;
+   color: #000;
+   font-weight: 700;
  }
 
  .buttonPlay {

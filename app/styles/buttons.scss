@@ -1,0 +1,10 @@
+@import "../styles/colors.scss";
+
+.yellow-button-link {
+  color: #000;
+  background: $yellow;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 3px;
+}

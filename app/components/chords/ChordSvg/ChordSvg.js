@@ -36,7 +36,7 @@ const ChordSvg = ({
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 -22 200 250"
+        viewBox="0 -28 190 285"
         style={{
           width: '150px',
         }}
@@ -55,10 +55,10 @@ const ChordSvg = ({
           />
           <SVGText
             x={95 - (chordName.length - 1) * 4}
-            y={-5}
-            fontSize={20}
+            y={-8}
+            fontSize={24}
             fontWeight={700}
-            fill="#FFF"
+            fill="#f2d429"
           >
             {chordName}
           </SVGText>
