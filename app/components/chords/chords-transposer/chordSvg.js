@@ -18,7 +18,7 @@ function TextLine({ chordRoot, chordTail }) {
 }
 
 TextLine.propTypes = {
-  chordRoot: PropTypes.object,
+  chordRoot: PropTypes.string,
   chordTail: PropTypes.string,
 };
 
