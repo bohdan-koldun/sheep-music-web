@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { MdPictureAsPdf } from 'react-icons/md';
-import { FormattedMessage } from 'react-intl';
 import { useIntl } from 'containers/LanguageProvider';
 import commonMessages from 'translations/common-messages';
 import QRCode from 'qrcode';
 import ReactGA from 'react-ga';
+import ReactTooltip from 'react-tooltip';
 import SongTextPdf from './SongTextPdf';
 import messages from './messages';
 import './SongPdfGenerator.scss';
@@ -32,6 +32,8 @@ function SongPdfGenerator({ song }) {
     }
   }, [downloadPdf]);
 
+  const fileName = `${song.slug}.pdf`;
+
   return (
     <div className="song-pdf-generator">
       {downloadPdf && isReadyImg ? (
@@ -45,9 +47,10 @@ function SongPdfGenerator({ song }) {
                   album: intl.formatMessage(commonMessages.album),
                 }}
                 qrCode={qrCode}
+                fileName={fileName}
               />
             }
-            fileName={`${song.slug}.pdf`}
+            fileName={fileName}
           >
             {({ loading }) =>
               loading ? (
@@ -55,39 +58,41 @@ function SongPdfGenerator({ song }) {
                   <BeatLoader />
                 </div>
               ) : (
-                <button
-                  type="button"
-                  className="pdf-download-button"
-                  onClick={() =>
-                    ReactGA.event({
-                      category: 'Song',
-                      action: 'click pdf download button',
-                    })
-                  }
-                >
-                  <MdPictureAsPdf />
-                  <FormattedMessage {...messages.downloadPdf} />
-                </button>
+                <React.Fragment>
+                  <MdPictureAsPdf
+                    data-tip={intl.formatMessage(messages.downloadPdf)}
+                    data-for="click-pdf-download"
+                    className="song-icon"
+                    onClick={() => {
+                      ReactGA.event({
+                        category: 'Song',
+                        action: 'click pdf download button',
+                      });
+                    }}
+                  />
+                  <ReactTooltip id="click-pdf-download" />
+                </React.Fragment>
               )
             }
           </PDFDownloadLink>
         </div>
       ) : (
         (!downloadPdf && (
-          <button
-            type="button"
-            className="pdf-generate-button"
-            onClick={() => {
-              setDownloadPdf(true);
-              ReactGA.event({
-                category: 'Song',
-                action: 'click pdf generate button',
-              });
-            }}
-          >
-            <MdPictureAsPdf />
-            <FormattedMessage {...messages.generatePdf} />
-          </button>
+          <React.Fragment>
+            <MdPictureAsPdf
+              data-tip={intl.formatMessage(messages.generatePdf)}
+              data-for="click-pdf-generate"
+              className="song-icon"
+              onClick={() => {
+                setDownloadPdf(true);
+                ReactGA.event({
+                  category: 'Song',
+                  action: 'click pdf generate button',
+                });
+              }}
+            />
+            <ReactTooltip id="click-pdf-generate" />
+          </React.Fragment>
         )) || (
           <div className="pdf-loader">
             <BeatLoader />

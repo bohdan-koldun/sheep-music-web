@@ -125,8 +125,8 @@ export function SongChords({
                   </Link>
                 </div>
               )}
-              <SongPdfGenerator song={songData} />
               <div className="song-icons-wrapper">
+                <SongPdfGenerator song={songData} />
                 {songData.audioMp3 ? (
                   <React.Fragment>
                     <button

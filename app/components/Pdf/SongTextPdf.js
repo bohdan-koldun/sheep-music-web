@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function SongTextPdf({ song, titles, qrCode }) {
+function SongTextPdf({ song, titles, qrCode, fileName }) {
   const isBold = row => {
     const headers = [
       'Instrumental:',
@@ -134,7 +134,24 @@ function SongTextPdf({ song, titles, qrCode }) {
   const songLink = `https://sheep-music.com/song/${song.slug}`;
 
   return (
-    <Document renderMode="svg">
+    <Document
+      renderMode="svg"
+      title={song && song.title}
+      author="Sheep Music"
+      creator="sheep-music.com"
+      onRender={blob => {
+        if (blob && blob.blob) {
+          const a = document.createElement('a');
+          const url = window.URL.createObjectURL(blob.blob);
+          document.body.appendChild(a);
+          a.style = 'display: none';
+          a.href = url;
+          a.download = fileName;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        }
+      }}
+    >
       <Page style={styles.page}>
         <Text style={styles.headerTop} fixed>
           ~ sheep-music.com ~
@@ -192,6 +209,7 @@ SongTextPdf.propTypes = {
   song: PropTypes.object,
   titles: PropTypes.object,
   qrCode: PropTypes.string,
+  fileName: PropTypes.string,
 };
 
 export default SongTextPdf;
