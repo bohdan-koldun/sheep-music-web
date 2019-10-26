@@ -9,7 +9,6 @@ import ReactGA from 'react-ga';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import ReactPlayer from 'react-player';
 import {
   MdCloudDownload,
   MdPlayCircleFilled,
@@ -192,21 +191,6 @@ export function SongChords({
             songChords={songData.chords}
             chordsKey={songData.chordsKey}
           />
-          {songData.video && (
-            <div className="player-wrapper">
-              <ReactPlayer
-                url={songData.video}
-                className="react-player"
-                config={{
-                  youtube: {
-                    playerVars: { showinfo: 0, controls: 1 },
-                  },
-                }}
-                width="100%"
-                height="100%"
-              />
-            </div>
-          )}
           <div className="tags">
             {songData.tags &&
               songData.tags.map(tag => (
