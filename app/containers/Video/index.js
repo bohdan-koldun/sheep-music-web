@@ -29,23 +29,31 @@ export function Video({ onLoadVideo, match, videoData }) {
     onLoadVideo(match.params.slug);
   }, []);
 
+  const title =
+    videoData &&
+    `${videoData.title} | Видео | Клип | Youtube${
+      videoData.author ? ` | ${videoData.author.title}` : ''
+    }`;
+  const description = `Видеоклип пени ${videoData.title}.${
+    videoData.author ? ` Исполнитель ${videoData.author.title}.` : ''
+  }${videoData.album ? ` Альбом ${videoData.album.title}.` : ''}`;
+
   return (
     <React.Fragment>
       {videoData && (
         <div className="video-page">
           <Helmet>
-            <title>
-              {`${videoData.title} | Видео | Клип | Youtube`}
-              {videoData.author ? ` | ${videoData.author.title}` : ''}
-            </title>
+            <title>{title}</title>
+            <meta name="description" content={description} />
+            <meta property="og:title" content={title} />
+            <meta property="og:type" content="video.other" />
             <meta
-              name="description"
-              content={`Видеоклип пени ${videoData.title}.${
-                videoData.author
-                  ? ` Исполнитель ${videoData.author.title}.`
-                  : ''
-              }${videoData.album ? ` Альбом ${videoData.album.title}.` : ''}`}
+              property="og:url"
+              content={`https://sheep-music.com/video/${videoData.slug}`}
             />
+            <meta property="og:site_name" content="Sheep Music" />
+            <meta property="og:description" content={description} />
+            <meta property="og:video" content={videoData.video} />
           </Helmet>
           <h1>
             <FormattedMessage {...commonMessages.video} /> {videoData.title}
