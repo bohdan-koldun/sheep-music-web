@@ -1,23 +1,63 @@
+@import "../../styles/colors.scss";
+
 .song-video-item {
   width: 100%;
-  max-width: 250px;
-  margin-bottom: 40px;
+  max-width: 280px;
+  margin-bottom: 20px;
+  align-self: flex-end;
+
+  a {
+    line-height: 3;
+    display: inline-block;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+  }
 
   .player-wrapper {
-    position: relative;
-    padding-top: 56.25%
-      /* Player ratio: 100 / (1280 / 720) */
+    padding-top: 56.25%;
+    /* Player ratio: 100 / (1280 / 720) */
   }
 
   .react-player {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 5;
   }
-}
 
-@media screen and (max-width: 550px) {
-  .song-video-item {
-    max-width: 100%;
+  .video-item-picture {
+    position: relative;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    img {
+      position: absolute;
+      max-height: auto;
+      z-index: 1;
+    }
+
+    &:hover {
+      .video-play-icon {
+        font-size: 55px;
+      }
+    }
+
+  }
+
+  .video-play-icon {
+    position: absolute;
+    z-index: 2;
+    color: $yellow;
+    font-size: 48px;
+    transition: all 0.2s ease;
   }
 }
