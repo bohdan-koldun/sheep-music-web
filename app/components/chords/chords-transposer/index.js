@@ -5,22 +5,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { TextLine, ChordLine } from './songLine';
 import keys from './keys';
-import { chordRegexp } from './regexp';
+import { isChordLine } from './regexp';
 import './chords-transposer.scss';
 
 function ChordsTransposer({ chordsKey, songChords }) {
   const rootKey = keys.getKeyByName(chordsKey);
   const [currentKey, setCurrentKey] = useState(rootKey);
   const lines = (songChords && songChords.split(/\r\n|\n/g)) || [];
-
-  const isChordLine = input => {
-    const tokens = input.replace(/\s+|-/g, ' ').split(' ');
-    for (let i = 0; i < tokens.length; i += 1) {
-      if (tokens[i].trim().length !== 0 && !tokens[i].match(chordRegexp))
-        return false;
-    }
-    return true;
-  };
 
   const handleKeyLinkClick = e => {
     setCurrentKey(keys.getKeyByName(e.target.innerHTML));

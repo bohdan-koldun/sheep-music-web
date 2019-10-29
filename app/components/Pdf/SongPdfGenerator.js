@@ -9,10 +9,11 @@ import QRCode from 'qrcode';
 import ReactGA from 'react-ga';
 import ReactTooltip from 'react-tooltip';
 import SongTextPdf from './SongTextPdf';
+import SongChordsPdf from './SongChordsPdf';
 import messages from './messages';
 import './SongPdfGenerator.scss';
 
-function SongPdfGenerator({ song }) {
+function SongPdfGenerator({ song, type }) {
   const [downloadPdf, setDownloadPdf] = useState(false);
   const [isReadyImg, setIsReadyImg] = useState(false);
   const [qrCode, setQrCode] = useState();
@@ -40,15 +41,27 @@ function SongPdfGenerator({ song }) {
         <div>
           <PDFDownloadLink
             document={
-              <SongTextPdf
-                song={song}
-                titles={{
-                  author: intl.formatMessage(commonMessages.author),
-                  album: intl.formatMessage(commonMessages.album),
-                }}
-                qrCode={qrCode}
-                fileName={fileName}
-              />
+              type !== 'chords' ? (
+                <SongTextPdf
+                  song={song}
+                  titles={{
+                    author: intl.formatMessage(commonMessages.author),
+                    album: intl.formatMessage(commonMessages.album),
+                  }}
+                  qrCode={qrCode}
+                  fileName={fileName}
+                />
+              ) : (
+                <SongChordsPdf
+                  song={song}
+                  titles={{
+                    author: intl.formatMessage(commonMessages.author),
+                    album: intl.formatMessage(commonMessages.album),
+                  }}
+                  qrCode={qrCode}
+                  fileName={fileName}
+                />
+              )
             }
             fileName={fileName}
           >
@@ -105,6 +118,7 @@ function SongPdfGenerator({ song }) {
 
 SongPdfGenerator.propTypes = {
   song: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default SongPdfGenerator;
