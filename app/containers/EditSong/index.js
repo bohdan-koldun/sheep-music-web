@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import Select from 'react-select';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import checkUserPermissions from 'utils/checkPermissions';
 import * as striptags from 'striptags';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { makeSelectUser } from 'containers/App/selectors';
@@ -52,11 +53,6 @@ export function EditSong({
     }
   }, [song]);
 
-  const userRoles =
-    user &&
-    user.roles &&
-    user.roles.map(role => role && role.role.slug).join(',');
-
   const options = [
     { value: 'Аb', label: 'Аb' },
     { value: 'А', label: 'А' },
@@ -83,7 +79,7 @@ export function EditSong({
       {loading ? (
         <BeatLoader size={31} margin="20px" />
       ) : (
-        (/admin|moderator/.test(userRoles) && (
+        (checkUserPermissions(user, ['admin', 'moderator']) && (
           <form>
             <label
               style={{

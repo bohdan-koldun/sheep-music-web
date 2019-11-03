@@ -21,6 +21,7 @@ import { SongImg } from 'components/Img';
 import { DownloadModal } from 'components/Modal';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import checkUserPermissions from 'utils/checkPermissions';
 import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
 import { useIntl } from 'containers/LanguageProvider';
 import { makeSelectUser } from 'containers/App/selectors';
@@ -69,11 +70,6 @@ export function SongChords({
       onPlaySong(songData);
     }
   };
-
-  const userRoles =
-    user &&
-    user.roles &&
-    user.roles.map(role => role && role.role.slug).join(',');
 
   return (
     <React.Fragment>
@@ -170,7 +166,7 @@ export function SongChords({
                     <FaYoutube data-tip="youtube" className="song-icon" />
                   </Link>
                 )}
-                {/admin|moderator/.test(userRoles) && (
+                {checkUserPermissions(user, ['admin', 'moderator']) && (
                   <Link to={`/edit/song/${songData.slug}`} target="_blank">
                     {' '}
                     <MdModeEdit data-tip="edit song" className="song-icon" />

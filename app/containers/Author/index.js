@@ -4,14 +4,17 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import { SongPlayList, AlbumPictureList } from 'components/List';
+import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import checkUserPermissions from 'utils/checkPermissions';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import { MdModeEdit } from 'react-icons/md';
 import { FormattedMessage } from 'react-intl';
 import { SongsMessage, AlbumsMessage } from 'components/Message';
 import commonMessages from 'translations/common-messages';
+import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -24,6 +27,7 @@ import {
 import { loadAuthor } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import './Author.scss';
 
 export function Author({
   onLoadAuthor,
@@ -33,6 +37,7 @@ export function Author({
   playData,
   onPlaySongList,
   onPlayPause,
+  user,
 }) {
   useInjectReducer({ key: 'author', reducer });
   useInjectSaga({ key: 'author', saga });
@@ -87,17 +92,29 @@ export function Author({
             `}
             </script>
           </Helmet>
-          <h1>
-            <FormattedMessage {...commonMessages.author} /> {authorData.title}
-          </h1>
-          {authorData.thumbnail && (
-            <img
-              src={authorData.thumbnail.path}
-              alt={authorData.title}
-              style={{ width: '70%', display: 'block' }}
-            />
-          )}
-          <div>{authorData.description}</div>
+          <div className="author-header">
+            {authorData.thumbnail && (
+              <img
+                src={authorData.thumbnail.path}
+                alt={authorData.title}
+                className="author-img"
+              />
+            )}
+            <h1>
+              <FormattedMessage {...commonMessages.author} /> {authorData.title}
+              {checkUserPermissions(user, ['admin', 'moderator']) && (
+                <Link
+                  to={`/edit/author/${authorData.slug}`}
+                  target="_blank"
+                  className="author-edit-link"
+                >
+                  {' '}
+                  <MdModeEdit data-tip="edit author" className="author-icon" />
+                </Link>
+              )}
+            </h1>
+          </div>
+          <div className="author-dscription">{authorData.description}</div>
           <span>
             <b>{(authorData.songs && authorData.songs.length) || 0}</b>{' '}
             <SongsMessage
@@ -146,6 +163,7 @@ Author.propTypes = {
   }),
   onPlaySongList: PropTypes.func,
   onPlayPause: PropTypes.func,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -154,6 +172,7 @@ const mapStateToProps = createStructuredSelector({
   authorData: makeSelectAuthorData(),
   play: makeSelectPlay(),
   playData: makeSelectAudioPlayData(),
+  user: makeSelectUser(),
 });
 
 export function mapDispatchToProps(dispatch) {

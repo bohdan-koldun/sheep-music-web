@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import DefaultImg from './author_thumb.svg';
 
 function AuthorImg({ className, author }) {
-  const authorImg = author && author.thumbnail && author.album.thumbnail.path;
+  const authorImg = author && author.thumbnail && author.thumbnail.path;
 
   return (
     <img

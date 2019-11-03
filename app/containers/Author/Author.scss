@@ -1,0 +1,23 @@
+.author-edit-link{
+    text-decoration: none;
+    .author-icon{
+        color: #000;
+    }
+}
+
+.author-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.author-img {
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 6px;
+    border: .5px solid rgba(0,0,0,.1);
+}
+
+.author-dscription {
+    margin-bottom: 20px;
+}

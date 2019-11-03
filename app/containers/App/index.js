@@ -22,6 +22,7 @@ import VideoList from 'containers/VideoList/Loadable';
 import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import EditSong from 'containers/EditSong/Loadable';
+import EditAuthor from 'containers/EditAuthor/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -78,6 +79,7 @@ function App({ onLoadTags, onLoadUser, user }) {
             <Route path="/videos" component={VideoList} />
             <Route path="/login" component={LoginPage} />
             <PrivateRoute path="/edit/song/:slug" component={EditSong} />
+            <PrivateRoute path="/edit/author/:slug" component={EditAuthor} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </ScrollToTop>
