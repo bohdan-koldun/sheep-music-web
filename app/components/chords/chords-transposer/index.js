@@ -45,7 +45,7 @@ function ChordsTransposer({ chordsKey, songChords }) {
               <ChordLine
                 chordLine={line}
                 key={index}
-                chordKey={currentKey}
+                chordKey={currentKey || rootKey}
                 rootKey={rootKey}
               />
             );
