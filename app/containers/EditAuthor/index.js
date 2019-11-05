@@ -35,6 +35,21 @@ export function EditAuthor({
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [avatar, setAvatar] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+
+  const handleImageChange = event => {
+    event.preventDefault();
+
+    const reader = new FileReader();
+    const file = event.target.files[0];
+
+    reader.onloadend = () => {
+      setAvatar(file);
+      setImagePreviewUrl(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   useEffect(() => {
     onLoadAuthor(match.params.slug);
@@ -86,11 +101,21 @@ export function EditAuthor({
               />
             </label>
             <label>
+              Аватарка должна быть квадратной. Ширина равняется высоте и &gt;=
+              600px!
               <input
                 type="file"
                 name="avatar"
+                className="upload-author-avatar"
                 accept="image/*"
-                onChange={e => setAvatar(e.target.files[0])}
+                onChange={handleImageChange}
+              />
+              <img
+                src={
+                  imagePreviewUrl || (author.thumbnail && author.thumbnail.path)
+                }
+                className="author-edit-img"
+                alt=""
               />
             </label>
             <button
