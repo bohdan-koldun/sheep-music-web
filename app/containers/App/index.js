@@ -23,6 +23,7 @@ import AudioPlayer from 'containers/AudioPlayer/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import EditSong from 'containers/EditSong/Loadable';
 import EditAuthor from 'containers/EditAuthor/Loadable';
+import EditAlbum from 'containers/EditAlbum/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -80,6 +81,7 @@ function App({ onLoadTags, onLoadUser, user }) {
             <Route path="/login" component={LoginPage} />
             <PrivateRoute path="/edit/song/:slug" component={EditSong} />
             <PrivateRoute path="/edit/author/:slug" component={EditAuthor} />
+            <PrivateRoute path="/edit/album/:slug" component={EditAlbum} />
             <Route path="" component={NotFoundPage} />
           </Switch>
         </ScrollToTop>

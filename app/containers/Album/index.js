@@ -9,11 +9,13 @@ import { FormattedMessage } from 'react-intl';
 import { SongsMessage } from 'components/Message';
 import commonMessages from 'translations/common-messages';
 import classNames from 'classnames/bind';
-
+import { MdModeEdit } from 'react-icons/md';
 import { SongPlayList } from 'components/List';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import checkUserPermissions from 'utils/checkPermissions';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -39,6 +41,7 @@ export function Album({
   playData,
   onPlaySongList,
   onPlayPause,
+  user,
 }) {
   useInjectReducer({ key: 'album', reducer });
   useInjectSaga({ key: 'album', saga });
@@ -102,7 +105,22 @@ export function Album({
             )}
             <div className="album-description">
               <div>
-                <h1>{albumData.title}</h1>
+                <h1>
+                  {albumData.title}
+                  {checkUserPermissions(user, ['admin', 'moderator']) && (
+                    <Link
+                      to={`/edit/album/${albumData.slug}`}
+                      target="_blank"
+                      className="album-edit-link"
+                    >
+                      {' '}
+                      <MdModeEdit
+                        data-tip="edit album"
+                        className="album-icon"
+                      />
+                    </Link>
+                  )}
+                </h1>
                 <div>
                   <FormattedMessage {...commonMessages.album} /> {' • '}
                   {albumData.year && `${albumData.year} • `}
@@ -174,6 +192,7 @@ Album.propTypes = {
   }),
   onPlaySongList: PropTypes.func,
   onPlayPause: PropTypes.func,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -182,6 +201,7 @@ const mapStateToProps = createStructuredSelector({
   albumData: makeSelectAlbumData(),
   play: makeSelectPlay(),
   playData: makeSelectAudioPlayData(),
+  user: makeSelectUser(),
 });
 
 export function mapDispatchToProps(dispatch) {

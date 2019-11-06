@@ -8,32 +8,38 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import checkUserPermissions from 'utils/checkPermissions';
 import * as striptags from 'striptags';
+import Select from 'react-select';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectLoading,
   makeSelectError,
-  makeSelectAuthorData,
+  makeSelectAlbumData,
+  makeSelectAuthorsData,
 } from './selectors';
-import { loadAuthor, editAuthor } from './actions';
+import { loadAlbum, editAlbum, loadAuthorIds } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import './EditAuthor.scss';
+import './EditAlbum.scss';
 
-export function EditAuthor({
-  onLoadAuthor,
-  author,
+export function EditAlbum({
+  onLoadAlbum,
+  album,
+  authors,
   user,
   error,
   match,
   loading,
-  onEditAuthor,
+  onEditAlbum,
+  onLoadAuthorIds,
 }) {
-  useInjectReducer({ key: 'editAuthor', reducer });
-  useInjectSaga({ key: 'editAuthor', saga });
+  useInjectReducer({ key: 'editAlbum', reducer });
+  useInjectSaga({ key: 'editAlbum', saga });
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [year, setYear] = useState('');
+  const [author, setAuthor] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
@@ -52,18 +58,23 @@ export function EditAuthor({
   };
 
   useEffect(() => {
-    onLoadAuthor(match.params.slug);
+    onLoadAlbum(match.params.slug);
+    onLoadAuthorIds();
   }, []);
 
   useEffect(() => {
-    if (author) {
-      setTitle(author.title || '');
-      setDescription(striptags(author.description || ''));
+    if (album) {
+      setTitle(album.title || '');
+      setDescription(striptags(album.description || ''));
+      setYear(album.year || '');
+      setAuthor(
+        album.author && { label: album.author.title, value: album.author.id },
+      );
     }
-  }, [author]);
+  }, [album]);
 
   return (
-    <div className="edit-author-page">
+    <div className="edit-album-page">
       {loading ? (
         <BeatLoader size={31} margin="20px" />
       ) : (
@@ -76,28 +87,53 @@ export function EditAuthor({
                 marginBottom: '10px',
               }}
             >
-              {author.parsedSource}
+              {album.parsedSource}
             </label>
 
             <label>
-              Имя автора:
+              Название альбома:
               <input
                 type="text"
                 name="title"
-                className="author-input"
+                className="album-input"
                 placeholder="Имя автора"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
               />
             </label>
             <label>
-              Описание автора:
+              Год:
+              <input
+                type="number"
+                name="year"
+                className="album-input"
+                placeholder="Год"
+                value={year}
+                onChange={e => setYear(e.target.value)}
+              />
+            </label>
+            <label>
+              Описание альбома:
               <textarea
                 name="text"
                 rows="15"
-                className="author-input"
+                className="album-input"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
+              />
+            </label>
+            <label>
+              Автор альбома:
+              <Select
+                value={author}
+                onChange={value => setAuthor(value)}
+                options={
+                  authors &&
+                  authors.map(item => ({ value: item.id, label: item.title }))
+                }
+                isSearchable
+                className="album-author-select"
+                placeholder="автор альбома"
               />
             </label>
             <label>
@@ -106,15 +142,15 @@ export function EditAuthor({
               <input
                 type="file"
                 name="avatar"
-                className="upload-author-avatar"
+                className="upload-album-avatar"
                 accept="image/*"
                 onChange={handleImageChange}
               />
               <img
                 src={
-                  imagePreviewUrl || (author.thumbnail && author.thumbnail.path)
+                  imagePreviewUrl || (album.thumbnail && album.thumbnail.path)
                 }
-                className="author-edit-img"
+                className="album-edit-img"
                 alt=""
               />
             </label>
@@ -122,12 +158,13 @@ export function EditAuthor({
               type="button"
               className="save-button"
               onClick={() => {
-                onEditAuthor({
+                onEditAlbum({
                   title,
-                  id: author.id,
-                  slug: author.slug,
+                  id: album.id,
                   description,
+                  year,
                   avatar,
+                  author: author && author.value,
                 });
               }}
             >
@@ -142,31 +179,35 @@ export function EditAuthor({
   );
 }
 
-EditAuthor.propTypes = {
+EditAlbum.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loading: PropTypes.bool,
-  author: PropTypes.object,
-  onLoadAuthor: PropTypes.func,
-  onEditAuthor: PropTypes.func,
+  album: PropTypes.object,
+  onLoadAlbum: PropTypes.func,
+  onEditAlbum: PropTypes.func,
+  onLoadAuthorIds: PropTypes.func,
   user: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
       slug: PropTypes.string,
     }),
   }),
+  authors: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
-  author: makeSelectAuthorData(),
+  album: makeSelectAlbumData(),
   user: makeSelectUser(),
+  authors: makeSelectAuthorsData(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoadAuthor: slug => dispatch(loadAuthor(slug)),
-    onEditAuthor: author => dispatch(editAuthor(author)),
+    onLoadAlbum: slug => dispatch(loadAlbum(slug)),
+    onLoadAuthorIds: () => dispatch(loadAuthorIds()),
+    onEditAlbum: album => dispatch(editAlbum(album)),
   };
 }
 
@@ -175,4 +216,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(EditAuthor);
+export default compose(withConnect)(EditAlbum);
