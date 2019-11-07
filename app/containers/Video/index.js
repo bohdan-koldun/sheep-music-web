@@ -76,6 +76,18 @@ export function Video({ onLoadVideo, match, videoData }) {
           )}
 
           <div className="video-page-info">
+            <p>
+              <b>
+                <FormattedMessage {...commonMessages.words} />:{' '}
+              </b>
+              <Link to={`/song/${videoData.slug}`}>{videoData.title}</Link>
+            </p>
+            <p>
+              <b>
+                <FormattedMessage {...commonMessages.chords} />:{' '}
+              </b>
+              <Link to={`/chord/${videoData.slug}`}>{videoData.title}</Link>
+            </p>
             {videoData.author && (
               <p>
                 <b>
