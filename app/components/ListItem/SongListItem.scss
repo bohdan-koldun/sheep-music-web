@@ -1,25 +1,39 @@
-.song-list-item{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    -webkit-column-break-inside: avoid; /* Chrome, Safari */
-    page-break-inside: avoid;           /* Theoretically FF 20+ */
-    break-inside: avoid-column;  
-    max-width: 98%; 
+@import "../../styles/colors.scss";
+
+.song-list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  -webkit-column-break-inside: avoid;
+  /* Chrome, Safari */
+  page-break-inside: avoid;
+  /* Theoretically FF 20+ */
+  break-inside: avoid-column;
+  max-width: 98%;
+  margin-bottom: 10px;
 }
 
-.song-list-item-description{
-    margin: 10px 2px;
-    max-width: 70%;
-    span{
-        font-size: 12px;
-    }
+.song-list-item-description {
+  text-decoration: none;
+  color: #000;
+  margin: 10px 2px;
+  max-width: 70%;
 }
 
-.song-list-item-info{
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
+.song-list-title {
+  font-weight: 500;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.song-list-item-info {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  font-size: 12px; 
+  color: #929292;
 }

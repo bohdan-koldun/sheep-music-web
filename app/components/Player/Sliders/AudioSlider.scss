@@ -1,3 +1,5 @@
+@import "../../../styles/colors.scss";
+
 .audio-player-slider {
   .rc-slider {
     position: relative;
@@ -46,15 +48,15 @@
     cursor: grab;
     border-radius: 50%;
     border: none;
-    background-color: #e2263e;
+    background-color: $yellow;
     -ms-touch-action: pan-x;
     touch-action: pan-x;
 
 
     &:hover,
     &:focus {
-      border-color: #e2263e;
-      box-shadow: 0 0 0 1px #e2263e;
+      border-color: $yellow;
+      box-shadow: 0 0 0 1px $yellow;
       outline: none;
     }
   }
@@ -73,7 +75,7 @@
     left: 0;
     height: 6px;
     border-radius: 0;
-    background-color: #e2263e;
+    background-color: $yellow;
 
     &:hover {
       height: 8px;

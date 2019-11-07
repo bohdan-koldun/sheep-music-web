@@ -27,31 +27,47 @@ class SongListItem extends React.Component {
           }}
           className="icon-button"
         >
+          <div className="play-button-background" />
           {play && playData && playData.song && song.id === playData.song.id ? (
-            <MdPauseCircleFilled
-              data-tip={intl.formatMessage(messages.pause)}
-              className="song-icon"
-            />
+            <React.Fragment>
+              <MdPauseCircleFilled
+                data-tip={intl.formatMessage(messages.pause)}
+                data-for="pause-play-icon"
+                className="song-icon"
+              />
+              <ReactTooltip
+                id="pause-play-icon"
+                place="top"
+                type="dark"
+                effect="float"
+              />
+            </React.Fragment>
           ) : (
-            <MdPlayCircleFilled
-              data-tip={intl.formatMessage(messages.play)}
-              className={classNames('song-icon', {
-                'icon-disable': !(song.audioMp3 && song.audioMp3.path),
-              })}
-            />
+            <React.Fragment>
+              <MdPlayCircleFilled
+                data-tip={intl.formatMessage(messages.play)}
+                data-for="play-play-icon"
+                className={classNames('song-icon', {
+                  'icon-disable': !(song.audioMp3 && song.audioMp3.path),
+                })}
+              />
+              <ReactTooltip
+                id="play-play-icon"
+                place="top"
+                type="dark"
+                effect="float"
+              />
+            </React.Fragment>
           )}
         </button>
-        <div className="song-list-item-description">
-          <Link to={`/song/${song.slug}`}>{song.title}</Link>
-          <br />
+        <Link to={`/song/${song.slug}`} className="song-list-item-description">
+          <span className="song-list-title">{song.title}</span>
           <span className="song-list-item-info">
             {song.author && song.author.title}
             {song.author && song.album && ' • '}
             {song.album && song.album.title}
           </span>
-        </div>
-
-        <ReactTooltip place="top" type="dark" effect="float" />
+        </Link>
       </div>
     );
   }
