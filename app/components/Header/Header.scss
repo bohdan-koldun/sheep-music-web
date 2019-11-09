@@ -27,7 +27,7 @@ header {
   visibility: hidden;
   transition-duration: 0.2s;
   transition-timing-function: linear;
-  padding: 10px 0 20px; 
+  padding: 10px 0 20px;
 
 }
 
@@ -61,17 +61,8 @@ header {
   width: 180px;
   margin-left: 25px;
 
-  a {
-    font-family: 'Fascinate', cursive;
-    color: #fff;
-    font-size: 22px;
-    font-weight: 600;
-    text-transform: uppercase;
-    text-decoration: none;
-
-    span {
-      color: $yellow;
-    }
+  img {
+    width: 100%;
   }
 }
 
@@ -122,13 +113,14 @@ header {
   opacity: 0.01;
 }
 
-.header-login{
+.header-login {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   text-decoration: none;
   color: #fff;
-  svg{
+
+  svg {
     margin-right: 5px;
   }
 }
@@ -147,7 +139,7 @@ header {
   .header-logo {
     width: 180px;
     margin-left: 20px;
-  
+
     a {
       font-size: 20px;
     }
@@ -168,8 +160,8 @@ header {
 
 
 @media screen and (max-width: 500px) {
-  .header-login{
-    span{
+  .header-login {
+    span {
       display: none;
     }
   }
@@ -177,7 +169,7 @@ header {
   .header-logo {
     width: 150px;
     margin-left: 20px;
-  
+
     a {
       font-size: 18px;
     }

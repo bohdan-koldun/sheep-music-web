@@ -19,6 +19,7 @@ import { useIntl } from 'containers/LanguageProvider';
 import { FaYoutube } from 'react-icons/fa';
 import commonMessages from 'translations/common-messages';
 import Banner from './banner.png';
+import Logo from '../../images/sheep music.svg';
 import messages from './messages';
 import './Header.scss';
 
@@ -55,7 +56,7 @@ function Header({ location, user }) {
           </button>{' '}
           <div className="header-logo">
             <Link to="/">
-              <span> S </span>heep Music{' '}
+              <img src={Logo} alt="Sheep Music" />
             </Link>{' '}
           </div>{' '}
           <div className="header-desktop-links header-links">
