@@ -15,10 +15,7 @@ export const initialState = {
   songs: {},
   page: 0,
   search: '',
-  filter: {
-    value: 'newest',
-    label: 'Новые',
-  },
+  filter: {},
   tagsFilter: '',
 };
 

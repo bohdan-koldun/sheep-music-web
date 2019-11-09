@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 import React, { memo, useEffect, useRef } from 'react';
@@ -88,6 +89,13 @@ export function SongList({
     if (urlPage && !Number.isNaN(urlPage)) {
       onChangePage(Number.parseInt(urlPage, 10));
     }
+
+    return () => {
+      onChangeTagsFilter(null);
+      onChangeFilter({});
+      onChangePage(0);
+      onChangeSearch('');
+    };
   }, []);
 
   const changeURLSearchParams = (value, name, currentUrlParams) => {
@@ -98,15 +106,37 @@ export function SongList({
     }
   };
 
-  useEffect(() => {
+  const changeCurrentUrl = () => {
     const currentUrlParams = new URLSearchParams(window.location.search);
-    changeURLSearchParams(search, 'search', currentUrlParams);
-    changeURLSearchParams(filter && filter.value, 'filter', currentUrlParams);
-    changeURLSearchParams(curTags, 'tags', currentUrlParams);
-    changeURLSearchParams(page, 'page', currentUrlParams);
-    history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
+    const urlPage = currentUrlParams.get('page');
+    const urlSearch = currentUrlParams.get('search');
+    const urlTags = currentUrlParams.get('tags');
+    const urlFilter = currentUrlParams.get('filter');
 
+    const isChange = (param, urlParam) =>
+      (!!param || !!urlParam) && param != urlParam;
+    const isParams = page || search || filter.value || curTags;
+
+    if (
+      isParams &&
+      (isChange(page, urlPage) ||
+        isChange(search, urlSearch) ||
+        isChange(filter.value, urlFilter) ||
+        isChange(curTags, urlTags))
+    ) {
+      changeURLSearchParams(search, 'search', currentUrlParams);
+      changeURLSearchParams(filter && filter.value, 'filter', currentUrlParams);
+      changeURLSearchParams(curTags, 'tags', currentUrlParams);
+      changeURLSearchParams(page, 'page', currentUrlParams);
+      history.push(
+        `${window.location.pathname}?${currentUrlParams.toString()}`,
+      );
+    }
+  };
+
+  useEffect(() => {
     onLoadSongList(page, search, filter.value, curTags);
+    changeCurrentUrl();
   }, [page, search, filter, curTags]);
 
   const playPauseSong = song => {
