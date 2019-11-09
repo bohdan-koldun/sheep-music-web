@@ -1,0 +1,11 @@
+@import "../../styles/colors.scss";
+
+.theme-tag-header{
+    background:  $yellow;
+    color: #000;
+    font-size: 22px;
+    margin: 5px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+}

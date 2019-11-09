@@ -6,16 +6,17 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { push } from 'connected-react-router';
 import { FormattedMessage } from 'react-intl';
-
+import commonMessages from 'translations/common-messages';
 import Pagination from 'components/Pagination';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { titleCase } from 'utils/string';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { SongPlayList } from 'components/List';
 import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
+import { useIntl } from 'containers/LanguageProvider';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -40,6 +41,7 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import './SongList.scss';
 
 export function SongList({
   songs,
@@ -61,6 +63,7 @@ export function SongList({
 }) {
   useInjectReducer({ key: 'songList', reducer });
   useInjectSaga({ key: 'songList', saga });
+  const intl = useIntl();
 
   const myRef = useRef(null);
   const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop - 20);
@@ -124,12 +127,26 @@ export function SongList({
         />
       </Helmet>
       <h1 ref={myRef}>
-        <FormattedMessage {...messages.header} />
+        {curTags ? (
+          <React.Fragment>
+            {titleCase(intl.formatMessage(commonMessages.manySongFirstVariant))}
+            {': '}
+            {tags
+              .filter(tag => curTags.split(',').includes(String(tag.id)))
+              .map(tag => (
+                <span key={tag.name} className="theme-tag-header">
+                  {tag.name}
+                </span>
+              ))}
+          </React.Fragment>
+        ) : (
+          <FormattedMessage {...messages.header} />
+        )}
       </h1>
       <ListFilter
         search={search}
         filter={filter}
-        tags={tags}
+        // tags={tags}
         curTags={curTags}
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
