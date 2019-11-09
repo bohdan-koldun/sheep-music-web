@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.songs`,
     defaultMessage: 'Песни',
   },
+  topics: {
+    id: `${scope}.topics`,
+    defaultMessage: 'По темам',
+  },
   albums: {
     id: `${scope}.albums`,
     defaultMessage: 'Альбомы',

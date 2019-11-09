@@ -39,7 +39,7 @@ header {
 .header-bar {
   color: #fff;
   font-size: 32px;
-  padding: 2px 30px;
+  padding: 2px 25px;
   cursor: pointer;
   background: none;
   border: none;
@@ -58,13 +58,13 @@ header {
 }
 
 .header-logo {
-  width: 210px;
+  width: 180px;
   margin-left: 25px;
 
   a {
     font-family: 'Fascinate', cursive;
     color: #fff;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
     text-transform: uppercase;
     text-decoration: none;
@@ -156,6 +156,12 @@ header {
 
 @media screen and (max-width: 1435px) {
   .hide-medium {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .hide-small {
     display: none !important;
   }
 }

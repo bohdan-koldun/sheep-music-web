@@ -11,6 +11,7 @@ import {
   MdAlbum,
   MdGroup,
   MdMenu,
+  MdSubject,
   MdClose,
   MdAccountBox,
 } from 'react-icons/md';
@@ -68,6 +69,15 @@ function Header({ location, user }) {
               <FormattedMessage {...messages.songs} />{' '}
             </Link>{' '}
             <Link
+              to="/topics"
+              className={classNames('hide-small', {
+                'active-link': pathname === '/topics',
+              })}
+            >
+              <MdSubject />
+              <FormattedMessage {...messages.topics} />{' '}
+            </Link>{' '}
+            <Link
               to="/albums"
               className={classNames({
                 'active-link': pathname === '/albums',
@@ -84,15 +94,6 @@ function Header({ location, user }) {
             >
               <MdGroup />
               <FormattedMessage {...messages.authors} />{' '}
-            </Link>{' '}
-            <Link
-              to="/videos"
-              className={classNames('hide-medium', {
-                'active-link': pathname === '/videos',
-              })}
-            >
-              <FaYoutube />
-              <FormattedMessage {...messages.videos} />{' '}
             </Link>{' '}
           </div>{' '}
           <Link to="/login" className="header-login">
@@ -121,6 +122,16 @@ function Header({ location, user }) {
           >
             <MdLibraryMusic />
             <FormattedMessage {...messages.songs} />{' '}
+          </Link>{' '}
+          <Link
+            to="/topics"
+            className={classNames({
+              'active-link': pathname === '/topics',
+            })}
+            onClick={() => setShowMenu(false)}
+          >
+            <MdSubject />
+            <FormattedMessage {...messages.topics} />{' '}
           </Link>{' '}
           <Link
             to="/albums"
