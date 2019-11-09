@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import ReactTooltip from 'react-tooltip';
 import { MdBookmark, MdViewList, MdViewModule } from 'react-icons/md';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useIntl } from 'containers/LanguageProvider';
 import { makeSelectTags } from 'containers/App/selectors';
+import { SongsMessage } from 'components/Message';
 import messages from './messages';
 import './TagList.scss';
 
@@ -58,12 +60,21 @@ export function TagList({ tags }) {
         })}
       >
         {tags.map(tag => (
-          <Link to={`/songs?filter=newest&tags=${tag.id}`} key={tag.id}>
+          <Link
+            to={`/songs?filter=newest&tags=${tag.id}`}
+            key={tag.id}
+            data-tip
+            data-for={tag.name}
+          >
             <span>
               <MdBookmark />
               {tag.name}
             </span>
             <span className="tag-songs-count">{tag.songsCount}</span>
+            <ReactTooltip id={tag.name} place="top" type="dark" ffect="float">
+              {tag.name}: {tag.songsCount}{' '}
+              <SongsMessage count={tag.songsCount || 0} />
+            </ReactTooltip>
           </Link>
         ))}
       </div>
