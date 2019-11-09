@@ -62,5 +62,6 @@
   "app.containers.LoginPage.header": "Вход в систему:",
   "app.containers.LoginPage.email": "эл. адрес",
   "app.containers.LoginPage.password": "пароль",
-  "app.containers.LoginPage.error": "Ошибка авторизации!"
+  "app.containers.LoginPage.error": "Ошибка авторизации!",
+  "app.containers.TagList.header": "Песни по тематикам"
 }

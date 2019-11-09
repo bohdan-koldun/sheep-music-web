@@ -117,10 +117,22 @@ export function SongList({
     }
   };
 
+  const curTagNames =
+    curTags &&
+    tags
+      .filter(tag => curTags.split(',').includes(String(tag.id)))
+      .map(tag => tag.name);
+
   return (
     <div>
       <Helmet>
-        <title>Удобный Сборник Христианских Песен</title>
+        <title>
+          {curTagNames
+            ? `${curTagNames.join(
+                ', ',
+              )} | Песни | Лучшие ${new Date().getFullYear()}`
+            : `Удобный Сборник Христианских Песен ${new Date().getFullYear()}`}
+        </title>
         <meta
           name="description"
           content="Христианские песни: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
@@ -131,13 +143,11 @@ export function SongList({
           <React.Fragment>
             {titleCase(intl.formatMessage(commonMessages.manySongFirstVariant))}
             {': '}
-            {tags
-              .filter(tag => curTags.split(',').includes(String(tag.id)))
-              .map(tag => (
-                <span key={tag.name} className="theme-tag-header">
-                  {tag.name}
-                </span>
-              ))}
+            {curTagNames.map(tag => (
+              <span key={tag} className="theme-tag-header">
+                {tag}
+              </span>
+            ))}
           </React.Fragment>
         ) : (
           <FormattedMessage {...messages.header} />

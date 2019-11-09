@@ -63,5 +63,6 @@
   "app.containers.LoginPage.header": "Вхід у систему:",
   "app.containers.LoginPage.email": "ел. пошта",
   "app.containers.LoginPage.password": "пароль",
-  "app.containers.LoginPage.error": "Помилка авторизації!"
+  "app.containers.LoginPage.error": "Помилка авторизації!",
+  "app.containers.TagList.header": "Пісні по тематикам"
 }

@@ -13,6 +13,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import SongChords from 'containers/SongChords/Loadable';
 import Song from 'containers/Song/Loadable';
 import SongList from 'containers/SongList/Loadable';
+import TagList from 'containers/TagList/Loadable';
 import Album from 'containers/Album/Loadable';
 import AlbumList from 'containers/AlbumList/Loadable';
 import Author from 'containers/Author/Loadable';
@@ -71,6 +72,7 @@ function App({ onLoadTags, onLoadUser, user }) {
             <Route exact path="/" component={HomePage} />
             <Route path="/songs" component={SongList} />
             <Route path="/song/:slug" component={Song} />
+            <Route path="/topics" component={TagList} />
             <Route path="/chord/:slug" component={SongChords} />
             <Route path="/album/:slug" component={Album} />
             <Route path="/albums" component={AlbumList} />

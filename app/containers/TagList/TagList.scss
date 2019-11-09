@@ -1,0 +1,86 @@
+@import "../../styles/colors.scss";
+
+.theme-tag-header {
+  background: $yellow;
+  color: #000;
+  font-size: 22px;
+  margin: 5px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.tags-page-list {
+  display: flex;
+
+  a {
+    color: #000;
+    font-size: 18px;
+    padding: 10px 5px;
+    margin: 2px 0;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover{
+      color: #751984;
+    }
+  }
+
+  a:nth-child(even) {
+    background: #fffbe7;
+  }
+
+  a:nth-child(odd) {
+    background: #f1f1f1;
+  }
+
+  svg {
+    margin-right: 10px;
+    color: $yellow;
+  }
+}
+
+.tags-page-list-column {
+  flex-direction: column;
+}
+
+.tags-page-list-module {
+  flex-wrap: wrap;
+
+  a {
+    margin-right: 5px;
+    padding: 10px 20px;
+  }
+}
+
+.list-type-switch {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.type-list-icon {
+  font-size: 32px;
+  padding: 2px;
+}
+
+.type-list-icon-active {
+  color: #751984;
+}
+
+.type-list-button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.tag-songs-count {
+  color: #751984;
+  padding: 3px;
+  margin-left: 25px;
+  margin-right: 10px;
+  font-weight: 600;
+}

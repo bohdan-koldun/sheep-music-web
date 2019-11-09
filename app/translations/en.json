@@ -63,5 +63,6 @@
   "app.containers.LoginPage.header": "Member Login:",
   "app.containers.LoginPage.email": "email",
   "app.containers.LoginPage.password": "password",
-  "app.containers.LoginPage.error": "Authorisation Error!"
+  "app.containers.LoginPage.error": "Authorisation Error!",
+  "app.containers.TagList.header": "Songs by topics"
 }
