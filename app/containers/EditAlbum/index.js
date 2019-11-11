@@ -138,7 +138,7 @@ export function EditAlbum({
             </label>
             <label>
               Аватарка должна быть квадратной. Ширина равняется высоте и &gt;=
-              600px!
+              400px!
               <input
                 type="file"
                 name="avatar"
