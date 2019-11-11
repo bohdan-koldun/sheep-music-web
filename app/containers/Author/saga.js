@@ -3,6 +3,7 @@ import { LOAD_AUTHOR } from 'containers/Author/constants';
 import { authorLoaded, authorLoadingError } from 'containers/Author/actions';
 import request from 'utils/request';
 import { API_HOST } from 'utils/constants';
+import viewCounter from 'utils/viewCounter';
 
 export function* getAuthor(action) {
   const requestURL = `${API_HOST}/authors/${action.slug}`;
@@ -10,6 +11,7 @@ export function* getAuthor(action) {
   try {
     const author = yield call(request, requestURL);
     yield put(authorLoaded(author));
+    viewCounter('author', author && author.id);
   } catch (err) {
     yield put(authorLoadingError(err));
   }

@@ -3,6 +3,7 @@ import { LOAD_ALBUM } from 'containers/Album/constants';
 import { albumLoaded, albumLoadingError } from 'containers/Album/actions';
 import request from 'utils/request';
 import { API_HOST } from 'utils/constants';
+import viewCounter from 'utils/viewCounter';
 
 export function* getAlbum(action) {
   const requestURL = `${API_HOST}/albums/${action.slug}`;
@@ -10,6 +11,7 @@ export function* getAlbum(action) {
   try {
     const album = yield call(request, requestURL);
     yield put(albumLoaded(album));
+    viewCounter('album', album && album.id);
   } catch (err) {
     yield put(albumLoadingError(err));
   }
