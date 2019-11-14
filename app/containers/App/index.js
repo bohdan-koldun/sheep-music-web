@@ -26,7 +26,7 @@ import EditSong from 'containers/EditSong/Loadable';
 import EditAuthor from 'containers/EditAuthor/Loadable';
 import EditAlbum from 'containers/EditAlbum/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
+import SideMenu from 'components/SideMenu';
 import Footer from 'components/Footer';
 import {
   makeSelectLoading,
@@ -40,12 +40,19 @@ import ScrollToTop from './ScrollToTop';
 import './App.scss';
 
 const AppWrapper = styled.div`
-  max-width: 900px;
+  display: flex;
+`;
+
+const AppRightSideWrapper = styled.div`
+  width: 100%;
   margin: 0 auto;
   display: flex;
   min-height: 100%;
-  padding: 0 16px;
   flex-direction: column;
+`;
+
+const AppContainerWrapper = styled.div`
+  padding: 20px 16px;
 `;
 
 function App({ onLoadTags, onLoadUser, user }) {
@@ -65,30 +72,37 @@ function App({ onLoadTags, onLoadUser, user }) {
           content="Христианские песни: слова, текст, слушать аудио онлайн, скачать mp3, аккорды, видео"
         />
       </Helmet>
-      <Header user={user} />
       <AppWrapper>
-        <ScrollToTop>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/songs" component={SongList} />
-            <Route path="/song/:slug" component={Song} />
-            <Route path="/topics" component={TagList} />
-            <Route path="/chord/:slug" component={SongChords} />
-            <Route path="/album/:slug" component={Album} />
-            <Route path="/albums" component={AlbumList} />
-            <Route path="/author/:slug" component={Author} />
-            <Route path="/authors" component={AuthorList} />
-            <Route path="/video/:slug" component={Video} />
-            <Route path="/videos" component={VideoList} />
-            <Route path="/login" component={LoginPage} />
-            <PrivateRoute path="/edit/song/:slug" component={EditSong} />
-            <PrivateRoute path="/edit/author/:slug" component={EditAuthor} />
-            <PrivateRoute path="/edit/album/:slug" component={EditAlbum} />
-            <Route path="" component={NotFoundPage} />
-          </Switch>
-        </ScrollToTop>
+        <SideMenu user={user} />
+        <AppRightSideWrapper>
+          <AppContainerWrapper>
+            <ScrollToTop>
+              <Switch>
+                <Route exact path="/" component={HomePage} />
+                <Route path="/songs" component={SongList} />
+                <Route path="/song/:slug" component={Song} />
+                <Route path="/topics" component={TagList} />
+                <Route path="/chord/:slug" component={SongChords} />
+                <Route path="/album/:slug" component={Album} />
+                <Route path="/albums" component={AlbumList} />
+                <Route path="/author/:slug" component={Author} />
+                <Route path="/authors" component={AuthorList} />
+                <Route path="/video/:slug" component={Video} />
+                <Route path="/videos" component={VideoList} />
+                <Route path="/login" component={LoginPage} />
+                <PrivateRoute path="/edit/song/:slug" component={EditSong} />
+                <PrivateRoute
+                  path="/edit/author/:slug"
+                  component={EditAuthor}
+                />
+                <PrivateRoute path="/edit/album/:slug" component={EditAlbum} />
+                <Route path="" component={NotFoundPage} />
+              </Switch>
+            </ScrollToTop>
+          </AppContainerWrapper>
+          <Footer />
+        </AppRightSideWrapper>
       </AppWrapper>
-      <Footer />
       <AudioPlayer />
     </Fragment>
   );

@@ -9,7 +9,7 @@ export default defineMessages({
   },
   songs: {
     id: `${scope}.songs`,
-    defaultMessage: 'Песни',
+    defaultMessage: 'Музыка',
   },
   topics: {
     id: `${scope}.topics`,
