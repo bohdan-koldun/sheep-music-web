@@ -22,6 +22,11 @@
     margin-top: 10px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+
+    .song-icon, .yellow-button-link {
+      margin-bottom: 7px;
+    }
   }
 
   .song-icon {

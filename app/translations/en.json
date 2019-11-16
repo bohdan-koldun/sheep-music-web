@@ -28,6 +28,7 @@
   "app.components.Menu.videos": "Videos",
   "app.components.Menu.favorites": "Favorites",
   "app.components.Menu.notebook": "Notebook",
+  "app.components.Menu.login": "Sign in",
   "boilerplate.components.Info.page": "page",
   "boilerplate.components.Info.results": "Results:",
   "boilerplate.components.Filter.newest": "New",

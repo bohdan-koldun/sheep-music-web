@@ -8,6 +8,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useIntl } from 'containers/LanguageProvider';
 import BeatLoader from 'react-spinners/BeatLoader';
+import Breadcrumb from 'components/Breadcrumb';
+import menuMessages from 'components/Menu/messages';
 import commonMessages from 'translations/common-messages';
 import { makeSelectUser } from 'containers/App/selectors';
 import { logout } from 'containers/App/actions';
@@ -28,49 +30,59 @@ export function LoginPage({ onLogin, onLogout, loading, error, user }) {
   const [password, setPassword] = useState('');
 
   return (
-    <div className="login-page">
-      {loading ? (
-        <BeatLoader />
-      ) : (
-        (!user && (
-          <div className="login-form">
-            <FormattedMessage {...messages.header} />
-            <input
-              name="email"
-              type="email"
-              placeholder={intl.formatMessage(messages.email)}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-            <input
-              name="password"
-              type="password"
-              value={password}
-              placeholder={intl.formatMessage(messages.password)}
-              onChange={e => setPassword(e.target.value)}
-            />
-            <button type="button" onClick={() => onLogin(email, password)}>
-              {intl.formatMessage(commonMessages.login)}
-            </button>
-            {error && (
-              <div className="login-error">
-                {intl.formatMessage(messages.error)}
-              </div>
-            )}
-          </div>
-        )) || (
-          <div className="user">
-            <p>
-              {' '}
-              {intl.formatMessage(commonMessages.hello)}, {user.name}!
-            </p>
-            <button type="button" onClick={() => onLogout()}>
-              {intl.formatMessage(commonMessages.logout)}
-            </button>
-          </div>
-        )
-      )}
-    </div>
+    <React.Fragment>
+      <Breadcrumb
+        pageList={[
+          {
+            link: '/login',
+            name: intl.formatMessage(menuMessages.login),
+          },
+        ]}
+      />
+      <div className="login-page">
+        {loading ? (
+          <BeatLoader />
+        ) : (
+          (!user && (
+            <div className="login-form">
+              <FormattedMessage {...messages.header} />
+              <input
+                name="email"
+                type="email"
+                placeholder={intl.formatMessage(messages.email)}
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+              <input
+                name="password"
+                type="password"
+                value={password}
+                placeholder={intl.formatMessage(messages.password)}
+                onChange={e => setPassword(e.target.value)}
+              />
+              <button type="button" onClick={() => onLogin(email, password)}>
+                {intl.formatMessage(commonMessages.login)}
+              </button>
+              {error && (
+                <div className="login-error">
+                  {intl.formatMessage(messages.error)}
+                </div>
+              )}
+            </div>
+          )) || (
+            <div className="user">
+              <p>
+                {' '}
+                {intl.formatMessage(commonMessages.hello)}, {user.name}!
+              </p>
+              <button type="button" onClick={() => onLogout()}>
+                {intl.formatMessage(commonMessages.logout)}
+              </button>
+            </div>
+          )
+        )}
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.notebook`,
     defaultMessage: 'Блокнот',
   },
+  login: {
+    id: `${scope}.login`,
+    defaultMessage: 'Войти в систему',
+  },
 });

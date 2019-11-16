@@ -28,6 +28,7 @@
   "app.components.Menu.videos": "Кліпи",
   "app.components.Menu.favorites": "Вибране",
   "app.components.Menu.notebook": "Блокнот",
+  "app.components.Menu.login": "Увійти",
   "boilerplate.components.Info.page": "сторінка",
   "boilerplate.components.Info.results": "Результати:",
   "boilerplate.components.Filter.newest": "Нові",
