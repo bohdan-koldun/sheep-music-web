@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.SideMenu';
+export const scope = 'app.components.Menu';
 
 export default defineMessages({
   home: {

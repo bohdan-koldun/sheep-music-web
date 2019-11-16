@@ -15,7 +15,7 @@ import { FormattedMessage } from 'react-intl';
 import { SongsMessage, AlbumsMessage } from 'components/Message';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import commonMessages from 'translations/common-messages';
 import { makeSelectUser } from 'containers/App/selectors';
 import {

@@ -26,7 +26,7 @@ import EditSong from 'containers/EditSong/Loadable';
 import EditAuthor from 'containers/EditAuthor/Loadable';
 import EditAlbum from 'containers/EditAlbum/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import SideMenu from 'components/SideMenu';
+import Menu from 'components/Menu';
 import Footer from 'components/Footer';
 import {
   makeSelectLoading,
@@ -73,7 +73,7 @@ function App({ onLoadTags, onLoadUser, user }) {
         />
       </Helmet>
       <AppWrapper>
-        <SideMenu user={user} />
+        <Menu user={user} />
         <AppRightSideWrapper>
           <AppContainerWrapper>
             <ScrollToTop>

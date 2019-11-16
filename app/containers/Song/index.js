@@ -26,7 +26,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import checkUserPermissions from 'utils/checkPermissions';
 import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
 import { useIntl } from 'containers/LanguageProvider';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectPlay,

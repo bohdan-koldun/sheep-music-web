@@ -22,7 +22,7 @@ import {
   makeSelectAudioPlayData,
 } from 'containers/AudioPlayer/selectors';
 import { useIntl } from 'containers/LanguageProvider';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import {
   makeSelectLoading,
   makeSelectError,

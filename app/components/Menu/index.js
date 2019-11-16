@@ -19,10 +19,10 @@ import { useIntl } from 'containers/LanguageProvider';
 import commonMessages from 'translations/common-messages';
 import Logo from '../../images/sheep music.svg';
 import messages from './messages';
-import './SideMenu.scss';
+import './Menu.scss';
 import AsideLoginLogo from './aside-login-logo.png';
 
-function SideMenu({ location, user }) {
+function Menu({ location, user }) {
   const { pathname } = location || {};
   const intl = useIntl();
 
@@ -131,11 +131,11 @@ function SideMenu({ location, user }) {
   );
 }
 
-SideMenu.propTypes = {
+Menu.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }),
   user: PropTypes.object,
 };
 
-export default withRouter(SideMenu);
+export default withRouter(Menu);

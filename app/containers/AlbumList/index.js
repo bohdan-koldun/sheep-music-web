@@ -8,7 +8,7 @@ import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import Pagination from 'components/Pagination';
 import { AlbumPictureList } from 'components/List';
 import { ListFilter } from 'components/Filter';

@@ -12,7 +12,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { FormattedMessage } from 'react-intl';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import commonMessages from 'translations/common-messages';
 import {
   makeSelectLoading,

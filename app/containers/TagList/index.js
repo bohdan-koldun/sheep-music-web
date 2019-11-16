@@ -11,7 +11,7 @@ import { compose } from 'redux';
 import { useIntl } from 'containers/LanguageProvider';
 import { makeSelectTags } from 'containers/App/selectors';
 import Breadcrumb from 'components/Breadcrumb';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import { SongsMessage } from 'components/Message';
 import messages from './messages';
 import './TagList.scss';

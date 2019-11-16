@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useIntl } from 'containers/LanguageProvider';
 import classNames from 'classnames/bind';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import PropTypes from 'prop-types';
 import { FiChevronsRight } from 'react-icons/fi';
 import './Breadcrumb.scss';

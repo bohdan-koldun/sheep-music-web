@@ -8,7 +8,7 @@ import { MdLibraryMusic, MdAlbum, MdGroup } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 
 import LocaleToggle from 'containers/LocaleToggle';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import messages from './messages';
 import Logo from './logo.png';
 import './Footer.scss';

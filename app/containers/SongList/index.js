@@ -19,7 +19,7 @@ import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
-import menuMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/Menu/messages';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
