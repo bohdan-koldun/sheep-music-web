@@ -25,6 +25,8 @@ import LoginPage from 'containers/LoginPage/Loadable';
 import EditSong from 'containers/EditSong/Loadable';
 import EditAuthor from 'containers/EditAuthor/Loadable';
 import EditAlbum from 'containers/EditAlbum/Loadable';
+import Favorites from 'containers/Favorites/Loadable';
+import Notebook from 'containers/Notebook/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Menu from 'components/Menu';
 import Footer from 'components/Footer';
@@ -88,6 +90,8 @@ function App({ onLoadTags, onLoadUser, user }) {
                 <Route path="/video/:slug" component={Video} />
                 <Route path="/videos" component={VideoList} />
                 <Route path="/login" component={LoginPage} />
+                <Route path="/favorites" component={Favorites} />
+                <Route path="/notebook" component={Notebook} />
                 <PrivateRoute path="/edit/song/:slug" component={EditSong} />
                 <PrivateRoute
                   path="/edit/author/:slug"

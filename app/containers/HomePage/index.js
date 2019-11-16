@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
+import WaitSheep from 'components/WaitSheep';
 import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import messages from './messages';
 import { changeUsername } from './actions';
@@ -28,6 +28,7 @@ export function HomePage() {
         <p>
           <FormattedMessage {...messages.startProjectMessage} />
         </p>
+        <WaitSheep message="Здесь скоро появится интересная статистика о песнях! И многое другое!" />
       </div>
     </article>
   );
