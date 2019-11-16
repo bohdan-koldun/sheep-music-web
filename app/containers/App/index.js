@@ -39,9 +39,7 @@ import saga from './saga';
 import ScrollToTop from './ScrollToTop';
 import './App.scss';
 
-const AppWrapper = styled.div`
-  display: flex;
-`;
+const AppWrapper = styled.div``;
 
 const AppRightSideWrapper = styled.div`
   width: 100%;
@@ -72,7 +70,7 @@ function App({ onLoadTags, onLoadUser, user }) {
           content="Христианские песни: слова, текст, слушать аудио онлайн, скачать mp3, аккорды, видео"
         />
       </Helmet>
-      <AppWrapper>
+      <AppWrapper id="app-wrapper">
         <Menu user={user} />
         <AppRightSideWrapper>
           <AppContainerWrapper>

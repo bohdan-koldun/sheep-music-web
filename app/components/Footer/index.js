@@ -5,9 +5,8 @@ import { withRouter } from 'react-router';
 import classNames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { MdLibraryMusic, MdAlbum, MdGroup } from 'react-icons/md';
-import { FaYoutube } from 'react-icons/fa';
-
-import LocaleToggle from 'containers/LocaleToggle';
+import { FaYoutube, FaTelegramPlane, FaInstagram } from 'react-icons/fa';
+import { FiFacebook, FiYoutube } from 'react-icons/fi';
 import menuMessages from 'components/Menu/messages';
 import messages from './messages';
 import Logo from './logo.png';
@@ -56,9 +55,11 @@ function Footer({ location }) {
             </Link>
           </div>
         </div>
-        <div className="footer-language">
-          <FormattedMessage {...messages.languageMessage} />
-          <LocaleToggle />
+        <div className="footer-social">
+          <FiFacebook className="social-icon" />
+          <FaInstagram className="social-icon" />
+          <FaTelegramPlane className="social-icon" />
+          <FiYoutube className="social-icon" />
         </div>
       </section>
       <section className="footer-website-rule">

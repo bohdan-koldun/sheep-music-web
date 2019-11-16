@@ -1,3 +1,5 @@
+@import "../../styles/dimensions.scss";
+
 html,
 body {
   height: 100%;
@@ -12,8 +14,17 @@ body {
   min-height: 100%;
   min-width: 100%;
 }
+#app-wrapper{
+  display: flex;
+}
 p,
 label {
   font-family: 'Roboto';
   line-height: 1.5em;
+}
+
+@media screen and (max-width: $max-mobile-width) {
+  #app-wrapper{
+    display: block;
+  }
 }
