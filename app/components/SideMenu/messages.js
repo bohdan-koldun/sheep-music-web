@@ -5,7 +5,7 @@ export const scope = 'app.components.SideMenu';
 export default defineMessages({
   home: {
     id: `${scope}.home`,
-    defaultMessage: 'Home',
+    defaultMessage: 'Главная',
   },
   songs: {
     id: `${scope}.songs`,

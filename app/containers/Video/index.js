@@ -10,6 +10,9 @@ import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { FormattedMessage } from 'react-intl';
+import Breadcrumb from 'components/Breadcrumb';
+import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
 import commonMessages from 'translations/common-messages';
 import {
   makeSelectLoading,
@@ -24,6 +27,8 @@ import './Video.scss';
 export function Video({ onLoadVideo, match, videoData }) {
   useInjectReducer({ key: 'video', reducer });
   useInjectSaga({ key: 'video', saga });
+
+  const intl = useIntl();
 
   useEffect(() => {
     onLoadVideo(match.params.slug);
@@ -55,6 +60,17 @@ export function Video({ onLoadVideo, match, videoData }) {
             <meta property="og:description" content={description} />
             <meta property="og:video" content={videoData.video} />
           </Helmet>
+
+          <Breadcrumb
+            pageList={[
+              {
+                link: '/videos',
+                name: intl.formatMessage(menuMessages.videos),
+              },
+              { link: `/video/${videoData.slug}`, name: videoData.title },
+            ]}
+          />
+
           <h1>
             <FormattedMessage {...commonMessages.video} /> {videoData.title}
           </h1>

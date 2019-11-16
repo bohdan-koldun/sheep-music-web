@@ -9,15 +9,15 @@
 .locale-select {
   border: none;
   &>div{
-    background-color: $light-grey-two;
+    background-color: $light-grey-one;
   }
   
   svg {
-    color: $black-for-menu;
+    color: $dark-two;
   }
 
   span {
-    background-color: $black-for-menu;
+    background-color: $dark-two;
   }
 
 

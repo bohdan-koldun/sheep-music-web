@@ -11,6 +11,7 @@ import commonMessages from 'translations/common-messages';
 import classNames from 'classnames/bind';
 import { MdModeEdit } from 'react-icons/md';
 import { SongPlayList } from 'components/List';
+import Breadcrumb from 'components/Breadcrumb';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import checkUserPermissions from 'utils/checkPermissions';
@@ -20,6 +21,8 @@ import {
   makeSelectPlay,
   makeSelectAudioPlayData,
 } from 'containers/AudioPlayer/selectors';
+import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -45,6 +48,8 @@ export function Album({
 }) {
   useInjectReducer({ key: 'album', reducer });
   useInjectSaga({ key: 'album', saga });
+
+  const intl = useIntl();
 
   useEffect(() => {
     onLoadAlbum(match.params.slug);
@@ -95,6 +100,17 @@ export function Album({
             }]`}
             </script>
           </Helmet>
+
+          <Breadcrumb
+            pageList={[
+              {
+                link: '/albums',
+                name: intl.formatMessage(menuMessages.albums),
+              },
+              { link: `/album/${albumData.slug}`, name: albumData.title },
+            ]}
+          />
+
           <div className="album-header">
             {albumData.thumbnail && (
               <img

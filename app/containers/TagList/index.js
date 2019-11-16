@@ -10,6 +10,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useIntl } from 'containers/LanguageProvider';
 import { makeSelectTags } from 'containers/App/selectors';
+import Breadcrumb from 'components/Breadcrumb';
+import menuMessages from 'components/SideMenu/messages';
 import { SongsMessage } from 'components/Message';
 import messages from './messages';
 import './TagList.scss';
@@ -28,6 +30,16 @@ export function TagList({ tags }) {
           content="Христианские посортирование по темам: рождественские, пасхальные и так далие"
         />
       </Helmet>
+
+      <Breadcrumb
+        pageList={[
+          {
+            link: '/topics',
+            name: intl.formatMessage(menuMessages.topics),
+          },
+        ]}
+      />
+
       <h1>{intl.formatMessage(messages.header)}</h1>
       <div className="list-type-switch">
         <button

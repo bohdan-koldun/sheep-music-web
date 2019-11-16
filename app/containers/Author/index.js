@@ -13,6 +13,9 @@ import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { MdModeEdit } from 'react-icons/md';
 import { FormattedMessage } from 'react-intl';
 import { SongsMessage, AlbumsMessage } from 'components/Message';
+import Breadcrumb from 'components/Breadcrumb';
+import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
 import commonMessages from 'translations/common-messages';
 import { makeSelectUser } from 'containers/App/selectors';
 import {
@@ -41,6 +44,8 @@ export function Author({
 }) {
   useInjectReducer({ key: 'author', reducer });
   useInjectSaga({ key: 'author', saga });
+
+  const intl = useIntl();
 
   useEffect(() => {
     onLoadAuthor(match.params.slug);
@@ -92,6 +97,15 @@ export function Author({
             `}
             </script>
           </Helmet>
+          <Breadcrumb
+            pageList={[
+              {
+                link: '/authors',
+                name: intl.formatMessage(menuMessages.authors),
+              },
+              { link: `/author/${authorData.slug}`, name: authorData.title },
+            ]}
+          />
           <div className="author-header">
             {authorData.thumbnail && (
               <img

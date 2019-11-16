@@ -6,7 +6,9 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
-
+import Breadcrumb from 'components/Breadcrumb';
+import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
 import Pagination from 'components/Pagination';
 import { AlbumPictureList } from 'components/List';
 import { ListFilter } from 'components/Filter';
@@ -44,6 +46,8 @@ export function AlbumList({
 }) {
   useInjectReducer({ key: 'albumList', reducer });
   useInjectSaga({ key: 'albumList', saga });
+
+  const intl = useIntl();
 
   const myRef = useRef(null);
   const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop - 20);
@@ -93,6 +97,16 @@ export function AlbumList({
           content="Христианские песни: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
         />
       </Helmet>
+
+      <Breadcrumb
+        pageList={[
+          {
+            link: '/albums',
+            name: intl.formatMessage(menuMessages.albums),
+          },
+        ]}
+      />
+
       <h1 ref={myRef}>
         <FormattedMessage {...messages.header} />
       </h1>

@@ -1,0 +1,25 @@
+@import "../../styles/colors.scss";
+
+.breadcrumb {
+  margin: 20px 0;
+
+  a {
+    font-size: 16px;
+    color: $dark-three;
+    text-decoration: none;
+
+    &:hover {
+        color: $blue-one;
+    }
+  }
+
+  .last-breadcrumb-link{
+      color: $blue-two;
+  }
+
+  .breadcrumb-arrow {
+    margin: 0 4px;
+    font-size: 28px;
+    color: $dark-two;
+  }
+}

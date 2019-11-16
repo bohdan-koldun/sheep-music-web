@@ -22,8 +22,10 @@ import { DownloadModal } from 'components/Modal';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import checkUserPermissions from 'utils/checkPermissions';
-import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
+import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
+import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
 import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectPlay,
@@ -92,6 +94,16 @@ export function SongChords({
               href={`https://sheep-music.com/chord/${songData.slug}`}
             />
           </Helmet>
+
+          <Breadcrumb
+            pageList={[
+              {
+                link: '/songs',
+                name: intl.formatMessage(menuMessages.songs),
+              },
+              { link: `/chord/${songData.slug}`, name: songData.title },
+            ]}
+          />
 
           <div className="song-page-header">
             <SongImg song={songData} className="song-page-img" />

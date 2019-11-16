@@ -17,7 +17,9 @@ import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { SongPlayList } from 'components/List';
 import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
+import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -168,6 +170,16 @@ export function SongList({
           content="Христианские песни: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
         />
       </Helmet>
+
+      <Breadcrumb
+        pageList={[
+          {
+            link: '/songs',
+            name: intl.formatMessage(menuMessages.songs),
+          },
+        ]}
+      />
+
       <h1 ref={myRef}>
         {curTags ? (
           <React.Fragment>

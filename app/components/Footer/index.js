@@ -8,7 +8,7 @@ import { MdLibraryMusic, MdAlbum, MdGroup } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 
 import LocaleToggle from 'containers/LocaleToggle';
-import headerMessages from 'components/SideMenu/messages';
+import menuMessages from 'components/SideMenu/messages';
 import messages from './messages';
 import Logo from './logo.png';
 import './Footer.scss';
@@ -31,28 +31,28 @@ function Footer({ location }) {
               className={classNames({ 'active-link': pathname === '/songs' })}
             >
               <MdLibraryMusic />
-              <FormattedMessage {...headerMessages.songs} />
+              <FormattedMessage {...menuMessages.songs} />
             </Link>
             <Link
               to="/albums"
               className={classNames({ 'active-link': pathname === '/albums' })}
             >
               <MdAlbum />
-              <FormattedMessage {...headerMessages.albums} />
+              <FormattedMessage {...menuMessages.albums} />
             </Link>
             <Link
               to="/authors"
               className={classNames({ 'active-link': pathname === '/authors' })}
             >
               <MdGroup />
-              <FormattedMessage {...headerMessages.authors} />
+              <FormattedMessage {...menuMessages.authors} />
             </Link>
             <Link
               to="/videos"
               className={classNames({ 'active-link': pathname === '/videos' })}
             >
               <FaYoutube />
-              <FormattedMessage {...headerMessages.videos} />
+              <FormattedMessage {...menuMessages.videos} />
             </Link>
           </div>
         </div>

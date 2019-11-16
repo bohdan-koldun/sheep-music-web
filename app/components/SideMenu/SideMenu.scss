@@ -5,7 +5,7 @@
   min-width: 215px;
   height: auto;
   min-height: 100vh;
-  background: $black-for-menu;
+  background: $dark-two;
 
   hr {
     width: 171px;
@@ -14,7 +14,7 @@
     border: none;
     margin: 5px auto;
     opacity: 0.5;
-    background-color: $light-grey-two;
+    background-color: $light-grey-one;
   }
 }
 
@@ -52,7 +52,7 @@
     padding: 5px 12px;
     margin: 4px 0;
     box-sizing: content-box;
-    color: $light-grey-one;
+    color: $light-grey-two;
     margin-left: 15px;
 
     div {
@@ -112,7 +112,7 @@
     width: 88px;
     height: 32px;
     border-radius: 5px;
-    background-color: $light-grey-two;
+    background-color: $light-grey-one;
     font-size: 18px;
     font-weight: 500;
   }

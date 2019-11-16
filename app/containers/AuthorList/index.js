@@ -7,7 +7,9 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { FormattedMessage } from 'react-intl';
-
+import Breadcrumb from 'components/Breadcrumb';
+import { useIntl } from 'containers/LanguageProvider';
+import menuMessages from 'components/SideMenu/messages';
 import Pagination from 'components/Pagination';
 import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
@@ -45,6 +47,8 @@ export function AuthorList({
 }) {
   useInjectReducer({ key: 'authorList', reducer });
   useInjectSaga({ key: 'authorList', saga });
+
+  const intl = useIntl();
 
   const myRef = useRef(null);
   const scrollToRef = ref => window.scrollTo(0, ref.current.offsetTop - 20);
@@ -94,6 +98,16 @@ export function AuthorList({
           content="Песни христианских исполнителей: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
         />
       </Helmet>
+
+      <Breadcrumb
+        pageList={[
+          {
+            link: '/authors',
+            name: intl.formatMessage(menuMessages.authors),
+          },
+        ]}
+      />
+
       <h1 ref={myRef}>
         <FormattedMessage {...messages.header} />
       </h1>
