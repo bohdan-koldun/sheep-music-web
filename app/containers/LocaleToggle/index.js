@@ -2,24 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { MdLanguage } from 'react-icons/md';
+import Select from 'react-select';
 
-import Toggle from 'components/Toggle';
-import messages from './messages';
 import { appLocales } from '../../i18n';
 import { changeLocale } from '../LanguageProvider/actions';
 import { makeSelectLocale } from '../LanguageProvider/selectors';
 import './LocaleToggle.scss';
 
-export function LocaleToggle(props) {
+export function LocaleToggle({ locale, onLocaleToggle }) {
+  const options = appLocales.map(language => ({
+    value: language,
+    label: language,
+  }));
+
   return (
     <div className="locale-toggle">
-      <MdLanguage />
-      <Toggle
-        value={props.locale}
-        values={appLocales}
-        messages={messages}
-        onToggle={props.onLocaleToggle}
+      <Select
+        value={{ value: locale, label: locale }}
+        onChange={onLocaleToggle}
+        options={options}
+        isSearchable={false}
+        className="locale-select"
       />
     </div>
   );
@@ -39,7 +42,7 @@ const mapStateToProps = createSelector(
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLocaleToggle: evt => dispatch(changeLocale(evt.target.value)),
+    onLocaleToggle: option => dispatch(changeLocale(option && option.value)),
     dispatch,
   };
 }

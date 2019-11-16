@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import classNames from 'classnames/bind';
 import LocaleToggle from 'containers/LocaleToggle';
-import { IoIosMusicalNotes } from 'react-icons/io';
+import { IoIosMusicalNotes, IoIosBookmarks } from 'react-icons/io';
 import {
   FiPlay,
   FiMic,
@@ -14,6 +14,7 @@ import {
   FiFileText,
   FiChevronRight,
 } from 'react-icons/fi';
+import { FaStar } from 'react-icons/fa';
 import { useIntl } from 'containers/LanguageProvider';
 import commonMessages from 'translations/common-messages';
 import Logo from '../../images/sheep music.svg';
@@ -96,6 +97,17 @@ function SideMenu({ location, user }) {
             <FormattedMessage {...messages.videos} />{' '}
           </MenuLink>
         </div>{' '}
+        <hr />
+        <div className="aside-menu-links">
+          <MenuLink linkPath="/favorites">
+            <FaStar className="yellow-icon" />
+            <FormattedMessage {...messages.favorites} />{' '}
+          </MenuLink>
+          <MenuLink linkPath="/notebook">
+            <IoIosBookmarks className="yellow-icon" />
+            <FormattedMessage {...messages.notebook} />{' '}
+          </MenuLink>
+        </div>
         <hr />
         <Link to="/login" className="aside-menu-login">
           <img src={AsideLoginLogo} alt="Sheep Music Login" />

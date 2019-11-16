@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.Header';
+export const scope = 'app.components.SideMenu';
 
 export default defineMessages({
   home: {
@@ -26,5 +26,13 @@ export default defineMessages({
   videos: {
     id: `${scope}.videos`,
     defaultMessage: 'Клипы',
+  },
+  favorites: {
+    id: `${scope}.favorites`,
+    defaultMessage: 'Избранное',
+  },
+  notebook: {
+    id: `${scope}.notebook`,
+    defaultMessage: 'Блокнот',
   },
 });
