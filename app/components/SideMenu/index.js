@@ -43,21 +43,28 @@ function SideMenu({ location, user }) {
   //   };
   // }, []);
 
-  const MenuLink = ({ linkPath, children }) => (
-    <Link
-      to={linkPath}
-      className={classNames({
-        'active-menu-link': pathname === linkPath,
-      })}
-    >
-      <div>{children}</div>
-      {pathname === linkPath && <FiChevronRight className="arrow-icon" />}
-    </Link>
-  );
+  const MenuLink = ({ linkPath, children, subPageRoot }) => {
+    const isActive =
+      pathname === linkPath ||
+      (subPageRoot && new RegExp(subPageRoot).test(pathname));
+
+    return (
+      <Link
+        to={linkPath}
+        className={classNames({
+          'active-menu-link': isActive,
+        })}
+      >
+        <div>{children}</div>
+        {isActive && <FiChevronRight className="arrow-icon" />}
+      </Link>
+    );
+  };
 
   MenuLink.propTypes = {
     linkPath: PropTypes.string,
     children: PropTypes.array,
+    subPageRoot: PropTypes.string,
   };
 
   return (
@@ -80,19 +87,19 @@ function SideMenu({ location, user }) {
             <FiGrid />
             <FormattedMessage {...messages.topics} />{' '}
           </MenuLink>
-          <MenuLink linkPath="/songs">
+          <MenuLink linkPath="/songs" subPageRoot="/song/">
             <FiFileText />
             <FormattedMessage {...messages.songs} />{' '}
           </MenuLink>
-          <MenuLink linkPath="/authors">
+          <MenuLink linkPath="/authors" subPageRoot="/author/">
             <FiMic />
             <FormattedMessage {...messages.authors} />{' '}
           </MenuLink>
-          <MenuLink linkPath="/albums">
+          <MenuLink linkPath="/albums" subPageRoot="/album/">
             <IoIosMusicalNotes />
             <FormattedMessage {...messages.albums} />{' '}
           </MenuLink>
-          <MenuLink linkPath="/videos">
+          <MenuLink linkPath="/videos" subPageRoot="/video/">
             <FiPlay />
             <FormattedMessage {...messages.videos} />{' '}
           </MenuLink>
