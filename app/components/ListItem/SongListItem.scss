@@ -1,6 +1,7 @@
 @import "../../styles/colors.scss";
 
 .song-list-item {
+  min-width: 320px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -36,4 +37,11 @@
   max-width: 100%;
   font-size: 12px; 
   color: #929292;
+}
+
+@media screen and (max-width: 600px) {
+  .song-list-item {
+    min-width: 200px;
+    width: 100%;
+  }
 }
