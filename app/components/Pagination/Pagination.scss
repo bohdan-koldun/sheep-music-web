@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .pagination {
   margin: 30px auto;
   padding: 0;
@@ -28,7 +30,7 @@
       &:hover {
         transition: all ease 0.5s;
         color: #fff;
-        background-color: #e2263e;
+        background-color: $dark-three;
       }
     }
 
@@ -39,7 +41,7 @@
   .active {
     a {
       color: #fff;
-      background: #e2263e;
+      background: $dark-three;
     }
 
   }
