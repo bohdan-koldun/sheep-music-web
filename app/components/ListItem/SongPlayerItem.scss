@@ -1,5 +1,5 @@
 .song-play-list-item {
-  min-width: 320px;
+  width: 320px;
   display: flex;
   width: 100%;
   max-width: 500px;
@@ -32,7 +32,6 @@
 
 @media screen and (max-width: 600px) {
   .song-play-list-item {
-    min-width: 200px;
     width: 100%;
   }
 }

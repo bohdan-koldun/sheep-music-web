@@ -1,5 +1,5 @@
 .song-album-item {
-  min-width: 340px;
+  width: 340px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -22,7 +22,6 @@
 
 @media screen and (max-width: 600px) {
   .song-album-item {
-    min-width: 200px;
     width: 100%;
   }
 }
