@@ -23,8 +23,16 @@ label {
   line-height: 1.5em;
 }
 
+.page-container-wrapper {
+  padding: 0 40px;
+}
+
 @media screen and (max-width: $max-mobile-width) {
   #app-wrapper{
     display: block;
+  }
+
+  .page-container-wrapper {
+    padding: 0 20px;
   }
 }

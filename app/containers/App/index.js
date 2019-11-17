@@ -75,7 +75,7 @@ function App({ onLoadTags, onLoadUser, user }) {
       <AppWrapper id="app-wrapper">
         <Menu user={user} />
         <AppRightSideWrapper>
-          <AppContainerWrapper>
+          <AppContainerWrapper className="page-container-wrapper">
             <ScrollToTop>
               <Switch>
                 <Route exact path="/" component={HomePage} />
