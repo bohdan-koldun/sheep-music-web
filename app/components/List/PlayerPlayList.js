@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SongPlayerItem } from 'components/ListItem';
+import { FormattedMessage } from 'react-intl';
+import commonMessages from 'translations/common-messages';
 import './PlayerPlayList.scss';
 
 function PlayerPlayList({ songs, playData, play, playPauseSong }) {
   return songs ? (
     <div className="player-song-list">
+      <h1>
+        <FormattedMessage {...commonMessages.playlist} />
+      </h1>
       {songs.map((song, index) => (
         <SongPlayerItem
           key={song.slug}

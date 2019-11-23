@@ -8,7 +8,8 @@ import { PlayerPlayList } from 'components/List';
 import {
   MdClose,
 } from 'react-icons/md';
-
+import { FiPlay, FiPause } from "react-icons/fi";
+import { SongImg } from 'components/Img';
 import { useInjectReducer } from 'utils/injectReducer';
 import { SongPlayer } from 'components/Player';
 import {
@@ -49,12 +50,41 @@ export function AudioPlayer({
               <div className="play-list-header">
                 <button className="close-button" type="button" onClick={onShowPlayList}><MdClose/></button>
               </div>
-              <PlayerPlayList
-                songs={playList}
-                playPauseSong={onPlayById}
-                playData={playData}
-                play={play}
-              />
+              <div className="sheep-music-player-list-content">
+                <div className="full-player-left-wrapper">
+                  <div className="full-player-card-wrapper">
+                    <div className="img-wrapper">
+                      <SongImg song={playData.song} className="full-player-img" />
+                      <div className="dark-line"></div>
+                    </div>
+                   
+                    <div className="full-player-play-song-info">
+                      {playData.song.title} - <br/>{playData.song.author && playData.song.author.title}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => onPlayPause()}
+                      className="play-card-button"
+                    >
+                      {play ? (
+                        <FiPause
+                          className="play-card-icon"
+                        />
+                      ) : (
+                        <FiPlay
+                          className="play-card-icon"
+                        />
+                      )}
+                    </button>
+                  </div>
+                </div>
+                <PlayerPlayList
+                  songs={playList}
+                  playPauseSong={onPlayById}
+                  playData={playData}
+                  play={play}
+                />
+              </div>
             </div>
           }
     

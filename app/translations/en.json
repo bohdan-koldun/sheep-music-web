@@ -15,6 +15,7 @@
   "app.common.logout": "Logout",
   "app.common.words": "Words",
   "app.common.chords": "Chords",
+  "app.common.playlist": "Playlist",
   "app.components.Footer.author.message": "Made with love by {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",
   "app.components.Footer.website.menu": "Menu:",

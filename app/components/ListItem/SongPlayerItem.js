@@ -1,10 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import ReactTooltip from 'react-tooltip';
-import { MdPlayCircleFilled, MdPauseCircleFilled } from 'react-icons/md';
+import { IoMdPause, IoMdPlay } from 'react-icons/io';
 import messages from 'components/Player/messages';
 import { SongImg } from '../Img';
 import './SongPlayerItem.scss';
@@ -22,12 +21,12 @@ class SongPlayerItem extends React.Component {
           className="icon-button"
         >
           {play && playData && playData.song && song.id === playData.song.id ? (
-            <MdPauseCircleFilled
+            <IoMdPause
               data-tip={intl.formatMessage(messages.pause)}
               className="song-icon"
             />
           ) : (
-            <MdPlayCircleFilled
+            <IoMdPlay
               data-tip={intl.formatMessage(messages.play)}
               className={classNames('song-icon', {
                 'icon-disable': !(song.audioMp3 && song.audioMp3.path),
@@ -37,7 +36,7 @@ class SongPlayerItem extends React.Component {
         </button>
         <SongImg song={song} className="song-player-img" />
         <div className="song-play-list-item-description">
-          <Link to={`/song/${song.slug}`}>{song.title}</Link>
+          <span className="song-title">{song.title}</span>
           <br />
           <span>{song.author && song.author.title}</span>
         </div>

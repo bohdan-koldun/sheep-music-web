@@ -15,6 +15,7 @@
   "app.common.logout": "Выйти",
   "app.common.words": "Cлова",
   "app.common.chords": "Аккорды",
+  "app.common.playlist": "Плейлист",
   "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
   "app.components.Footer.website.menu": "Меню:",

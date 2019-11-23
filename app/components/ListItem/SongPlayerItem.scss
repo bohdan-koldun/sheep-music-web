@@ -1,3 +1,5 @@
+@import "../../styles/colors.scss";
+
 .song-play-list-item {
   width: 320px;
   display: flex;
@@ -10,6 +12,7 @@
   page-break-inside: avoid;
   /* Theoretically FF 20+ */
   break-inside: avoid-column;
+  border-top: 1px solid $light-grey-one;
 
   a {
     color: #fff;
@@ -24,6 +27,15 @@
 
 .song-play-list-item-description {
   margin: 10px 2px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .song-title {
+    font-size: 14px;
+    font-weight: 400;
+  }
 
   span {
     font-size: 12px;

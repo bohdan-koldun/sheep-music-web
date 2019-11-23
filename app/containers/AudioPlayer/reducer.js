@@ -64,21 +64,28 @@ const audioPlayerReducer = (state = initialState, action) =>
         draft.play = !draft.play;
         draft.showPlayer = true;
         break;
-      case SET_PLAY_BY_LIST_ID:
+      case SET_PLAY_BY_LIST_ID: {
+        const currSong = state.playData.song;
+        const newSong = state.playList[action.listId];
+
         draft.showPlayer = true;
-        draft.play = true;
+        draft.play =
+          !currSong || !newSong || currSong.id !== newSong.id
+            ? true
+            : !state.play;
         draft.playData = {
           prevPlayListId:
             action.listId > 0 && action.listId < state.playList.length
               ? action.listId - 1
               : null,
-          song: { ...state.playList[action.listId] },
+          song: { ...newSong },
           nextPlayListId:
             action.listId >= 0 && action.listId < state.playList.length - 1
               ? action.listId + 1
               : null,
         };
         break;
+      }
       case SET_SHOW_PLAYER_LIST:
         draft.showPlayerList = !state.showPlayerList;
         break;

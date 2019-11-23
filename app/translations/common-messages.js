@@ -67,4 +67,8 @@ export default defineMessages({
     id: `${scope}.chords`,
     defaultMessage: 'Аккорды',
   },
+  playlist: {
+    id: `${scope}.playlist`,
+    defaultMessage: 'Плейлист',
+  },
 });
