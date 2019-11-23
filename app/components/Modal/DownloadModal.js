@@ -10,7 +10,7 @@ function DownloadModal({ isOpen, onCloseModal, downloadUrl, title }) {
   Modal.setAppElement('#app');
 
   return (
-    <Modal isOpen={isOpen} className="download-modal">
+    <Modal isOpen={isOpen} styles={{ zIndex: 200 }} className="download-modal">
       <a
         href={downloadUrl}
         onClick={() => setTimeout(onCloseModal, 1000)}

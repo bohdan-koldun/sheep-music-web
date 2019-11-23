@@ -5,9 +5,9 @@ import 'rc-slider/assets/index.css';
 import 'rc-tooltip/assets/bootstrap.css';
 import './VolumeSlider.scss';
 
-function VolumeSlider({ value, onChange }) {
+function VolumeSlider({ value, onChange, className }) {
   return (
-    <div className="volume-player-slider">
+    <div className={`volume-player-slider${className ? ` ${className}` : ''}`}>
       <Slider
         min={0}
         max={1000}
@@ -20,6 +20,7 @@ function VolumeSlider({ value, onChange }) {
 VolumeSlider.propTypes = {
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default VolumeSlider;

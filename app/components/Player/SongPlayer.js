@@ -4,18 +4,16 @@ import ReactPlayer from 'react-player';
 import ReactTooltip from 'react-tooltip';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { MdVolumeUp, MdVolumeOff, MdVerticalAlignBottom } from 'react-icons/md';
 import {
-  MdPause,
-  MdPlayArrow,
-  MdSkipNext,
-  MdSkipPrevious,
-  MdVolumeUp,
-  MdVolumeOff,
-  MdRepeat,
-  MdShuffle,
-  MdVerticalAlignBottom,
-  MdQueueMusic,
-} from 'react-icons/md';
+  IoMdRewind,
+  IoIosFastforward,
+  IoMdPause,
+  IoMdPlay,
+  IoIosShuffle,
+  IoIosRepeat,
+  IoMdMore,
+} from 'react-icons/io';
 import { DownloadModal } from 'components/Modal';
 import { SongImg } from '../Img';
 import messages from './messages';
@@ -193,6 +191,22 @@ class SongPlayer extends Component {
 
           <div className="song-player-control">
             <div className="group-control-first">
+              <Link to={`/song/${song.slug}`} className="player-song-link">
+                <SongImg song={song} className="song-player-img" />
+                <div>
+                  <span>{song.title}</span>
+                  <br />
+                  <span className="author-line">
+                    {song.author && song.author.title}
+                  </span>
+                  <br />
+                  <span className="player-timer hide-desktop">
+                    <Duration seconds={played * duration} />
+                    {' / '}
+                    <Duration seconds={duration} />
+                  </span>
+                </div>
+              </Link>
               <button
                 type="button"
                 onClick={() =>
@@ -201,7 +215,7 @@ class SongPlayer extends Component {
                 }
                 className="icon-button"
               >
-                <MdSkipPrevious
+                <IoMdRewind
                   data-tip={intl.formatMessage(messages.prev)}
                   className={classNames('player-icon', {
                     'icon-disable': !prevPlayListId && prevPlayListId !== 0,
@@ -210,12 +224,12 @@ class SongPlayer extends Component {
               </button>
               <button type="button" onClick={playPause} className="icon-button">
                 {!playing ? (
-                  <MdPlayArrow
+                  <IoMdPlay
                     data-tip={intl.formatMessage(messages.play)}
                     className="player-icon play-icon"
                   />
                 ) : (
-                  <MdPause
+                  <IoMdPause
                     data-tip={intl.formatMessage(messages.pause)}
                     className="player-icon play-icon"
                   />
@@ -226,13 +240,13 @@ class SongPlayer extends Component {
                 onClick={() => nextPlayListId && onPrevNext(nextPlayListId)}
                 className="icon-button"
               >
-                <MdSkipNext
+                <IoIosFastforward
                   className={classNames('player-icon', {
                     'icon-disable': !nextPlayListId,
                   })}
                 />
               </button>
-              <span>
+              <span className="player-timer hide-mobile">
                 <Duration seconds={played * duration} />
                 {' / '}
                 <Duration seconds={duration} />
@@ -240,14 +254,6 @@ class SongPlayer extends Component {
             </div>
 
             <div className="group-control-second">
-              <Link to={`/song/${song.slug}`} className="player-song-link">
-                <SongImg song={song} className="song-player-img" />
-                <div>
-                  <b>{song.title}</b>
-                  <br />
-                  <span>{song.author && song.author.title}</span>
-                </div>
-              </Link>
               <button type="button" className="icon-button">
                 <MdVerticalAlignBottom
                   data-tip={intl.formatMessage(messages.download)}
@@ -256,38 +262,18 @@ class SongPlayer extends Component {
                 />
               </button>
               <button type="button" className="icon-button">
-                <MdQueueMusic
+                <IoMdMore
                   data-tip={intl.formatMessage(messages.list)}
                   onClick={() => onShowPlayList()}
                   className="player-icon"
                 />
               </button>
-            </div>
-            <div className="group-control-third">
-              <VolumeSlider value={volume * 1000} onChange={this.setVolume} />
-              <button
-                type="button"
-                onClick={this.toggleMuted}
-                className="icon-button"
-              >
-                {!muted ? (
-                  <MdVolumeUp
-                    data-tip={intl.formatMessage(messages.volumeOff)}
-                    className="player-icon"
-                  />
-                ) : (
-                  <MdVolumeOff
-                    data-tip={intl.formatMessage(messages.volumeOn)}
-                    className="player-icon"
-                  />
-                )}
-              </button>
               <button
                 type="button"
                 onClick={this.toggleLoop}
-                className="icon-button"
+                className="icon-button hide-mobile"
               >
-                <MdRepeat
+                <IoIosRepeat
                   data-tip={intl.formatMessage(messages.loop)}
                   className={classNames('player-icon', { 'icon-active': loop })}
                 />
@@ -295,13 +281,33 @@ class SongPlayer extends Component {
               <button
                 type="button"
                 onClick={onMixPlayList}
-                className="icon-button"
+                className="icon-button hide-mobile"
               >
-                <MdShuffle
+                <IoIosShuffle
                   className="player-icon"
                   data-tip={intl.formatMessage(messages.shuffle)}
                 />
               </button>
+              <div className="volume-control">
+                <button
+                  type="button"
+                  onClick={this.toggleMuted}
+                  className="icon-button"
+                >
+                  {!muted ? (
+                    <MdVolumeUp
+                      data-tip={intl.formatMessage(messages.volumeOff)}
+                      className="player-icon volume-icon"
+                    />
+                  ) : (
+                    <MdVolumeOff
+                      data-tip={intl.formatMessage(messages.volumeOn)}
+                      className="volume-icon player-icon"
+                    />
+                  )}
+                </button>
+                <VolumeSlider value={volume * 1000} onChange={this.setVolume} />
+              </div>
             </div>
           </div>
 

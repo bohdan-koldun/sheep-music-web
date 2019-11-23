@@ -1,19 +1,27 @@
+@import "../../styles/colors.scss";
+
+.ReactModalPortal {
+  &>div {
+    z-index: 200;
+  }
+}
+
 .download-modal {
   position: absolute;
-  z-index: 101S;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100%;
-  background: #323232a8;
   font-size: 24px;
+  background: #07070782;
   color: #fff;
   padding: 20px;
 
-  .download-button{
-    background:#fff;;
+  .download-button {
+    background: $yellow;
+    color: $dark-one;
     text-decoration: none;
     border-radius: 5px;
     outline: none;
@@ -22,18 +30,26 @@
     width: 100%;
     max-width: 500px;
     text-align: center;
-}
 
-  .cancel-button{
-      background: #000;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      outline: none;
-      margin: 10px;
-      padding: 12px 16px;
-      width: 100%;
-      max-width: 500px;
+    &:hover {
+      color: $blue-one;
+    }
+  }
+
+  .cancel-button {
+    background: $dark-one;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    margin: 10px;
+    padding: 12px 16px;
+    width: 100%;
+    max-width: 500px;
+    cursor: pointer;
+    &:hover {
+      color: $light-grey-one;
+    }
   }
 }
 
