@@ -2,11 +2,9 @@
 @import "../../styles/dimensions.scss";
 
 .player-song-list {
-  display: flex;
-  flex-wrap: wrap;
   width: 50%;
 
-  h1{
+  h1 {
     margin-top: 0;
     position: sticky;
     width: 100%;
@@ -14,9 +12,8 @@
     text-transform: uppercase;
     background: $grey-one;
     text-align: left;
-    top: 0;
   }
- 
+
 
   .icon-button {
     border: none;
@@ -40,5 +37,10 @@
   .player-song-list {
     display: block;
     width: 100%;
+
+    h1 {
+      padding-top: 30px;
+      position: static;
+    }
   }
 }
