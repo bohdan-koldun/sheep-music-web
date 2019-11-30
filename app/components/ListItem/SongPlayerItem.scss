@@ -1,16 +1,19 @@
 @import "../../styles/colors.scss";
 
 .song-play-list-item {
-  width: 320px;
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  -webkit-column-break-inside: avoid;
+  width: 100%;
+  border: none;
   border-top: 1px solid $light-grey-one;
+  background: none;
+  color: #fff;
+  cursor: pointer;
 
-  a {
-    color: #fff;
+  &:focus {
+    outline: none;
+    color: $yellow;
   }
 
   .song-player-img {
@@ -26,6 +29,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
 
   .song-title {
     font-size: 14px;
@@ -35,6 +39,17 @@
   span {
     font-size: 12px;
   }
+}
+
+.player-list-song {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.player-song-duration {
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 600px) {

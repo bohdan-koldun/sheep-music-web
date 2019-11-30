@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import ReactTooltip from 'react-tooltip';
 import { IoMdPause, IoMdPlay } from 'react-icons/io';
 import messages from 'components/Player/messages';
+import Duration from 'components/Player/Duration';
 import { SongImg } from '../Img';
 import './SongPlayerItem.scss';
 
@@ -14,12 +15,12 @@ class SongPlayerItem extends React.Component {
     const { intl } = this.context;
 
     return (
-      <div className="song-play-list-item">
-        <button
-          type="button"
-          onClick={() => playPauseSong(listId)}
-          className="icon-button"
-        >
+      <button
+        type="button"
+        className="song-play-list-item"
+        onClick={() => playPauseSong(listId)}
+      >
+        <div className="player-list-song">
           {play && playData && playData.song && song.id === playData.song.id ? (
             <IoMdPause
               data-tip={intl.formatMessage(messages.pause)}
@@ -33,16 +34,19 @@ class SongPlayerItem extends React.Component {
               })}
             />
           )}
-        </button>
-        <SongImg song={song} className="song-player-img" />
-        <div className="song-play-list-item-description">
-          <span className="song-title">{song.title}</span>
-          <br />
-          <span>{song.author && song.author.title}</span>
-        </div>
 
+          <SongImg song={song} className="song-player-img" />
+          <div className="song-play-list-item-description">
+            <span className="song-title">{song.title}</span>
+            <br />
+            <span>{song.author && song.author.title}</span>
+          </div>
+        </div>
+        <div className="player-song-duration">
+          <Duration seconds={song.audioMp3 && song.audioMp3.duration} />
+        </div>
         <ReactTooltip place="top" type="dark" effect="float" />
-      </div>
+      </button>
     );
   }
 }
