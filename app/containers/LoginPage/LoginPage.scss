@@ -1,30 +1,61 @@
-.login-page{
-    display: flex;
-    justify-content: center;
+@import "../../styles/colors.scss";
 
-    .login-form{
-        width: 100%;
-        max-width: 500px;
+.login-page {
+  display: flex;
+  justify-content: center;
 
-        input, button {
-            width: 100%;
-            margin-top: 20px;
-        }
+  .login-form {
+    width: 100%;
+    max-width: 500px;
 
-        input{
-            padding: 5px 20px;
-        }
+    input,
+    button {
+      width: 100%;
+      margin-top: 20px;
     }
 
-    .login-error{
-        color: red;
-        margin-top: 10px;
-        text-align: center;
+    input {
+      padding: 5px 20px;
+    }
+  }
+
+  .login-error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .user {
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .moderator-statistic {
+    margin-top: 30px;
+    max-width: 500px;
+    text-align: left;
+    font-weight: 400;
+    padding: 10px 15px;
+    background: $yellow;
+    border-radius: 4px;
+
+    b {
+      font-size: 18px;
+      padding: 5px;
+      margin-left: 30px;
+      background: $dark-one;
+      color: #fff;
+      border-radius: 2px;
     }
 
-    .user{
-        font-weight: 700;
-         text-align: center;
+    p {
+      display: flex;
+      justify-content: space-between;
     }
+
+    h4 {
+      padding-bottom: 20px;
+    }
+  }
 
 }

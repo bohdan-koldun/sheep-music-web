@@ -13,6 +13,7 @@ import menuMessages from 'components/Menu/messages';
 import commonMessages from 'translations/common-messages';
 import { makeSelectUser } from 'containers/App/selectors';
 import { logout } from 'containers/App/actions';
+import checkUserPermissions from 'utils/checkPermissions';
 import { makeSelectLoading, makeSelectError } from './selectors';
 import { login } from './actions';
 import reducer from './reducer';
@@ -78,6 +79,20 @@ export function LoginPage({ onLogin, onLogout, loading, error, user }) {
               <button type="button" onClick={() => onLogout()}>
                 {intl.formatMessage(commonMessages.logout)}
               </button>
+              {checkUserPermissions(user, ['admin', 'moderator']) && (
+                <div className="moderator-statistic">
+                  <h4>Статистика редактирования:</h4>
+                  <p>
+                    Количество песен: <b>{user.songs}</b>
+                  </p>
+                  <p>
+                    Количество альбомов: <b>{user.albums}</b>
+                  </p>
+                  <p>
+                    Количество исполнителей: <b>{user.authors}</b>
+                  </p>
+                </div>
+              )}
             </div>
           )
         )}
