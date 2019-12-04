@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import commonMessages from 'translations/common-messages';
 import { SongsMessage } from 'components/Message';
 import { Link } from 'react-router-dom';
 import './AlbumListItem.scss';
 
 function AlbumListItem({ album }) {
   return (
-    <div className="song-album-item">
+    <Link to={`/album/${album.slug}`} className="song-album-item">
       <img src={album.thumbnail && album.thumbnail.path} alt={album.title} />
-      <div>
-        <Link to={`/album/${album.slug}`}>{album.title}</Link>
-        <br />
+      <div className="album-item-name">
+        <h4>{album.title}</h4>
+      </div>
+      <div className="album-item-info">
         <span>
-          <FormattedMessage {...commonMessages.album} />{' '}
-          {album.year && ` • ${album.year}`} {' • '} {album.songs || 0}{' '}
+          {album.year && `${album.year} • `} {album.songs || 0}{' '}
           <SongsMessage count={album.songs || 0} />
+          {album.author && ` • ${album.author.title}`}
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
 

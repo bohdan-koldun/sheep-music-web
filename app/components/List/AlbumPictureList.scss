@@ -1,6 +1,14 @@
+@import "../../styles/dimensions.scss";
+
 .album-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
 
+
+@media screen and (max-width: $max-mobile-width) {
+  .album-list {
+    justify-content: space-evenly;
+  }
 }
