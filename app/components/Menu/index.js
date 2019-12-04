@@ -92,7 +92,7 @@ function Menu({ location, user }) {
         })}
         ref={menuElem}
       >
-        <div className="aside-menu-content-wraper">
+        <div className="aside-menu-content-wrapper">
           <div className="aside-menu-content">
             <div className="aside-menu-logo">
               <Link to="/">
