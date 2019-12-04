@@ -92,60 +92,62 @@ function Menu({ location, user }) {
         })}
         ref={menuElem}
       >
-        <div className="aside-menu-content">
-          <div className="aside-menu-logo">
-            <Link to="/">
-              <img src={Logo} alt="Sheep Music" />
-            </Link>{' '}
-          </div>{' '}
-          <div className="aside-menu-links">
-            <MenuLink linkPath="/topics">
-              <FiGrid />
-              <FormattedMessage {...messages.topics} />{' '}
-            </MenuLink>
-            <MenuLink linkPath="/songs" subPageRoot="/song/">
-              <FiFileText />
-              <FormattedMessage {...messages.songs} />{' '}
-            </MenuLink>
-            <MenuLink linkPath="/authors" subPageRoot="/author/">
-              <FiMic />
-              <FormattedMessage {...messages.authors} />{' '}
-            </MenuLink>
-            <MenuLink linkPath="/albums" subPageRoot="/album/">
-              <IoIosMusicalNotes />
-              <FormattedMessage {...messages.albums} />{' '}
-            </MenuLink>
-            <MenuLink linkPath="/videos" subPageRoot="/video/">
-              <FiPlay />
-              <FormattedMessage {...messages.videos} />{' '}
-            </MenuLink>
-          </div>{' '}
-          <hr />
-          <div className="aside-menu-links">
-            <MenuLink linkPath="/favorites">
-              <FaStar className="yellow-icon" />
-              <FormattedMessage {...messages.favorites} />{' '}
-            </MenuLink>
-            <MenuLink linkPath="/notebook">
-              <IoIosBookmarks className="yellow-icon" />
-              <FormattedMessage {...messages.notebook} />{' '}
-            </MenuLink>
+        <div className="aside-menu-content-wraper">
+          <div className="aside-menu-content">
+            <div className="aside-menu-logo">
+              <Link to="/">
+                <img src={Logo} alt="Sheep Music" />
+              </Link>{' '}
+            </div>{' '}
+            <div className="aside-menu-links">
+              <MenuLink linkPath="/topics">
+                <FiGrid />
+                <FormattedMessage {...messages.topics} />{' '}
+              </MenuLink>
+              <MenuLink linkPath="/songs" subPageRoot="/song/">
+                <FiFileText />
+                <FormattedMessage {...messages.songs} />{' '}
+              </MenuLink>
+              <MenuLink linkPath="/authors" subPageRoot="/author/">
+                <FiMic />
+                <FormattedMessage {...messages.authors} />{' '}
+              </MenuLink>
+              <MenuLink linkPath="/albums" subPageRoot="/album/">
+                <IoIosMusicalNotes />
+                <FormattedMessage {...messages.albums} />{' '}
+              </MenuLink>
+              <MenuLink linkPath="/videos" subPageRoot="/video/">
+                <FiPlay />
+                <FormattedMessage {...messages.videos} />{' '}
+              </MenuLink>
+            </div>{' '}
+            <hr />
+            <div className="aside-menu-links">
+              <MenuLink linkPath="/favorites">
+                <FaStar className="yellow-icon" />
+                <FormattedMessage {...messages.favorites} />{' '}
+              </MenuLink>
+              <MenuLink linkPath="/notebook">
+                <IoIosBookmarks className="yellow-icon" />
+                <FormattedMessage {...messages.notebook} />{' '}
+              </MenuLink>
+            </div>
+            <hr />
+            <Link
+              to="/login"
+              className="aside-menu-login"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+            >
+              <img src={AsideLoginLogo} alt="Sheep Music Login" />
+              <button type="button">
+                {user ? user.name : intl.formatMessage(commonMessages.login)}
+              </button>
+            </Link>
+            <hr />
+            <div className="aside-menu-locale">
+              <LocaleToggle />
+            </div>{' '}
           </div>
-          <hr />
-          <Link
-            to="/login"
-            className="aside-menu-login"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-          >
-            <img src={AsideLoginLogo} alt="Sheep Music Login" />
-            <button type="button">
-              {user ? user.name : intl.formatMessage(commonMessages.login)}
-            </button>
-          </Link>
-          <hr />
-          <div className="aside-menu-locale">
-            <LocaleToggle />
-          </div>{' '}
         </div>
       </aside>
     </React.Fragment>

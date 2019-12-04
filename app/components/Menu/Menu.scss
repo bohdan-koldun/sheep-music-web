@@ -8,6 +8,8 @@
   height: auto;
   min-height: 100vh;
   background: $dark-two;
+  position: relative;
+
 
   hr {
     width: 171px;
@@ -23,6 +25,16 @@
 .aside-menu-content {
   display: flex;
   flex-direction: column;
+
+
+}
+
+.aside-menu-content-wraper {
+  height: 100vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  padding-bottom: 30px;
 }
 
 .aside-menu-logo {
