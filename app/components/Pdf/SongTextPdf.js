@@ -15,22 +15,22 @@ import {
 } from '@react-pdf/renderer';
 import * as striptags from 'striptags';
 import sheep from '../../images/icon-512x512.png';
+import robotoMono from '../../styles/fonts/robotomono/RobotoMono-Regular.ttf';
+import robotoMonoBold from '../../styles/fonts/robotomono/RobotoMono-Bold.ttf';
+import robotoMonoItalic from '../../styles/fonts/robotomono/RobotoMono-Italic.ttf';
 
 Font.register({
-  family: 'DejaVu Sans',
+  family: 'Roboto Mono',
   fonts: [
     {
-      src:
-        'https://kendo.cdn.telerik.com/2017.2.621/styles/fonts/DejaVu/DejaVuSans.ttf',
+      src: robotoMono,
     },
     {
-      src:
-        'https://kendo.cdn.telerik.com/2017.2.621/styles/fonts/DejaVu/DejaVuSans-Bold.ttf',
+      src: robotoMonoBold,
       fontWeight: 'bold',
     },
     {
-      src:
-        'https://kendo.cdn.telerik.com/2017.2.621/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf',
+      src: robotoMonoItalic,
       fontStyle: 'italic',
     },
   ],
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    marginTop: 15,
+    marginTop: 5,
     marginBottom: 10,
   },
   headerSong: {
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     paddingTop: 35,
     paddingBottom: 80,
     paddingHorizontal: 35,
-    fontFamily: 'DejaVu Sans',
+    fontFamily: 'Roboto Mono',
     fontSize: 14,
     lineHeight: '1.2',
   },
