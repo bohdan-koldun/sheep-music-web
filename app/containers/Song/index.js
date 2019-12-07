@@ -18,7 +18,7 @@ import {
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 import { SongPdfGenerator } from 'components/Pdf';
-import { SongImg } from 'components/Img';
+import { SongImg, songImgUrl } from 'components/Img';
 import { DownloadModal } from 'components/Modal';
 import Breadcrumb from 'components/Breadcrumb';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -73,26 +73,38 @@ export function Song({
     }
   };
 
+  const title =
+    songData &&
+    `${songData.title}${
+      songData.author ? ` | ${songData.author.title}` : ''
+    } | Слова, Аккорды, Видео`;
+
+  const description =
+    songData &&
+    `${
+      songData.title
+    }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`;
+
+  const canonicalUrl =
+    songData && `https://sheep-music.com/song/${songData.slug}`;
+
   return (
     <React.Fragment>
       {songData ? (
         <div>
           <Helmet>
-            <title>
-              {songData.title}{' '}
-              {songData.author ? ` | ${songData.author.title}` : ''}
-              {` | Слова, Аккорды, Видео`}
-            </title>
-            <meta
-              name="description"
-              content={`${
-                songData.title
-              }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
-            />
-            <link
-              rel="canonical"
-              href={`https://sheep-music.com/song/${songData.slug}`}
-            />
+            <title>{title}</title>
+            <meta name="description" content={description} />
+
+            <link rel="canonical" href={canonicalUrl} />
+            <meta name="og:title" content={title} />
+            <meta name="og:description" content={description} />
+            <meta name="og:image" content={songImgUrl(songData)} />
+            <meta name="og:url" content={canonicalUrl} />
+            <meta name="og:site_name" content="Sheep Music" />
+            <meta name="og:video" content={songData.video} />
+            <meta name="fb:app_id" content="464243220625029" />
+
             <script type="application/ld+json">
               {`
             "@context": "https://schema.org",
@@ -106,7 +118,7 @@ export function Song({
               "@type": "ListItem",
               "position": 2,
               "name": "${songData.title}",
-              "item": "https://sheep-music.com/song/${songData.slug}"
+              "item": "${canonicalUrl}"
             }]
             `}
             </script>
