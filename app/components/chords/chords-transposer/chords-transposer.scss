@@ -1,80 +1,96 @@
 @import "../../../styles/colors.scss";
 
- .chords-pre {
-   text-align: unset;
-   padding: 15px;
-   line-height: 1.6;
+.chords-pre {
+  text-align: unset;
+  padding: 15px;
+  line-height: 1.6;
 
-   span {
-     display: flex;
-   }
+  span {
+    display: flex;
+  }
 
-   b.c {
-     color: #2159D6;
-     cursor: pointer;
-   }
+  b.c {
+    color: $blue-one;
+    cursor: pointer;
+  }
 
-   b {
-     font-weight: normal;
-   }
- }
+  b {
+    font-weight: normal;
+  }
 
- .chord-tooltip {
-   color: #FFF;
-   font-size: 20px !important;
-   pointer-events: auto !important;
+  .type-dark {
+    background-color: $yellow !important;
+    padding: 5px !important;
+    border-radius: 10px;
+  }
 
-   &:hover {
-     visibility: visible !important;
-     opacity: 1 !important;
-   }
- }
+  .place-bottom:after {
+    border-bottom-color: $yellow !important;
+  }
+
+  .place-top:after {
+    border-top-color: $yellow !important;
+  }
+}
 
 
- .transpose-keys {
-   margin: 25px 15px 0;
-   overflow: auto;
-   font: normal 11px sans-serif;
- }
+.chord-tooltip {
+  color: #fff;
+  background-color: $yellow;
+  font-size: 20px !important;
+  pointer-events: auto !important;
 
- .transpose-keys span {
-   display: block;
-   float: left;
-   width: 2.25em;
-   text-align: center;
-   margin: 0 .3em .3em 0;
-   color: #333;
-   background: #eee;
-   text-decoration: none;
-   padding: .4em 0;
-   border: solid 1px transparent;
-   outline: none;
-   cursor: pointer;
- }
+  &:hover {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
 
- .transpose-keys span.selected {
-   background: $yellow;
-   color: #000;
-   font-weight: 700;
- }
 
- .buttonPlay {
-   text-indent: -9999em;
-   background: none;
-   border-right: none;
-   width: 21px;
-   height: 30px;
-   border-left: solid 20px rgb(37, 37, 37);
-   border-bottom: solid 15px transparent;
-   border-top: solid 15px transparent;
- }
+.transpose-keys {
+  margin: 25px 15px 0;
+  overflow: auto;
+  font: normal 11px sans-serif;
+}
 
- .buttonPlay:hover {
-   border-left: solid 20px #2159D6;
-   border-bottom: solid 15px transparent;
-   border-top: solid 15px transparent;
- }
+.transpose-keys span {
+  display: block;
+  float: left;
+  width: 2.25em;
+  text-align: center;
+  margin: 0 .3em .3em 0;
+  color: #333;
+  background: #eee;
+  text-decoration: none;
+  padding: .4em 0;
+  border: solid 1px transparent;
+  outline: none;
+  cursor: pointer;
+}
 
- .buttonPlay:focus {
-   outline: 0;
- }
+.transpose-keys span.selected {
+  background: $yellow;
+  color: #000;
+  font-weight: 700;
+}
+
+.buttonPlay {
+  text-indent: -9999em;
+  background: none;
+  border-right: none;
+  width: 21px;
+  height: 30px;
+  border-left: solid 20px rgb(37, 37, 37);
+  border-bottom: solid 15px transparent;
+  border-top: solid 15px transparent;
+}
+
+.buttonPlay:hover {
+  border-left: solid 20px $blue-one;
+  border-bottom: solid 15px transparent;
+  border-top: solid 15px transparent;
+}
+
+.buttonPlay:focus {
+  outline: 0;
+}

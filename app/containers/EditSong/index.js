@@ -107,17 +107,19 @@ export function EditSong({
               <textarea
                 name="text"
                 rows="15"
-                className="song-input"
                 value={text}
+                className="song-textarea"
                 onChange={e => setText(e.target.value)}
-              />
+              >
+                {text}
+              </textarea>
             </label>
             <label>
               Акорды:
               <textarea
                 name="chords"
-                className="song-input"
                 rows="15"
+                className="song-textarea"
                 value={chords}
                 onChange={e => setChords(e.target.value)}
               />

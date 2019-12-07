@@ -26,7 +26,7 @@ const ChordSvg = ({
   chordShape.p.forEach((f, i) => {
     if (f === 0 || f === 'x')
       stringsText.push(
-        <SVGText x={22 + 30 * i} y={20} fontSize={16} fill={stroke} key={f + i}>
+        <SVGText x={22 + 30 * i} y={20} fontSize={18} fill={stroke} key={f + i}>
           {f}
         </SVGText>,
       );
@@ -38,7 +38,7 @@ const ChordSvg = ({
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 -28 190 285"
         style={{
-          width: '150px',
+          width: '120px',
         }}
         {...props}
       >
@@ -58,7 +58,7 @@ const ChordSvg = ({
             y={-8}
             fontSize={24}
             fontWeight={700}
-            fill="#f2d429"
+            fill="#000"
           >
             {chordName}
           </SVGText>
@@ -128,8 +128,8 @@ ChordSvg.propTypes = {
 ChordSvg.defaultProps = {
   alternate: false,
   quality: 'MAJ',
-  background: '#FFF',
-  stroke: '#222',
+  background: '#ffcf00',
+  stroke: '#000',
 };
 
 export default ChordSvg;
