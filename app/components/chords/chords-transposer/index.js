@@ -44,12 +44,13 @@ function ChordsTransposer({ chordsKey, songChords }) {
             return (
               <ChordLine
                 chordLine={line}
-                key={index}
+                key={`chord-line-${index}`}
                 chordKey={currentKey || rootKey}
                 rootKey={rootKey}
+                lineIndex={index}
               />
             );
-          return <TextLine textLine={line} key={index} />;
+          return <TextLine textLine={line} key={`song-line-${index}`} />;
         })}
       </pre>
     </div>

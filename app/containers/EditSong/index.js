@@ -54,9 +54,9 @@ export function EditSong({
   }, [song]);
 
   const options = [
-    { value: 'Аb', label: 'Аb' },
-    { value: 'А', label: 'А' },
-    { value: 'А#', label: 'А#' },
+    { value: 'Ab', label: 'Ab' },
+    { value: 'A', label: 'A' },
+    { value: 'A#', label: 'A#' },
     { value: 'Bb', label: 'Bb' },
     { value: 'B', label: 'B' },
     { value: 'H', label: 'H' },
