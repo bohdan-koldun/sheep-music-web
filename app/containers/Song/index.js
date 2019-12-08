@@ -95,8 +95,8 @@ export function Song({
           <Helmet>
             <title>{title}</title>
             <meta name="description" content={description} />
-
             <link rel="canonical" href={canonicalUrl} />
+
             <meta name="og:title" content={title} />
             <meta name="og:description" content={description} />
             <meta name="og:image" content={songImgUrl(songData)} />
