@@ -63,27 +63,41 @@ export function Album({
     }
   };
 
+  const title =
+    albumData &&
+    `Альбом ${albumData.title}${
+      albumData.author ? ` | ${albumData.author.title}` : ''
+    }${
+      albumData.songs ? ` | ${albumData.songs.length} песен(я)` : ''
+    } | Песни, Слова, Аккорды, Видео`;
+
+  const description =
+    albumData &&
+    `Альбом ${
+      albumData.title
+    }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`;
+
+  const canonicalUrl = `https://sheep-music.com/album/${albumData.slug}`;
+
   return (
     <React.Fragment>
       {albumData && (
         <div>
           <Helmet>
-            <title>
-              Альбом {albumData.title}{' '}
-              {albumData.author ? ` | ${albumData.author.title}` : ''}
-              {albumData.songs ? ` | ${albumData.songs.length} песен(я)` : ''}
-              {` | Песни, Слова, Аккорды, Видео`}
-            </title>
+            <title>{title}</title>
+            <meta name="description" content={description} />
+            <link rel="canonical" href={canonicalUrl} />
+
+            <meta name="og:title" content={title} />
+            <meta name="og:description" content={description} />
             <meta
-              name="description"
-              content={`Альбом ${
-                albumData.title
-              }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
+              name="og:image"
+              content={albumData.thumbnail && albumData.thumbnail.path}
             />
-            <link
-              rel="canonical"
-              href={`https://sheep-music.com/album/${albumData.slug}`}
-            />
+            <meta name="og:url" content={canonicalUrl} />
+            <meta name="og:site_name" content="Sheep Music" />
+            <meta name="fb:app_id" content="464243220625029" />
+
             <script type="application/ld+json">
               {`"@context": "https://schema.org",
             "@type": "BreadcrumbList",
@@ -96,7 +110,7 @@ export function Album({
               "@type": "ListItem",
               "position": 2,
               "name": "${albumData.title}",
-              "item": "https://sheep-music.com/album/${albumData.slug}"
+              "item": "${canonicalUrl}"
             }]`}
             </script>
           </Helmet>
