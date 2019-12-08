@@ -59,26 +59,39 @@ export function Author({
     }
   };
 
+  const title =
+    authorData &&
+    `${authorData.title}${
+      authorData.songs ? ` | ${authorData.songs.length} песен(я)` : ''
+    } | Песни, Слова, Аккорды, Видео`;
+
+  const description =
+    authorData &&
+    `Автор ${
+      authorData.title
+    }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`;
+
+  const canonicalUrl = `https://sheep-music.com/author/${authorData.slug}`;
+
   return (
     <React.Fragment>
       {authorData && (
         <div>
           <Helmet>
-            <title>
-              {authorData.title}{' '}
-              {authorData.songs ? ` | ${authorData.songs.length} песен(я)` : ''}
-              {` | Песни, Слова, Аккорды, Видео`}
-            </title>
+            <title>{title}</title>
+            <meta name="description" content={description} />
+            <link rel="canonical" href={canonicalUrl} />
+
+            <meta name="og:title" content={title} />
+            <meta name="og:description" content={description} />
             <meta
-              name="description"
-              content={`Автор ${
-                authorData.title
-              }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`}
+              name="og:image"
+              content={authorData.thumbnail && authorData.thumbnail.path}
             />
-            <link
-              rel="canonical"
-              href={`https://sheep-music.com/author/${authorData.slug}`}
-            />
+            <meta name="og:url" content={canonicalUrl} />
+            <meta name="og:site_name" content="Sheep Music" />
+            <meta name="fb:app_id" content="464243220625029" />
+
             <script type="application/ld+json">
               {`
             "@context": "https://schema.org",
@@ -92,7 +105,7 @@ export function Author({
               "@type": "ListItem",
               "position": 2,
               "name": "${authorData.title}",
-              "item": "https://sheep-music.com/author/${authorData.slug}"
+              "item": "${canonicalUrl}"
             }]
             `}
             </script>
