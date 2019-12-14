@@ -80,7 +80,7 @@
     "ip": "1.1.5",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
-    "prerendercloud": "^1.43.0",
+    "prerendercloud": "^1.44.0",
     "prop-types": "15.7.2",
     "qrcode": "^1.4.2",
     "rc-slider": "^8.6.13",

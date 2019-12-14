@@ -9162,10 +9162,10 @@ prepend-http@^2.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prerendercloud@^1.43.0:
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/prerendercloud/-/prerendercloud-1.43.0.tgz#ffde779d288fd8cfc5d8d5c052319a72202f690d"
-  integrity sha512-DHcfqOqaWS2+cRGTWWmoYnsZNZEKCX1xeNCqOyd5qkIbSqXV7wQtcXeLmSSutV4dE0pbWfdmiFEtaN8y78wQYw==
+prerendercloud@^1.44.0:
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/prerendercloud/-/prerendercloud-1.44.0.tgz#5552ebd8d195c4c1f4a64d2a2b6dd19378d61017"
+  integrity sha512-Y26FEr+/DPGHICDP+9zvZu5ywqsu5IY99sVMAK+ZUWx0o8n0oIJbDsPl+Glm7xxPjv+HbN6mA9kMfOzLnj2m7Q==
   dependencies:
     debug "^2.2.0"
     got-lite "^8.0.1"
