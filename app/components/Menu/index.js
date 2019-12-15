@@ -11,7 +11,7 @@ import {
   FiPlay,
   FiMic,
   FiGrid,
-  FiFileText,
+  FiHeadphones,
   FiChevronRight,
 } from 'react-icons/fi';
 import { FaStar } from 'react-icons/fa';
@@ -105,7 +105,7 @@ function Menu({ location, user }) {
                 <FormattedMessage {...messages.topics} />{' '}
               </MenuLink>
               <MenuLink linkPath="/songs" subPageRoot="/song/">
-                <FiFileText />
+                <FiHeadphones />
                 <FormattedMessage {...messages.songs} />{' '}
               </MenuLink>
               <MenuLink linkPath="/authors" subPageRoot="/author/">

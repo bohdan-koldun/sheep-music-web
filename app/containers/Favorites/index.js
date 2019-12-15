@@ -22,6 +22,10 @@ export function Favorites() {
       <div className="favorites-page">
         <WaitSheep message="Эта функция будет реализована в ближайшее время. Вы сможете создавать списки своих любимых песен." />
       </div>
+      <div className="email">
+        Пишите:{'  '}
+        <a href="mailto:sheep.music.com@gmail.com">sheep.music.com@gmail.com</a>
+      </div>
     </React.Fragment>
   );
 }

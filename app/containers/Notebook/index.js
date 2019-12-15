@@ -22,6 +22,10 @@ export function Notebook() {
       <div className="notebook-page">
         <WaitSheep message="Очень хотим реализовать эту страницу. Как только будет время - с Божьей помощью сделаем!" />
       </div>
+      <div className="email">
+        Пишите:{'  '}
+        <a href="mailto:sheep.music.com@gmail.com">sheep.music.com@gmail.com</a>
+      </div>
     </React.Fragment>
   );
 }

@@ -56,10 +56,17 @@ function Footer({ location }) {
           </div>
         </div>
         <div className="footer-social">
-          <FiFacebook className="social-icon" />
-          <FaInstagram className="social-icon" />
-          <FaTelegramPlane className="social-icon" />
-          <FiYoutube className="social-icon" />
+          <div>
+            <FiFacebook className="social-icon" />
+            <FaInstagram className="social-icon" />
+            <FaTelegramPlane className="social-icon" />
+            <FiYoutube className="social-icon" />
+          </div>
+          <div className="email">
+            <a href="mailto:sheep.music.com@gmail.com">
+              sheep.music.com@gmail.com
+            </a>
+          </div>
         </div>
       </section>
       <section className="footer-website-rule">

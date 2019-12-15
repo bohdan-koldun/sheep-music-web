@@ -29,6 +29,12 @@ export function HomePage() {
           <FormattedMessage {...messages.startProjectMessage} />
         </p>
         <WaitSheep message="Здесь скоро появится интересная статистика о песнях! И многое другое!" />
+        <div className="email">
+          Пишите:{'  '}
+          <a href="mailto:sheep.music.com@gmail.com">
+            sheep.music.com@gmail.com
+          </a>
+        </div>
       </div>
     </article>
   );
