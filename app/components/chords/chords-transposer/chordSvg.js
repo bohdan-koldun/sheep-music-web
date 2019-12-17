@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ChordSvg from '../ChordSvg';
 
-function Chord({ chordRoot, chordTail }) {
+function Chord({ chordRoot, chordTail, style }) {
   let quality;
 
   switch (chordTail) {
@@ -14,12 +14,13 @@ function Chord({ chordRoot, chordTail }) {
       break;
   }
 
-  return <ChordSvg chord={chordRoot} quality={quality} />;
+  return <ChordSvg chord={chordRoot} quality={quality} style={style} />;
 }
 
 Chord.propTypes = {
   chordRoot: PropTypes.string,
   chordTail: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default Chord;

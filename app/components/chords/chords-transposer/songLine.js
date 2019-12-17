@@ -1,13 +1,9 @@
 /* eslint-disable react/no-danger */
-/* eslint-disable prefer-destructuring */
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
-import keys from './keys';
 import ChordSvg from './chordSvg';
-
-const DEVIDERS = ['/', '-', ' ', '(', ')', '|'];
+import { DEVIDERS } from './consts';
 
 function createChordOffsetPairs(line) {
   const { length } = line;
@@ -41,45 +37,42 @@ function createChordOffsetPairs(line) {
   return chordOffsetPairs;
 }
 
-export function ChordLine({ chordLine, chordKey, rootKey, lineIndex }) {
+export function ChordLine({ chordLine, lineIndex, uniqueChords }) {
   const chordOffsetPairs = createChordOffsetPairs(chordLine);
-  const delta = keys.getDelta(
-    rootKey && rootKey.value,
-    chordKey && chordKey.value,
-  );
 
   return (
     <span>
       {chordOffsetPairs.map((pair, i) => {
         const { first, second } = pair;
-        const chord = DEVIDERS.includes(first[0]) ? second : first;
+        const chordText = DEVIDERS.includes(first[0]) ? second : first;
 
-        const oldChordRoot = chord && keys.getChordRoot(chord);
-        const newChord =
-          oldChordRoot && keys.getNewKey(oldChordRoot, delta, chordKey);
-        const tailChord =
-          chord && oldChordRoot && chord.substr(oldChordRoot.length);
-        const printedChords = (newChord && newChord.name + tailChord) || '';
+        const chord = uniqueChords && uniqueChords[chordText];
 
-        const chordId = printedChords + lineIndex + i;
+        const printedChord = chord ? chord.chord.name + (chord.tail || '') : '';
+
+        const chordId = printedChord + lineIndex + i;
 
         return (
           <b id={chordId} key={chordId}>
-            {chord === second && first}
-            <b className="c" data-tip data-for={chordId}>
-              {printedChords}
+            {chordText === second && first}
+            <b className="c" data-tip data-for={printedChord}>
+              {printedChord}
+              {chord && (
+                <ReactTooltip
+                  className="chord-tooltip"
+                  id={printedChord}
+                  delayHide={100}
+                  effect="solid"
+                >
+                  <ChordSvg
+                    chordRoot={chord.chord.name}
+                    chordTail={chord.tail}
+                    style={{ width: '110px' }}
+                  />
+                </ReactTooltip>
+              )}
             </b>
-            {chord === first && !!second && second}
-            {printedChords && (
-              <ReactTooltip
-                className="chord-tooltip"
-                id={chordId}
-                delayHide={100}
-                effect="solid"
-              >
-                <ChordSvg chordRoot={newChord.name} chordTail={tailChord} />
-              </ReactTooltip>
-            )}
+            {chordText === first && !!second && second}
           </b>
         );
       })}
@@ -89,8 +82,7 @@ export function ChordLine({ chordLine, chordKey, rootKey, lineIndex }) {
 
 ChordLine.propTypes = {
   chordLine: PropTypes.string,
-  chordKey: PropTypes.object,
-  rootKey: PropTypes.object,
+  uniqueChords: PropTypes.object,
   lineIndex: PropTypes.number.isRequired,
 };
 

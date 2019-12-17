@@ -37,9 +37,7 @@ const ChordSvg = ({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 -28 190 285"
-        style={{
-          width: '120px',
-        }}
+        style={style}
         {...props}
       >
         <path fill={background} d="M-1-1h202v252H-1z" />
