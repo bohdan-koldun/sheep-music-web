@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
+import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { MdPlayCircleFilled, MdPauseCircleFilled } from 'react-icons/md';
 import getVideoId from 'get-video-id';
@@ -23,6 +24,7 @@ function VideoYoutubeItem({ video }) {
             getVideoId(video.video).id
           }/hqdefault.jpg`}
           alt={video.title}
+          className={classNames({ 'hide-img': play })}
         />
         {!play ? (
           <MdPlayCircleFilled className="video-play-icon" />
