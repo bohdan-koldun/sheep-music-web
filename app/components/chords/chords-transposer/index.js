@@ -47,10 +47,15 @@ function ChordsTransposer({ chordsKey, songChords }) {
       (result, chord) => {
         const oldChordRoot = keys.getChordRoot(chord);
 
-        result[chord] = {
+        const chordObj = {
           chord: keys.getNewKey(oldChordRoot, delta, chordKey),
           tail: chord.substr(oldChordRoot.length),
         };
+
+        if (chordObj.chord) {
+          result[chord] = chordObj;
+        }
+
         return result;
       },
       {},
