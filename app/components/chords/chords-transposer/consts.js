@@ -1,1 +1,1 @@
-export const DEVIDERS = ['/', '-', ' ', '(', ')', '|'];
+export const DEVIDERS = ['/', '-', ' ', '(', ')', '|', '+'];
