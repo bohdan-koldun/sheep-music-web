@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { handlerCopy } from 'utils/copy';
 import { PrivateRoute } from 'utils/privateRoute';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -72,7 +73,7 @@ function App({ onLoadTags, onLoadUser, user }) {
           content="Христианские песни: слова, текст, слушать аудио онлайн, скачать mp3, аккорды, видео"
         />
       </Helmet>
-      <AppWrapper id="app-wrapper">
+      <AppWrapper id="app-wrapper" onCopy={handlerCopy}>
         <Menu user={user} />
         <AppRightSideWrapper>
           <AppContainerWrapper className="page-container-wrapper">
