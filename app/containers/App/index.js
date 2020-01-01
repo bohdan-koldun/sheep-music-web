@@ -45,7 +45,6 @@ import './App.scss';
 const AppWrapper = styled.div``;
 
 const AppRightSideWrapper = styled.div`
-  width: 100%;
   margin: 0 auto;
   display: flex;
   min-height: 100%;
@@ -75,7 +74,7 @@ function App({ onLoadTags, onLoadUser, user }) {
       </Helmet>
       <AppWrapper id="app-wrapper" onCopy={handlerCopy}>
         <Menu user={user} />
-        <AppRightSideWrapper>
+        <AppRightSideWrapper id="app-right-wrapper">
           <AppContainerWrapper className="page-container-wrapper">
             <ScrollToTop>
               <Switch>

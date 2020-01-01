@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import Breadcrumb from 'components/Breadcrumb';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -8,7 +9,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import {
-  AlbumPictureList,
+  AlbumPictureListCarousel,
   SongPlayList,
   AuhorPictureList,
 } from 'components/List';
@@ -62,29 +63,30 @@ export function HomePage({
         />
         <link rel="canonical" href="https://sheep-music.com/album/" />
       </Helmet>
+      <Breadcrumb />
       <div>
-        <h2>
-          <FormattedMessage {...messages.startProjectHeader} />
-        </h2>
-        <p>
-          <FormattedMessage {...messages.startProjectMessage} />
-        </p>
         <div>
-          <h2>Топ песни: </h2>
+          <h2>
+            <FormattedMessage {...messages.popularAlbums} />:
+          </h2>
+          <AlbumPictureListCarousel albums={albums} />
+        </div>
+        <div>
+          <h2>
+            <FormattedMessage {...messages.popularAuthors} />:
+          </h2>
+          <AuhorPictureList authors={authors} />
+        </div>
+        <div>
+          <h2>
+            <FormattedMessage {...messages.popularSongs} />:
+          </h2>
           <SongPlayList
             songs={songs}
             playPauseSong={playPauseSong}
             playData={playData}
             play={play}
           />
-        </div>
-        <div>
-          <h2>Топ альбоми: </h2>
-          <AlbumPictureList albums={albums} />
-        </div>
-        <div>
-          <h2>Топ автори: </h2>
-          <AuhorPictureList authors={authors} />
         </div>
       </div>
     </article>

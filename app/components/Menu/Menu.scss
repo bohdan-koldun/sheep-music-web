@@ -3,8 +3,8 @@
 
 
 .aside-menu {
-  width: 215px;
-  min-width: 215px;
+  width: $aside-menu-width;
+  min-width: $aside-menu-width;
   height: auto;
   min-height: 100vh;
   background: $dark-two;
@@ -204,7 +204,7 @@
     border-top: 2px solid $yellow;
     padding-top: 20px;
     position: absolute;
-    z-index: 100;
+    z-index: 1001;
     overflow-y: auto;
     height: 100vh;
   }

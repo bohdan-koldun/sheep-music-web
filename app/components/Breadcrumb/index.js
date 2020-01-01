@@ -13,7 +13,12 @@ function Breadcrumb({ pageList }) {
 
   return (
     <div className="breadcrumb">
-      <Link to="/">{intl.formatMessage(menuMessages.home)}</Link>
+      <Link
+        to="/"
+        className={classNames({ 'last-breadcrumb-link': !pageList })}
+      >
+        {intl.formatMessage(menuMessages.home)}
+      </Link>
       {pageList &&
         pageList.map((page, i) => (
           <React.Fragment key={page.link}>

@@ -6,17 +6,25 @@ body {
   width: 100%;
   line-height: 1.5;
 }
+
 body {
   font-family: 'Roboto';
 }
+
 #app {
   background-color: #fff;
   min-height: 100%;
   min-width: 100%;
 }
-#app-wrapper{
+
+#app-wrapper {
   display: flex;
 }
+
+#app-right-wrapper {
+  width: $aside-content-width;
+}
+
 p,
 label {
   font-family: 'Roboto';
@@ -28,11 +36,15 @@ label {
 }
 
 @media screen and (max-width: $max-mobile-width) {
-  #app-wrapper{
+  #app-wrapper {
     display: block;
   }
 
   .page-container-wrapper {
     padding: 0 20px;
+  }
+
+  #app-right-wrapper {
+    width: 100%;
   }
 }

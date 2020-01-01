@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.containers.HomePage';
+export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
   startProjectHeader: {
@@ -11,16 +11,16 @@ export default defineMessages({
     id: `${scope}.start_project.message`,
     defaultMessage: 'Аудио, тексты, аккорды, авторы, альбомы',
   },
-  trymeHeader: {
-    id: `${scope}.tryme.header`,
-    defaultMessage: 'Try me!',
+  popularAlbums: {
+    id: `${scope}.popularAlbums`,
+    defaultMessage: 'Популярные альбомы',
   },
-  trymeMessage: {
-    id: `${scope}.tryme.message`,
-    defaultMessage: 'Show Github repositories by',
+  popularAuthors: {
+    id: `${scope}.popularAuthors`,
+    defaultMessage: 'Популярные авторы',
   },
-  trymeAtPrefix: {
-    id: `${scope}.tryme.atPrefix`,
-    defaultMessage: '@',
+  popularSongs: {
+    id: `${scope}.popularSongs`,
+    defaultMessage: 'Популярные песни',
   },
 });

@@ -9607,6 +9607,11 @@ react-modal@^3.10.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
+react-multi-carousel@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-multi-carousel/-/react-multi-carousel-2.5.0.tgz#6a69cf6d7b0e2bd384170021b30d943be2f3aa9b"
+  integrity sha512-Z/iCrFaWbwedqyGCMaTG7OlwdMkchv0WiKGXSDXRqAfKwdoz8lRzToJCsap2F7N1qjPpRn0txq/9d0hE9xWBxw==
+
 react-paginate@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-6.3.0.tgz#29cbb5d1645227f4e4f959b9d7f43cfae603f801"
