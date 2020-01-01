@@ -7,7 +7,16 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
-import WaitSheep from 'components/WaitSheep';
+import {
+  AlbumPictureList,
+  SongPlayList,
+  AuhorPictureList,
+} from 'components/List';
+import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import {
+  makeSelectPlay,
+  makeSelectAudioPlayData,
+} from 'containers/AudioPlayer/selectors';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -18,13 +27,30 @@ import { loadStatistic } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 
-export function HomePage({ onLoadStatistic, statisticData }) {
+export function HomePage({
+  onLoadStatistic,
+  statisticData,
+  play,
+  playData,
+  onPlaySongList,
+  onPlayPause,
+}) {
   useInjectReducer({ key: 'statisticHome', reducer });
   useInjectSaga({ key: 'statisticHome', saga });
 
   useEffect(() => {
     onLoadStatistic();
   }, []);
+
+  const { songs, albums, authors } = statisticData || {};
+
+  const playPauseSong = song => {
+    if (playData && playData.song && song && song.id === playData.song.id) {
+      onPlayPause(song.id);
+    } else if (song && song.audioMp3 && song.audioMp3.path) {
+      onPlaySongList(song, songs || []);
+    }
+  };
 
   return (
     <article>
@@ -42,14 +68,23 @@ export function HomePage({ onLoadStatistic, statisticData }) {
         </h2>
         <p>
           <FormattedMessage {...messages.startProjectMessage} />
-          {JSON.stringify(statisticData)}
         </p>
-        <WaitSheep message="Здесь скоро появится интересная статистика о песнях! И многое другое!" />
-        <div className="email">
-          Пишите:{'  '}
-          <a href="mailto:sheep.music.com@gmail.com">
-            sheep.music.com@gmail.com
-          </a>
+        <div>
+          <h2>Топ песни: </h2>
+          <SongPlayList
+            songs={songs}
+            playPauseSong={playPauseSong}
+            playData={playData}
+            play={play}
+          />
+        </div>
+        <div>
+          <h2>Топ альбоми: </h2>
+          <AlbumPictureList albums={albums} />
+        </div>
+        <div>
+          <h2>Топ автори: </h2>
+          <AuhorPictureList authors={authors} />
         </div>
       </div>
     </article>
@@ -61,17 +96,34 @@ HomePage.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   statisticData: PropTypes.object,
   onLoadStatistic: PropTypes.func,
+  play: PropTypes.bool,
+  playData: PropTypes.shape({
+    song: PropTypes.shape({
+      title: PropTypes.string,
+      audioMp3: PropTypes.shape({
+        path: PropTypes.string,
+      }),
+    }),
+    prevPlayListId: PropTypes.number,
+    nextPlayListId: PropTypes.number,
+  }),
+  onPlaySongList: PropTypes.func,
+  onPlayPause: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   statisticData: makeSelectStatisticData(),
+  play: makeSelectPlay(),
+  playData: makeSelectAudioPlayData(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadStatistic: () => dispatch(loadStatistic()),
+    onPlaySongList: (song, songList) => dispatch(setSongList(song, songList)),
+    onPlayPause: () => dispatch(setPlayPause()),
   };
 }
 
