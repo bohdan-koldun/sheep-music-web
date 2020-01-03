@@ -6,17 +6,25 @@ import 'react-multi-carousel/lib/styles.css';
 import './AlbumPictureList.scss';
 
 const responsive = {
+  superLargeDesktop: {
+    breakpoint: {
+      max: 5000,
+      min: 1700,
+    },
+    items: 7,
+    partialVisibilityGutter: 60,
+  },
   desktop: {
     breakpoint: {
-      max: 3000,
-      min: 1024,
+      max: 1700,
+      min: 750,
     },
     items: 4,
     partialVisibilityGutter: 40,
   },
   mobile: {
     breakpoint: {
-      max: 464,
+      max: 470,
       min: 0,
     },
     items: 1,
@@ -24,8 +32,8 @@ const responsive = {
   },
   tablet: {
     breakpoint: {
-      max: 1024,
-      min: 464,
+      max: 750,
+      min: 470,
     },
     items: 2,
     partialVisibilityGutter: 20,
