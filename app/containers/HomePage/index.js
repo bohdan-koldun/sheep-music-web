@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import {
   AlbumPictureListCarousel,
   SongPlayList,
-  AuhorPictureList,
+  AuthorPictureListCarousel,
 } from 'components/List';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import {
@@ -75,7 +75,7 @@ export function HomePage({
           <h2>
             <FormattedMessage {...messages.popularAuthors} />:
           </h2>
-          <AuhorPictureList authors={authors} />
+          <AuthorPictureListCarousel authors={authors} />
         </div>
         <div>
           <h2>
