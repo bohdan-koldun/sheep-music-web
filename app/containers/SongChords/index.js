@@ -18,6 +18,7 @@ import {
 import { FaYoutube } from 'react-icons/fa';
 import { SongPdfGenerator } from 'components/Pdf';
 import { SongImg, songImgUrl } from 'components/Img';
+import Loader from 'components/Loader';
 import { DownloadModal } from 'components/Modal';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -53,6 +54,7 @@ export function SongChords({
   onPlaySong,
   onPlayPause,
   user,
+  loading,
 }) {
   useInjectReducer({ key: 'song', reducer });
   useInjectSaga({ key: 'song', saga });
@@ -90,7 +92,7 @@ export function SongChords({
 
   return (
     <React.Fragment>
-      {songData ? (
+      {!loading && songData ? (
         <div>
           <Helmet>
             <title>{title}</title>
@@ -223,7 +225,9 @@ export function SongChords({
               ))}
           </div>
         </div>
-      ) : null}
+      ) : (
+        (loading && <Loader />) || null
+      )}
       <ReactTooltip place="top" type="dark" effect="float" />
     </React.Fragment>
   );

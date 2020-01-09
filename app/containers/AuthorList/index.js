@@ -11,6 +11,7 @@ import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
 import menuMessages from 'components/Menu/messages';
 import Pagination from 'components/Pagination';
+import Loader from 'components/Loader';
 import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -36,6 +37,7 @@ import messages from './messages';
 
 export function AuthorList({
   authors,
+  loading,
   onLoadAuthorList,
   page,
   search,
@@ -123,7 +125,7 @@ export function AuthorList({
         search={search}
       />
 
-      {authors && authors.results ? (
+      {!loading && authors && authors.results ? (
         <div>
           <AuhorPictureList authors={authors.results}/>
           <Pagination
@@ -135,12 +137,15 @@ export function AuthorList({
             }}
           />
         </div>
-      ) : null}
+      ) : (
+        (loading && <Loader />) || null
+      )}
     </div>
   );
 }
 
 AuthorList.propTypes = {
+  loading: PropTypes.bool,
   authors: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,

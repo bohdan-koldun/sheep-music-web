@@ -13,6 +13,7 @@ import { FormattedMessage } from 'react-intl';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
 import menuMessages from 'components/Menu/messages';
+import Loader from 'components/Loader';
 import commonMessages from 'translations/common-messages';
 import {
   makeSelectLoading,
@@ -24,7 +25,7 @@ import reducer from './reducer';
 import saga from './saga';
 import './Video.scss';
 
-export function Video({ onLoadVideo, match, videoData }) {
+export function Video({ onLoadVideo, match, videoData, loading }) {
   useInjectReducer({ key: 'video', reducer });
   useInjectSaga({ key: 'video', saga });
 
@@ -45,7 +46,7 @@ export function Video({ onLoadVideo, match, videoData }) {
 
   return (
     <React.Fragment>
-      {videoData && (
+      {!loading && videoData ? (
         <div className="video-page">
           <Helmet>
             <title>{title}</title>
@@ -126,12 +127,15 @@ export function Video({ onLoadVideo, match, videoData }) {
             )}
           </div>
         </div>
+      ) : (
+        (loading && <Loader />) || null
       )}
     </React.Fragment>
   );
 }
 
 Video.propTypes = {
+  loading: PropTypes.bool,
   videoData: PropTypes.object,
   onLoadVideo: PropTypes.func,
   match: PropTypes.shape({

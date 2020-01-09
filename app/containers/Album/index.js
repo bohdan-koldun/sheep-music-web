@@ -23,6 +23,7 @@ import {
 } from 'containers/AudioPlayer/selectors';
 import { useIntl } from 'containers/LanguageProvider';
 import menuMessages from 'components/Menu/messages';
+import Loader from 'components/Loader';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -38,6 +39,7 @@ import googlePlay from './images/googleplay.png';
 
 export function Album({
   onLoadAlbum,
+  loading,
   match,
   albumData,
   play,
@@ -81,7 +83,7 @@ export function Album({
 
   return (
     <React.Fragment>
-      {albumData && (
+      {!loading && albumData ? (
         <div>
           <Helmet>
             <title>{title}</title>
@@ -196,12 +198,15 @@ export function Album({
             </a>
           </div>
         </div>
+      ) : (
+        (loading && <Loader />) || null
       )}
     </React.Fragment>
   );
 }
 
 Album.propTypes = {
+  loading: PropTypes.bool,
   albumData: PropTypes.object,
   onLoadAlbum: PropTypes.func,
   match: PropTypes.shape({

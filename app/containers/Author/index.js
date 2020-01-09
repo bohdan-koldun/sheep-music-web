@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { SongPlayList, AlbumPictureList } from 'components/List';
+import Loader from 'components/Loader';
 import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -34,6 +35,7 @@ import './Author.scss';
 
 export function Author({
   onLoadAuthor,
+  loading,
   match,
   authorData,
   play,
@@ -75,7 +77,7 @@ export function Author({
 
   return (
     <React.Fragment>
-      {authorData && (
+      {!loading && authorData ? (
         <div>
           <Helmet>
             <title>{title}</title>
@@ -164,12 +166,15 @@ export function Author({
           <AlbumPictureList albums={authorData.albums} />
           <br /> <br />
         </div>
+      ) : (
+        (loading && <Loader />) || null
       )}
     </React.Fragment>
   );
 }
 
 Author.propTypes = {
+  loading: PropTypes.bool,
   authorData: PropTypes.object,
   onLoadAuthor: PropTypes.func,
   match: PropTypes.shape({

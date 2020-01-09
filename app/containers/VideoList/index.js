@@ -16,6 +16,7 @@ import { SearchInfo } from 'components/Info';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { VideoYoutubeList } from 'components/List';
+import Loader from 'components/Loader';
 import reducer from './reducer';
 import saga from './saga';
 import { 
@@ -36,6 +37,7 @@ import messages from './messages';
 
 export function VideoList({
   videos,
+  loading,
   onLoadVideoList,
   page,
   search,
@@ -123,7 +125,7 @@ export function VideoList({
         search={search}
       />
 
-      {videos && videos.results ? (
+      {!loading && videos && videos.results ? (
         <div>
           <VideoYoutubeList videos={videos.results}/>
           <Pagination
@@ -135,12 +137,15 @@ export function VideoList({
             }}
           />
         </div>
-      ) : null}
+      ) : (
+        (loading && <Loader />) || null
+      )}
     </div>
   );
 }
 
 VideoList.propTypes = {
+  loading: PropTypes.bool,
   videos: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,

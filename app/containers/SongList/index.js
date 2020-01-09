@@ -20,6 +20,7 @@ import { SearchInfo } from 'components/Info';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
 import menuMessages from 'components/Menu/messages';
+import Loader from 'components/Loader';
 import {
   makeSelectPlay,
   makeSelectAudioPlayData,
@@ -48,6 +49,7 @@ import './SongList.scss';
 
 export function SongList({
   songs,
+  loading,
   onLoadSongList,
   onPlaySongList,
   onPlayPause,
@@ -210,7 +212,7 @@ export function SongList({
         search={search}
       />
 
-      {songs && songs.results ? (
+      {!loading && songs && songs.results ? (
         <div>
           <SongPlayList
             songs={songs.results}
@@ -227,12 +229,15 @@ export function SongList({
             }}
           />
         </div>
-      ) : null}
+      ) : (
+        (loading && <Loader />) || null
+      )}
     </div>
   );
 }
 
 SongList.propTypes = {
+  loading: PropTypes.bool,
   songs: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,

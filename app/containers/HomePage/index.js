@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
+import Loader from 'components/Loader';
 import {
   AlbumPictureListCarousel,
   SongPlayList,
@@ -33,6 +34,7 @@ export function HomePage({
   statisticData,
   play,
   playData,
+  loading,
   onPlaySongList,
   onPlayPause,
 }) {
@@ -64,31 +66,35 @@ export function HomePage({
         <link rel="canonical" href="https://sheep-music.com/album/" />
       </Helmet>
       <Breadcrumb />
-      <div>
+      {loading ? (
+        <Loader />
+      ) : (
         <div>
-          <h2>
-            <FormattedMessage {...messages.popularAlbums} />:
-          </h2>
-          <AlbumPictureListCarousel albums={albums} />
+          <div>
+            <h2>
+              <FormattedMessage {...messages.popularAlbums} />:
+            </h2>
+            <AlbumPictureListCarousel albums={albums} />
+          </div>
+          <div>
+            <h2>
+              <FormattedMessage {...messages.popularAuthors} />:
+            </h2>
+            <AuthorPictureListCarousel authors={authors} />
+          </div>
+          <div>
+            <h2>
+              <FormattedMessage {...messages.popularSongs} />:
+            </h2>
+            <SongPlayList
+              songs={songs}
+              playPauseSong={playPauseSong}
+              playData={playData}
+              play={play}
+            />
+          </div>
         </div>
-        <div>
-          <h2>
-            <FormattedMessage {...messages.popularAuthors} />:
-          </h2>
-          <AuthorPictureListCarousel authors={authors} />
-        </div>
-        <div>
-          <h2>
-            <FormattedMessage {...messages.popularSongs} />:
-          </h2>
-          <SongPlayList
-            songs={songs}
-            playPauseSong={playPauseSong}
-            playData={playData}
-            play={play}
-          />
-        </div>
-      </div>
+      )}
     </article>
   );
 }

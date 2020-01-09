@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,14 +10,15 @@ import { MdBookmark, MdViewList, MdViewModule } from 'react-icons/md';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useIntl } from 'containers/LanguageProvider';
-import { makeSelectTags } from 'containers/App/selectors';
+import { makeSelectTags, makeSelectLoading } from 'containers/App/selectors';
 import Breadcrumb from 'components/Breadcrumb';
 import menuMessages from 'components/Menu/messages';
 import { SongsMessage } from 'components/Message';
+import Loader from 'components/Loader';
 import messages from './messages';
 import './TagList.scss';
 
-export function TagList({ tags }) {
+export function TagList({ tags, loading }) {
   const intl = useIntl();
 
   const [listType, setListType] = useState(1);
@@ -71,35 +73,44 @@ export function TagList({ tags }) {
           'tags-page-list-module': listType === 2,
         })}
       >
-        {tags.map(tag => (
-          <Link
-            to={`/songs?filter=newest&tags=${tag.id}`}
-            key={tag.id}
-            data-tip
-            data-for={tag.name}
-          >
-            <span>
-              <MdBookmark />
-              {tag.name}
-            </span>
-            <span className="tag-songs-count">{tag.songsCount}</span>
-            <ReactTooltip id={tag.name} place="top" type="dark" ffect="float">
-              {tag.name}: {tag.songsCount}{' '}
-              <SongsMessage count={tag.songsCount || 0} />
-            </ReactTooltip>
-          </Link>
-        ))}
+        {!loading
+          ? tags.map(tag => (
+              <Link
+                to={`/songs?filter=newest&tags=${tag.id}`}
+                key={tag.id}
+                data-tip
+                data-for={tag.name}
+              >
+                <span>
+                  <MdBookmark />
+                  {tag.name}
+                </span>
+                <span className="tag-songs-count">{tag.songsCount}</span>
+                <ReactTooltip
+                  id={tag.name}
+                  place="top"
+                  type="dark"
+                  ffect="float"
+                >
+                  {tag.name}: {tag.songsCount}{' '}
+                  <SongsMessage count={tag.songsCount || 0} />
+                </ReactTooltip>
+              </Link>
+            ))
+          : (loading && <Loader />) || null}
       </div>
     </div>
   );
 }
 
 TagList.propTypes = {
+  loading: PropTypes.bool,
   tags: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = createStructuredSelector({
   tags: makeSelectTags(),
+  loading: makeSelectLoading(),
 });
 
 const withConnect = connect(

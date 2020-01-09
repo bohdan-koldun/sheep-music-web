@@ -13,6 +13,7 @@ import Pagination from 'components/Pagination';
 import { AlbumPictureList } from 'components/List';
 import { ListFilter } from 'components/Filter';
 import { SearchInfo } from 'components/Info';
+import Loader from 'components/Loader';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import reducer from './reducer';
@@ -35,6 +36,7 @@ import messages from './messages';
 
 export function AlbumList({
   albums,
+  loading,
   onLoadAlbumList,
   page,
   search,
@@ -122,7 +124,7 @@ export function AlbumList({
         search={search}
       />
 
-      {albums && albums.results ? (
+      {!loading && albums && albums.results ? (
         <div>
           <AlbumPictureList albums={albums.results} />
           <Pagination
@@ -134,12 +136,15 @@ export function AlbumList({
             }}
           />
         </div>
-      ) : null}
+      ) : (
+        (loading && <Loader />) || null
+      )}
     </div>
   );
 }
 
 AlbumList.propTypes = {
+  loading: PropTypes.bool,
   albums: PropTypes.shape({
     result: PropTypes.object,
     pageTotal: PropTypes.number,
