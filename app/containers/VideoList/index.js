@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable indent */
 import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -24,7 +23,7 @@ import {
   changeSearch,
   changePage,
   changeFilter,
- } from './actions';
+} from './actions';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -94,7 +93,7 @@ export function VideoList({
   return (
     <div>
       <Helmet>
-      <title>Видеоклипы Христианских Песен | Youtube</title>
+        <title>Видеоклипы Христианских Песен | Youtube</title>
         <meta
           name="description"
           content="Видео песен христианских исполнителей: смотреть видео онлайн с Youtube."
@@ -119,24 +118,29 @@ export function VideoList({
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
       />
-      <SearchInfo
-        count={(videos && videos.total) || 0}
-        page={videos && 1 + Number.parseInt(videos.curPage, 10)}
-        search={search}
-      />
 
-      {!loading && videos && videos.results ? (
-        <div>
-          <VideoYoutubeList videos={videos.results}/>
-          <Pagination
-            pageCount={videos.countPages}
-            forcePage={Number(videos.curPage)}
-            onPageChange={pageNum => {
-              onChangePage(pageNum);
-              executeScroll();
-            }}
+      {!loading ? (
+        <React.Fragment>
+          <SearchInfo
+            count={(videos && videos.total) || 0}
+            page={videos && 1 + Number.parseInt(videos.curPage, 10)}
+            search={search}
           />
-        </div>
+
+          {videos && videos.results ? (
+            <div>
+              <VideoYoutubeList videos={videos.results}/>
+              <Pagination
+                pageCount={videos.countPages}
+                forcePage={Number(videos.curPage)}
+                onPageChange={pageNum => {
+                  onChangePage(pageNum);
+                  executeScroll();
+                }}
+              />
+            </div>
+          ) : null}
+        </React.Fragment>
       ) : (
         (loading && <Loader />) || null
       )}

@@ -206,29 +206,33 @@ export function SongList({
         onChangeFilter={onChangeFilter}
         onChangeTagsFilter={onChangeTagsFilter}
       />
-      <SearchInfo
-        count={(songs && songs.total) || 0}
-        page={songs && 1 + Number.parseInt(songs.curPage, 10)}
-        search={search}
-      />
+      {!loading ? (
+        <React.Fragment>
+          <SearchInfo
+            count={(songs && songs.total) || 0}
+            page={songs && 1 + Number.parseInt(songs.curPage, 10)}
+            search={search}
+          />
 
-      {!loading && songs && songs.results ? (
-        <div>
-          <SongPlayList
-            songs={songs.results}
-            playPauseSong={playPauseSong}
-            playData={playData}
-            play={play}
-          />
-          <Pagination
-            pageCount={songs.countPages}
-            forcePage={Number(songs.curPage)}
-            onPageChange={pageNum => {
-              onChangePage(pageNum);
-              executeScroll();
-            }}
-          />
-        </div>
+          {songs && songs.results ? (
+            <div>
+              <SongPlayList
+                songs={songs.results}
+                playPauseSong={playPauseSong}
+                playData={playData}
+                play={play}
+              />
+              <Pagination
+                pageCount={songs.countPages}
+                forcePage={Number(songs.curPage)}
+                onPageChange={pageNum => {
+                  onChangePage(pageNum);
+                  executeScroll();
+                }}
+              />
+            </div>
+          ) : null}
+        </React.Fragment>
       ) : (
         (loading && <Loader />) || null
       )}

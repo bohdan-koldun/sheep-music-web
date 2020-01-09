@@ -118,24 +118,29 @@ export function AlbumList({
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
       />
-      <SearchInfo
-        count={(albums && albums.total) || 0}
-        page={albums && 1 + Number.parseInt(albums.curPage, 10)}
-        search={search}
-      />
 
-      {!loading && albums && albums.results ? (
-        <div>
-          <AlbumPictureList albums={albums.results} />
-          <Pagination
-            pageCount={albums.countPages}
-            forcePage={Number(albums.curPage)}
-            onPageChange={pageNum => {
-              onChangePage(pageNum);
-              executeScroll();
-            }}
+      {!loading ? (
+        <React.Fragment>
+          <SearchInfo
+            count={(albums && albums.total) || 0}
+            page={albums && 1 + Number.parseInt(albums.curPage, 10)}
+            search={search}
           />
-        </div>
+
+          {albums && albums.results ? (
+            <div>
+              <AlbumPictureList albums={albums.results} />
+              <Pagination
+                pageCount={albums.countPages}
+                forcePage={Number(albums.curPage)}
+                onPageChange={pageNum => {
+                  onChangePage(pageNum);
+                  executeScroll();
+                }}
+              />
+            </div>
+          ) : null}
+        </React.Fragment>
       ) : (
         (loading && <Loader />) || null
       )}

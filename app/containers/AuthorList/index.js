@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable indent */
 import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -24,7 +23,7 @@ import {
   changeSearch,
   changePage,
   changeFilter,
- } from './actions';
+} from './actions';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -94,7 +93,7 @@ export function AuthorList({
   return (
     <div>
       <Helmet>
-      <title>Авторы, Исполнители Христианских Песен</title>
+        <title>Авторы, Исполнители Христианских Песен</title>
         <meta
           name="description"
           content="Песни христианских исполнителей: слушать онлайн, скачать, слова, текст, аккорды, фонограммы"
@@ -119,24 +118,29 @@ export function AuthorList({
         onChangeSearch={onChangeSearch}
         onChangeFilter={onChangeFilter}
       />
-      <SearchInfo
-        count={(authors && authors.total) || 0}
-        page={authors && 1 + Number.parseInt(authors.curPage, 10)}
-        search={search}
-      />
-
-      {!loading && authors && authors.results ? (
-        <div>
-          <AuhorPictureList authors={authors.results}/>
-          <Pagination
-            pageCount={authors.countPages}
-            forcePage={Number(authors.curPage)}
-            onPageChange={pageNum => {
-              onChangePage(pageNum);
-              executeScroll();
-            }}
+      
+      {!loading ? (
+        <React.Fragment>
+          <SearchInfo
+            count={(authors && authors.total) || 0}
+            page={authors && 1 + Number.parseInt(authors.curPage, 10)}
+            search={search}
           />
-        </div>
+          
+          {authors && authors.results ? (
+            <div>
+              <AuhorPictureList authors={authors.results}/>
+              <Pagination
+                pageCount={authors.countPages}
+                forcePage={Number(authors.curPage)}
+                onPageChange={pageNum => {
+                  onChangePage(pageNum);
+                  executeScroll();
+                }}
+              />
+            </div>
+          ) : null}
+        </React.Fragment>
       ) : (
         (loading && <Loader />) || null
       )}
