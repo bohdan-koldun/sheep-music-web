@@ -6,6 +6,7 @@ import {
   MdFiberNew,
   MdArrowDownward,
   MdArrowUpward,
+  MdShowChart,
 } from 'react-icons/md';
 
 function SelectIcon({ filter }) {
@@ -16,6 +17,8 @@ function SelectIcon({ filter }) {
       return <MdArrowDownward />;
     case 'revert_alphabet':
       return <MdArrowUpward />;
+    case 'popular':
+      return <MdShowChart />;
     default:
       return <MdFilterList />;
   }

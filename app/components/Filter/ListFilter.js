@@ -20,6 +20,7 @@ function ListFilter({
   const intl = useIntl();
   const options = [
     { value: 'newest', label: intl.formatMessage(messages.newest) },
+    { value: 'popular', label: intl.formatMessage(messages.popular) },
     { value: 'alphabet', label: intl.formatMessage(messages.alphabet) },
     {
       value: 'revert_alphabet',

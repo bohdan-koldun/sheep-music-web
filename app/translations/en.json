@@ -33,6 +33,7 @@
   "boilerplate.components.Info.page": "page",
   "boilerplate.components.Info.results": "Results:",
   "boilerplate.components.Filter.newest": "New",
+  "boilerplate.components.Filter.popular": "Popular",
   "boilerplate.components.Filter.alphabet": "Alphabetically",
   "boilerplate.components.Filter.alphabet.revert": "Back alphabetically",
   "boilerplate.components.Filter.search": "Search",

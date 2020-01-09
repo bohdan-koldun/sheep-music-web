@@ -33,6 +33,7 @@
   "boilerplate.components.Info.page": "страница",
   "boilerplate.components.Info.results": "Результатов:",
   "boilerplate.components.Filter.newest": "Новые",
+  "boilerplate.components.Filter.popular": "Популярные",
   "boilerplate.components.Filter.alphabet": "По алфавиту",
   "boilerplate.components.Filter.alphabet.revert": "Обратно алфавиту",
   "boilerplate.components.Filter.search": "Поиск",

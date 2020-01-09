@@ -33,6 +33,7 @@
   "boilerplate.components.Info.page": "сторінка",
   "boilerplate.components.Info.results": "Результати:",
   "boilerplate.components.Filter.newest": "Нові",
+  "boilerplate.components.Filter.popular": "Популярні",
   "boilerplate.components.Filter.alphabet": "За алфавітом",
   "boilerplate.components.Filter.alphabet.revert": "Зворотно алфавіту",
   "boilerplate.components.Filter.search": "Пошук",

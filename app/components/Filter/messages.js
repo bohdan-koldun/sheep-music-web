@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.alphabet`,
     defaultMessage: 'По алфавиту',
   },
+  popular: {
+    id: `${scope}.popular`,
+    defaultMessage: 'Популярные',
+  },
   revertAlphabet: {
     id: `${scope}.alphabet.revert`,
     defaultMessage: 'Обратно алфавиту',
