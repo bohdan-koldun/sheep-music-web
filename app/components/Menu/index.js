@@ -80,7 +80,9 @@ function Menu({ location, user }) {
           {showMobileMenu ? <MdClose /> : <MdMenu />}{' '}
         </button>{' '}
         <div className="mobile-menu-logo">
-          <img src={Logo} alt="Sheep Music" />
+          <Link to="/">
+            <img src={Logo} alt="Sheep Music" />
+          </Link>
         </div>{' '}
         <button type="button" className="mobile-more-bar">
           <MdMoreVert />
