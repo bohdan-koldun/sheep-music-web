@@ -1,7 +1,8 @@
 @import "../../styles/colors.scss";
+@import "../../styles/dimensions.scss";
 
 .song-author-item {
-  width: 340px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,6 +14,11 @@
 
   .author-description {
     text-align: center;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 
     a {
       color: $dark-one;
@@ -30,8 +36,9 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $tablet-max-width) {
   .song-author-item {
-    width: 100%;
+    width: 140px;
+    margin: 5px 8px;
   }
 }

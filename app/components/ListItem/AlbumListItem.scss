@@ -77,6 +77,7 @@ $albumItemWidthMobile: 130px;
 
 @media screen and (max-width: $tablet-max-width) {
   .song-album-item {
+    width: $albumItemWidthMobile;
     img {
       width: $albumItemWidthMobile;
       height: $albumItemWidthMobile;
