@@ -56,8 +56,8 @@ export function SongChords({
   user,
   loading,
 }) {
-  useInjectReducer({ key: 'song', reducer });
-  useInjectSaga({ key: 'song', saga });
+  useInjectReducer({ key: 'songChord', reducer });
+  useInjectSaga({ key: 'songChord', saga });
 
   const intl = useIntl();
 
