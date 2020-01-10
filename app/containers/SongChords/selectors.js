@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectSongChordsDomain = state => state.song || initialState;
+const selectSongChordsDomain = state => state.songChord || initialState;
 
 const makeSelectLoading = () =>
   createSelector(
