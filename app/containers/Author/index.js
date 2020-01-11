@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { SongPlayList, AlbumPictureList } from 'components/List';
+import { SongPlayList, AlbumPictureListCarousel } from 'components/List';
 import Loader from 'components/Loader';
 import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -163,7 +163,7 @@ export function Author({
               count={(authorData.albums && authorData.albums.length) || 0}
             />
           </span>
-          <AlbumPictureList albums={authorData.albums} />
+          <AlbumPictureListCarousel albums={authorData.albums} />
           <br /> <br />
         </div>
       ) : (
