@@ -25,6 +25,10 @@ body {
   width: $aside-content-width;
 }
 
+.page-container-wrapper {
+  margin: 0 25px;
+}
+
 p,
 label {
   font-family: 'Roboto';
@@ -41,7 +45,7 @@ label {
   }
 
   .page-container-wrapper {
-    padding: 0 20px;
+    margin: 0 10px;
   }
 
   #app-right-wrapper {
