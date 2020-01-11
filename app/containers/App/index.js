@@ -52,7 +52,7 @@ const AppRightSideWrapper = styled.div`
 `;
 
 const AppContainerWrapper = styled.div`
-  padding: 20px 16px;
+  padding: 8px 20px;
 `;
 
 function App({ onLoadTags, onLoadUser, user }) {
