@@ -39,4 +39,8 @@ export default defineMessages({
     id: `${scope}.login`,
     defaultMessage: 'Войти в систему',
   },
+  add: {
+    id: `${scope}.add`,
+    defaultMessage: 'Добавить',
+  },
 });

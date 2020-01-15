@@ -13,7 +13,9 @@ import {
   FiGrid,
   FiHeadphones,
   FiChevronRight,
+  FiPlus,
 } from 'react-icons/fi';
+import checkUserPermissions from 'utils/checkPermissions';
 import { FaStar } from 'react-icons/fa';
 import { MdClose, MdMenu, MdMoreVert } from 'react-icons/md';
 import { useIntl } from 'containers/LanguageProvider';
@@ -133,6 +135,12 @@ function Menu({ location, user }) {
                 <IoIosBookmarks className="yellow-icon" />
                 <FormattedMessage {...messages.notebook} />{' '}
               </MenuLink>
+              {checkUserPermissions(user, ['admin', 'moderator']) && (
+                <MenuLink linkPath="/add">
+                  <FiPlus className="yellow-icon" />
+                  <FormattedMessage {...messages.add} />{' '}
+                </MenuLink>
+              )}
             </div>
             <hr />
             <Link
