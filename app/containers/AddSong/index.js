@@ -15,33 +15,22 @@ import {
   makeSelectLoading,
   makeSelectError,
   makeSelectSongData,
+  makeSelectResultAdding,
 } from './selectors';
-import { loadSong, editSong } from './actions';
+import { addSong } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import './EditSong.scss';
+import './AddSong.scss';
 
-export function EditSong({
-  onLoadSong,
-  song,
-  user,
-  error,
-  match,
-  loading,
-  onEditSong,
-}) {
-  useInjectReducer({ key: 'editSong', reducer });
-  useInjectSaga({ key: 'editSong', saga });
+export function AddSong({ song, user, error, loading, onAddSong }) {
+  useInjectReducer({ key: 'addSong', reducer });
+  useInjectSaga({ key: 'addSong', saga });
 
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [chords, setChords] = useState('');
   const [video, setVideo] = useState('');
   const [chordsKey, setChordsKey] = useState();
-
-  useEffect(() => {
-    onLoadSong(match.params.slug);
-  }, []);
 
   useEffect(() => {
     if (song) {
@@ -76,8 +65,8 @@ export function EditSong({
 
   return (
     <React.Fragment>
-      <h1>Редактирование песни:</h1>
-      <div className="edit-song-page">
+      <h1>Добавить песню:</h1>
+      <div className="add-song-page">
         {loading ? (
           <BeatLoader size={31} margin="20px" />
         ) : (
@@ -152,7 +141,7 @@ export function EditSong({
                 type="button"
                 className="save-button"
                 onClick={() => {
-                  onEditSong({
+                  onAddSong({
                     title,
                     text,
                     chords,
@@ -174,12 +163,11 @@ export function EditSong({
   );
 }
 
-EditSong.propTypes = {
+AddSong.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loading: PropTypes.bool,
   song: PropTypes.object,
-  onLoadSong: PropTypes.func,
-  onEditSong: PropTypes.func,
+  onAddSong: PropTypes.func,
   user: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -192,13 +180,13 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   song: makeSelectSongData(),
+  result: makeSelectResultAdding(),
   user: makeSelectUser(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoadSong: slug => dispatch(loadSong(slug)),
-    onEditSong: song => dispatch(editSong(song)),
+    onAddSong: song => dispatch(addSong(song)),
   };
 }
 
@@ -207,4 +195,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(EditSong);
+export default compose(withConnect)(AddSong);

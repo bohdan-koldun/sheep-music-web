@@ -13,7 +13,7 @@ export default function Add() {
       <Helmet>
         <title>Добавить песню, альбом, автора</title>
       </Helmet>
-      <h1 className="add-header">Добавить:</h1>
+      <h1>Добавить:</h1>
       <div className="add-link">
         <Link to="/add_song">
           <FiHeadphones size={48} />
