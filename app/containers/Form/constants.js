@@ -1,0 +1,7 @@
+export const LOAD_AUTHOR_IDS = 'app/Form/LOAD_AUTHOR_IDS';
+export const LOAD_AUTHOR_IDS_SUCCESS = 'app/Form/LOAD_AUTHOR_IDS_SUCCESS';
+export const LOAD_AUTHOR_IDS_ERROR = 'app/Form/LOAD_AUTHOR_IDS_ERROR';
+
+export const LOAD_ALBUM_IDS = 'ap/Form/LOAD_ALBUM_IDS';
+export const LOAD_ALBUM_IDS_SUCCESS = 'ap/Form/LOAD_ALBUM_IDS_SUCCESS';
+export const LOAD_ALBUM_IDS_ERROR = 'ap/Form/LOAD_ALBUM_IDS_ERROR';

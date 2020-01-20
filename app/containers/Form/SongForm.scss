@@ -1,0 +1,39 @@
+.song-form {
+  .song-input {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 5px;
+  }
+
+  .song-textarea {
+    width: 100%;
+    font-family: monospace;
+  }
+
+
+  label {
+    font-weight: 700;
+  }
+
+  .options-select {
+    height: 40px;
+    margin-bottom: 30px;
+  }
+
+  .save-button {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .error-label {
+    color: red;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .source-label{
+    color: #009688;
+    display: block;
+    margin-bottom: 10px;
+  }
+}

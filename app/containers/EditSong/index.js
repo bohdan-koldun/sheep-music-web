@@ -1,16 +1,18 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+/* eslint-disable prettier/prettier */
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import Select from 'react-select';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import checkUserPermissions from 'utils/checkPermissions';
-import * as striptags from 'striptags';
-import BeatLoader from 'react-spinners/BeatLoader';
-import { makeSelectUser } from 'containers/App/selectors';
+import {
+  makeSelectUser,
+  makeSelectGlobalLoading,
+} from 'containers/App/selectors';
+import { SongForm } from 'containers/Form';
+import Loader from 'components/Loader';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -28,147 +30,38 @@ export function EditSong({
   error,
   match,
   loading,
+  globalLoading,
   onEditSong,
 }) {
   useInjectReducer({ key: 'editSong', reducer });
   useInjectSaga({ key: 'editSong', saga });
 
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
-  const [chords, setChords] = useState('');
-  const [video, setVideo] = useState('');
-  const [chordsKey, setChordsKey] = useState();
-
   useEffect(() => {
     onLoadSong(match.params.slug);
   }, []);
 
-  useEffect(() => {
-    if (song) {
-      setTitle(song.title || '');
-      setText(striptags(song.text || ''));
-      setChords(striptags(song.chords) || '');
-      setChordsKey({ value: song.chordsKey, label: song.chordsKey });
-      setVideo(song.video || '');
-    }
-  }, [song]);
-
-  const options = [
-    { value: 'Ab', label: 'Ab' },
-    { value: 'A', label: 'A' },
-    { value: 'A#', label: 'A#' },
-    { value: 'Bb', label: 'Bb' },
-    { value: 'B', label: 'B' },
-    { value: 'H', label: 'H' },
-    { value: 'С', label: 'С' },
-    { value: 'С#', label: 'С#' },
-    { value: 'Db', label: 'Db' },
-    { value: 'D', label: 'D' },
-    { value: 'D#', label: 'D#' },
-    { value: 'Еb', label: 'Еb' },
-    { value: 'D#', label: 'D#' },
-    { value: 'F', label: 'F' },
-    { value: 'F#', label: 'F#' },
-    { value: 'Gb', label: 'Gb' },
-    { value: 'G', label: 'G' },
-    { value: 'G#', label: 'G#' },
-  ];
+  const isAdminOrModerator = checkUserPermissions(user, ['admin', 'moderator']);
 
   return (
     <React.Fragment>
       <h1>Редактирование песни:</h1>
       <div className="edit-song-page">
-        {loading ? (
-          <BeatLoader size={31} margin="20px" />
+        {loading || globalLoading ? (
+          <Loader />
         ) : (
-          (checkUserPermissions(user, ['admin', 'moderator']) && (
-            <form>
-              <label
-                style={{
-                  color: '#009688',
-                  display: 'block',
-                  marginBottom: '10px',
-                }}
-              >
-                {song.parsedSource}
-              </label>
-
-              <label>
-                Название песни:
-                <input
-                  type="text"
-                  name="title"
-                  className="song-input"
-                  placeholder="Название"
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                />
-              </label>
-              <label>
-                Текст песни:
-                <textarea
-                  name="text"
-                  rows="15"
-                  value={text}
-                  className="song-textarea"
-                  onChange={e => setText(e.target.value)}
-                >
-                  {text}
-                </textarea>
-              </label>
-              <label>
-                Акорды:
-                <textarea
-                  name="chords"
-                  rows="15"
-                  className="song-textarea"
-                  value={chords}
-                  onChange={e => setChords(e.target.value)}
-                />
-              </label>
-              <label>
-                Ключ акордов:
-                <Select
-                  value={chordsKey}
-                  onChange={setChordsKey}
-                  options={options}
-                  isSearchable={false}
-                  className="chords-key-select"
-                  placeholder="ключ акордов"
-                />
-              </label>
-              <label>
-                Видео:
-                <input
-                  type="text"
-                  name="video"
-                  className="song-input"
-                  placeholder="Видео"
-                  value={video}
-                  onChange={e => setVideo(e.target.value)}
-                />
-              </label>
-              <button
-                type="button"
-                className="save-button"
-                onClick={() => {
-                  onEditSong({
-                    title,
-                    text,
-                    chords,
-                    video,
-                    id: song.id,
-                    slug: song.slug,
-                    chordsKey: chordsKey.value,
-                  });
-                }}
-              >
-                Сохранить
-              </button>
-              {error && <p className="error-label">Ошибка сохранения!</p>}
-            </form>
-          )) || <p className="error-label">У вас нет прав!</p>
-        )}
+          isAdminOrModerator && (
+            <SongForm
+              song={song}
+              onSubmit={data => {
+                onEditSong({
+                  id: song.id,
+                  ...data,
+                });
+              }}
+              outsideError={error}
+            />
+          ) || <p className="error-label">У вас нет прав!</p>)
+        }
       </div>
     </React.Fragment>
   );
@@ -177,6 +70,7 @@ export function EditSong({
 EditSong.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loading: PropTypes.bool,
+  globalLoading: PropTypes.bool,
   song: PropTypes.object,
   onLoadSong: PropTypes.func,
   onEditSong: PropTypes.func,
@@ -192,6 +86,7 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   song: makeSelectSongData(),
+  globalLoading: makeSelectGlobalLoading(),
   user: makeSelectUser(),
 });
 

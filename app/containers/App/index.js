@@ -34,7 +34,7 @@ import NotFoundPage from 'containers/NotFoundPage';
 import Menu from 'components/Menu';
 import Footer from 'components/Footer';
 import {
-  makeSelectLoading,
+  makeSelectGlobalLoading,
   makeSelectError,
   makeSelectUser,
 } from './selectors';
@@ -121,7 +121,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectLoading(),
+  loading: makeSelectGlobalLoading(),
   user: makeSelectUser(),
   error: makeSelectError(),
 });

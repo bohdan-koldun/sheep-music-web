@@ -10,7 +10,10 @@ import { MdBookmark, MdViewList, MdViewModule } from 'react-icons/md';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useIntl } from 'containers/LanguageProvider';
-import { makeSelectTags, makeSelectLoading } from 'containers/App/selectors';
+import {
+  makeSelectTags,
+  makeSelectGlobalLoading,
+} from 'containers/App/selectors';
 import Breadcrumb from 'components/Breadcrumb';
 import menuMessages from 'components/Menu/messages';
 import { SongsMessage } from 'components/Message';
@@ -110,7 +113,7 @@ TagList.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   tags: makeSelectTags(),
-  loading: makeSelectLoading(),
+  loading: makeSelectGlobalLoading(),
 });
 
 const withConnect = connect(

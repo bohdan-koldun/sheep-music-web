@@ -20,9 +20,9 @@ export function* addSong(action) {
       referrer: 'no-referrer',
       body: JSON.stringify(action.song),
     });
-    yield put(addSongError(song));
+    yield put(addSongSuccess(song));
   } catch (err) {
-    yield put(addSongSuccess(err));
+    yield put(addSongError(err));
   }
 }
 

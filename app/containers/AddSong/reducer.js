@@ -1,5 +1,11 @@
 import produce from 'immer';
-import { ADD_SONG, ADD_SONG_ERROR, ADD_SONG_SUCCESS } from './constants';
+import {
+  ADD_SONG,
+  ADD_SONG_ERROR,
+  ADD_SONG_SUCCESS,
+  UPDATE_SONG_STORE,
+  CLEAR_SONG_STORE,
+} from './constants';
 
 export const initialState = {
   loading: false,
@@ -22,6 +28,14 @@ const addSongReducer = (state = initialState, action) =>
         draft.error = false;
         draft.song = {};
         draft.result = action.song;
+        break;
+      case UPDATE_SONG_STORE:
+        draft.song = action.song;
+        break;
+      case CLEAR_SONG_STORE:
+        draft.result = null;
+        draft.error = false;
+        draft.song = {};
         break;
       case ADD_SONG_ERROR:
         draft.error = action.error;
