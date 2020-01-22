@@ -22,7 +22,7 @@ export function* addSong(action) {
     });
     yield put(addSongSuccess(song));
   } catch (err) {
-    yield put(addSongError(err));
+    yield put(addSongError(err && err.response));
   }
 }
 

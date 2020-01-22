@@ -9,24 +9,17 @@ function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
-  return response.json();
-}
 
-/**
- * Checks if a network request came back fine, and throws an error if not
- *
- * @param  {object} response   A response from a network request
- *
- * @return {object|undefined} Returns either the response, or throws an error
- */
-function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
-    return response;
+    return response.json();
   }
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  return response.json().then(body => {
+    const error = new Error((body && body.message) || response.statusText);
+
+    error.response = body;
+    throw error;
+  });
 }
 
 /**
@@ -38,7 +31,5 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
+  return fetch(url, options).then(parseJSON);
 }

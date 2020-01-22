@@ -18,6 +18,7 @@ import { loadAlbumIds, loadAuthorIds } from './actions';
 import './SongForm.scss';
 import reducer from './reducer';
 import saga from './saga';
+import { updateSongStore } from '../AddSong/actions';
 
 const options = [
   { value: 'Ab', label: 'Ab' },
@@ -44,6 +45,7 @@ function SongForm({
   song = {},
   outsideError,
   onSubmit,
+  onWillUnmount,
   tags = [],
   authors = [],
   albums = [],
@@ -116,10 +118,16 @@ function SongForm({
     chords,
     video,
     chordsKey: chordsKey && chordsKey.value,
-    tags: songTags && songTags.map(tag => ({ id: tag.value })),
-    author: author && { id: author.value },
-    album: album && { id: album.value },
+    tags: songTags && songTags.map(tag => ({ id: tag.value, name: tag.label })),
+    author: author && { id: author.value, title: author.label },
+    album: album && { id: album.value, title: album.label },
   });
+
+  useEffect(() => {
+    if (onWillUnmount) {
+      onWillUnmount(getSongState());
+    }
+  }, [title, text, chords, chordsKey, author, video, album, songTags]);
 
   return (
     <form className="song-form">
@@ -161,7 +169,7 @@ function SongForm({
         Ключ акордов:
         <Select
           value={chordsKey}
-          onChange={setChordsKey}
+          onChange={value => setChordsKey(value)}
           options={options}
           isSearchable={false}
           className="options-select"
@@ -220,7 +228,7 @@ function SongForm({
         Тематика песни:
         <Select
           value={songTags}
-          onChange={setSongTags}
+          onChange={value => setSongTags(value)}
           options={tagsOptions}
           isSearchable
           isMulti
@@ -237,7 +245,11 @@ function SongForm({
       >
         Сохранить
       </button>
-      {outsideError && <p className="error-label">Ошибка сохранения!</p>}
+      {outsideError && (
+        <p className="error-label">
+          Ошибка сохранения! {outsideError && outsideError.message}
+        </p>
+      )}
     </form>
   );
 }
@@ -245,6 +257,7 @@ function SongForm({
 SongForm.propTypes = {
   song: PropTypes.object,
   onSubmit: PropTypes.func,
+  onWillUnmount: PropTypes.func,
   outsideError: PropTypes.any,
   tags: PropTypes.array,
   albums: PropTypes.array,
@@ -264,6 +277,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onLoadAuthorsIds: albumId => dispatch(loadAuthorIds(albumId)),
     onLoadAlbumsIds: authorId => dispatch(loadAlbumIds(authorId)),
+    onUpdateSongStore: song => dispatch(updateSongStore(song)),
   };
 }
 

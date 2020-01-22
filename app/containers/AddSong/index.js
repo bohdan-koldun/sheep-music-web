@@ -33,26 +33,11 @@ export function AddSong({
   loading,
   globalLoading,
   onAddSong,
-  // TODO: onUpdateSongStore,
+  onUpdateSongStore,
   onClearSongStore,
 }) {
   useInjectReducer({ key: 'addSong', reducer });
   useInjectSaga({ key: 'addSong', saga });
-
-  // const getSongState = () => ({
-  //   title,
-  //   text,
-  //   chords,
-  //   video,
-  //   chordsKey: chordsKey && chordsKey.value,
-  // });
-  //
-  // useEffect(
-  //   () => () => {
-  //     onUpdateSongStore(getSongState());
-  //   },
-  //   [title, text, chords, video, chordsKey],
-  // );
 
   const isAdminOrModerator = checkUserPermissions(user, ['admin', 'moderator']);
 
@@ -75,7 +60,12 @@ export function AddSong({
                 </button>
               </div>
             )) || (
-              <SongForm song={song} outsideError={error} onSubmit={onAddSong} />
+              <SongForm
+                song={song}
+                outsideError={error}
+                onSubmit={onAddSong}
+                onWillUnmount={onUpdateSongStore}
+              />
             )
           )}
         </div>
@@ -93,7 +83,7 @@ AddSong.propTypes = {
   song: PropTypes.object,
   result: PropTypes.object,
   onAddSong: PropTypes.func,
-  // onUpdateSongStore: PropTypes.func,
+  onUpdateSongStore: PropTypes.func,
   onClearSongStore: PropTypes.func,
   user: PropTypes.object,
   match: PropTypes.shape({
@@ -115,8 +105,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onAddSong: song => dispatch(addSong(song)),
-    onUpdateSongStore: song => dispatch(updateSongStore(song)),
     onClearSongStore: () => dispatch(clearSongStore()),
+    onUpdateSongStore: song => dispatch(updateSongStore(song)),
   };
 }
 
