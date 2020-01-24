@@ -1,14 +1,15 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import checkUserPermissions from 'utils/checkPermissions';
-import * as striptags from 'striptags';
-import BeatLoader from 'react-spinners/BeatLoader';
+import { isAdminOrModerator } from 'utils/checkPermissions';
+import Loader from 'components/Loader';
+import { AuthorForm } from 'containers/Form';
 import { makeSelectUser } from 'containers/App/selectors';
 import {
   makeSelectLoading,
@@ -32,113 +33,27 @@ export function EditAuthor({
   useInjectReducer({ key: 'editAuthor', reducer });
   useInjectSaga({ key: 'editAuthor', saga });
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [avatar, setAvatar] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
-
-  const handleImageChange = event => {
-    event.preventDefault();
-
-    const reader = new FileReader();
-    const file = event.target.files[0];
-
-    reader.onloadend = () => {
-      setAvatar(file);
-      setImagePreviewUrl(reader.result);
-    };
-
-    reader.readAsDataURL(file);
-  };
-
   useEffect(() => {
     onLoadAuthor(match.params.slug);
   }, []);
 
-  useEffect(() => {
-    if (author) {
-      setTitle(author.title || '');
-      setDescription(striptags(author.description || ''));
-    }
-  }, [author]);
-
   return (
-    <div className="edit-author-page">
-      {loading ? (
-        <BeatLoader size={31} margin="20px" />
-      ) : (
-        (checkUserPermissions(user, ['admin', 'moderator']) && (
-          <form>
-            <label
-              style={{
-                color: '#009688',
-                display: 'block',
-                marginBottom: '10px',
-              }}
-            >
-              {author.parsedSource}
-            </label>
-
-            <label>
-              Имя автора:
-              <input
-                type="text"
-                name="title"
-                className="author-input"
-                placeholder="Имя автора"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-              />
-            </label>
-            <label>
-              Описание автора:
-              <textarea
-                name="text"
-                rows="15"
-                className="author-input"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-              />
-            </label>
-            <label>
-              Аватарка должна быть квадратной. Ширина равняется высоте и &gt;=
-              400px!
-              <input
-                type="file"
-                name="avatar"
-                className="upload-author-avatar"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-              <img
-                src={
-                  imagePreviewUrl || (author.thumbnail && author.thumbnail.path)
-                }
-                className="author-edit-img"
-                alt=""
-              />
-            </label>
-            <button
-              type="button"
-              className="save-button"
-              onClick={() => {
-                onEditAuthor({
-                  title,
-                  id: author.id,
-                  slug: author.slug,
-                  description,
-                  avatar,
-                });
-              }}
-            >
-              Сохранить
-            </button>
-            {error && <p className="error-label">Ошибка сохранения!</p>}
-          </form>
-        )) ||
-        (user && <p className="error-label">У вас нет прав!</p>)
-      )}
-    </div>
+    <React.Fragment>
+      <h1>Редактирование исполнителя:</h1>
+      <div className="edit-author-page">
+        {loading ? (
+          <Loader />
+        ) : (
+          isAdminOrModerator(user) && (
+            <AuthorForm
+              author={author}
+              onSubmit={data => onEditAuthor({ ...data, id: author.id })}
+              outsideError={error}
+            />
+          ) || <p className="error-label">У вас нет прав!</p>
+        )}
+      </div>
+    </React.Fragment>
   );
 }
 

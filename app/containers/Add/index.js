@@ -25,7 +25,7 @@ export default function Add() {
         </Link>
         <Link to="/add_author">
           <FiMic size={48} />
-          <span>Добавить музиканта</span>
+          <span>Добавить исполнителя</span>
         </Link>
         <Link to="/add_radio">
           <MdRadio size={48} />

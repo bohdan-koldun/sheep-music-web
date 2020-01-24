@@ -12,3 +12,6 @@ export default function checkUserPermissions(user, roles) {
 
   return false;
 }
+
+export const isAdminOrModerator = user =>
+  checkUserPermissions(user, ['admin', 'moderator']);

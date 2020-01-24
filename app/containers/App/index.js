@@ -30,6 +30,7 @@ import Favorites from 'containers/Favorites';
 import Notebook from 'containers/Notebook';
 import Add from 'containers/Add';
 import AddSong from 'containers/AddSong';
+import AddAuthor from 'containers/AddAuthor';
 import NotFoundPage from 'containers/NotFoundPage';
 import Menu from 'components/Menu';
 import Footer from 'components/Footer';
@@ -102,6 +103,7 @@ function App({ onLoadTags, onLoadUser, user }) {
                 <PrivateRoute path="/edit/album/:slug" component={EditAlbum} />
                 <PrivateRoute path="/add" component={Add} />
                 <PrivateRoute path="/add_song" component={AddSong} />
+                <PrivateRoute path="/add_author" component={AddAuthor} />
                 <Route path="" component={NotFoundPage} />
               </Switch>
             </ScrollToTop>
