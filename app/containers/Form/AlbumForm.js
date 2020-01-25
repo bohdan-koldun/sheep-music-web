@@ -27,6 +27,10 @@ function AlbumForm({
 
   const [title, setTitle] = useState(album.title || '');
   const [year, setYear] = useState(album.year || '');
+  const [iTunes, setITunes] = useState(album.iTunes || '');
+  const [googlePlay, setGooglePlay] = useState(album.googlePlay || '');
+  const [soundCloud, setSoundCloud] = useState(album.soundCloud || '');
+  const [youtubeMusic, setYoutubeMusic] = useState(album.youtubeMusic || '');
   const [description, setDescription] = useState(
     striptags(album.description || ''),
   );
@@ -61,16 +65,21 @@ function AlbumForm({
     label: item.title,
   }));
 
-  const getAuthorState = () => ({
+  const getAlbumState = () => ({
     title,
     year,
+    iTunes,
+    googlePlay,
+    soundCloud,
+    youtubeMusic,
+    author: author && { id: author.value, title: author.label },
     description,
     avatar,
   });
 
   useEffect(() => {
     if (onWillUnmount) {
-      onWillUnmount(getAuthorState());
+      onWillUnmount(getAlbumState());
     }
   }, [title, description]);
 
@@ -127,6 +136,50 @@ function AlbumForm({
         />
       </label>
       <label>
+        iTunes:
+        <input
+          type="text"
+          name="iTunes"
+          className="album-input"
+          placeholder="iTunes"
+          value={iTunes}
+          onChange={e => setITunes(e.target.value)}
+        />
+      </label>
+      <label>
+        Google Play Music:
+        <input
+          type="text"
+          name="googlePlay"
+          className="album-input"
+          placeholder="Google Play Music"
+          value={googlePlay}
+          onChange={e => setGooglePlay(e.target.value)}
+        />
+      </label>
+      <label>
+        Sound Cloud:
+        <input
+          type="text"
+          name="soundCloud"
+          className="album-input"
+          placeholder="Sound Cloud"
+          value={soundCloud}
+          onChange={e => setSoundCloud(e.target.value)}
+        />
+      </label>
+      <label>
+        Youtube Music:
+        <input
+          type="text"
+          name="youtubeMusic"
+          className="album-input"
+          placeholder="Youtube Music"
+          value={youtubeMusic}
+          onChange={e => setYoutubeMusic(e.target.value)}
+        />
+      </label>
+      <label>
         Аватарка должна быть квадратной. Ширина равняется высоте и &gt;= 400px!
         <input
           type="file"
@@ -141,7 +194,11 @@ function AlbumForm({
         type="button"
         className="save-button"
         onClick={() => {
-          onSubmit(getAuthorState());
+          const data = getAlbumState();
+          onSubmit({
+            ...data,
+            author: data.author && data.author.id,
+          });
         }}
       >
         Сохранить
