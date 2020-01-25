@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import checkUserPermissions from 'utils/checkPermissions';
+import { isAdminOrModerator } from 'utils/checkPermissions';
 import {
   makeSelectUser,
   makeSelectGlobalLoading,
@@ -39,12 +39,10 @@ export function AddAuthor({
   useInjectReducer({ key: 'addAuthor', reducer });
   useInjectSaga({ key: 'addAuthor', saga });
 
-  const isAdminOrModerator = checkUserPermissions(user, ['admin', 'moderator']);
-
   return (
     <React.Fragment>
       <h1>Добавить исполнителя:</h1>
-      {isAdminOrModerator ? (
+      {isAdminOrModerator(user) ? (
         <div className="add-author-page">
           {loading || globalLoading ? (
             <Loader />

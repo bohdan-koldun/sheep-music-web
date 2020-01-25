@@ -1,47 +1,4 @@
 .edit-album-page{
     display: flex;
-    justify-content: center;
-    
-    .album-input{
-        width: 100%;
-        margin-bottom: 30px;
-        padding: 5px;
-    }
-
-    .album-author-select{
-        width: 100%;
-        margin-bottom: 30px;
-        background: yellow;
-    }
-
-    label {
-        font-weight: 700;
-    }
-
-    .chords-key-select{
-        height: 40px;
-        margin-bottom: 30px;
-    }
-
-    .upload-album-avatar {
-        margin-bottom: 20px;
-    }
-
-    .album-edit-img{
-        height: 200px;
-        margin-bottom: 20px;
-        display: block;
-    }
-
-    .save-button{
-        width: 100%;
-        padding: 5px;
-    }
-
-    .error-label{
-        color: red;
-        font-weight: 700;
-        text-align: center;
-    }
 }
 

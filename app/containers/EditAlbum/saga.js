@@ -59,7 +59,7 @@ export function* editAlbum(action) {
     });
     yield put(editSuccess(album));
   } catch (err) {
-    yield put(editError(err));
+    yield put(editError(err && err.response));
   }
 }
 

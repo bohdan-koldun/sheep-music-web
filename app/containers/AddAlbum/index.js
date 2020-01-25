@@ -12,38 +12,38 @@ import {
   makeSelectUser,
   makeSelectGlobalLoading,
 } from 'containers/App/selectors';
-import { SongForm } from 'containers/Form';
+import { AlbumForm } from 'containers/Form';
 import Loader from 'components/Loader';
 import {
   makeSelectLoading,
   makeSelectError,
-  makeSelectSongData,
+  makeSelectAlbumData,
   makeSelectResultAdding,
 } from './selectors';
-import { addSong, updateSongStore, clearSongStore } from './actions';
+import { addAlbum, updateAlbumStore, clearAlbumStore } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import './AddSong.scss';
+import './AddAlbum.scss';
 
-export function AddSong({
-  song,
+export function AddAlbum({
+  album,
   result,
   user,
   error,
   loading,
   globalLoading,
-  onAddSong,
-  onUpdateSongStore,
-  onClearSongStore,
+  onAddAlbum,
+  onUpdateAlbumStore,
+  onClearAlbumStore,
 }) {
-  useInjectReducer({ key: 'addSong', reducer });
-  useInjectSaga({ key: 'addSong', saga });
+  useInjectReducer({ key: 'addAlbum', reducer });
+  useInjectSaga({ key: 'addAlbum', saga });
 
   return (
     <React.Fragment>
-      <h1>Добавить песню:</h1>
+      <h1>Добавить альбом:</h1>
       {isAdminOrModerator(user) ? (
-        <div className="add-song-page">
+        <div className="add-album-page">
           {loading || globalLoading ? (
             <Loader />
           ) : (
@@ -51,18 +51,18 @@ export function AddSong({
               <div>
                 <h2>
                   Песня добавлена:{' '}
-                  <Link to={`/song/${result.slug}`}>{result.title}</Link>
+                  <Link to={`/albums/${result.slug}`}>{result.title}</Link>
                 </h2>
-                <button type="button" onClick={onClearSongStore}>
+                <button type="button" onClick={onClearAlbumStore}>
                   Добавить еще
                 </button>
               </div>
             )) || (
-              <SongForm
-                song={song}
+              <AlbumForm
+                album={album}
                 outsideError={error}
-                onSubmit={onAddSong}
-                onWillUnmount={onUpdateSongStore}
+                onSubmit={onAddAlbum}
+                onWillUnmount={onUpdateAlbumStore}
               />
             )
           )}
@@ -74,15 +74,15 @@ export function AddSong({
   );
 }
 
-AddSong.propTypes = {
+AddAlbum.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loading: PropTypes.bool,
   globalLoading: PropTypes.bool,
-  song: PropTypes.object,
+  album: PropTypes.object,
   result: PropTypes.object,
-  onAddSong: PropTypes.func,
-  onUpdateSongStore: PropTypes.func,
-  onClearSongStore: PropTypes.func,
+  onAddAlbum: PropTypes.func,
+  onUpdateAlbumStore: PropTypes.func,
+  onClearAlbumStore: PropTypes.func,
   user: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -95,16 +95,16 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   globalLoading: makeSelectGlobalLoading(),
   error: makeSelectError(),
-  song: makeSelectSongData(),
+  album: makeSelectAlbumData(),
   result: makeSelectResultAdding(),
   user: makeSelectUser(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onAddSong: song => dispatch(addSong(song)),
-    onClearSongStore: () => dispatch(clearSongStore()),
-    onUpdateSongStore: song => dispatch(updateSongStore(song)),
+    onAddAlbum: album => dispatch(addAlbum(album)),
+    onClearAlbumStore: () => dispatch(clearAlbumStore()),
+    onUpdateAlbumStore: album => dispatch(updateAlbumStore(album)),
   };
 }
 
@@ -113,4 +113,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(AddSong);
+export default compose(withConnect)(AddAlbum);

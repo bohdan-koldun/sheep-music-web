@@ -24,16 +24,22 @@ export function* getAuthor(action) {
 
 export function* editAuthor(action) {
   const requestURL = `${API_HOST}/authors`;
-  if (action.author && !action.author.avatar) {
-    delete action.author.avatar;
+  const { author } = action;
+
+  if (author && !author.avatar) {
+    delete author.avatar;
   }
+
   const formData = new FormData();
-  for (const name of Object.keys(action.author)) {
-    formData.append(name, action.author[name]);
+
+  for (const name of Object.keys(author)) {
+    formData.append(name, author[name]);
   }
+
   try {
     const token = localStorage.getItem('authToken');
-    const author = yield call(request, requestURL, {
+
+    const result = yield call(request, requestURL, {
       method: 'PUT',
       mode: 'cors',
       credentials: 'same-origin',
@@ -44,9 +50,9 @@ export function* editAuthor(action) {
       referrer: 'no-referrer',
       body: formData,
     });
-    yield put(editSuccess(author));
+    yield put(editSuccess(result));
   } catch (err) {
-    yield put(editError(err));
+    yield put(editError(err && err.response));
   }
 }
 
