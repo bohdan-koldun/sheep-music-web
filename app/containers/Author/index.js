@@ -9,7 +9,7 @@ import Loader from 'components/Loader';
 import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import checkUserPermissions from 'utils/checkPermissions';
+import { isAdminOrModerator } from 'utils/checkPermissions';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { MdModeEdit } from 'react-icons/md';
 import { FormattedMessage } from 'react-intl';
@@ -69,7 +69,7 @@ export function Author({
 
   const description =
     authorData &&
-    `Автор ${
+    `Исполнитель ${
       authorData.title
     }: слова, текст, слушать аудио онлайн, скачать, аккорды, видео, минус`;
 
@@ -130,11 +130,11 @@ export function Author({
               />
             )}
             <h1>
-              <FormattedMessage {...commonMessages.author} /> {authorData.title}
-              {checkUserPermissions(user, ['admin', 'moderator']) && (
+              {authorData.title} |{' '}
+              <FormattedMessage {...commonMessages.author} />
+              {isAdminOrModerator(user) && (
                 <Link
                   to={`/edit/author/${authorData.slug}`}
-                  target="_blank"
                   className="author-edit-link"
                 >
                   {' '}

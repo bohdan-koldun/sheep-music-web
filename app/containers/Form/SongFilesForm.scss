@@ -1,0 +1,30 @@
+.song-add-files-form{
+
+  input {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 5px;
+  }
+
+  audio{
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 5px;
+  }
+
+  label {
+    font-weight: 700;
+  }
+
+  .save-button {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .source-label{
+    color: #009688;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+}

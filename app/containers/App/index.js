@@ -26,6 +26,7 @@ import LoginPage from 'containers/LoginPage';
 import EditSong from 'containers/EditSong';
 import EditAuthor from 'containers/EditAuthor';
 import EditAlbum from 'containers/EditAlbum';
+import AddSongFiles from 'containers/AddSongFiles';
 import Favorites from 'containers/Favorites';
 import Notebook from 'containers/Notebook';
 import Add from 'containers/Add';
@@ -100,6 +101,10 @@ function App({ onLoadTags, onLoadUser, user }) {
                 <PrivateRoute
                   path="/edit/author/:slug"
                   component={EditAuthor}
+                />
+                <PrivateRoute
+                  path="/edit/song_files/:slug"
+                  component={AddSongFiles}
                 />
                 <PrivateRoute path="/edit/album/:slug" component={EditAlbum} />
                 <PrivateRoute path="/add" component={Add} />

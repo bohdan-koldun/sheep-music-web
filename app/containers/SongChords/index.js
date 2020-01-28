@@ -14,6 +14,7 @@ import {
   MdPlayCircleFilled,
   MdPauseCircleFilled,
   MdModeEdit,
+  MdAudiotrack,
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 import { SongPdfGenerator } from 'components/Pdf';
@@ -22,7 +23,7 @@ import Loader from 'components/Loader';
 import { DownloadModal } from 'components/Modal';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import checkUserPermissions from 'utils/checkPermissions';
+import { isAdminOrModerator } from 'utils/checkPermissions';
 import Breadcrumb from 'components/Breadcrumb';
 import { useIntl } from 'containers/LanguageProvider';
 import menuMessages from 'components/Menu/messages';
@@ -122,7 +123,8 @@ export function SongChords({
             <SongImg song={songData} className="song-page-img" />
             <div className="song-metadata">
               <h1>
-                <FormattedMessage {...commonMessages.chords} /> {songData.title}
+                {songData.title} |{' '}
+                <FormattedMessage {...commonMessages.chords} />
               </h1>
               {songData.author && (
                 <div>
@@ -191,11 +193,20 @@ export function SongChords({
                     <FaYoutube data-tip="youtube" className="song-icon" />
                   </Link>
                 )}
-                {checkUserPermissions(user, ['admin', 'moderator']) && (
-                  <Link to={`/edit/song/${songData.slug}`} target="_blank">
-                    {' '}
-                    <MdModeEdit data-tip="edit song" className="song-icon" />
-                  </Link>
+                {isAdminOrModerator(user) && (
+                  <React.Fragment>
+                    <Link to={`/edit/song/${songData.slug}`}>
+                      {' '}
+                      <MdModeEdit data-tip="edit song" className="song-icon" />
+                    </Link>
+                    <Link to={`/edit/song_files/${songData.slug}`}>
+                      {' '}
+                      <MdAudiotrack
+                        data-tip="edit song mp3"
+                        className="song-icon"
+                      />
+                    </Link>
+                  </React.Fragment>
                 )}
                 <Link
                   to={`/song/${songData.slug}`}

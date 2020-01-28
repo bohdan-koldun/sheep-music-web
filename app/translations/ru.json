@@ -1,5 +1,5 @@
 {
-  "app.common.author": "Автор",
+  "app.common.author": "Исполнитель",
   "app.common.album": "Альбом",
   "app.common.video": "Видео",
   "app.common.oneSong": "песня",
@@ -58,7 +58,7 @@
   "app.components.Player.shuffle": "перемешать",
   "app.components.Player.loop": "зациклить",
   "app.containers.AlbumList.header": "Найти альбом",
-  "app.containers.AuthorList.header": "Найти автора",
+  "app.containers.AuthorList.header": "Найти исполнителя",
   "app.containers.SongList.header": "Найти песню",
   "app.containers.VideoList.header": "Найти видеоклип",
   "app.components.Model.download": "Скачать MP3:",

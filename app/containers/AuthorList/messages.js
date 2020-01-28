@@ -5,6 +5,6 @@ export const scope = 'app.containers.AuthorList';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Найти автора',
+    defaultMessage: 'Найти исполнителя',
   },
 });

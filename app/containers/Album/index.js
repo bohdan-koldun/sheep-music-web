@@ -14,7 +14,7 @@ import { SongPlayList } from 'components/List';
 import Breadcrumb from 'components/Breadcrumb';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import checkUserPermissions from 'utils/checkPermissions';
+import { isAdminOrModerator } from 'utils/checkPermissions';
 import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
 import { makeSelectUser } from 'containers/App/selectors';
 import {
@@ -139,10 +139,9 @@ export function Album({
               <div>
                 <h1>
                   {albumData.title}
-                  {checkUserPermissions(user, ['admin', 'moderator']) && (
+                  {isAdminOrModerator(user) && (
                     <Link
                       to={`/edit/album/${albumData.slug}`}
-                      target="_blank"
                       className="album-edit-link"
                     >
                       {' '}

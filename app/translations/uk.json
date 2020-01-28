@@ -1,5 +1,5 @@
 {
-  "app.common.author": "Автор",
+  "app.common.author": "Виконавець",
   "app.common.album": "Альбом",
   "app.common.video": "Відео",
   "app.common.oneSong": "пісня",
@@ -58,7 +58,7 @@
   "app.components.Player.shuffle": "перемішати",
   "app.components.Player.loop": "зациклити",
   "app.containers.AlbumList.header": "Знайти альбом",
-  "app.containers.AuthorList.header": "Знайти автора",
+  "app.containers.AuthorList.header": "Знайти виконавця",
   "app.containers.SongList.header": "Знайти пісню",
   "app.containers.VideoList.header": "Знайти відеокліп",
   "app.components.Model.download": "Завантажити MP3:",

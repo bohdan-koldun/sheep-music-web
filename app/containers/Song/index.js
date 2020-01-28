@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -15,6 +16,7 @@ import {
   MdPlayCircleFilled,
   MdPauseCircleFilled,
   MdModeEdit,
+  MdAudiotrack,
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 import { SongPdfGenerator } from 'components/Pdf';
@@ -24,7 +26,7 @@ import Loader from 'components/Loader';
 import Breadcrumb from 'components/Breadcrumb';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import checkUserPermissions from 'utils/checkPermissions';
+import { isAdminOrModerator } from 'utils/checkPermissions';
 import { setSong, setPlayPause } from 'containers/AudioPlayer/actions';
 import { useIntl } from 'containers/LanguageProvider';
 import menuMessages from 'components/Menu/messages';
@@ -207,19 +209,31 @@ export function Song({
                     <FaYoutube data-tip="youtube" className="song-icon" />
                   </Link>
                 )}
-                {checkUserPermissions(user, ['admin', 'moderator']) && (
-                  <Link to={`/edit/song/${songData.slug}`} target="_blank">
-                    {' '}
-                    <MdModeEdit data-tip="edit song" className="song-icon" />
-                  </Link>
+                {isAdminOrModerator(user) && (
+                  <React.Fragment>
+                    <Link to={`/edit/song/${songData.slug}`}>
+                      {' '}
+                      <MdModeEdit data-tip="edit song" className="song-icon" />
+                    </Link>
+                    <Link to={`/edit/song_files/${songData.slug}`}>
+                      {' '}
+                      <MdAudiotrack
+                        data-tip="edit song mp3"
+                        className="song-icon"
+                      />
+                    </Link>
+                  </React.Fragment>
                 )}
-                <Link
-                  to={`/chord/${songData.slug}`}
-                  className="yellow-button-link"
-                >
-                  {' '}
-                  <FormattedMessage {...commonMessages.chords} />
-                </Link>
+                {
+                  songData.chords &&
+                  <Link
+                    to={`/chord/${songData.slug}`}
+                    className="yellow-button-link"
+                  >
+                    {' '}
+                    <FormattedMessage {...commonMessages.chords} />
+                  </Link>
+                }
               </div>
             </div>
           </div>

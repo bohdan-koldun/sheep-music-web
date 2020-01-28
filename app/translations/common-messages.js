@@ -5,7 +5,7 @@ export const scope = 'app.common';
 export default defineMessages({
   author: {
     id: `${scope}.author`,
-    defaultMessage: 'Автор',
+    defaultMessage: 'Исполнитель',
   },
   album: {
     id: `${scope}.album`,
