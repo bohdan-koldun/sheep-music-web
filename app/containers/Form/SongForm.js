@@ -41,6 +41,16 @@ const options = [
   { value: 'G#', label: 'G#' },
 ];
 
+const optionsLanguage = [
+  { value: 'ru', label: 'Русский' },
+  { value: 'ua', label: 'Украинский' },
+  { value: 'en', label: 'Английский' },
+  { value: 'be', label: 'Белорусский' },
+  { value: 'es', label: 'Испанский' },
+  { value: 'pl', label: 'Польский' },
+  { value: 'pl', label: 'Французский' },
+];
+
 function SongForm({
   song = {},
   outsideError,
@@ -63,6 +73,9 @@ function SongForm({
     value: song.chordsKey,
     label: song.chordsKey,
   });
+  const [language, setLanguage] = useState(
+    optionsLanguage.find(lan => lan.value === song.language),
+  );
   const [songTags, setSongTags] = useState(
     song.tags &&
       song.tags.map(
@@ -117,6 +130,7 @@ function SongForm({
     text,
     chords,
     video,
+    language: language && language.value,
     chordsKey: chordsKey && chordsKey.value,
     tags: songTags && songTags.map(tag => ({ id: tag.value, name: tag.label })),
     author: author && { id: author.value, title: author.label },
@@ -174,6 +188,17 @@ function SongForm({
           isSearchable={false}
           className="options-select"
           placeholder="ключ акордов"
+        />
+      </label>
+      <label>
+        Язык:
+        <Select
+          value={language}
+          onChange={value => setLanguage(value)}
+          options={optionsLanguage}
+          isSearchable
+          className="options-select"
+          placeholder="язык"
         />
       </label>
       <label>
