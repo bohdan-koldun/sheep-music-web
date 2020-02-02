@@ -33,6 +33,7 @@ const options = [
   { value: 'Db', label: 'Db' },
   { value: 'D', label: 'D' },
   { value: 'D#', label: 'D#' },
+  { value: 'E', label: 'E' },
   { value: 'Еb', label: 'Еb' },
   { value: 'D#', label: 'D#' },
   { value: 'F', label: 'F' },
