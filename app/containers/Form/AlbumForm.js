@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import * as striptags from 'striptags';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
@@ -85,6 +86,12 @@ function AlbumForm({
 
   return (
     <form className="album-form">
+      {album.slug && (
+        <Link to={`/album/${album.slug}`}>
+          {album.title}
+          {album.author && ` • ${album.author.title}`}
+        </Link>
+      )}
       <label className="source-label">{album.parsedSource}</label>
 
       <label>

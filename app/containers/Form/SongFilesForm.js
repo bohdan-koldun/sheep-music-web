@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
@@ -37,6 +38,11 @@ function SongFilesForm({ song = {}, outsideError, onSubmit }) {
 
   return (
     <form className="song-add-files-form">
+      <Link to={`/song/${song.slug}`}>
+        {song.title}
+        {song.author && ` • ${song.author.title}`}
+      </Link>
+      <hr />
       <label className="source-label">{song.parsedSource}</label>
       <label>
         Песня mp3:

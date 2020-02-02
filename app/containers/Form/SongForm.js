@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
 import * as striptags from 'striptags';
 import { makeSelectTags } from 'containers/App/selectors';
 import {
@@ -145,6 +146,12 @@ function SongForm({
 
   return (
     <form className="song-form">
+      {song.slug && (
+        <Link to={`/song/${song.slug}`}>
+          {song.title}
+          {song.author && ` • ${song.author.title}`}
+        </Link>
+      )}
       <label className="source-label">{song.parsedSource}</label>
       <label>
         Название песни:

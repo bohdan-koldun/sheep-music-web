@@ -153,11 +153,16 @@ export function Album({
                   )}
                 </h1>
                 <div>
-                  <FormattedMessage {...commonMessages.album} /> {' • '}
-                  {albumData.year && `${albumData.year} • `}
-                  <Link to={`/author/${albumData.author.slug}`}>
-                    {albumData.author.title}
-                  </Link>
+                  <FormattedMessage {...commonMessages.album} />
+                  {albumData.year && ` • ${albumData.year}`}
+                  {albumData.author && (
+                    <React.Fragment>
+                      {' • '}
+                      <Link to={`/author/${albumData.author.slug}`}>
+                        {albumData.author.title}
+                      </Link>
+                    </React.Fragment>
+                  )}
                 </div>
                 <div>
                   <b>{(albumData.songs && albumData.songs.length) || 0}</b>{' '}

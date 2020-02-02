@@ -5,6 +5,7 @@ import * as striptags from 'striptags';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { makeSelectLoading } from './selectors';
@@ -54,6 +55,7 @@ function AuthorForm({ author = {}, outsideError, onSubmit, onWillUnmount }) {
 
   return (
     <form className="author-form">
+      {author.slug && <Link to={`/author/${author.slug}`}>{author.title}</Link>}
       <label className="source-label">{author.parsedSource}</label>
       <label>
         Имя исполнителя:
