@@ -36,6 +36,8 @@ import messages from './messages';
 import './Album.scss';
 import iTunes from './images/itunes.png';
 import googlePlay from './images/googleplay.png';
+import youtubeMusic from './images/youtubemusic.png';
+import soundCloud from './images/soundcloud.png';
 
 export function Album({
   onLoadAlbum,
@@ -180,26 +182,46 @@ export function Album({
             playData={playData}
             play={play}
           />
-          <div className="itunes-googleplay">
+          <div className="album-social">
             <h3>
               <FormattedMessage {...messages.availableOn} />
             </h3>
-            <a href={albumData.iTunes} target="_blank">
-              <img
-                src={iTunes}
-                className={classNames({ 'no-availavle': !albumData.iTunes })}
-                alt="itunes"
-              />
-            </a>
-            <a href={albumData.googlePlay} target="_blank">
-              <img
-                src={googlePlay}
-                className={classNames({
-                  'no-availavle': !albumData.googlePlay,
-                })}
-                alt="google play"
-              />
-            </a>
+            <div className="album-social-list">
+              <a href={albumData.iTunes} target="_blank">
+                <img
+                  src={iTunes}
+                  className={classNames({ 'no-availavle': !albumData.iTunes })}
+                  alt="itunes"
+                />
+              </a>
+              <a href={albumData.googlePlay} target="_blank">
+                <img
+                  src={googlePlay}
+                  className={classNames({
+                    'no-availavle': !albumData.googlePlay,
+                  })}
+                  alt="google play"
+                />
+              </a>
+              <a href={albumData.youtubeMusic} target="_blank">
+                <img
+                  src={youtubeMusic}
+                  className={classNames({
+                    'no-availavle': !albumData.youtubeMusic,
+                  })}
+                  alt="youtube music"
+                />
+              </a>
+              <a href={albumData.soundCloud} target="_blank">
+                <img
+                  src={soundCloud}
+                  className={classNames({
+                    'no-availavle': !albumData.soundCloud,
+                  })}
+                  alt="sound cloud"
+                />
+              </a>
+            </div>
           </div>
         </div>
       ) : (

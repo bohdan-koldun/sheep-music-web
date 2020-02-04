@@ -1,27 +1,30 @@
-.album-header {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-wrap: wrap;
-    
-    h1{
-      margin: 0;
-    }
+@import "../../styles/dimensions.scss";
 
-  img{
-      width: 100%;
-      max-width: 150px;
-      height: auto;
-      border-radius: 50%;
-      margin: 10px;
+.album-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  h1 {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    margin: 10px;
   }
 
 }
 
-.album-edit-link{
+.album-edit-link {
   text-decoration: none;
-  .album-icon{
-      color: #000;
+
+  .album-icon {
+    color: #000;
   }
 }
 
@@ -29,11 +32,18 @@
   margin: 10px;
 }
 
-.itunes-googleplay{
+.album-social {
   margin-top: 100px;
+
+  .album-social-list{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
 
   img {
     width: 120px;
+    margin-bottom: 10px;
     margin-right: 10px;
   }
 
