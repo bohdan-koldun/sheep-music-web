@@ -42,12 +42,13 @@
   }
 
   img {
-    width: 120px;
+    width: 150px;
     margin-bottom: 10px;
     margin-right: 10px;
   }
 
   .no-availavle {
-    opacity: 0.4;
+    filter: opacity(50%);
+    cursor: not-allowed;
   }
 }
