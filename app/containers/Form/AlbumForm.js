@@ -32,6 +32,7 @@ function AlbumForm({
   const [googlePlay, setGooglePlay] = useState(album.googlePlay || '');
   const [soundCloud, setSoundCloud] = useState(album.soundCloud || '');
   const [youtubeMusic, setYoutubeMusic] = useState(album.youtubeMusic || '');
+  const [deezer, setDeezer] = useState(album.deezer || '');
   const [description, setDescription] = useState(
     striptags(album.description || ''),
   );
@@ -73,6 +74,7 @@ function AlbumForm({
     googlePlay,
     soundCloud,
     youtubeMusic,
+    deezer,
     author: author && { id: author.value, title: author.label },
     description,
     avatar,
@@ -184,6 +186,17 @@ function AlbumForm({
           placeholder="Youtube Music"
           value={youtubeMusic}
           onChange={e => setYoutubeMusic(e.target.value)}
+        />
+      </label>
+      <label>
+        Deezer:
+        <input
+          type="text"
+          name="deezer"
+          className="album-input"
+          placeholder="Deezer"
+          value={deezer}
+          onChange={e => setDeezer(e.target.value)}
         />
       </label>
       <label>

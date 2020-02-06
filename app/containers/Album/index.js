@@ -38,6 +38,7 @@ import iTunes from './images/itunes.png';
 import googlePlay from './images/googleplay.png';
 import youtubeMusic from './images/youtubemusic.png';
 import soundCloud from './images/soundcloud.png';
+import deezer from './images/deezer.png';
 
 export function Album({
   onLoadAlbum,
@@ -219,6 +220,15 @@ export function Album({
                     'no-availavle': !albumData.soundCloud,
                   })}
                   alt="sound cloud"
+                />
+              </a>
+              <a href={albumData.deezer} target="_blank">
+                <img
+                  src={deezer}
+                  className={classNames({
+                    'no-availavle': !albumData.deezer,
+                  })}
+                  alt="deezer"
                 />
               </a>
             </div>
