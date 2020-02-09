@@ -14,42 +14,6 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
-const prerendercloud = require('prerendercloud');
-prerendercloud.set('whitelistUserAgents', [
-  'yahoo',
-  'bingbot',
-  'yandex',
-  'baiduspider',
-  'facebookexternalhit',
-  'twitterbot',
-  'rogerbot',
-  'linkedinbot',
-  'embedly',
-  'quora link preview',
-  'showyoubot',
-  'outbrain',
-  'pinterest/0.',
-  'pinterestbot',
-  'slackbot',
-  'vkShare',
-  'redditbot',
-  'Applebot',
-  'WhatsApp',
-  'flipboard',
-  'tumblr',
-  'bitlybot',
-  'Bitrix link preview',
-  'XING-contenttabreceiver',
-  'Discordbot',
-  'TelegramBot',
-]);
-prerendercloud.set(
-  'prerenderToken',
-  'dXMtd2VzdC0yOjQxOTJmNWRkLTBmMGUtNDEwMS05YTU4LTg0MTU1MTJmNmIwZQ.yuVmbwU5eiwpHxzMnqBOoT0zlgMSTwIPV1THNllTRdo',
-);
-
-app.use(prerendercloud);
-
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
