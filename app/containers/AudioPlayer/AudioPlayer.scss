@@ -9,9 +9,8 @@
   color: #fff;
   position: fixed;
   bottom: 0;
-  z-index: 101;
+  z-index: 1000;
 }
-
 
 
 .sheep-music-player {
@@ -103,6 +102,19 @@
       z-index: 5;
       ;
     }
+
+    .minus-label {
+      background-color: $yellow;
+      text-align: center;
+      font-weight: 600;
+      width: 100%;
+      padding: 8px 5px;
+      color: $dark-one;
+      position: absolute;
+      top: 1;
+      z-index: 1;
+    }
+    
   }
 
   .play-card-button {

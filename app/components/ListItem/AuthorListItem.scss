@@ -2,7 +2,6 @@
 @import "../../styles/dimensions.scss";
 
 .song-author-item {
-  width: 240px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,6 +10,7 @@
   page-break-inside: avoid;
   break-inside: avoid-column;
   padding: 10px 0;
+  margin: 5px 10px;
 
   .author-description {
     text-align: center;
@@ -33,12 +33,12 @@
     height: 140px;
     border-radius: 50%;
     border: .5px solid rgba(0, 0, 0, .1);
+    margin: 0;
   }
 }
 
 @media screen and (max-width: $tablet-max-width) {
   .song-author-item {
-    width: 140px;
-    margin: 5px 8px;
+    margin: 5px 6px;
   }
 }

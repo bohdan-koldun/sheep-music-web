@@ -242,7 +242,7 @@ export function Song({
             <React.Fragment>
               <hr/>
               <div className="song-minus">
-                <FormattedMessage {...commonMessages.soundtrack} />:
+                <span className="title"><FormattedMessage {...commonMessages.soundtrack} />:</span>
                 <button
                   type="button"
                   onClick={() => {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { PlayerPlayList } from 'components/List';
+import { useIntl } from 'containers/LanguageProvider';
 import {
   MdClose,
 } from 'react-icons/md';
@@ -12,6 +13,7 @@ import { FiPlay, FiPause } from "react-icons/fi";
 import { SongImg } from 'components/Img';
 import { useInjectReducer } from 'utils/injectReducer';
 import { SongPlayer } from 'components/Player';
+import commonMessages from 'translations/common-messages';
 import {
   makeSelectPlay,
   makeSelectShowPlayer,
@@ -41,6 +43,8 @@ export function AudioPlayer({
 
   const isPlayPath = (!playMinus && audioMp3.path) || (playMinus && phonogramMp3.path);
 
+  const intl = useIntl();
+
   return (
     <Fragment>
       {
@@ -56,6 +60,14 @@ export function AudioPlayer({
               <div className="sheep-music-player-list-content">
                 <div className="full-player-left-wrapper">
                   <div className="full-player-card-wrapper">
+                    {
+                      playMinus &&
+                      <div className="minus-label">
+                        {intl
+                          .formatMessage(commonMessages.soundtrack)
+                          .toUpperCase()}
+                      </div>
+                    }
                     <div className="img-wrapper">
                       <SongImg song={song} className="full-player-img" />
                       <div className="dark-line"></div>
@@ -127,6 +139,10 @@ AudioPlayer.propTypes = {
   onPlayById: PropTypes.func.isRequired,
   onShowPlayList: PropTypes.func.isRequired,
   onMixPlayList: PropTypes.func.isRequired,
+};
+
+AudioPlayer.contextTypes = {
+  intl: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -53,6 +53,10 @@
 .song-minus {
   display: flex;
   align-items: center;
+
+  .title {
+    margin-right: 5px;
+  }
 }
 
 .tags {
