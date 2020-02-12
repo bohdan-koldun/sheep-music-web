@@ -15,6 +15,7 @@ export const initialState = {
   playData: {
     song: {
       id: null,
+      playMinus: false,
     },
     prevPlayListId: null,
     nextPlayListId: null,
@@ -31,10 +32,11 @@ const audioPlayerReducer = (state = initialState, action) =>
         draft.showPlayer = true;
         draft.playData = {
           prevPlayListId: null,
-          song: action.song,
+          song: { ...(action.song || {}), playMinus: action.playMinus },
           nextPlayListId: state.playData && state.playData.audioMp3 && 1,
         };
         draft.playList = [action.song, ...draft.playList];
+        draft.isMinus = !!action.isMinus;
         break;
 
       case SET_PLAY_SONG_LIST: {
@@ -60,10 +62,22 @@ const audioPlayerReducer = (state = initialState, action) =>
         draft.playList = filteredList;
         break;
       }
-      case SET_PLAY_PAUSE:
-        draft.play = !draft.play;
+      case SET_PLAY_PAUSE: {
+        const { playMinus } = action;
+        const { play } = draft;
+        const prevState = draft.playData.song || {};
+
+        draft.play = (play && playMinus !== prevState.playMinus) || !play;
         draft.showPlayer = true;
+        draft.playData = {
+          ...state.playData,
+          song: {
+            ...(state.playData.song || {}),
+            playMinus: !!playMinus,
+          },
+        };
         break;
+      }
       case SET_PLAY_BY_LIST_ID: {
         const currSong = state.playData.song;
         const newSong = state.playList[action.listId];

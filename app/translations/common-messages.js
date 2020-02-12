@@ -15,6 +15,10 @@ export default defineMessages({
     id: `${scope}.video`,
     defaultMessage: 'Видео',
   },
+  soundtrack: {
+    id: `${scope}.soundtrack`,
+    defaultMessage: 'Минус',
+  },
   oneSong: {
     id: `${scope}.oneSong`,
     defaultMessage: 'песня',

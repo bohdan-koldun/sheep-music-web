@@ -36,16 +36,19 @@ export function AudioPlayer({
 }) {
   useInjectReducer({ key: 'audioPlayer', reducer });
 
+  const { song = {} } = (playData || {});
+  const { audioMp3 = {}, phonogramMp3 = {}, playMinus } = song;
+
+  const isPlayPath = (!playMinus && audioMp3.path) || (playMinus && phonogramMp3.path);
+
   return (
     <Fragment>
-      {showPlayer &&
-        playData &&
-        playData.song &&
-        playData.song.audioMp3 &&
-        playData.song.audioMp3.path && (
-        <div>
-          {
-            showPlayerList &&
+      {
+        showPlayer &&
+        isPlayPath && (
+          <div>
+            {
+              showPlayerList &&
             <div className="sheep-music-player-list">
               <div className="play-list-header">
                 <button className="close-button" type="button" onClick={onShowPlayList}><MdClose/></button>
@@ -54,12 +57,12 @@ export function AudioPlayer({
                 <div className="full-player-left-wrapper">
                   <div className="full-player-card-wrapper">
                     <div className="img-wrapper">
-                      <SongImg song={playData.song} className="full-player-img" />
+                      <SongImg song={song} className="full-player-img" />
                       <div className="dark-line"></div>
                     </div>
                    
                     <div className="full-player-play-song-info">
-                      {playData.song.title} - <br/>{playData.song.author && playData.song.author.title}
+                      {song.title} - <br/>{song.author && song.author.title}
                     </div>
                     <button
                       type="button"
@@ -86,21 +89,21 @@ export function AudioPlayer({
                 />
               </div>
             </div>
-          }
+            }
     
-          <div className="sheep-music-player">
-            <SongPlayer
-              playing={play}
-              playPause={onPlayPause}
-              onPrevNext={onPlayById}
-              onShowPlayList={onShowPlayList}
-              onMixPlayList={onMixPlayList}
-              playData={playData}
-            />
+            <div className="sheep-music-player">
+              <SongPlayer
+                playing={play}
+                playPause={() => onPlayPause(playMinus)}
+                onPrevNext={onPlayById}
+                onShowPlayList={onShowPlayList}
+                onMixPlayList={onMixPlayList}
+                playData={playData}
+              />
+            </div>
           </div>
-        </div>
 
-      )}
+        )}
     </Fragment>
   );
 }
@@ -136,7 +139,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onPlayPause: () => dispatch(setPlayPause()),
+    onPlayPause: playMinus => dispatch(setPlayPause(playMinus)),
     onPlayById: listId => dispatch(setPlayByListId(listId)),
     onShowPlayList: () => dispatch(setShowPlayList()),
     onMixPlayList: () => dispatch(mixPlayList()),

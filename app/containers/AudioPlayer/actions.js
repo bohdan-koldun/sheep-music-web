@@ -7,10 +7,11 @@ import {
   MIX_PLAYER_LIST,
 } from './constants';
 
-export function setSong(song) {
+export function setSong(song, playMinus = false) {
   return {
     type: SET_PLAY_SONG,
     song,
+    playMinus,
   };
 }
 
@@ -29,9 +30,10 @@ export function setPlayByListId(listId) {
   };
 }
 
-export function setPlayPause() {
+export function setPlayPause(playMinus = false) {
   return {
     type: SET_PLAY_PAUSE,
+    playMinus,
   };
 }
 

@@ -15,9 +15,11 @@ import {
   IoMdMore,
 } from 'react-icons/io';
 import { DownloadModal } from 'components/Modal';
+import commonMessages from 'translations/common-messages';
 import { SongImg } from '../Img';
 import messages from './messages';
 import { AudioSlider, VolumeSlider } from './Sliders';
+
 import Duration from './Duration';
 import './SongPlayer.scss';
 
@@ -160,7 +162,10 @@ class SongPlayer extends Component {
       onShowPlayList,
       onMixPlayList,
     } = this.props;
-    const { song, nextPlayListId, prevPlayListId } = playData || {};
+
+    const { song = {}, nextPlayListId, prevPlayListId } = playData || {};
+    const { audioMp3 = {}, phonogramMp3 = {}, playMinus } = song;
+
     const { intl } = this.context;
 
     return (
@@ -176,7 +181,7 @@ class SongPlayer extends Component {
             className="react-player"
             width="0"
             height="0"
-            url={song.audioMp3.path}
+            url={playMinus ? phonogramMp3.path : audioMp3.path}
             playing={playing}
             loop={loop}
             playbackRate={playbackRate}
@@ -192,7 +197,16 @@ class SongPlayer extends Component {
           <div className="song-player-control">
             <div className="group-control-first">
               <Link to={`/song/${song.slug}`} className="player-song-link">
-                <SongImg song={song} className="song-player-img" />
+                <div className="song-player-img-wrapper">
+                  <SongImg song={song} className="song-player-img" />
+                  {playMinus && (
+                    <div className="minus-label">
+                      {intl
+                        .formatMessage(commonMessages.soundtrack)
+                        .toLowerCase()}
+                    </div>
+                  )}
+                </div>
                 <div>
                   <span>{song.title}</span>
                   <br />

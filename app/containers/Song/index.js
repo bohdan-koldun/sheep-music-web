@@ -17,6 +17,7 @@ import {
   MdPauseCircleFilled,
   MdModeEdit,
   MdAudiotrack,
+  MdFileDownload,
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
 import { SongPdfGenerator } from 'components/Pdf';
@@ -69,11 +70,11 @@ export function Song({
 
   const [showDownload, setShowDownload] = useState(false);
 
-  const playPauseSong = () => {
+  const playPauseSong = playMinus => {
     if (playData && songData && songData.id === playData.song.id) {
-      onPlayPause(songData.id);
+      onPlayPause(playMinus);
     } else {
-      onPlaySong(songData);
+      onPlaySong(songData, playMinus);
     }
   };
 
@@ -171,7 +172,7 @@ export function Song({
                     <button
                       type="button"
                       onClick={() => {
-                        playPauseSong();
+                        playPauseSong(false);
                         ReactGA.event({
                           category: 'Song',
                           action: 'click play/pause button',
@@ -179,7 +180,7 @@ export function Song({
                       }}
                       className="icon-button"
                     >
-                      {play && playData && songData.id === playData.song.id ? (
+                      {play && playData && songData.id === playData.song.id && !playData.song.playMinus ? (
                         <MdPauseCircleFilled
                           data-tip={intl.formatMessage(playerMessages.pause)}
                           className="song-icon"
@@ -237,6 +238,55 @@ export function Song({
               </div>
             </div>
           </div>
+          {songData.phonogramMp3 && (
+            <React.Fragment>
+              <hr/>
+              <div className="song-minus">
+                <FormattedMessage {...commonMessages.soundtrack} />:
+                <button
+                  type="button"
+                  onClick={() => {
+                    playPauseSong(true);
+                    ReactGA.event({
+                      category: 'Song',
+                      action: 'click play/pause button',
+                    });
+                  }}
+                  className="icon-button"
+                >
+                  {play && playData && songData.id === playData.song.id && playData.song.playMinus ? (
+                    <MdPauseCircleFilled
+                      data-tip={intl.formatMessage(playerMessages.pause)}
+                      className="song-icon"
+                    />
+                  ) : (
+                    <MdPlayCircleFilled
+                      data-tip={intl.formatMessage(playerMessages.play)}
+                      className="song-icon"
+                    />
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowDownload(true)}
+                  className="icon-button"
+                >
+                  <FormattedMessage {...playerMessages.download} />
+                  <MdFileDownload
+                    data-tip={intl.formatMessage(playerMessages.download)}
+                    className="song-icon"
+                  />
+                </button>
+                <DownloadModal
+                  isOpen={showDownload}
+                  onCloseModal={() => setShowDownload(false)}
+                  downloadUrl={songData.phonogramMp3.path}
+                  title={`${intl.formatMessage(commonMessages.soundtrack)} ${songData.title}`}
+                /> 
+              </div> 
+              <hr/>
+            </React.Fragment>
+          )}
           <pre dangerouslySetInnerHTML={{ __html: songData.text }} />
           {songData.video && (
             <div className="player-wrapper">
@@ -312,8 +362,8 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadSong: slug => dispatch(loadSong(slug)),
-    onPlaySong: song => dispatch(setSong(song)),
-    onPlayPause: () => dispatch(setPlayPause()),
+    onPlaySong: (song, playMinus) => dispatch(setSong(song, playMinus)),
+    onPlayPause: (playMinus) => dispatch(setPlayPause(playMinus)),
   };
 }
 

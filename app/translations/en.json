@@ -2,6 +2,7 @@
   "app.common.author": "Singer",
   "app.common.album": "Album",
   "app.common.video": "Video",
+  "app.common.soundtrack": "Soundtrack",
   "app.common.oneSong": "song",
   "app.common.manySongFirstVariant": "songs",
   "app.common.manySongSecondVariant": "songs",

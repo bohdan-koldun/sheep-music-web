@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -68,11 +69,11 @@ export function SongChords({
 
   const [showDownload, setShowDownload] = useState(false);
 
-  const playPauseSong = () => {
+  const playPauseSong = playMinus => {
     if (playData && songData && songData.id === playData.song.id) {
-      onPlayPause(songData.id);
+      onPlayPause(playMinus);
     } else {
-      onPlaySong(songData);
+      onPlaySong(songData, playMinus);
     }
   };
 
@@ -155,7 +156,7 @@ export function SongChords({
                     <button
                       type="button"
                       onClick={() => {
-                        playPauseSong();
+                        playPauseSong(false);
                         ReactGA.event({
                           category: 'Song',
                           action: 'click play/pause button',
@@ -163,17 +164,20 @@ export function SongChords({
                       }}
                       className="icon-button"
                     >
-                      {play && playData && songData.id === playData.song.id ? (
-                        <MdPauseCircleFilled
-                          data-tip={intl.formatMessage(playerMessages.pause)}
-                          className="song-icon"
-                        />
-                      ) : (
-                        <MdPlayCircleFilled
-                          data-tip={intl.formatMessage(playerMessages.play)}
-                          className="song-icon"
-                        />
-                      )}
+                      {play &&
+                      playData &&
+                      songData.id === playData.song.id &&
+                      !playData.song.playMinus ? (
+                          <MdPauseCircleFilled
+                            data-tip={intl.formatMessage(playerMessages.pause)}
+                            className="song-icon"
+                          />
+                        ) : (
+                          <MdPlayCircleFilled
+                            data-tip={intl.formatMessage(playerMessages.play)}
+                            className="song-icon"
+                          />
+                        )}
                     </button>
                     <MdCloudDownload
                       data-tip={intl.formatMessage(playerMessages.download)}
@@ -218,7 +222,6 @@ export function SongChords({
               </div>
             </div>
           </div>
-          {/* <pre dangerouslySetInnerHTML={{ __html: songData.chords }} /> */}
           <ChordsTransposer
             songChords={songData.chords}
             chordsKey={songData.chordsKey}
@@ -282,8 +285,8 @@ const mapStateToProps = createStructuredSelector({
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadSong: slug => dispatch(loadSongChords(slug)),
-    onPlaySong: song => dispatch(setSong(song)),
-    onPlayPause: () => dispatch(setPlayPause()),
+    onPlaySong: (song, playMinus) => dispatch(setSong(song, playMinus)),
+    onPlayPause: playMinus => dispatch(setPlayPause(playMinus)),
   };
 }
 
