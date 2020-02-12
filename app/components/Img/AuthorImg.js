@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DefaultImg from './author_thumb.svg';
+import DefaultImg from './author_thumb.png';
 
 function AuthorImg({ className, author }) {
   const authorImg = author && author.thumbnail && author.thumbnail.path;

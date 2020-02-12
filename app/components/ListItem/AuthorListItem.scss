@@ -11,6 +11,7 @@
   break-inside: avoid-column;
   padding: 10px 0;
   margin: 5px 10px;
+  max-width: 190px;
 
   .author-description {
     text-align: center;
@@ -39,6 +40,7 @@
 
 @media screen and (max-width: $tablet-max-width) {
   .song-author-item {
+    width: 140px;
     margin: 5px 6px;
   }
 }
