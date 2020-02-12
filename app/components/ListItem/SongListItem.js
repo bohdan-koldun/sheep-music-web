@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -28,7 +29,11 @@ class SongListItem extends React.Component {
           className="icon-button"
         >
           <div className="play-button-background" />
-          {play && playData && playData.song && song.id === playData.song.id ? (
+          {play &&
+          playData &&
+          playData.song &&
+          song.id === playData.song.id &&
+          !playData.song.playMinus ? (
             <React.Fragment>
               <MdPauseCircleFilled
                 data-tip={intl.formatMessage(messages.pause)}

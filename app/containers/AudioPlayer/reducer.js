@@ -63,11 +63,12 @@ const audioPlayerReducer = (state = initialState, action) =>
         break;
       }
       case SET_PLAY_PAUSE: {
-        const { playMinus } = action;
+        const { playMinus = false } = action;
         const { play } = draft;
         const prevState = draft.playData.song || {};
 
-        draft.play = (play && playMinus !== prevState.playMinus) || !play;
+        draft.play =
+          (play && playMinus !== (prevState.playMinus || false)) || !play;
         draft.showPlayer = true;
         draft.playData = {
           ...state.playData,
