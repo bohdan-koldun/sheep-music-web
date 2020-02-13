@@ -6,16 +6,24 @@
   margin-bottom: 20px;
   align-self: flex-end;
 
-  a {
-    line-height: 3;
+  .video-link {
     display: inline-block;
     text-overflow: ellipsis;
+    vertical-align: middle;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-decoration: none;
-    color: #000;
+    color: $dark-one;
     font-weight: 600;
+    padding: 2px 5px;
+
+    svg{
+      font-size: 16px;
+      margin-right: 8px;
+      color: $red;
+      opacity: 0.8;
+    }
   }
 
   img {
@@ -36,22 +44,16 @@
 
   .video-item-picture {
     position: relative;
-    height: 20vh;
-    min-height: 190px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 158px;
+    margin: 2px 5px;
     cursor: pointer;
+    background-position: center;
+    background-size: cover;
 
-    img {
-      position: absolute;
-      max-height: auto;
-      z-index: 1;
-    }
 
     &:hover {
       .video-play-icon {
-        font-size: 55px;
+        color: $red;
       }
     }
 
@@ -63,10 +65,9 @@
     color: $yellow;
     font-size: 48px;
     transition: all 0.2s ease;
-  }
-
-  .hide-img {
-    visibility: hidden;
-    transition: visibility 0.4s ease-out;
+    left: 50%;
+    margin-left: -24px;
+    top: 50%;
+    margin-top: -24px;
   }
 }

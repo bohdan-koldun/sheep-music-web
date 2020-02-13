@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
-import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { MdPlayCircleFilled, MdPauseCircleFilled } from 'react-icons/md';
+import { FaYoutube } from 'react-icons/fa';
 import getVideoId from 'get-video-id';
 import './VideoYoutubeItem.scss';
 
@@ -15,17 +15,15 @@ function VideoYoutubeItem({ video }) {
     <div className="song-video-item">
       <div
         className="video-item-picture"
+        style={{
+          backgroundImage: `url(https://img.youtube.com/vi/${
+            getVideoId(video.video).id
+          }/hqdefault.jpg)`,
+        }}
         onClick={() => {
           setPlay(!play);
         }}
       >
-        <img
-          src={`https://img.youtube.com/vi/${
-            getVideoId(video.video).id
-          }/hqdefault.jpg`}
-          alt={video.title}
-          className={classNames({ 'hide-img': play })}
-        />
         {!play ? (
           <MdPlayCircleFilled className="video-play-icon" />
         ) : (
@@ -48,7 +46,10 @@ function VideoYoutubeItem({ video }) {
           </div>
         )}
       </div>
-      <Link to={`/video/${video.slug}`}>{video.title}</Link>
+      <Link to={`/video/${video.slug}`} className="video-link">
+        <FaYoutube />
+        <span>{video.title}</span>
+      </Link>
     </div>
   );
 }

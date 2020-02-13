@@ -10,7 +10,7 @@ import { API_HOST } from 'utils/constants';
 export function* getVideoList(action) {
   const requestURL = `${API_HOST}/videos?page=${action.page}&keyword=${
     action.search
-  }&limit=12&filter=${action.filter}`;
+  }&limit=15&filter=${action.filter}`;
 
   try {
     const videos = yield call(request, requestURL);
