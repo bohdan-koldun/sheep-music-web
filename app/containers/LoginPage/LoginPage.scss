@@ -30,31 +30,29 @@
     text-align: center;
   }
 
-  .moderator-statistic {
-    margin-top: 30px;
-    max-width: 500px;
-    text-align: left;
-    font-weight: 400;
-    padding: 10px 15px;
+  .moderator-statistic-link {
+    display: flex;
+    align-items: center;
     background: $yellow;
+    color: $dark-one;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 50px 15px;
+    padding: 10px 20px;
     border-radius: 4px;
+    transition: all 0.5s ease;
 
-    b {
-      font-size: 18px;
-      padding: 5px;
-      margin-left: 30px;
-      background: $dark-one;
+    &:hover{
       color: #fff;
-      border-radius: 2px;
+      background: $dark-three;
     }
 
-    p {
-      display: flex;
-      justify-content: space-between;
+    span{
+      margin-right: 8px;
     }
 
-    h4 {
-      padding-bottom: 20px;
+    svg{
+      font-size: 24px;
     }
   }
 

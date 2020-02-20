@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -8,6 +9,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useIntl } from 'containers/LanguageProvider';
 import BeatLoader from 'react-spinners/BeatLoader';
+import { MdTrendingUp } from 'react-icons/md';
 import Breadcrumb from 'components/Breadcrumb';
 import menuMessages from 'components/Menu/messages';
 import commonMessages from 'translations/common-messages';
@@ -80,18 +82,13 @@ export function LoginPage({ onLogin, onLogout, loading, error, user }) {
                 {intl.formatMessage(commonMessages.logout)}
               </button>
               {checkUserPermissions(user, ['admin', 'moderator']) && (
-                <div className="moderator-statistic">
-                  <h4>Статистика редактирования:</h4>
-                  <p>
-                    Количество песен: <b>{user.songs}</b>
-                  </p>
-                  <p>
-                    Количество альбомов: <b>{user.albums}</b>
-                  </p>
-                  <p>
-                    Количество исполнителей: <b>{user.authors}</b>
-                  </p>
-                </div>
+                <Link
+                  to="/moderator/statistic"
+                  className="moderator-statistic-link"
+                >
+                  <span>Статистика модераторов</span>
+                  <MdTrendingUp />
+                </Link>
               )}
             </div>
           )
