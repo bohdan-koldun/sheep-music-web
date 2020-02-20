@@ -31,14 +31,29 @@ $table-width: 535px;
     display: flex;
     align-items: center;
   }
+
+  span {
+    margin-right: 10px;
+  }
+
+  svg{
+    font-size: 18px;
+    color: $orange;
+  }
 }
 
-.moderator-statistic-row {
+.moderator-statistic-header {
   padding: 8px 5px;
 
   span {
     margin-right: 5px;
     font-weight: 400;
+    margin-right: 10px;
+  }
+
+  svg{
+    font-size: 14px;
+    color: $dark-three;
   }
 
   background: $light-grey-two;

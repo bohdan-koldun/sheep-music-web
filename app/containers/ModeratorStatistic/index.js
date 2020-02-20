@@ -48,18 +48,21 @@ export function ModeratorStatistic({
           <h2>Статистика добавлених пісень:</h2>
           <div className="statistic-tables">
             {statistic.songs && (
-              <TableModeratorStatistic data={statistic.songs} title="Пісні" />
+              <TableModeratorStatistic
+                data={statistic.songs}
+                title="Пісні - добавлені"
+              />
             )}
             {statistic.albums && (
               <TableModeratorStatistic
                 data={statistic.albums}
-                title="Альбоми"
+                title="Альбоми - добавлені"
               />
             )}
             {statistic.authors && (
               <TableModeratorStatistic
                 data={statistic.authors}
-                title="Виконавці"
+                title="Виконавці - добавлені"
               />
             )}
           </div>
@@ -68,19 +71,19 @@ export function ModeratorStatistic({
             {statistic.editedSongs && (
               <TableModeratorStatistic
                 data={statistic.editedSongs}
-                title="Пісні"
+                title="Пісні - відредаговані"
               />
             )}
             {statistic.editedAlbums && (
               <TableModeratorStatistic
                 data={statistic.editedAlbums}
-                title="Альбоми"
+                title="Альбоми - відредаговані"
               />
             )}
             {statistic.editedAuthors && (
               <TableModeratorStatistic
                 data={statistic.editedAuthors}
-                title="Виконавці"
+                title="Виконавці - відредаговані"
               />
             )}
           </div>
