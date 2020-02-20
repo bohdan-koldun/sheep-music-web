@@ -1,0 +1,50 @@
+@import "../../styles/colors.scss";
+
+$table-width: 535px;
+
+.moderator-statistic-table {
+  margin: 15px;
+  margin-bottom: 50px;
+  overflow-x: auto;
+
+  h3 {
+    color: #fff;
+    background: $dark-three;
+    padding: 5px;
+    border-radius: 2px;
+    width: $table-width;
+  }
+}
+
+.moderator-statistic-row {
+  display: grid;
+  grid-template-columns: 150px 120px 140px 120px;
+  width: $table-width;
+  border-bottom: 1px solid $light-grey-one;
+  padding: 5px;
+
+  .user-name {
+    color: $blue-one;
+  }
+
+  &>div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.moderator-statistic-row {
+  padding: 8px 5px;
+
+  span {
+    margin-right: 5px;
+    font-weight: 400;
+  }
+
+  background: $light-grey-two;
+}
+
+.statistic-tables {
+  display: flex;
+  flex-wrap: wrap;
+}

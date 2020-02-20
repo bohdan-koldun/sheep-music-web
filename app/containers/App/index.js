@@ -30,6 +30,7 @@ import AddSongFiles from 'containers/AddSongFiles';
 import Favorites from 'containers/Favorites';
 import Notebook from 'containers/Notebook';
 import Add from 'containers/Add';
+import ModeratorStatistic from 'containers/ModeratorStatistic';
 import AddSong from 'containers/AddSong';
 import AddAuthor from 'containers/AddAuthor';
 import AddAlbum from 'containers/AddAlbum';
@@ -111,6 +112,10 @@ function App({ onLoadTags, onLoadUser, user }) {
                 <PrivateRoute path="/add_song" component={AddSong} />
                 <PrivateRoute path="/add_author" component={AddAuthor} />
                 <PrivateRoute path="/add_album" component={AddAlbum} />
+                <PrivateRoute
+                  path="/moderator/statistic"
+                  component={ModeratorStatistic}
+                />
                 <Route path="" component={NotFoundPage} />
               </Switch>
             </ScrollToTop>
