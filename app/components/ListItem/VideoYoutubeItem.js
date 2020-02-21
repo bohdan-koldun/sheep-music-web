@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-import { MdPlayCircleFilled, MdPauseCircleFilled } from 'react-icons/md';
+import { AiOutlineYoutube } from 'react-icons/ai';
 import { FaYoutube } from 'react-icons/fa';
 import getVideoId from 'get-video-id';
 import './VideoYoutubeItem.scss';
@@ -24,11 +24,7 @@ function VideoYoutubeItem({ video }) {
           setPlay(!play);
         }}
       >
-        {!play ? (
-          <MdPlayCircleFilled className="video-play-icon" />
-        ) : (
-          <MdPauseCircleFilled className="video-play-icon" />
-        )}
+        {!play && <AiOutlineYoutube className="video-play-icon" />}
         {play && (
           <div className="player-wrapper">
             <ReactPlayer
