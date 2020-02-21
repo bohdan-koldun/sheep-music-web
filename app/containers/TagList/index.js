@@ -6,7 +6,8 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import ReactTooltip from 'react-tooltip';
-import { MdBookmark, MdViewList, MdViewModule } from 'react-icons/md';
+import { MdViewList, MdViewModule } from 'react-icons/md';
+import { AiFillTag } from 'react-icons/ai';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useIntl } from 'containers/LanguageProvider';
@@ -24,7 +25,7 @@ import './TagList.scss';
 export function TagList({ tags, loading }) {
   const intl = useIntl();
 
-  const [listType, setListType] = useState(1);
+  const [listType, setListType] = useState(2);
 
   return (
     <div>
@@ -85,7 +86,7 @@ export function TagList({ tags, loading }) {
                 data-for={tag.name}
               >
                 <span>
-                  <MdBookmark />
+                  <AiFillTag />
                   {tag.name}
                 </span>
                 <span className="tag-songs-count">{tag.songsCount}</span>
