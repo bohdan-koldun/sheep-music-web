@@ -28,7 +28,6 @@ import EditAuthor from 'containers/EditAuthor';
 import EditAlbum from 'containers/EditAlbum';
 import AddSongFiles from 'containers/AddSongFiles';
 import Favorites from 'containers/Favorites';
-import Notebook from 'containers/Notebook';
 import Add from 'containers/Add';
 import ModeratorStatistic from 'containers/ModeratorStatistic';
 import AddSong from 'containers/AddSong';
@@ -97,7 +96,6 @@ function App({ onLoadTags, onLoadUser, user }) {
                 <Route path="/videos" component={VideoList} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/favorites" component={Favorites} />
-                <Route path="/notebook" component={Notebook} />
                 <PrivateRoute path="/edit/song/:slug" component={EditSong} />
                 <PrivateRoute
                   path="/edit/author/:slug"

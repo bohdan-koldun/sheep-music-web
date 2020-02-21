@@ -6,18 +6,23 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import classNames from 'classnames/bind';
 import LocaleToggle from 'containers/LocaleToggle';
-import { IoIosMusicalNotes, IoIosBookmarks } from 'react-icons/io';
+import { IoIosMusicalNotes } from 'react-icons/io';
 import {
-  FiPlay,
+  FiBookmark,
   FiMic,
   FiGrid,
   FiHeadphones,
   FiChevronRight,
-  FiPlus,
 } from 'react-icons/fi';
+import { AiOutlineHome } from 'react-icons/ai';
 import checkUserPermissions from 'utils/checkPermissions';
-import { FaStar } from 'react-icons/fa';
-import { MdClose, MdMenu, MdMoreVert } from 'react-icons/md';
+import {
+  MdClose,
+  MdMenu,
+  MdMoreVert,
+  MdOndemandVideo,
+  MdPlaylistAdd,
+} from 'react-icons/md';
 import { useIntl } from 'containers/LanguageProvider';
 import commonMessages from 'translations/common-messages';
 import Logo from '../../images/sheep music.svg';
@@ -104,9 +109,9 @@ function Menu({ location, user }) {
               </Link>{' '}
             </div>{' '}
             <div className="aside-menu-links">
-              <MenuLink linkPath="/topics">
-                <FiGrid />
-                <FormattedMessage {...messages.topics} />{' '}
+              <MenuLink linkPath="/">
+                <AiOutlineHome />
+                <FormattedMessage {...messages.home} />{' '}
               </MenuLink>
               <MenuLink linkPath="/songs" subPageRoot="/song/">
                 <FiHeadphones />
@@ -121,23 +126,23 @@ function Menu({ location, user }) {
                 <FormattedMessage {...messages.albums} />{' '}
               </MenuLink>
               <MenuLink linkPath="/videos" subPageRoot="/video/">
-                <FiPlay />
+                <MdOndemandVideo />
                 <FormattedMessage {...messages.videos} />{' '}
               </MenuLink>
             </div>{' '}
             <hr />
             <div className="aside-menu-links">
-              <MenuLink linkPath="/favorites">
-                <FaStar className="yellow-icon" />
-                <FormattedMessage {...messages.favorites} />{' '}
+              <MenuLink linkPath="/topics">
+                <FiGrid className="yellow-icon" />
+                <FormattedMessage {...messages.topics} />{' '}
               </MenuLink>
-              <MenuLink linkPath="/notebook">
-                <IoIosBookmarks className="yellow-icon" />
-                <FormattedMessage {...messages.notebook} />{' '}
+              <MenuLink linkPath="/favorites">
+                <FiBookmark className="yellow-icon" />
+                <FormattedMessage {...messages.favorites} />{' '}
               </MenuLink>
               {checkUserPermissions(user, ['admin', 'moderator']) && (
                 <MenuLink linkPath="/add">
-                  <FiPlus className="yellow-icon" />
+                  <MdPlaylistAdd className="yellow-icon" />
                   <FormattedMessage {...messages.add} />{' '}
                 </MenuLink>
               )}
