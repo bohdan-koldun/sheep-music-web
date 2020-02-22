@@ -48,6 +48,7 @@
   "app.containers.HomePage.popularSongs": "Popular songs",
   "boilerplate.containers.NotFoundPage.header": "Page not found.",
   "app.containers.Album.availableOn": "Available on:",
+  "app.containers.Album.albumVideo": "Album Clips:",
   "app.components.Player.play": "play",
   "app.components.Player.pause": "pause",
   "app.components.Player.volumeOff": "mute",

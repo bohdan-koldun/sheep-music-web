@@ -48,6 +48,7 @@
   "app.containers.HomePage.popularSongs": "Популярные песни",
   "boilerplate.containers.NotFoundPage.header": "Страница не найдена.",
   "app.containers.Album.availableOn": "Доступен на:",
+  "app.containers.Album.albumVideo": "Клипы альбома:",
   "app.components.Player.play": "воспроизвести",
   "app.components.Player.pause": "остановить",
   "app.components.Player.volumeOff": "отключить звук",

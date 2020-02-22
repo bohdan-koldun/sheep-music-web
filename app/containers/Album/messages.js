@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.availableOn`,
     defaultMessage: 'Доступен на:',
   },
+  albumVideo: {
+    id: `${scope}.albumVideo`,
+    defaultMessage: 'Клипы альбома:',
+  },
 });

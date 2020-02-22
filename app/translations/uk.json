@@ -48,6 +48,7 @@
   "app.containers.HomePage.popularSongs": "Популярні пісні",
   "boilerplate.containers.NotFoundPage.header": "Сторінку не знайдено.",
   "app.containers.Album.availableOn": "Доступний на:",
+  "app.containers.Album.albumVideo": "Кліпи альбому:",
   "app.components.Player.play": "відтворити",
   "app.components.Player.pause": "зупинити",
   "app.components.Player.volumeOff": "відключити звук",

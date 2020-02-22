@@ -10,7 +10,7 @@ import { SongsMessage } from 'components/Message';
 import commonMessages from 'translations/common-messages';
 import classNames from 'classnames/bind';
 import { MdModeEdit } from 'react-icons/md';
-import { SongPlayList } from 'components/List';
+import { SongPlayList, VideoYoutubeListCarousel } from 'components/List';
 import Breadcrumb from 'components/Breadcrumb';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -84,6 +84,9 @@ export function Album({
 
   const canonicalUrl = `https://sheep-music.com/album/${albumData.slug}`;
 
+  const videoSongs =
+    albumData && albumData.songs && albumData.songs.filter(song => song.video);
+
   return (
     <React.Fragment>
       {!loading && albumData ? (
@@ -102,22 +105,6 @@ export function Album({
             <meta name="og:url" content={canonicalUrl} />
             <meta name="og:site_name" content="Sheep Music" />
             <meta name="fb:app_id" content="464243220625029" />
-
-            <script type="application/ld+json">
-              {`"@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Альбомы",
-              "item": "https://sheep-music.com/albums"
-            },{
-              "@type": "ListItem",
-              "position": 2,
-              "name": "${albumData.title}",
-              "item": "${canonicalUrl}"
-            }]`}
-            </script>
           </Helmet>
 
           <Breadcrumb
@@ -130,7 +117,7 @@ export function Album({
             ]}
           />
 
-          <div className="album-header">
+          <section className="album-header">
             {albumData.thumbnail && (
               <img
                 src={albumData.thumbnail.path}
@@ -175,7 +162,7 @@ export function Album({
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           <SongPlayList
             songs={albumData.songs}
@@ -183,7 +170,18 @@ export function Album({
             playData={playData}
             play={play}
           />
-          <div className="album-social">
+          <section className="album-videos">
+            {videoSongs && videoSongs.length && (
+              <React.Fragment>
+                <h3>
+                  <FormattedMessage {...messages.albumVideo} />
+                </h3>
+                <VideoYoutubeListCarousel songs={videoSongs} />
+              </React.Fragment>
+            )}
+          </section>
+
+          <section className="album-social">
             <h3>
               <FormattedMessage {...messages.availableOn} />
             </h3>
@@ -232,7 +230,7 @@ export function Album({
                 />
               </a>
             </div>
-          </div>
+          </section>
         </div>
       ) : (
         (loading && <Loader />) || null
