@@ -12,7 +12,6 @@ const responsive = {
       min: 1700,
     },
     items: 5,
-    partialVisibilityGutter: 60,
   },
   desktop: {
     breakpoint: {
@@ -20,23 +19,20 @@ const responsive = {
       min: 750,
     },
     items: 3,
-    partialVisibilityGutter: 40,
   },
   mobile: {
     breakpoint: {
-      max: 470,
+      max: 380,
       min: 0,
     },
     items: 1,
-    partialVisibilityGutter: 10,
   },
   tablet: {
     breakpoint: {
       max: 750,
-      min: 470,
+      min: 380,
     },
     items: 1,
-    partialVisibilityGutter: 10,
   },
 };
 
@@ -44,10 +40,9 @@ function VideoYoutubeListCarousel({ songs }) {
   return songs ? (
     <Carousel
       additionalTransfrom={0}
-      arrows={false}
+      arrows
       autoPlaySpeed={3000}
       centerMode
-      className=""
       containerClass="container"
       dotListClass=""
       draggable
@@ -60,7 +55,6 @@ function VideoYoutubeListCarousel({ songs }) {
       renderDotsOutside={false}
       responsive={responsive}
       showDots={false}
-      sliderClass=""
       slidesToSlide={1}
       swipeable
     >
