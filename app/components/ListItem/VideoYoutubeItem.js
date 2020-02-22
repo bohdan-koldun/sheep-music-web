@@ -44,7 +44,10 @@ function VideoYoutubeItem({ video }) {
       </div>
       <Link to={`/video/${video.slug}`} className="video-link">
         <FaYoutube />
-        <span>{video.title}</span>
+        <span>
+          {video.title}
+          {video.author ? ` • ${video.author.title}` : ''}
+        </span>
       </Link>
     </div>
   );
