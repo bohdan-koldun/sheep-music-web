@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -178,7 +179,7 @@ export function Album({
                 </h3>
                 <VideoYoutubeListCarousel songs={videoSongs} />
               </React.Fragment>
-            )}
+            ) || null}
           </section>
 
           <section className="album-social">
