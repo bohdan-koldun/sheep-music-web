@@ -27,7 +27,6 @@ const options = [
   { value: 'A#', label: 'A#' },
   { value: 'Bb', label: 'Bb' },
   { value: 'B', label: 'B' },
-  { value: 'H', label: 'H' },
   { value: 'С', label: 'С' },
   { value: 'С#', label: 'С#' },
   { value: 'Db', label: 'Db' },
