@@ -75,4 +75,8 @@ export default defineMessages({
     id: `${scope}.playlist`,
     defaultMessage: 'Плейлист',
   },
+  copy: {
+    id: `${scope}.copy`,
+    defaultMessage: 'скопировать',
+  },
 });

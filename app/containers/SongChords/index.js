@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -17,8 +17,7 @@ import {
   MdModeEdit,
   MdAudiotrack,
 } from 'react-icons/md';
-import { FaYoutube } from 'react-icons/fa';
-import { SongPdfGenerator } from 'components/Pdf';
+import { FaYoutube, FaCopy } from 'react-icons/fa';
 import { SongImg, songImgUrl } from 'components/Img';
 import Loader from 'components/Loader';
 import { DownloadModal } from 'components/Modal';
@@ -92,8 +91,15 @@ export function SongChords({
   const canonicalUrl =
     songData && `https://sheep-music.com/chord/${songData.slug}`;
 
+  const chordsTextarea = useRef();
+
+  const setChordsToClipBoard = () => {
+    chordsTextarea.current.select();
+    document.execCommand('copy');
+  };
+
   return (
-    <React.Fragment>
+    <Fragment>
       {!loading && songData ? (
         <div>
           <Helmet>
@@ -150,7 +156,26 @@ export function SongChords({
                 </div>
               )}
               <div className="song-icons-wrapper">
-                <SongPdfGenerator song={songData} type="chords" />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setChordsToClipBoard();
+                    ReactGA.event({
+                      category: 'Song',
+                      action: 'click copy song',
+                    });
+                  }}
+                  className="icon-button"
+                >
+  
+                  <FaCopy
+                    data-tip={intl.formatMessage(commonMessages.copy)}
+                    data-for='copy-chords'
+                    style={{fontSize: '30px'}}
+                    className="song-icon"
+                  />
+                  <ReactTooltip id='copy-chords'/>
+                </button>
                 {songData.audioMp3 ? (
                   <React.Fragment>
                     <button
@@ -170,20 +195,27 @@ export function SongChords({
                       !playData.song.playMinus ? (
                           <MdPauseCircleFilled
                             data-tip={intl.formatMessage(playerMessages.pause)}
+                            data-for="play-pause"
                             className="song-icon"
                           />
+                
                         ) : (
                           <MdPlayCircleFilled
                             data-tip={intl.formatMessage(playerMessages.play)}
+                            data-for="play-play"
                             className="song-icon"
                           />
                         )}
+                      <ReactTooltip id="play-pause" />
+                      <ReactTooltip id="play-play" />
                     </button>
                     <MdCloudDownload
                       data-tip={intl.formatMessage(playerMessages.download)}
+                      data-for='download-song'
                       onClick={() => setShowDownload(true)}
                       className="song-icon"
                     />
+                    <ReactTooltip id='download-song'/>
                     <DownloadModal
                       isOpen={showDownload}
                       onCloseModal={() => setShowDownload(false)}
@@ -194,11 +226,12 @@ export function SongChords({
                 ) : null}
                 {songData.video && (
                   <Link to={`/video/${songData.slug}`} target="_blank">
-                    <FaYoutube data-tip="youtube" className="song-icon" />
+                    <FaYoutube data-tip="youtube" data-for='youtube' className="song-icon" />
+                    <ReactTooltip id='youtube'/>
                   </Link>
                 )}
                 {isAdminOrModerator(user) && (
-                  <React.Fragment>
+                  <Fragment>
                     <Link to={`/edit/song/${songData.slug}`}>
                       {' '}
                       <MdModeEdit data-tip="edit song" className="song-icon" />
@@ -210,7 +243,7 @@ export function SongChords({
                         className="song-icon"
                       />
                     </Link>
-                  </React.Fragment>
+                  </Fragment>
                 )}
                 <Link
                   to={`/song/${songData.slug}`}
@@ -222,7 +255,7 @@ export function SongChords({
               </div>
             </div>
           </div>
-          <ChordsTransposer song={songData} />
+          <ChordsTransposer song={songData} chordsTextareaRef={chordsTextarea} />
           <div className="tags">
             {songData.tags &&
               songData.tags.map(tag => (
@@ -240,7 +273,7 @@ export function SongChords({
         (loading && <Loader />) || null
       )}
       <ReactTooltip place="top" type="dark" effect="float" />
-    </React.Fragment>
+    </Fragment>
   );
 }
 

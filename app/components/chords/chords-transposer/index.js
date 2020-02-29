@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as striptags from 'striptags';
 import { TextLine, ChordLine, chordLineString } from './songLine';
@@ -33,7 +33,7 @@ const getChordsSet = chords => {
   return [...result];
 };
 
-function ChordsTransposer({ song }) {
+function ChordsTransposer({ song, chordsTextareaRef }) {
   const { chordsKey, chords: songChords, author } = song;
   const rootKey = keys.getKeyByName(chordsKey);
   const [currentKey, setCurrentKey] = useState(rootKey);
@@ -68,10 +68,8 @@ function ChordsTransposer({ song }) {
     setCurrentKey(keys.getKeyByName(e.target.innerHTML));
   };
 
-  const chordsTextDiv = useRef();
-
   const handleCopyChords = () => {
-    chordsTextDiv.current.select();
+    chordsTextareaRef.current.select();
     document.execCommand('copy');
   };
 
@@ -127,7 +125,7 @@ function ChordsTransposer({ song }) {
         })}
       </pre>
       <textarea
-        ref={chordsTextDiv}
+        ref={chordsTextareaRef}
         value={chordsForCopy}
         onChange={() => {}}
         style={{ height: '0px', opacity: 0 }}
@@ -152,6 +150,7 @@ function ChordsTransposer({ song }) {
 
 ChordsTransposer.propTypes = {
   song: PropTypes.object,
+  chordsTextareaRef: PropTypes.object,
 };
 
 export default ChordsTransposer;

@@ -17,6 +17,7 @@
   "app.common.words": "Words",
   "app.common.chords": "Chords",
   "app.common.playlist": "Playlist",
+  "app.common.copy": "copy",
   "app.components.Menu.add": "Add",
   "app.components.Footer.author.message": "Made with love by {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",

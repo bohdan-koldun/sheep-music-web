@@ -17,6 +17,7 @@
   "app.common.words": "Cлова",
   "app.common.chords": "Аккорды",
   "app.common.playlist": "Плейлист",
+  "app.common.copy": "скопировать",
   "app.components.Menu.add": "Добавить",
   "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
