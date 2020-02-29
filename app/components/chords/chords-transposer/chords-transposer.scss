@@ -4,6 +4,11 @@
   text-align: unset;
   padding: 15px;
   line-height: 1.6;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
 
   span {
     display: flex;
@@ -96,7 +101,7 @@
   outline: 0;
 }
 
-.footer-chords-svg{
+.footer-chords-svg {
   display: flex;
   flex-wrap: wrap;
 }

@@ -41,7 +41,7 @@ export function ChordLine({ chordLine, lineIndex, uniqueChords }) {
   const chordOffsetPairs = createChordOffsetPairs(chordLine);
 
   return (
-    <span>
+    <span style={{ display: 'inline' }}>
       {chordOffsetPairs.map((pair, i) => {
         const { first, second } = pair;
         const chordText = DEVIDERS.includes(first[0]) ? second : first;
@@ -53,9 +53,15 @@ export function ChordLine({ chordLine, lineIndex, uniqueChords }) {
         const chordId = printedChord + lineIndex + i;
 
         return (
-          <b id={chordId} key={chordId}>
+          <React.Fragment key={chordId}>
             {chordText === second && first}
-            <b className="c" data-tip data-for={printedChord}>
+            <b
+              className="c"
+              id={chordId}
+              data-tip
+              data-for={printedChord}
+              style={{ display: 'inline' }}
+            >
               {printedChord}
               {chord && (
                 <ReactTooltip
@@ -73,7 +79,7 @@ export function ChordLine({ chordLine, lineIndex, uniqueChords }) {
               )}
             </b>
             {chordText === first && !!second && second}
-          </b>
+          </React.Fragment>
         );
       })}
     </span>
