@@ -122,7 +122,6 @@ function ChordsTransposer({ song, chordsTextareaRef, setChordsToClipBoard }) {
         </pre>
         <textarea
           ref={chordsTextareaRef}
-          data-tip="tooltip"
           value={chordsForCopy}
           onChange={() => {}}
           style={{ height: '0px', opacity: 0 }}

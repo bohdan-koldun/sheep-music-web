@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import * as striptags from 'striptags';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -19,7 +20,7 @@ import {
   MdAudiotrack,
   MdFileDownload,
 } from 'react-icons/md';
-import { FaYoutube } from 'react-icons/fa';
+import { FaYoutube, FaCopy } from 'react-icons/fa';
 import { SongImg, songImgUrl } from 'components/Img';
 import { DownloadModal } from 'components/Modal';
 import Loader from 'components/Loader';
@@ -92,6 +93,20 @@ export function Song({
   const canonicalUrl =
     songData && `https://sheep-music.com/song/${songData.slug}`;
 
+  const songTextTextarea = useRef();
+  const songTextPre = useRef();
+
+  const setTextToClipBoard = () => {
+    songTextTextarea.current.select();
+    document.execCommand('copy');
+  
+    songTextPre.current.classList.add('copied-text');
+  
+    setTimeout(() => {
+      songTextPre.current.classList.remove('copied-text');
+    }, 500);
+  };
+
   return (
     <React.Fragment>
       {!loading && songData ? (
@@ -108,24 +123,6 @@ export function Song({
             <meta name="og:site_name" content="Sheep Music" />
             <meta name="og:video" content={songData.video} />
             <meta name="fb:app_id" content="464243220625029" />
-
-            <script type="application/ld+json">
-              {`
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Песни",
-              "item": "https://sheep-music.com/songs"
-            },{
-              "@type": "ListItem",
-              "position": 2,
-              "name": "${songData.title}",
-              "item": "${canonicalUrl}"
-            }]
-            `}
-            </script>
           </Helmet>
 
           <Breadcrumb
@@ -165,6 +162,26 @@ export function Song({
                 </div>
               )}
               <div className="song-icons-wrapper">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTextToClipBoard();
+                    ReactGA.event({
+                      category: 'Song',
+                      action: 'click copy song text',
+                    });
+                  }}
+                  className="icon-button"
+                >
+  
+                  <FaCopy
+                    data-tip={intl.formatMessage(commonMessages.copy)}
+                    data-for='copy-song'
+                    style={{fontSize: '30px'}}
+                    className="song-icon"
+                  />
+                  <ReactTooltip id='copy-song'/>
+                </button>
                 {songData.audioMp3 ? (
                   <React.Fragment>
                     <button
@@ -181,20 +198,26 @@ export function Song({
                       {play && playData && songData.id === playData.song.id && !playData.song.playMinus ? (
                         <MdPauseCircleFilled
                           data-tip={intl.formatMessage(playerMessages.pause)}
+                          data-for="play-pause"
                           className="song-icon"
                         />
                       ) : (
                         <MdPlayCircleFilled
                           data-tip={intl.formatMessage(playerMessages.play)}
+                          data-for="play-play"
                           className="song-icon"
                         />
                       )}
+                      <ReactTooltip id="play-pause" />
+                      <ReactTooltip id="play-play" />
                     </button>
                     <MdCloudDownload
                       data-tip={intl.formatMessage(playerMessages.download)}
                       onClick={() => setShowDownload(true)}
+                      data-for="download-mp3"
                       className="song-icon"
                     />
+                    <ReactTooltip id="download-mp3" />
                     <DownloadModal
                       isOpen={showDownload}
                       onCloseModal={() => setShowDownload(false)}
@@ -205,7 +228,8 @@ export function Song({
                 ) : null}
                 {songData.video && (
                   <Link to={`/video/${songData.slug}`} target="_blank">
-                    <FaYoutube data-tip="youtube" className="song-icon" />
+                    <FaYoutube data-tip="youtube" data-for="youtube" className="song-icon" />
+                    <ReactTooltip id="youtube" />
                   </Link>
                 )}
                 {isAdminOrModerator(user) && (
@@ -285,7 +309,13 @@ export function Song({
               <hr/>
             </React.Fragment>
           )}
-          <pre dangerouslySetInnerHTML={{ __html: songData.text }} />
+          <pre dangerouslySetInnerHTML={{ __html: songData.text }} ref={songTextPre} />
+          <textarea
+            ref={songTextTextarea}
+            value={striptags(songData.text)}
+            onChange={() => {}}
+            style={{ height: '0px', opacity: 0 }}
+          />
           {songData.video && (
             <div className="player-wrapper">
               <ReactPlayer

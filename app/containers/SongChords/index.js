@@ -168,7 +168,7 @@ export function SongChords({
                     setChordsToClipBoard();
                     ReactGA.event({
                       category: 'Song',
-                      action: 'click copy song',
+                      action: 'click copy song chords',
                     });
                   }}
                   className="icon-button"
