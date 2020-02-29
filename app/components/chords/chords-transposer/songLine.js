@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-danger */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -61,6 +63,7 @@ export function ChordLine({ chordLine, lineIndex, uniqueChords }) {
               data-tip
               data-for={printedChord}
               style={{ display: 'inline' }}
+              onClick={e => e.stopPropagation()}
             >
               {printedChord}
               {chord && (

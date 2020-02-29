@@ -43,6 +43,16 @@ label {
   padding: 0 40px;
 }
 
+.copied-text {
+  font-weight: 700;
+  transition: all 0.5s ease;
+  border-radius: 4px;
+
+  b {
+    font-weight: 800 !important;
+  }
+}
+
 @media screen and (max-width: $max-mobile-width) {
   #app-wrapper {
     display: block;

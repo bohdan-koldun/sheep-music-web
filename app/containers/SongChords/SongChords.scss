@@ -1,15 +1,14 @@
 @import "../../styles/colors.scss";
 @import "../../styles/buttons.scss";
 
+.song-page-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 
-.song-page-header{
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    h1{
-        margin: 0;
-    }
+  h1 {
+    margin: 0;
+  }
 
   .icon-button {
     border: none;
@@ -19,7 +18,7 @@
 
   }
 
-  .song-icons-wrapper{
+  .song-icons-wrapper {
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -32,22 +31,22 @@
     cursor: pointer;
   }
 
-  .song-player-img{
+  .song-player-img {
     width: 45px;
     border-radius: 3px;
     margin: 2px 8px;
   }
 }
 
-.song-page-img{
-    width: 180px;
-    margin-right: 20px;
+.song-page-img {
+  width: 180px;
+  margin-right: 20px;
 }
 
-.tags{
+.tags {
   margin-top: 20px;
 
-  .song-tag{
+  .song-tag {
     background: #000;
     text-decoration: none;
     padding: 5px 10px;
@@ -61,44 +60,47 @@
   }
 }
 
-.verse, .chorus, .bridge {
+.verse,
+.chorus,
+.bridge {
   font-weight: 700;
   line-height: 3;
 }
 
 .player-wrapper {
   position: relative;
-  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+  padding-top: 56.25%
+    /* Player ratio: 100 / (1280 / 720) */
 }
- 
+
 .react-player {
   position: absolute;
   top: 0;
   left: 0;
 }
 
-pre{
+pre {
   overflow-x: auto;
   font-family: 'Roboto Mono', monospace;
 }
 
 @media screen and (max-width: 600px) {
-  .song-page-header{
-    h1{
+  .song-page-header {
+    h1 {
       font-size: 24px;
     }
 
-  .song-icon {
-    font-size: 36px;
+    .song-icon {
+      font-size: 36px;
+    }
   }
-}
 
-pre{
-  font-size: 14px;
-}
+  pre {
+    font-size: 14px;
+  }
 
-.song-page-img{
-  width: 80px;
-  margin-right: 20px;
-}
+  .song-page-img {
+    width: 80px;
+    margin-right: 20px;
+  }
 }

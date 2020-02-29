@@ -33,7 +33,7 @@ const getChordsSet = chords => {
   return [...result];
 };
 
-function ChordsTransposer({ song, chordsTextareaRef }) {
+function ChordsTransposer({ song, chordsTextareaRef, setChordsToClipBoard }) {
   const { chordsKey, chords: songChords, author } = song;
   const rootKey = keys.getKeyByName(chordsKey);
   const [currentKey, setCurrentKey] = useState(rootKey);
@@ -68,11 +68,6 @@ function ChordsTransposer({ song, chordsTextareaRef }) {
     setCurrentKey(keys.getKeyByName(e.target.innerHTML));
   };
 
-  const handleCopyChords = () => {
-    chordsTextareaRef.current.select();
-    document.execCommand('copy');
-  };
-
   const songTitle = `${song.title}${(author &&
     author.title &&
     ` • ${author.title}`) ||
@@ -89,7 +84,7 @@ function ChordsTransposer({ song, chordsTextareaRef }) {
     .join('\n')}\n\n\n©sheep-music.com`;
 
   return songChords ? (
-    <div className="chord-page-content">
+    <section className="chord-page-content">
       <div className="transpose-keys">
         {keys.keys.map((key, i) => {
           if (
@@ -109,48 +104,52 @@ function ChordsTransposer({ song, chordsTextareaRef }) {
           );
         })}
       </div>
-      <pre className="chords-pre" onClick={handleCopyChords}>
-        {lines.map((line, index) => {
-          if (isChordLine(line)) {
+      <section className="chords-wrapper">
+        <pre className="chords-pre" onClick={setChordsToClipBoard}>
+          {lines.map((line, index) => {
+            if (isChordLine(line)) {
+              return (
+                <ChordLine
+                  chordLine={line}
+                  uniqueChords={uniqueChords}
+                  lineIndex={index}
+                  key={`chord-line-${index}`}
+                />
+              );
+            }
+            return <TextLine textLine={line} key={`song-line-${index}`} />;
+          })}
+        </pre>
+        <textarea
+          ref={chordsTextareaRef}
+          data-tip="tooltip"
+          value={chordsForCopy}
+          onChange={() => {}}
+          style={{ height: '0px', opacity: 0 }}
+        />
+        <div className="footer-chords-svg">
+          {Object.values(uniqueChords).map(chord => {
+            const printedChord = chord.chord.name + chord.tail;
+
             return (
-              <ChordLine
-                chordLine={line}
-                uniqueChords={uniqueChords}
-                lineIndex={index}
-                key={`chord-line-${index}`}
+              <ChordSvg
+                chordRoot={chord.chord.name}
+                chordTail={chord.tail}
+                style={{ width: '80px', margin: '5px' }}
+                key={printedChord}
               />
             );
-          }
-          return <TextLine textLine={line} key={`song-line-${index}`} />;
-        })}
-      </pre>
-      <textarea
-        ref={chordsTextareaRef}
-        value={chordsForCopy}
-        onChange={() => {}}
-        style={{ height: '0px', opacity: 0 }}
-      />
-      <div className="footer-chords-svg">
-        {Object.values(uniqueChords).map(chord => {
-          const printedChord = chord.chord.name + chord.tail;
-
-          return (
-            <ChordSvg
-              chordRoot={chord.chord.name}
-              chordTail={chord.tail}
-              style={{ width: '80px', margin: '5px' }}
-              key={printedChord}
-            />
-          );
-        })}
-      </div>
-    </div>
+          })}
+        </div>
+      </section>
+    </section>
   ) : null;
 }
 
 ChordsTransposer.propTypes = {
   song: PropTypes.object,
   chordsTextareaRef: PropTypes.object,
+  setChordsToClipBoard: PropTypes.func,
 };
 
 export default ChordsTransposer;

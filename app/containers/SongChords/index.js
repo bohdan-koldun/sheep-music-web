@@ -96,6 +96,12 @@ export function SongChords({
   const setChordsToClipBoard = () => {
     chordsTextarea.current.select();
     document.execCommand('copy');
+
+    chordsTextarea.current.parentNode.firstChild.classList.add('copied-text');
+
+    setTimeout(() => {
+      chordsTextarea.current.parentNode.firstChild.classList.remove('copied-text');
+    }, 500);
   };
 
   return (
@@ -177,7 +183,7 @@ export function SongChords({
                   <ReactTooltip id='copy-chords'/>
                 </button>
                 {songData.audioMp3 ? (
-                  <React.Fragment>
+                  <Fragment>
                     <button
                       type="button"
                       onClick={() => {
@@ -222,7 +228,7 @@ export function SongChords({
                       downloadUrl={songData.audioMp3.path}
                       title={songData.title}
                     />
-                  </React.Fragment>
+                  </Fragment>
                 ) : null}
                 {songData.video && (
                   <Link to={`/video/${songData.slug}`} target="_blank">
@@ -255,7 +261,7 @@ export function SongChords({
               </div>
             </div>
           </div>
-          <ChordsTransposer song={songData} chordsTextareaRef={chordsTextarea} />
+          <ChordsTransposer song={songData} chordsTextareaRef={chordsTextarea} setChordsToClipBoard={setChordsToClipBoard} />
           <div className="tags">
             {songData.tags &&
               songData.tags.map(tag => (
