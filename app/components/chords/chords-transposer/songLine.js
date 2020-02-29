@@ -92,6 +92,24 @@ ChordLine.propTypes = {
   lineIndex: PropTypes.number.isRequired,
 };
 
+export function chordLineString(chordLine, uniqueChords) {
+  const chordOffsetPairs = createChordOffsetPairs(chordLine);
+
+  return chordOffsetPairs
+    .map(pair => {
+      const { first, second } = pair;
+      const chordText = DEVIDERS.includes(first[0]) ? second : first;
+
+      const chord = uniqueChords && uniqueChords[chordText];
+
+      const printedChord = chord ? chord.chord.name + (chord.tail || '') : '';
+
+      return `${(chordText === second && first) ||
+        ''}${printedChord}${(chordText === first && !!second && second) || ''}`;
+    })
+    .join('');
+}
+
 export function TextLine({ textLine }) {
   return <span dangerouslySetInnerHTML={{ __html: textLine }} />;
 }

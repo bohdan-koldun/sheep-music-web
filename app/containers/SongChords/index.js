@@ -222,10 +222,7 @@ export function SongChords({
               </div>
             </div>
           </div>
-          <ChordsTransposer
-            songChords={songData.chords}
-            chordsKey={songData.chordsKey}
-          />
+          <ChordsTransposer song={songData} />
           <div className="tags">
             {songData.tags &&
               songData.tags.map(tag => (

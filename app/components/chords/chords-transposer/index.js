@@ -1,10 +1,12 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { TextLine, ChordLine } from './songLine';
+import * as striptags from 'striptags';
+import { TextLine, ChordLine, chordLineString } from './songLine';
 import keys from './keys';
 import ChordSvg from './chordSvg';
 import { isChordLine } from './regexp';
@@ -31,7 +33,8 @@ const getChordsSet = chords => {
   return [...result];
 };
 
-function ChordsTransposer({ chordsKey, songChords }) {
+function ChordsTransposer({ song }) {
+  const { chordsKey, chords: songChords, author } = song;
   const rootKey = keys.getKeyByName(chordsKey);
   const [currentKey, setCurrentKey] = useState(rootKey);
 
@@ -65,6 +68,28 @@ function ChordsTransposer({ chordsKey, songChords }) {
     setCurrentKey(keys.getKeyByName(e.target.innerHTML));
   };
 
+  const chordsTextDiv = useRef();
+
+  const handleCopyChords = () => {
+    chordsTextDiv.current.select();
+    document.execCommand('copy');
+  };
+
+  const songTitle = `${song.title}${(author &&
+    author.title &&
+    ` • ${author.title}`) ||
+    ''}\n\n\n`;
+
+  const chordsForCopy = `${songTitle}${lines
+    .map(line => {
+      if (isChordLine(line)) {
+        return chordLineString(line, uniqueChords);
+      }
+
+      return striptags(line);
+    })
+    .join('\n')}\n\n\n©sheep-music.com`;
+
   return songChords ? (
     <div className="chord-page-content">
       <div className="transpose-keys">
@@ -86,7 +111,7 @@ function ChordsTransposer({ chordsKey, songChords }) {
           );
         })}
       </div>
-      <pre className="chords-pre">
+      <pre className="chords-pre" onClick={handleCopyChords}>
         {lines.map((line, index) => {
           if (isChordLine(line)) {
             return (
@@ -101,6 +126,12 @@ function ChordsTransposer({ chordsKey, songChords }) {
           return <TextLine textLine={line} key={`song-line-${index}`} />;
         })}
       </pre>
+      <textarea
+        ref={chordsTextDiv}
+        value={chordsForCopy}
+        onChange={() => {}}
+        style={{ height: '0px', opacity: 0 }}
+      />
       <div className="footer-chords-svg">
         {Object.values(uniqueChords).map(chord => {
           const printedChord = chord.chord.name + chord.tail;
@@ -120,8 +151,7 @@ function ChordsTransposer({ chordsKey, songChords }) {
 }
 
 ChordsTransposer.propTypes = {
-  chordsKey: PropTypes.string,
-  songChords: PropTypes.string,
+  song: PropTypes.object,
 };
 
 export default ChordsTransposer;
