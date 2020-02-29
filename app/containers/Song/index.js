@@ -20,7 +20,6 @@ import {
   MdFileDownload,
 } from 'react-icons/md';
 import { FaYoutube } from 'react-icons/fa';
-import { SongPdfGenerator } from 'components/Pdf';
 import { SongImg, songImgUrl } from 'components/Img';
 import { DownloadModal } from 'components/Modal';
 import Loader from 'components/Loader';
@@ -166,7 +165,6 @@ export function Song({
                 </div>
               )}
               <div className="song-icons-wrapper">
-                <SongPdfGenerator song={songData} />
                 {songData.audioMp3 ? (
                   <React.Fragment>
                     <button
