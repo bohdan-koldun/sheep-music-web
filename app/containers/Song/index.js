@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as striptags from 'striptags';
+import { JsonLd } from "react-schemaorg";
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -124,7 +125,26 @@ export function Song({
             <meta name="og:video" content={songData.video} />
             <meta name="fb:app_id" content="464243220625029" />
           </Helmet>
-
+          <JsonLd
+            item={{
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Музыка',
+                  item: 'https://sheep-music.com/song',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: songData.title,
+                  item: canonicalUrl,
+                },
+              ],
+            }}
+          />
           <Breadcrumb
             pageList={[
               {

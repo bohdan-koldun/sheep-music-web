@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { JsonLd } from 'react-schemaorg';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -93,25 +94,41 @@ export function Author({
             <meta name="og:url" content={canonicalUrl} />
             <meta name="og:site_name" content="Sheep Music" />
             <meta name="fb:app_id" content="464243220625029" />
-
-            <script type="application/ld+json">
-              {`
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [{
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Исполнители",
-              "item": "https://sheep-music.com/authors"
-            },{
-              "@type": "ListItem",
-              "position": 2,
-              "name": "${authorData.title}",
-              "item": "${canonicalUrl}"
-            }]
-            `}
-            </script>
           </Helmet>
+          <JsonLd
+            item={{
+              '@context': 'https://schema.org',
+              '@type': 'MusicGroup',
+              '@id': canonicalUrl,
+              name: authorData.title,
+              description: authorData.description,
+              logo: {
+                '@type': 'ImageObject',
+                url: authorData.thumbnail && authorData.thumbnail.path,
+              },
+              url: canonicalUrl,
+            }}
+          />
+          <JsonLd
+            item={{
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Исполнители',
+                  item: 'https://sheep-music.com/author',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: authorData.title,
+                  item: canonicalUrl,
+                },
+              ],
+            }}
+          />
           <Breadcrumb
             pageList={[
               {
