@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from 'react';
+import { JsonLd } from 'react-schemaorg';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -44,23 +45,44 @@ export function Video({ onLoadVideo, match, videoData, loading }) {
     videoData.author ? ` Исполнитель ${videoData.author.title}.` : ''
   }${videoData.album ? ` Альбом ${videoData.album.title}.` : ''}`;
 
+  const canonicalUrl = `https://sheep-music.com/video/${videoData.slug}`;
+
   return (
     <React.Fragment>
       {!loading && videoData ? (
         <div className="video-page">
           <Helmet>
             <title>{title}</title>
+            <link rel="canonical" href={canonicalUrl} />
             <meta name="description" content={description} />
             <meta property="og:title" content={title} />
             <meta property="og:type" content="video.other" />
-            <meta
-              property="og:url"
-              content={`https://sheep-music.com/video/${videoData.slug}`}
-            />
+            <meta property="og:url" content={canonicalUrl} />
             <meta property="og:site_name" content="Sheep Music" />
             <meta property="og:description" content={description} />
             <meta property="og:video" content={videoData.video} />
           </Helmet>
+
+          <JsonLd
+            item={{
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Клипы',
+                  item: 'https://sheep-music.com/videos',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: videoData.title,
+                  item: canonicalUrl,
+                },
+              ],
+            }}
+          />
 
           <Breadcrumb
             pageList={[

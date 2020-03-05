@@ -76,6 +76,8 @@ export function Author({
 
   const canonicalUrl = `https://sheep-music.com/author/${authorData.slug}`;
 
+  const thumbnail = authorData.thumbnail && authorData.thumbnail.path;
+
   return (
     <React.Fragment>
       {!loading && authorData ? (
@@ -87,10 +89,7 @@ export function Author({
 
             <meta name="og:title" content={title} />
             <meta name="og:description" content={description} />
-            <meta
-              name="og:image"
-              content={authorData.thumbnail && authorData.thumbnail.path}
-            />
+            <meta name="og:image" content={thumbnail} />
             <meta name="og:url" content={canonicalUrl} />
             <meta name="og:site_name" content="Sheep Music" />
             <meta name="fb:app_id" content="464243220625029" />
@@ -104,7 +103,7 @@ export function Author({
               description: authorData.description,
               logo: {
                 '@type': 'ImageObject',
-                url: authorData.thumbnail && authorData.thumbnail.path,
+                url: thumbnail,
               },
               url: canonicalUrl,
             }}
@@ -118,7 +117,7 @@ export function Author({
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Исполнители',
-                  item: 'https://sheep-music.com/author',
+                  item: 'https://sheep-music.com/authors',
                 },
                 {
                   '@type': 'ListItem',
@@ -129,6 +128,17 @@ export function Author({
               ],
             }}
           />
+          {thumbnail ? (
+            <JsonLd
+              item={{
+                '@context': 'http://schema.org',
+                '@type': 'ImageObject',
+                contentUrl: thumbnail,
+                datePublished: authorData.createdAt,
+                name: authorData.title,
+              }}
+            />
+          ) : null}
           <Breadcrumb
             pageList={[
               {

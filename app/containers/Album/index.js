@@ -1,8 +1,9 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable indent */
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { JsonLd } from 'react-schemaorg';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
@@ -35,11 +36,11 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import './Album.scss';
-import iTunes from './images/itunes.png';
-import googlePlay from './images/googleplay.png';
-import youtubeMusic from './images/youtubemusic.png';
-import soundCloud from './images/soundcloud.png';
-import deezer from './images/deezer.png';
+import iTunesImg from './images/itunes.png';
+import googlePlayImg from './images/googleplay.png';
+import youtubeMusicImg from './images/youtubemusic.png';
+import soundCloudImg from './images/soundcloud.png';
+import deezerImg from './images/deezer.png';
 
 export function Album({
   onLoadAlbum,
@@ -88,6 +89,10 @@ export function Album({
   const videoSongs =
     albumData && albumData.songs && albumData.songs.filter(song => song.video);
 
+  const thumbnail = albumData.thumbnail && albumData.thumbnail.path;
+
+  const { youtubeMusic, googlePlay, deezer, soundCloud, iTunes } = albumData;
+
   return (
     <React.Fragment>
       {!loading && albumData ? (
@@ -99,15 +104,76 @@ export function Album({
 
             <meta name="og:title" content={title} />
             <meta name="og:description" content={description} />
-            <meta
-              name="og:image"
-              content={albumData.thumbnail && albumData.thumbnail.path}
-            />
+            <meta name="og:image" content={thumbnail} />
             <meta name="og:url" content={canonicalUrl} />
             <meta name="og:site_name" content="Sheep Music" />
             <meta name="fb:app_id" content="464243220625029" />
           </Helmet>
-
+          <JsonLd
+            item={{
+              '@context': 'http://schema.org',
+              '@type': 'MusicAlbum',
+              name: albumData.title,
+              image: thumbnail || '',
+              byArtist: {
+                '@type': 'MusicGroup',
+                name: (albumData.author && albumData.author.title) || '',
+              },
+              sameAs: [
+                youtubeMusic,
+                googlePlay,
+                deezer,
+                soundCloud,
+                iTunes,
+              ].filter(url => url),
+              track: {
+                '@type': 'ItemList',
+                numberOfItems: albumData.songs ? albumData.songs.length : 0,
+                itemListElement: albumData.songs
+                  ? albumData.songs.map((song, i) => ({
+                      '@type': 'ListItem',
+                      position: i + 1,
+                      item: {
+                        '@type': 'MusicRecording',
+                        name: song.title,
+                      },
+                    }))
+                  : [],
+              },
+              url: canonicalUrl,
+            }}
+          />
+          <JsonLd
+            item={{
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Альбомы',
+                  item: 'https://sheep-music.com/albums',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: albumData.title,
+                  item: canonicalUrl,
+                },
+              ],
+            }}
+          />
+          {thumbnail ? (
+            <JsonLd
+              item={{
+                '@context': 'http://schema.org',
+                '@type': 'ImageObject',
+                contentUrl: thumbnail,
+                datePublished: albumData.createdAt,
+                name: albumData.title,
+              }}
+            />
+          ) : null}
           <Breadcrumb
             pageList={[
               {
@@ -172,14 +238,15 @@ export function Album({
             play={play}
           />
           <section className="album-videos">
-            {videoSongs && videoSongs.length && (
+            {(videoSongs && videoSongs.length && (
               <React.Fragment>
                 <h3>
                   <FormattedMessage {...messages.albumVideo} />
                 </h3>
                 <VideoYoutubeListCarousel songs={videoSongs} />
               </React.Fragment>
-            ) || null}
+            )) ||
+              null}
           </section>
 
           <section className="album-social">
@@ -187,45 +254,45 @@ export function Album({
               <FormattedMessage {...messages.availableOn} />
             </h3>
             <div className="album-social-list">
-              <a href={albumData.iTunes} target="_blank">
+              <a href={iTunes} target="_blank">
                 <img
-                  src={iTunes}
-                  className={classNames({ 'no-availavle': !albumData.iTunes })}
+                  src={iTunesImg}
+                  className={classNames({ 'no-availavle': !iTunes })}
                   alt="itunes"
                 />
               </a>
-              <a href={albumData.googlePlay} target="_blank">
+              <a href={googlePlay} target="_blank">
                 <img
-                  src={googlePlay}
+                  src={googlePlayImg}
                   className={classNames({
-                    'no-availavle': !albumData.googlePlay,
+                    'no-availavle': !googlePlay,
                   })}
                   alt="google play"
                 />
               </a>
-              <a href={albumData.youtubeMusic} target="_blank">
+              <a href={youtubeMusic} target="_blank">
                 <img
-                  src={youtubeMusic}
+                  src={youtubeMusicImg}
                   className={classNames({
-                    'no-availavle': !albumData.youtubeMusic,
+                    'no-availavle': !youtubeMusic,
                   })}
                   alt="youtube music"
                 />
               </a>
-              <a href={albumData.soundCloud} target="_blank">
+              <a href={soundCloud} target="_blank">
                 <img
-                  src={soundCloud}
+                  src={soundCloudImg}
                   className={classNames({
-                    'no-availavle': !albumData.soundCloud,
+                    'no-availavle': !soundCloud,
                   })}
                   alt="sound cloud"
                 />
               </a>
-              <a href={albumData.deezer} target="_blank">
+              <a href={deezer} target="_blank">
                 <img
-                  src={deezer}
+                  src={deezerImg}
                   className={classNames({
-                    'no-availavle': !albumData.deezer,
+                    'no-availavle': !deezer,
                   })}
                   alt="deezer"
                 />

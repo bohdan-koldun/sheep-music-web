@@ -1,9 +1,9 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable indent */
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import * as striptags from 'striptags';
-import { JsonLd } from "react-schemaorg";
+import { JsonLd } from 'react-schemaorg';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -100,9 +100,9 @@ export function Song({
   const setTextToClipBoard = () => {
     songTextTextarea.current.select();
     document.execCommand('copy');
-  
+
     songTextPre.current.classList.add('copied-text');
-  
+
     setTimeout(() => {
       songTextPre.current.classList.remove('copied-text');
     }, 500);
@@ -125,6 +125,19 @@ export function Song({
             <meta name="og:video" content={songData.video} />
             <meta name="fb:app_id" content="464243220625029" />
           </Helmet>
+          {songData.audioMp3 ? (
+            <JsonLd
+              item={{
+                '@context': 'http://schema.org/',
+                '@id': '',
+                '@type': 'AudioObject',
+                contentURL: songData.audioMp3.path,
+                duration: songData.audioMp3.duration,
+                encodingFormat: 'mp3',
+                name: songData.audioMp3.awsKey,
+              }}
+            />
+          ) : null}
           <JsonLd
             item={{
               '@context': 'https://schema.org',
@@ -134,7 +147,7 @@ export function Song({
                   '@type': 'ListItem',
                   position: 1,
                   name: 'Музыка',
-                  item: 'https://sheep-music.com/song',
+                  item: 'https://sheep-music.com/songs',
                 },
                 {
                   '@type': 'ListItem',
@@ -143,6 +156,32 @@ export function Song({
                   item: canonicalUrl,
                 },
               ],
+            }}
+          />
+          <JsonLd
+            item={{
+              '@context': 'http://schema.org',
+              '@type': 'MusicComposition',
+              '@id': canonicalUrl,
+              name: songData.title,
+              composer: [
+                {
+                  '@type': 'Person',
+                  name: songData.author && songData.author.title,
+                  '@id':
+                    (songData.author &&
+                      `https://sheep-music.com/author/${
+                        songData.author.slug
+                      }`) ||
+                    '',
+                },
+              ],
+              inLanguage: songData.language,
+              datePublished: (songData.album && songData.album.year) || '',
+              lyrics: {
+                '@type': 'CreativeWork',
+                text: striptags(songData.text) || '',
+              },
             }}
           />
           <Breadcrumb
@@ -193,14 +232,13 @@ export function Song({
                   }}
                   className="icon-button"
                 >
-  
                   <FaCopy
                     data-tip={intl.formatMessage(commonMessages.copy)}
-                    data-for='copy-song'
-                    style={{fontSize: '30px'}}
+                    data-for="copy-song"
+                    style={{ fontSize: '30px' }}
                     className="song-icon"
                   />
-                  <ReactTooltip id='copy-song'/>
+                  <ReactTooltip id="copy-song" />
                 </button>
                 {songData.audioMp3 ? (
                   <React.Fragment>
@@ -215,7 +253,10 @@ export function Song({
                       }}
                       className="icon-button"
                     >
-                      {play && playData && songData.id === playData.song.id && !playData.song.playMinus ? (
+                      {play &&
+                      playData &&
+                      songData.id === playData.song.id &&
+                      !playData.song.playMinus ? (
                         <MdPauseCircleFilled
                           data-tip={intl.formatMessage(playerMessages.pause)}
                           data-for="play-pause"
@@ -248,7 +289,11 @@ export function Song({
                 ) : null}
                 {songData.video && (
                   <Link to={`/video/${songData.slug}`} target="_blank">
-                    <FaYoutube data-tip="youtube" data-for="youtube" className="song-icon" />
+                    <FaYoutube
+                      data-tip="youtube"
+                      data-for="youtube"
+                      className="song-icon"
+                    />
                     <ReactTooltip id="youtube" />
                   </Link>
                 )}
@@ -267,8 +312,7 @@ export function Song({
                     </Link>
                   </React.Fragment>
                 )}
-                {
-                  songData.chords &&
+                {songData.chords && (
                   <Link
                     to={`/chord/${songData.slug}`}
                     className="yellow-button-link"
@@ -276,15 +320,17 @@ export function Song({
                     {' '}
                     <FormattedMessage {...commonMessages.chords} />
                   </Link>
-                }
+                )}
               </div>
             </div>
           </div>
           {songData.phonogramMp3 && (
             <React.Fragment>
-              <hr/>
+              <hr />
               <div className="song-minus">
-                <span className="title"><FormattedMessage {...commonMessages.soundtrack} />:</span>
+                <span className="title">
+                  <FormattedMessage {...commonMessages.soundtrack} />:
+                </span>
                 <button
                   type="button"
                   onClick={() => {
@@ -296,7 +342,10 @@ export function Song({
                   }}
                   className="icon-button"
                 >
-                  {play && playData && songData.id === playData.song.id && playData.song.playMinus ? (
+                  {play &&
+                  playData &&
+                  songData.id === playData.song.id &&
+                  playData.song.playMinus ? (
                     <MdPauseCircleFilled
                       data-tip={intl.formatMessage(playerMessages.pause)}
                       className="song-icon"
@@ -323,13 +372,18 @@ export function Song({
                   isOpen={showDownload}
                   onCloseModal={() => setShowDownload(false)}
                   downloadUrl={songData.phonogramMp3.path}
-                  title={`${intl.formatMessage(commonMessages.soundtrack)} ${songData.title}`}
-                /> 
-              </div> 
-              <hr/>
+                  title={`${intl.formatMessage(commonMessages.soundtrack)} ${
+                    songData.title
+                  }`}
+                />
+              </div>
+              <hr />
             </React.Fragment>
           )}
-          <pre dangerouslySetInnerHTML={{ __html: songData.text }} ref={songTextPre} />
+          <pre
+            dangerouslySetInnerHTML={{ __html: songData.text }}
+            ref={songTextPre}
+          />
           <textarea
             ref={songTextTextarea}
             value={striptags(songData.text)}
@@ -411,7 +465,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     onLoadSong: slug => dispatch(loadSong(slug)),
     onPlaySong: (song, playMinus) => dispatch(setSong(song, playMinus)),
-    onPlayPause: (playMinus) => dispatch(setPlayPause(playMinus)),
+    onPlayPause: playMinus => dispatch(setPlayPause(playMinus)),
   };
 }
 

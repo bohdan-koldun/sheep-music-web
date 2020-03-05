@@ -2,6 +2,8 @@
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import * as striptags from 'striptags';
+import { JsonLd } from 'react-schemaorg';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -121,7 +123,65 @@ export function SongChords({
             <meta name="og:video" content={songData.video} />
             <meta name="fb:app_id" content="464243220625029" />
           </Helmet>
-
+          <JsonLd
+            item={{
+              '@context': 'http://schema.org',
+              '@type': 'MusicComposition',
+              '@id': canonicalUrl,
+              name: songData.title,
+              composer: [
+                {
+                  '@type': 'Person',
+                  name: songData.author && songData.author.title,
+                  '@id':
+                    (songData.author &&
+                      `https://sheep-music.com/author/${
+                        songData.author.slug
+                      }`) ||
+                    '',
+                },
+              ],
+              inLanguage: songData.language,
+              datePublished: (songData.album && songData.album.year) || '',
+              lyrics: {
+                '@type': 'CreativeWork',
+                text: striptags(songData.chords) || '',
+              },
+            }}
+          />
+          {songData.audioMp3 ? (
+            <JsonLd
+              item={{
+                '@context': 'http://schema.org/',
+                '@id': '',
+                '@type': 'AudioObject',
+                contentURL: songData.audioMp3.path,
+                duration: songData.audioMp3.duration,
+                encodingFormat: 'mp3',
+                name: songData.audioMp3.awsKey,
+              }}
+            />
+          ) : null}
+          <JsonLd
+            item={{
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Музыка',
+                  item: 'https://sheep-music.com/songs',
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: songData.title,
+                  item: canonicalUrl,
+                },
+              ],
+            }}
+          />
           <Breadcrumb
             pageList={[
               {
