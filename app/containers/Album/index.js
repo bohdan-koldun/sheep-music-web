@@ -93,6 +93,18 @@ export function Album({
 
   const { youtubeMusic, googlePlay, deezer, soundCloud, iTunes } = albumData;
 
+  const songList =
+    albumData &&
+    albumData.songs &&
+    albumData.songs.map(song => ({
+      ...song,
+      author: albumData.author,
+      album: {
+        title: albumData.title,
+        thumbnail: albumData.thumbnail,
+      },
+    }));
+
   return (
     <React.Fragment>
       {!loading && albumData ? (
@@ -232,7 +244,7 @@ export function Album({
           </section>
 
           <SongPlayList
-            songs={albumData.songs}
+            songs={songList}
             playPauseSong={playPauseSong}
             playData={playData}
             play={play}
