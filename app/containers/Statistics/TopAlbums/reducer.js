@@ -1,40 +1,36 @@
 import produce from 'immer';
 import {
-  LOAD_STATISTIC,
-  LOAD_STATISTIC_ERROR,
-  LOAD_STATISTIC_SUCCESS,
+  LOAD_TOP_ALBUMS,
+  LOAD_TOP_ALBUMS_ERROR,
+  LOAD_TOP_ALBUMS_SUCCESS,
 } from './constants';
 
 export const initialState = {
   loading: false,
   error: false,
-  data: {
-    songs: [],
-    albums: [],
-    authors: [],
-  },
+  albums: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const statisticHomeReducer = (state = initialState, action) =>
+const topAlbumsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOAD_STATISTIC:
+      case LOAD_TOP_ALBUMS:
         draft.loading = true;
         draft.error = false;
         break;
 
-      case LOAD_STATISTIC_SUCCESS:
-        draft.data = action.data;
+      case LOAD_TOP_ALBUMS_SUCCESS:
+        draft.albums = action.data;
         draft.error = false;
         draft.loading = false;
         break;
 
-      case LOAD_STATISTIC_ERROR:
+      case LOAD_TOP_ALBUMS_ERROR:
         draft.error = action.error;
         draft.loading = false;
         break;
     }
   });
 
-export default statisticHomeReducer;
+export default topAlbumsReducer;

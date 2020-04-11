@@ -1,3 +1,0 @@
-export const LOAD_STATISTIC = 'app/HomePage/LOAD_STATISTIC';
-export const LOAD_STATISTIC_SUCCESS = 'app/HomePage/LOAD_STATISTIC_SUCCESS';
-export const LOAD_STATISTIC_ERROR = 'app/HomePage/LOAD_STATISTIC_ERROR';

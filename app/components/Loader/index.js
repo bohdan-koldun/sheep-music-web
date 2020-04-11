@@ -6,7 +6,8 @@ import styled from 'styled-components';
 const Loader = () => {
   const LoaderWrapper = styled.div`
     width: 100%;
-    height: 45vh;
+    max-height: 45vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
