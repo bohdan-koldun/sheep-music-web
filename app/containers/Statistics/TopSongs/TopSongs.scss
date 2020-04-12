@@ -21,8 +21,9 @@
     height: 1px;
   }
 
-  .songs-carousel {
-    height: 300px;
+  .songs-top-list {
+   margin-top: 16px;
+   min-height: 300px;
   }
 }
 
@@ -30,10 +31,6 @@
   .top-songs {
     h2 {
       font-size: 22px;
-    }
-
-    .songs-carousel {
-      height: 280px;
     }
   }
 }

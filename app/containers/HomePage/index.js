@@ -3,6 +3,7 @@ import { JsonLd } from 'react-schemaorg';
 import { Helmet } from 'react-helmet';
 import TopAlbums from 'containers/Statistics/TopAlbums';
 import TopAuthors from 'containers/Statistics/TopAuthors';
+import TopSongs from 'containers/Statistics/TopSongs';
 import Breadcrumb from 'components/Breadcrumb';
 
 export function HomePage() {
@@ -41,6 +42,7 @@ export function HomePage() {
       <section>
         <TopAlbums count={15} />
         <TopAuthors count={15} />
+        <TopSongs count={15} />
       </section>
     </article>
   );

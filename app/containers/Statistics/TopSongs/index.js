@@ -9,7 +9,12 @@ import { AiTwotoneFire } from 'react-icons/ai';
 import { createStructuredSelector } from 'reselect';
 import Loader from 'components/Loader';
 import { DaysFilter } from 'components/Filter';
-import { AuthorPictureListCarousel } from 'components/List';
+import { SongPlayList } from 'components/List';
+import { setSongList, setPlayPause } from 'containers/AudioPlayer/actions';
+import {
+  makeSelectPlay,
+  makeSelectAudioPlayData,
+} from 'containers/AudioPlayer/selectors';
 import {
   makeSelectLoading,
   makeSelectError,
@@ -21,7 +26,16 @@ import reducer from './reducer';
 import saga from './saga';
 import './TopSongs.scss';
 
-export function TopSongs({ onLoadTopSongs, songs, loading, count = 10 }) {
+export function TopSongs({
+  onLoadTopSongs,
+  songs,
+  loading,
+  count = 10,
+  play,
+  playData,
+  onPlaySongList,
+  onPlayPause,
+}) {
   useInjectReducer({ key: 'topSongsState', reducer });
   useInjectSaga({ key: 'topSongsState', saga });
 
@@ -33,6 +47,14 @@ export function TopSongs({ onLoadTopSongs, songs, loading, count = 10 }) {
     onLoadTopSongs(days, count);
   }, [days]);
 
+  const playPauseSong = song => {
+    if (playData && playData.song && song && song.id === playData.song.id) {
+      onPlayPause(song.id);
+    } else if (song && song.audioMp3 && song.audioMp3.path) {
+      onPlaySongList(song, songs || []);
+    }
+  };
+
   return (
     <section className="top-songs">
       <h2>
@@ -43,8 +65,17 @@ export function TopSongs({ onLoadTopSongs, songs, loading, count = 10 }) {
       <div>
         <DaysFilter onChange={setDays} days={days} />
       </div>
-      <div className="songs-carousel">
-        {loading ? <Loader /> : <AuthorPictureListCarousel songs={songs} />}
+      <div className="songs-top-list">
+        {loading ? (
+          <Loader />
+        ) : (
+          <SongPlayList
+            songs={songs}
+            playPauseSong={playPauseSong}
+            playData={playData}
+            play={play}
+          />
+        )}
       </div>
     </section>
   );
@@ -55,6 +86,19 @@ TopSongs.propTypes = {
   loading: PropTypes.bool,
   songs: PropTypes.array,
   onLoadTopSongs: PropTypes.func,
+  play: PropTypes.bool,
+  playData: PropTypes.shape({
+    song: PropTypes.shape({
+      title: PropTypes.string,
+      audioMp3: PropTypes.shape({
+        path: PropTypes.string,
+      }),
+    }),
+    prevPlayListId: PropTypes.number,
+    nextPlayListId: PropTypes.number,
+  }),
+  onPlaySongList: PropTypes.func,
+  onPlayPause: PropTypes.func,
 };
 
 TopSongs.contextTypes = {
@@ -65,11 +109,15 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   songs: makeSelectTopSongs(),
+  play: makeSelectPlay(),
+  playData: makeSelectAudioPlayData(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadTopSongs: (days, count) => dispatch(loadTopSongs(days, count)),
+    onPlaySongList: (song, songList) => dispatch(setSongList(song, songList)),
+    onPlayPause: () => dispatch(setPlayPause()),
   };
 }
 
