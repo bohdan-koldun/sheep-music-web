@@ -38,7 +38,7 @@ export function TopAlbums({ onLoadTopAlbums, albums, loading, count = 10 }) {
           </h2>
           <hr />
           <div>
-            <DaysFilter onChange={setDays} />
+            <DaysFilter onChange={setDays} days={days} />
           </div>
           <div style={{ height: '300px' }}>
             {loading ? (

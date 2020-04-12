@@ -1,0 +1,21 @@
+@import "../../styles/colors.scss";
+
+.days-filter{
+    button {
+        border: none;
+        outline: none;
+        padding: 6px 4px;
+        margin: 1px;
+        cursor: pointer;
+        background: $light-grey-two;
+        
+
+        &:hover{
+            background: $light-grey-one;
+        }
+    }
+
+    .active{
+        background: $yellow;
+    }
+}

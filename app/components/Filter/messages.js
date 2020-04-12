@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.components.Filter';
+export const scope = 'app.components.Filter';
 
 export default defineMessages({
   newest: {
@@ -30,5 +30,29 @@ export default defineMessages({
   sorting: {
     id: `${scope}.sorting`,
     defaultMessage: 'Сортировка...',
+  },
+  day: {
+    id: `${scope}.day`,
+    defaultMessage: 'сутки',
+  },
+  week: {
+    id: `${scope}.week`,
+    defineMessages: 'неделя',
+  },
+  month: {
+    id: `${scope}.month`,
+    defineMessages: 'месяц',
+  },
+  quarter: {
+    id: `${scope}.quarter`,
+    defineMessages: 'квартал',
+  },
+  year: {
+    id: `${scope}.year`,
+    defineMessages: 'год',
+  },
+  allTime: {
+    id: `${scope}.allTime`,
+    defineMessages: 'все время',
   },
 });
