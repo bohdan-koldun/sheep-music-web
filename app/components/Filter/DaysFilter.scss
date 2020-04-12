@@ -1,21 +1,44 @@
 @import "../../styles/colors.scss";
+@import "../../styles/dimensions.scss";
 
-.days-filter{
+.days-filter {
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    padding: 4px 16px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    background: none;
+    border: 1px solid $light-grey-one;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 -1px 0px rgba(0, 0, 0, 0.02);
+
+
+    &:hover {
+      background: $light-grey-one;
+    }
+  }
+
+  .active {
+    background: $light-grey-one;
+  }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+  .days-filter {
+
     button {
-        border: none;
-        outline: none;
-        padding: 6px 4px;
-        margin: 1px;
-        cursor: pointer;
-        background: $light-grey-two;
-        
-
-        &:hover{
-            background: $light-grey-one;
-        }
+      font-size: 14px;
     }
-
-    .active{
-        background: $yellow;
-    }
+  }
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { useIntl } from 'containers/LanguageProvider';
+import { AiTwotoneFire } from 'react-icons/ai';
 import { createStructuredSelector } from 'reselect';
 import Loader from 'components/Loader';
 import { DaysFilter } from 'components/Filter';
@@ -18,10 +19,13 @@ import messages from '../messages';
 import { loadTopAlbums } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import './TopAlbums.scss';
 
 export function TopAlbums({ onLoadTopAlbums, albums, loading, count = 10 }) {
   useInjectReducer({ key: 'topAlbumsState', reducer });
   useInjectSaga({ key: 'topAlbumsState', saga });
+
+  const intl = useIntl();
 
   const [days, setDays] = useState(7);
 
@@ -30,24 +34,17 @@ export function TopAlbums({ onLoadTopAlbums, albums, loading, count = 10 }) {
   }, [days]);
 
   return (
-    <section>
+    <section className="top-albums">
+      <h2>
+        <AiTwotoneFire />
+        {intl.formatMessage(messages.popularAlbums).toLowerCase()}
+      </h2>
+      <hr />
       <div>
-        <div>
-          <h2>
-            <FormattedMessage {...messages.popularAlbums} />
-          </h2>
-          <hr />
-          <div>
-            <DaysFilter onChange={setDays} days={days} />
-          </div>
-          <div style={{ height: '300px' }}>
-            {loading ? (
-              <Loader />
-            ) : (
-              <AlbumPictureListCarousel albums={albums} />
-            )}
-          </div>
-        </div>
+        <DaysFilter onChange={setDays} days={days} />
+      </div>
+      <div className="albums-carousel">
+        {loading ? <Loader /> : <AlbumPictureListCarousel albums={albums} />}
       </div>
     </section>
   );
@@ -56,9 +53,12 @@ export function TopAlbums({ onLoadTopAlbums, albums, loading, count = 10 }) {
 TopAlbums.propTypes = {
   count: PropTypes.number,
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   albums: PropTypes.array,
   onLoadTopAlbums: PropTypes.func,
+};
+
+TopAlbums.contextTypes = {
+  intl: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

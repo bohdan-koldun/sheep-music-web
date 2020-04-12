@@ -1,0 +1,39 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/dimensions.scss";
+
+
+.top-albums {
+  h2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  svg {
+    color: $orange;
+    margin-right: 4px;
+  }
+
+  hr {
+    border: none;
+    color: $light-grey-one;
+    background-color: $light-grey-one;
+    height: 1px;
+  }
+
+  .albums-carousel {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: $max-mobile-width) {
+  .top-albums {
+    h2 {
+      font-size: 22px;
+    }
+
+    .albums-carousel {
+      height: 280px;
+    }
+  }
+}
