@@ -67,7 +67,7 @@ export function TopSongs({
       </div>
       <div className="songs-top-list">
         {loading ? (
-          <Loader />
+          <Loader marginTop="70px" />
         ) : (
           <SongPlayList
             songs={songs}

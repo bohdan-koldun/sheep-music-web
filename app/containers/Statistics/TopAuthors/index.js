@@ -44,7 +44,11 @@ export function TopAuthors({ onLoadTopAuthors, authors, loading, count = 10 }) {
         <DaysFilter onChange={setDays} days={days} />
       </div>
       <div className="authors-carousel">
-        {loading ? <Loader /> : <AuthorPictureListCarousel authors={authors} />}
+        {loading ? (
+          <Loader marginTop="0" />
+        ) : (
+          <AuthorPictureListCarousel authors={authors} />
+        )}
       </div>
     </section>
   );

@@ -44,7 +44,11 @@ export function TopAlbums({ onLoadTopAlbums, albums, loading, count = 10 }) {
         <DaysFilter onChange={setDays} days={days} />
       </div>
       <div className="albums-carousel">
-        {loading ? <Loader /> : <AlbumPictureListCarousel albums={albums} />}
+        {loading ? (
+          <Loader marginTop="0" />
+        ) : (
+          <AlbumPictureListCarousel albums={albums} />
+        )}
       </div>
     </section>
   );
