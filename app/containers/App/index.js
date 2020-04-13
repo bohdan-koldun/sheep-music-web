@@ -35,7 +35,7 @@ import AddAuthor from 'containers/AddAuthor';
 import AddAlbum from 'containers/AddAlbum';
 import NotFoundPage from 'containers/NotFoundPage';
 import Menu from 'components/Menu';
-import Footer from 'components/Footer';
+import Footer from 'components/Footer/Loadable';
 import {
   makeSelectGlobalLoading,
   makeSelectError,
