@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.components.Info';
+export const scope = 'app.components.Info';
 
 export default defineMessages({
   page: {

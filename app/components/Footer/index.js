@@ -6,54 +6,60 @@ import classNames from 'classnames/bind';
 import { FormattedMessage } from 'react-intl';
 import { MdLibraryMusic, MdAlbum, MdGroup } from 'react-icons/md';
 import { FaYoutube, FaTelegramPlane, FaInstagram } from 'react-icons/fa';
-import { FiFacebook, FiYoutube } from 'react-icons/fi';
+import { FiFacebook, FiYoutube, FiGrid, FiBookmark } from 'react-icons/fi';
 import menuMessages from 'components/Menu/messages';
-import messages from './messages';
-import Logo from './logo.png';
 import './Footer.scss';
 
 function Footer({ location }) {
   const { pathname } = location || {};
   return (
     <footer>
-      <section className="footer-website-menu">
-        <div>
-          <img src={Logo} className="footer-logo" alt="logo sheep music" />
+      <div className="footer-website-menu">
+        <div className="footer-links">
+          <Link
+            to="/topics"
+            className={classNames({ 'active-link': pathname === '/topics' })}
+          >
+            <FiGrid />
+            <FormattedMessage {...menuMessages.topics} />
+          </Link>
+          <Link
+            to="/favorites"
+            className={classNames({ 'active-link': pathname === '/favorites' })}
+          >
+            <FiBookmark />
+            <FormattedMessage {...menuMessages.favorites} />
+          </Link>
         </div>
-        <div>
-          <h3>
-            <FormattedMessage {...messages.menuMessage} />
-          </h3>
-          <div className="footer-links">
-            <Link
-              to="/songs"
-              className={classNames({ 'active-link': pathname === '/songs' })}
-            >
-              <MdLibraryMusic />
-              <FormattedMessage {...menuMessages.songs} />
-            </Link>
-            <Link
-              to="/albums"
-              className={classNames({ 'active-link': pathname === '/albums' })}
-            >
-              <MdAlbum />
-              <FormattedMessage {...menuMessages.albums} />
-            </Link>
-            <Link
-              to="/authors"
-              className={classNames({ 'active-link': pathname === '/authors' })}
-            >
-              <MdGroup />
-              <FormattedMessage {...menuMessages.authors} />
-            </Link>
-            <Link
-              to="/videos"
-              className={classNames({ 'active-link': pathname === '/videos' })}
-            >
-              <FaYoutube />
-              <FormattedMessage {...menuMessages.videos} />
-            </Link>
-          </div>
+        <div className="footer-links">
+          <Link
+            to="/songs"
+            className={classNames({ 'active-link': pathname === '/songs' })}
+          >
+            <MdLibraryMusic />
+            <FormattedMessage {...menuMessages.songs} />
+          </Link>
+          <Link
+            to="/albums"
+            className={classNames({ 'active-link': pathname === '/albums' })}
+          >
+            <MdAlbum />
+            <FormattedMessage {...menuMessages.albums} />
+          </Link>
+          <Link
+            to="/authors"
+            className={classNames({ 'active-link': pathname === '/authors' })}
+          >
+            <MdGroup />
+            <FormattedMessage {...menuMessages.authors} />
+          </Link>
+          <Link
+            to="/videos"
+            className={classNames({ 'active-link': pathname === '/videos' })}
+          >
+            <FaYoutube />
+            <FormattedMessage {...menuMessages.videos} />
+          </Link>
         </div>
         <div className="footer-social">
           <div>
@@ -68,15 +74,10 @@ function Footer({ location }) {
             </a>
           </div>
         </div>
-      </section>
-      <section className="footer-website-rule">
-        <p className="copyright">
-          <FormattedMessage {...messages.licenseMessage} />
-        </p>
-        <p>
-          <FormattedMessage {...messages.footerMessage} />
-        </p>
-      </section>
+      </div>
+      <div className="copyright">
+        {`© ${new Date().getFullYear()} sheep-music.com`}
+      </div>
     </footer>
   );
 }
