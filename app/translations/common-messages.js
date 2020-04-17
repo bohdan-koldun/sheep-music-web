@@ -77,6 +77,10 @@ export default defineMessages({
   },
   copy: {
     id: `${scope}.copy`,
+    defaultMessage: 'Темы и жанры',
+  },
+  themesAndGenres: {
+    id: `${scope}.themesAndGenres`,
     defaultMessage: 'скопировать',
   },
 });

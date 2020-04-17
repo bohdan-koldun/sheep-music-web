@@ -6,6 +6,7 @@ import AuthorPictureListCarousel from './AuthorPictureListCarousel';
 import PlayerPlayList from './PlayerPlayList';
 import VideoYoutubeList from './VideoYoutubeList';
 import VideoYoutubeListCarousel from './VideoYoutubeListCarousel';
+import TagList from './TagList';
 
 export {
   SongPlayList,
@@ -16,4 +17,5 @@ export {
   VideoYoutubeList,
   AlbumPictureListCarousel,
   VideoYoutubeListCarousel,
+  TagList,
 };

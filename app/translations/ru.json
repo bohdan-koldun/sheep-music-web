@@ -18,8 +18,8 @@
   "app.common.chords": "Аккорды",
   "app.common.playlist": "Плейлист",
   "app.common.copy": "скопировать",
+  "app.common.themesAndGenres": "Темы и жанры",
   "app.components.Menu.add": "Добавить",
-  "app.components.Footer.author.message": "Сделано с любовью {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Все права защищены.",
   "app.components.Footer.website.menu": "Меню:",
   "app.components.Footer.website.language": "Язык:",
@@ -74,6 +74,5 @@
   "app.containers.LoginPage.header": "Вход в систему:",
   "app.containers.LoginPage.email": "эл. адрес",
   "app.containers.LoginPage.password": "пароль",
-  "app.containers.LoginPage.error": "Ошибка авторизации!",
-  "app.containers.TagList.header": "Песни по тематикам"
+  "app.containers.LoginPage.error": "Ошибка авторизации!"
 }

@@ -18,7 +18,6 @@
   "app.common.chords": "Акорди",
   "app.common.copy": "скопіювати",
   "app.components.Menu.add": "Додати",
-  "app.components.Footer.author.message": "Зроблено з любов'ю {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. Всі права захищені.",
   "app.components.Footer.website.menu": "Меню:",
   "app.components.Footer.website.language": "Мова:",
@@ -33,6 +32,7 @@
   "app.components.Menu.notebook": "Блокнот",
   "app.components.Menu.login": "Увійти",
   "app.common.playlist": "Плейлист",
+  "app.common.themesAndGenres": "Теми та жанри",
   "boilerplate.components.Info.page": "сторінка",
   "boilerplate.components.Info.results": "Результати:",
   "app.components.Filter.newest": "Нові",
@@ -75,6 +75,5 @@
   "app.containers.LoginPage.header": "Вхід у систему:",
   "app.containers.LoginPage.email": "ел. пошта",
   "app.containers.LoginPage.password": "пароль",
-  "app.containers.LoginPage.error": "Помилка авторизації!",
-  "app.containers.TagList.header": "Пісні по тематикам"
+  "app.containers.LoginPage.error": "Помилка авторизації!"
 }

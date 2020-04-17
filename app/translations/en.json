@@ -18,8 +18,8 @@
   "app.common.chords": "Chords",
   "app.common.playlist": "Playlist",
   "app.common.copy": "copy",
+  "app.common.themesAndGenres": "Themes and genres",
   "app.components.Menu.add": "Add",
-  "app.components.Footer.author.message": "Made with love by {author}.",
   "app.components.Footer.license.message": "Copyright © 2019 sheep-music.com. All rights reserved.",
   "app.components.Footer.website.menu": "Menu:",
   "app.components.Footer.website.language": "Language:",
@@ -75,6 +75,5 @@
   "app.containers.LoginPage.header": "Member Login:",
   "app.containers.LoginPage.email": "email",
   "app.containers.LoginPage.password": "password",
-  "app.containers.LoginPage.error": "Authorisation Error!",
-  "app.containers.TagList.header": "Songs by topics"
+  "app.containers.LoginPage.error": "Authorisation Error!"
 }
